@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyDeck - Home</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'><path fill='%233b82f6' d='M320 32c-8.1 0-16.1 1.4-23.7 4.1L15.8 137.4C6.3 140.9 0 149.9 0 160s6.3 19.1 15.8 22.6l57.9 20.9C57.3 229.3 48 259.8 48 291.9v28.1c0 28.4-10.8 57.7-22.3 80.8c-6.5 13-13.9 25.8-22.5 37.6C0 442.7-.9 448.3 .9 453.4s6 8.9 11.2 10.2l64 16c4.2 1.1 8.7 .3 12.4-2s6.3-6.1 7.1-10.4c8.6-42.8 4.3-81.2-2.1-108.7C90.3 344.3 86 329.8 80 316.5V291.9c0-30.2 10.2-58.7 27.9-81.5c12.9-15.5 29.6-28 49.2-35.7l157-61.7c8.2-3.2 17.5 .8 20.7 9s-.8 17.5-9 20.7l-157 61.7c-12.4 4.9-23.3 12.4-32.2 21.6l159.6 57.6c7.6 2.7 15.6 4.1 23.7 4.1s16.1-1.4 23.7-4.1L624.2 182.6c9.5-3.4 15.8-12.5 15.8-22.6s-6.3-19.1-15.8-22.6L343.7 36.1C336.1 33.4 328.1 32 320 32zM128 408c0 35.3 86 72 192 72s192-36.7 192-72L496.7 262.6 354.5 314c-11.1 4-22.8 6-34.5 6s-23.5-2-34.5-6L143.3 262.6 128 408z'/></svg>" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: #1e293b;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            padding: 30px 25px;
+            font-size: 24px;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo i {
+            color: #3b82f6;
+            margin-right: 10px;
+        }
+
+        .nav-menu {
+            flex: 1;
+            padding: 20px 0;
+        }
+
+        .nav-item {
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .nav-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .nav-item.active {
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .nav-item i {
+            width: 25px;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        /* AI Dropdown */
+        .ai-dropdown {
+            position: relative;
+        }
+
+        .ai-dropdown .nav-item {
+            padding: 15px 25px;
+        }
+
+        .dropdown-header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .dropdown-header .icon-text {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .dropdown-header i.fa-brain {
+            width: 25px;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        .dropdown-header .fa-chevron-down {
+            font-size: 12px;
+            transition: transform 0.3s;
+            margin-left: auto;
+        }
+
+        .ai-dropdown.open .fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .ai-dropdown.open .dropdown-content {
+            max-height: 350px;
+            opacity: 1;
+        }
+
+        .dropdown-item {
+            padding: 12px 25px 12px 55px;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            border-left: 3px solid transparent;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(59, 130, 246, 0.08);
+            color: #3b82f6;
+            padding-left: 60px;
+            border-left-color: #3b82f6;
+        }
+
+        .dropdown-item i {
+            width: 18px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* User Profile */
+        .user-profile {
+            padding: 20px 25px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .user-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #1e293b;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .header {
+            background: white;
+            padding: 25px 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #1e293b;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .card-icon.blue {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .card-icon.purple {
+            background: rgba(139, 92, 246, 0.1);
+            color: #8b5cf6;
+        }
+
+        .card-icon.green {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+
+        .card-icon.orange {
+            background: rgba(249, 115, 22, 0.1);
+            color: #f97316;
+        }
+
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+
+        .card p {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .card-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-top: 15px;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #1e293b;
+        }
+
+        .activity-item {
+            padding: 15px;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 3px;
+        }
+
+        .activity-time {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        /* Quick Action Buttons */
+        .quick-action-btn {
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .quick-action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .quick-action-btn i {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .quick-action-btn.blue {
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+
+        .quick-action-btn.blue:hover {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .quick-action-btn.purple {
+            border-color: #8b5cf6;
+            color: #8b5cf6;
+        }
+
+        .quick-action-btn.purple:hover {
+            background: #8b5cf6;
+            color: white;
+        }
+
+        .quick-action-btn.green {
+            border-color: #22c55e;
+            color: #22c55e;
+        }
+
+        .quick-action-btn.green:hover {
+            background: #22c55e;
+            color: white;
+        }
+
+        .quick-action-btn.orange {
+            border-color: #f97316;
+            color: #f97316;
+        }
+
+        .quick-action-btn.orange:hover {
+            background: #f97316;
+            color: white;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            transition: all 0.3s;
+        }
+
+        .mobile-menu-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-menu-toggle i {
+            font-size: 20px;
+        }
+
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -280px;
+                top: 0;
+                bottom: 0;
+                z-index: 999;
+                transition: left 0.3s ease;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .mobile-overlay {
+                display: block;
+            }
+
+            .main-content {
+                width: 100%;
+            }
+
+            .header {
+                padding: 20px 20px 20px 75px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .quick-action-btn {
+                padding: 15px;
+                font-size: 13px;
+            }
+
+            .quick-action-btn i {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 18px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .card-number {
+                font-size: 28px;
+            }
+
+            .user-avatar {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .user-name {
+                font-size: 13px;
+            }
+
+            .activity-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                StudyDeck
+            </div>
+            
+            <nav class="nav-menu">
+                <div class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </div>
+                
+                <div class="nav-item">
+                    <i class="fas fa-layer-group"></i>
+                    <span>Flashcards</span>
+                </div>
+                
+                <div class="nav-item">
+                    <i class="fas fa-list-check"></i>
+                    <span>To-Do List</span>
+                </div>
+                
+                <div class="nav-item">
+                    <i class="fas fa-calendar-days"></i>
+                    <span>Study Schedule</span>
+                </div>
+                
+                <div class="nav-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Pomodoro Timer</span>
+                </div>
+                
+                <div class="nav-item">
+                    <i class="fas fa-book-open"></i>
+                    <span>Take Notes</span>
+                </div>
+                
+                <div class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Progress Tracker</span>
+                </div>
+                
+                <div class="ai-dropdown">
+                    <div class="nav-item" onclick="toggleDropdown()">
+                        <div class="dropdown-header">
+                            <div class="icon-text">
+                                <i class="fas fa-brain"></i>
+                                <span>AI Tools</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="dropdown-content">
+                        <div class="dropdown-item">
+                            <i class="fas fa-spell-check"></i>
+                            <span>AI Proofread</span>
+                        </div>
+                        <div class="dropdown-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>AI QuickGrader</span>
+                        </div>
+                        <div class="dropdown-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Study Suggestions</span>
+                        </div>
+                        <div class="dropdown-item">
+                            <i class="fas fa-language"></i>
+                            <span>AI Translator</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </div>
+            </nav>
+            
+            <div class="user-profile">
+                <div class="user-avatar">
+                    AI
+                </div>
+                <div class="user-info">
+                    <div class="user-name">Ayham Issa</div>
+                    <span class="user-badge">
+                        <i class="fas fa-crown"></i> Premium
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Welcome back, Ayham! 👋</h1>
+            </div>
+            
+            <div class="content">
+                <!-- Stats Cards -->
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon blue">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <h3>Flashcard Decks</h3>
+                        <p>Total decks created</p>
+                        <div class="card-number">12</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon purple">
+                            <i class="fas fa-list-check"></i>
+                        </div>
+                        <h3>Tasks Completed</h3>
+                        <p>This week</p>
+                        <div class="card-number">24</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon green">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <h3>Study Streak</h3>
+                        <p>Consecutive days</p>
+                        <div class="card-number">7</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon orange">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>AI Sessions</h3>
+                        <p>AI tools used</p>
+                        <div class="card-number">18</div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="section">
+                    <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+                    <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <button class="quick-action-btn blue">
+                            <i class="fas fa-plus"></i>
+                            <span>New Flashcard Deck</span>
+                        </button>
+                        <button class="quick-action-btn purple">
+                            <i class="fas fa-check-square"></i>
+                            <span>Add Task</span>
+                        </button>
+                        <button class="quick-action-btn green">
+                            <i class="fas fa-play"></i>
+                            <span>Start Study Session</span>
+                        </button>
+                        <button class="quick-action-btn orange">
+                            <i class="fas fa-robot"></i>
+                            <span>Ask AI Assistant</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="section">
+                    <h2><i class="fas fa-clock"></i> Recent Activity</h2>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon blue">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Reviewed Biology Flashcards</div>
+                            <div class="activity-time">2 hours ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon purple">
+                            <i class="fas fa-spell-check"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Used AI Proofread on Essay</div>
+                            <div class="activity-time">5 hours ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon green">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Completed 8 Tasks</div>
+                            <div class="activity-time">Yesterday</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon orange">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">AI QuickGrader - Math Assignment</div>
+                            <div class="activity-time">2 days ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.querySelector('.ai-dropdown');
+            dropdown.classList.toggle('open');
+        }
+
+        function toggleMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        // Add click handlers for navigation items
+        document.querySelectorAll('.nav-item:not(.ai-dropdown)').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Close mobile menu on navigation (mobile only)
+                if (window.innerWidth <= 768) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        // Add click handlers for dropdown items
+        document.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.stopPropagation();
+                console.log('Clicked:', this.textContent.trim());
+                
+                // Close mobile menu on navigation (mobile only)
+                if (window.innerWidth <= 768) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
