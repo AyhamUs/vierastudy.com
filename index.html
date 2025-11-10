@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyDeck - Home</title>
     <link rel="icon" href="studydeck.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,7 +17,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #f5f7fa;
             color: #333;
         }
@@ -41,7 +44,7 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .logo img {
@@ -52,17 +55,22 @@
 
         .logo-text {
             color: white;
-            flex: 1;
         }
 
         .pro-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
             color: #1e293b;
-            padding: 4px 10px;
-            border-radius: 10px;
-            font-size: 11px;
-            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .nav-menu {
@@ -678,9 +686,266 @@
                 justify-content: center;
             }
         }
+
+        /* Notification Modal */
+        .notification-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .notification-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notification-content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.3s ease;
+            text-align: center;
+        }
+
+        .notification-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+        }
+
+        .notification-icon.success {
+            background: #10b981;
+            color: white;
+        }
+
+        .notification-icon.info {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .notification-icon.warning {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .notification-icon.error {
+            background: #ef4444;
+            color: white;
+        }
+
+        .notification-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .notification-message {
+            font-size: 15px;
+            color: #64748b;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .notification-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .notification-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Welcome Overlay */
+        .welcome-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 20000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .welcome-overlay.show {
+            display: flex;
+        }
+
+        .welcome-card {
+            background: #1e293b;
+            border-radius: 16px;
+            padding: 50px 40px;
+            max-width: 480px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: slideIn 0.5s ease;
+        }
+
+        .welcome-logo {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 25px;
+            border-radius: 12px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .welcome-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .welcome-subtitle {
+            font-size: 15px;
+            color: #cbd5e1;
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+
+        .welcome-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .welcome-input {
+            padding: 14px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            background: #f8fafc;
+        }
+
+        .welcome-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .welcome-btn {
+            background: white;
+            color: #1e293b;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .welcome-btn:hover {
+            background: #f8fafc;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .welcome-btn:active {
+            transform: translateY(0);
+        }
+
+        .welcome-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        @media (max-width: 480px) {
+            .welcome-card {
+                padding: 40px 30px;
+            }
+
+            .welcome-title {
+                font-size: 26px;
+            }
+
+            .welcome-subtitle {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Welcome Overlay -->
+    <div id="welcomeOverlay" class="welcome-overlay">
+        <div class="welcome-card">
+            <img src="studydeck.png" alt="StudyDeck" class="welcome-logo">
+            <h1 class="welcome-title">Welcome to StudyDeck! 👋</h1>
+            <p class="welcome-subtitle">Let's get started by setting up your profile. Please enter your name below.</p>
+            <form class="welcome-form" onsubmit="saveUserProfile(event)">
+                <input 
+                    type="text" 
+                    id="firstNameInput" 
+                    class="welcome-input" 
+                    placeholder="First Name" 
+                    required
+                    autocomplete="given-name"
+                >
+                <input 
+                    type="text" 
+                    id="lastNameInput" 
+                    class="welcome-input" 
+                    placeholder="Last Name" 
+                    required
+                    autocomplete="family-name"
+                >
+                <button type="submit" class="welcome-btn">
+                    Get Started 🚀
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- Mobile Menu Toggle -->
     <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
         <i class="fas fa-bars"></i>
@@ -714,11 +979,10 @@
                     <span>To-Do List</span>
                 </a>
                 
-                <div class="nav-item">
+                <a href="schedule.html" class="nav-item">
                     <i class="fas fa-calendar-days"></i>
                     <span>Study Schedule</span>
-                    <i class="fas fa-wrench" style="margin-left: auto; font-size: 12px; color: #f59e0b;" title="Work in Progress"></i>
-                </div>
+                </a>
                 
                 <a href="pomodoro.html" class="nav-item">
                     <i class="fas fa-clock"></i>
@@ -794,11 +1058,11 @@
             </nav>
             
             <div class="user-profile">
-                <div class="user-avatar">
+                <div class="user-avatar" id="userAvatar">
                     AI
                 </div>
                 <div class="user-info">
-                    <div class="user-name">Ayham Issa</div>
+                    <div class="user-name" id="userName">Ayham Issa</div>
                 </div>
                 <button class="signout-btn" onclick="handleSignout()" title="Sign Out">
                     <i class="fas fa-right-from-bracket"></i>
@@ -809,7 +1073,7 @@
         <!-- Main Content -->
         <div class="main-content">
             <div class="header">
-                <h1>Welcome back, Ayham! 👋</h1>
+                <h1 id="welcomeMessage">Welcome back, Ayham! 👋</h1>
             </div>
             
             <div class="content">
@@ -923,7 +1187,190 @@
         </div>
     </div>
 
+    <!-- Notification Modal -->
+    <div id="notificationModal" class="notification-modal">
+        <div class="notification-content">
+            <div id="notificationIcon" class="notification-icon success">
+                <i class="fas fa-check"></i>
+            </div>
+            <div id="notificationTitle" class="notification-title">Success</div>
+            <div id="notificationMessage" class="notification-message">Operation completed successfully!</div>
+            <button class="notification-btn" onclick="closeNotification()">OK</button>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="notification-modal">
+        <div class="notification-content">
+            <div id="confirmationIcon" class="notification-icon warning">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div id="confirmationTitle" class="notification-title">Confirm Action</div>
+            <div id="confirmationMessage" class="notification-message">Are you sure you want to proceed?</div>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="notification-btn" style="background: #64748b;" onclick="cancelConfirmation()">Cancel</button>
+                <button class="notification-btn" id="confirmButton" onclick="confirmAction()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // User Profile Management
+        function checkUserProfile() {
+            const userProfile = localStorage.getItem('studyDeckUserProfile');
+            if (!userProfile) {
+                document.getElementById('welcomeOverlay').classList.add('show');
+            } else {
+                loadUserProfile();
+            }
+        }
+
+        function saveUserProfile(event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById('firstNameInput').value.trim();
+            const lastName = document.getElementById('lastNameInput').value.trim();
+            
+            if (firstName && lastName) {
+                const userProfile = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    createdAt: new Date().toISOString()
+                };
+                
+                localStorage.setItem('studyDeckUserProfile', JSON.stringify(userProfile));
+                document.getElementById('welcomeOverlay').classList.remove('show');
+                loadUserProfile();
+                showNotification(`Welcome to StudyDeck, ${firstName}! Let's start studying! 🎉`, 'success', 'Profile Created');
+            }
+        }
+
+        function loadUserProfile() {
+            const userProfile = JSON.parse(localStorage.getItem('studyDeckUserProfile'));
+            if (userProfile) {
+                const { firstName, lastName } = userProfile;
+                const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
+                const fullName = `${firstName} ${lastName}`;
+                
+                // Update avatar
+                document.getElementById('userAvatar').textContent = initials;
+                
+                // Update name
+                document.getElementById('userName').textContent = fullName;
+                
+                // Update welcome message
+                document.getElementById('welcomeMessage').textContent = `Welcome back, ${firstName}! 👋`;
+            }
+        }
+
+        function getUserProfile() {
+            return JSON.parse(localStorage.getItem('studyDeckUserProfile'));
+        }
+
+        // Notification Modal Functions
+        function showNotification(message, type = 'success', title = null) {
+            const modal = document.getElementById('notificationModal');
+            const icon = document.getElementById('notificationIcon');
+            const titleEl = document.getElementById('notificationTitle');
+            const messageEl = document.getElementById('notificationMessage');
+            
+            // Set default titles based on type
+            const defaultTitles = {
+                success: 'Success!',
+                info: 'Information',
+                warning: 'Warning',
+                error: 'Error'
+            };
+            
+            // Update icon
+            const icons = {
+                success: 'fa-check',
+                info: 'fa-info',
+                warning: 'fa-exclamation',
+                error: 'fa-times'
+            };
+            
+            icon.className = `notification-icon ${type}`;
+            icon.innerHTML = `<i class="fas ${icons[type]}"></i>`;
+            
+            // Update title and message
+            titleEl.textContent = title || defaultTitles[type] || 'Notification';
+            messageEl.textContent = message;
+            
+            // Show modal
+            modal.classList.add('show');
+        }
+
+        function closeNotification() {
+            const modal = document.getElementById('notificationModal');
+            modal.classList.remove('show');
+        }
+
+        // Close modal on background click
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('notificationModal');
+            if (e.target === modal) {
+                closeNotification();
+            }
+        });
+
+        // Confirmation Modal Functions
+        let confirmCallback = null;
+
+        function showConfirmation(message, title = 'Confirm Action', type = 'warning') {
+            return new Promise((resolve) => {
+                const modal = document.getElementById('confirmationModal');
+                const icon = document.getElementById('confirmationIcon');
+                const titleEl = document.getElementById('confirmationTitle');
+                const messageEl = document.getElementById('confirmationMessage');
+                const confirmBtn = document.getElementById('confirmButton');
+                
+                const icons = {
+                    warning: 'fa-exclamation-triangle',
+                    danger: 'fa-exclamation-circle',
+                    info: 'fa-question-circle'
+                };
+                
+                const iconColors = {
+                    warning: 'warning',
+                    danger: 'error',
+                    info: 'info'
+                };
+                
+                icon.className = `notification-icon ${iconColors[type] || 'warning'}`;
+                icon.innerHTML = `<i class="fas ${icons[type] || 'fa-exclamation-triangle'}"></i>`;
+                titleEl.textContent = title;
+                messageEl.textContent = message;
+                
+                if (type === 'danger') {
+                    confirmBtn.style.background = '#ef4444';
+                } else {
+                    confirmBtn.style.background = '#3b82f6';
+                }
+                
+                confirmCallback = resolve;
+                modal.classList.add('show');
+            });
+        }
+
+        function confirmAction() {
+            const modal = document.getElementById('confirmationModal');
+            modal.classList.remove('show');
+            if (confirmCallback) {
+                confirmCallback(true);
+                confirmCallback = null;
+            }
+        }
+
+        function cancelConfirmation() {
+            const modal = document.getElementById('confirmationModal');
+            modal.classList.remove('show');
+            if (confirmCallback) {
+                confirmCallback(false);
+                confirmCallback = null;
+            }
+        }
+
         function toggleDropdown() {
             const dropdown = document.querySelector('.ai-dropdown');
             dropdown.classList.toggle('open');
@@ -941,11 +1388,17 @@
             overlay.classList.toggle('active');
         }
 
-        function handleSignout() {
-            if (confirm('Are you sure you want to sign out?')) {
+        async function handleSignout() {
+            const confirmed = await showConfirmation(
+                'Are you sure you want to sign out?',
+                'Sign Out',
+                'info'
+            );
+            
+            if (confirmed) {
                 console.log('User signed out');
                 // Add your signout logic here
-                alert('Signed out successfully!');
+                showNotification('You have been signed out successfully!', 'success', 'Signed Out');
             }
         }
 
@@ -1118,6 +1571,7 @@
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
+            checkUserProfile();
             loadStatistics();
             loadRecentActivity();
         });
