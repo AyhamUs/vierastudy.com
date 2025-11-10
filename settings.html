@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyDeck - Progress Tracker</title>
+    <title>StudyDeck - Settings</title>
     <link rel="icon" href="studydeck.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -24,7 +24,7 @@
             height: 100vh;
         }
 
-        /* Sidebar */
+        /* Sidebar - Same as other pages */
         .sidebar {
             width: 280px;
             background: #1e293b;
@@ -98,7 +98,6 @@
             font-size: 18px;
         }
 
-        /* AI & Math Dropdowns */
         .ai-dropdown, .math-dropdown {
             position: relative;
         }
@@ -175,7 +174,6 @@
             text-align: center;
         }
 
-        /* User Profile */
         .user-profile {
             padding: 20px 25px;
             border-top: 1px solid rgba(255,255,255,0.1);
@@ -233,6 +231,7 @@
         .signout-btn:hover {
             background: #ef4444;
             color: white;
+            flex: 1;
             transform: scale(1.05);
         }
 
@@ -250,9 +249,6 @@
             background: white;
             padding: 25px 40px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         .header h1 {
@@ -260,12 +256,50 @@
             color: #1e293b;
         }
 
-        .add-task-btn {
+        .content {
+            padding: 40px;
+        }
+
+        .settings-grid {
+            display: grid;
+            gap: 25px;
+        }
+
+        .setting-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: #3b82f6;
+        }
+
+        .add-class-btn {
             background: #3b82f6;
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 10px;
+            padding: 10px 20px;
+            border-radius: 8px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
@@ -275,210 +309,79 @@
             transition: all 0.3s;
         }
 
-        .add-task-btn:hover {
+        .add-class-btn:hover {
             background: #2563eb;
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
         }
 
-        .content {
-            padding: 40px;
-        }
-
-        /* Kanban Board */
-        .kanban-board {
+        .classes-list {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .kanban-column {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            min-height: 500px;
-        }
-
-        .column-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f1f5f9;
-        }
-
-        .column-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 18px;
-            font-weight: 600;
-            color: #1e293b;
-        }
-
-        .column-count {
-            background: #f1f5f9;
-            color: #64748b;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .column-icon {
-            width: 35px;
-            height: 35px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
-
-        .column-icon.todo {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
-        }
-
-        .column-icon.progress {
-            background: rgba(249, 115, 22, 0.1);
-            color: #f97316;
-        }
-
-        .column-icon.completed {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-        }
-
-        .tasks-container {
-            display: flex;
-            flex-direction: column;
             gap: 15px;
-            min-height: 400px;
         }
 
-        .task-card {
+        .class-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
             background: #f8fafc;
             border: 2px solid #e2e8f0;
             border-radius: 10px;
-            padding: 15px;
-            cursor: grab;
             transition: all 0.3s;
         }
 
-        .task-card:hover {
+        .class-item:hover {
             border-color: #3b82f6;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.1);
         }
 
-        .task-card.dragging {
-            opacity: 0.5;
-            cursor: grabbing;
+        .class-color {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .task-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 10px;
-        }
-
-        .task-title {
-            font-weight: 600;
-            color: #1e293b;
-            font-size: 15px;
+        .class-info {
             flex: 1;
         }
 
-        .task-menu {
-            color: #94a3b8;
-            cursor: pointer;
-            padding: 4px;
-            transition: color 0.3s;
+        .class-name {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 16px;
         }
 
-        .task-menu:hover {
-            color: #3b82f6;
-        }
-
-        .task-description {
+        .class-teacher {
             font-size: 13px;
             color: #64748b;
-            margin-bottom: 12px;
-            line-height: 1.5;
+            margin-top: 2px;
         }
 
-        .task-meta {
+        .class-actions {
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            align-items: center;
+            gap: 8px;
         }
 
-        .task-class {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 4px 10px;
+        .icon-btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            padding: 8px;
             border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
+            transition: all 0.3s;
         }
 
-        .task-class.math {
-            background: rgba(139, 92, 246, 0.1);
-            color: #8b5cf6;
-        }
-
-        .task-class.science {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-        }
-
-        .task-class.english {
-            background: rgba(59, 130, 246, 0.1);
+        .icon-btn:hover {
+            background: #f1f5f9;
             color: #3b82f6;
         }
 
-        .task-class.history {
-            background: rgba(249, 115, 22, 0.1);
-            color: #f97316;
-        }
-
-        .task-class.other {
-            background: rgba(100, 116, 139, 0.1);
-            color: #64748b;
-        }
-
-        .task-priority {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .task-priority.high {
+        .icon-btn.delete:hover {
             color: #ef4444;
-        }
-
-        .task-priority.medium {
-            color: #f59e0b;
-        }
-
-        .task-priority.low {
-            color: #3b82f6;
-        }
-
-        .task-due {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 12px;
-            color: #64748b;
         }
 
         /* Modal */
@@ -505,8 +408,6 @@
             padding: 30px;
             max-width: 500px;
             width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
         }
 
         .modal-header {
@@ -528,9 +429,6 @@
             font-size: 24px;
             color: #94a3b8;
             cursor: pointer;
-            padding: 0;
-            width: 30px;
-            height: 30px;
         }
 
         .close-modal:hover {
@@ -549,9 +447,7 @@
             font-size: 14px;
         }
 
-        .form-input,
-        .form-select,
-        .form-textarea {
+        .form-input {
             width: 100%;
             padding: 12px;
             border: 2px solid #e2e8f0;
@@ -561,28 +457,40 @@
             transition: border-color 0.3s;
         }
 
-        .form-input:focus,
-        .form-select:focus,
-        .form-textarea:focus {
+        .form-input:focus {
             outline: none;
             border-color: #3b82f6;
         }
 
-        .form-textarea {
-            resize: vertical;
-            min-height: 80px;
+        .color-picker-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
         }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+        .color-option {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+
+        .color-option.selected {
+            border-color: #1e293b;
+            box-shadow: 0 0 0 2px white, 0 0 0 4px #1e293b;
         }
 
         .submit-btn {
             width: 100%;
             background: #3b82f6;
             color: white;
+            flex: 1;
             border: none;
             padding: 14px;
             border-radius: 8px;
@@ -597,7 +505,6 @@
             transform: translateY(-2px);
         }
 
-        /* Mobile Menu Toggle */
         .mobile-menu-toggle {
             display: none;
             position: fixed;
@@ -606,21 +513,13 @@
             z-index: 1000;
             background: #3b82f6;
             color: white;
+            flex: 1;
             border: none;
             width: 45px;
             height: 45px;
             border-radius: 10px;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-            transition: all 0.3s;
-        }
-
-        .mobile-menu-toggle:active {
-            transform: scale(0.95);
-        }
-
-        .mobile-menu-toggle i {
-            font-size: 20px;
         }
 
         .mobile-overlay {
@@ -640,7 +539,6 @@
             opacity: 1;
         }
 
-        /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .sidebar {
                 position: fixed;
@@ -665,66 +563,27 @@
                 display: block;
             }
 
-            .main-content {
-                width: 100%;
-            }
-
             .header {
                 padding: 20px 20px 20px 75px;
-                flex-direction: column;
-                gap: 15px;
-                align-items: flex-start;
-            }
-
-            .header h1 {
-                font-size: 22px;
             }
 
             .content {
                 padding: 20px;
             }
 
-            .kanban-board {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .kanban-column {
-                min-height: auto;
-            }
-
-            .modal-content {
-                padding: 20px;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 18px;
-            }
-
-            .add-task-btn {
-                width: 100%;
-                justify-content: center;
+            .color-picker-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
         }
     </style>
 </head>
 <body>
-    <!-- Mobile Menu Toggle -->
     <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
         <i class="fas fa-bars"></i>
     </button>
-
-    <!-- Mobile Overlay -->
     <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
 
     <div class="container">
-        <!-- Sidebar -->
         <div class="sidebar">
             <div class="logo">
                 <img src="studydeck.png" alt="StudyDeck">
@@ -764,7 +623,7 @@
                     <span>Take Notes</span>
                 </a>
                 
-                <a href="progress-tracker.html" class="nav-item active">
+                <a href="progress-tracker.html" class="nav-item">
                     <i class="fas fa-chart-line"></i>
                     <span>Progress Tracker</span>
                 </a>
@@ -821,16 +680,14 @@
                     </div>
                 </div>
                 
-                <a href="settings.html" class="nav-item">
+                <a href="settings.html" class="nav-item active">
                     <i class="fas fa-cog"></i>
                     <span>Settings</span>
                 </a>
             </nav>
             
             <div class="user-profile">
-                <div class="user-avatar">
-                    AI
-                </div>
+                <div class="user-avatar">AI</div>
                 <div class="user-info">
                     <div class="user-name">Ayham Issa</div>
                 </div>
@@ -840,64 +697,26 @@
             </div>
         </div>
 
-        <!-- Main Content -->
         <div class="main-content">
             <div class="header">
-                <h1><i class="fas fa-chart-line"></i> Progress Tracker</h1>
-                <button class="add-task-btn" onclick="openModal()">
-                    <i class="fas fa-plus"></i>
-                    Add New Task
-                </button>
+                <h1><i class="fas fa-cog"></i> Settings</h1>
             </div>
             
             <div class="content">
-                <!-- Kanban Board -->
-                <div class="kanban-board">
-                    <!-- To Do Column -->
-                    <div class="kanban-column">
-                        <div class="column-header">
-                            <div class="column-title">
-                                <div class="column-icon todo">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                To Do
+                <div class="settings-grid">
+                    <div class="setting-section">
+                        <div class="section-header">
+                            <div class="section-title">
+                                <i class="fas fa-book"></i>
+                                My Classes
                             </div>
-                            <span class="column-count" id="todo-count">0</span>
+                            <button class="add-class-btn" onclick="openClassModal()">
+                                <i class="fas fa-plus"></i>
+                                Add Class
+                            </button>
                         </div>
-                        <div class="tasks-container" id="todo-tasks" ondrop="drop(event)" ondragover="allowDrop(event)" data-status="todo">
-                            <!-- Tasks will be added here -->
-                        </div>
-                    </div>
-
-                    <!-- In Progress Column -->
-                    <div class="kanban-column">
-                        <div class="column-header">
-                            <div class="column-title">
-                                <div class="column-icon progress">
-                                    <i class="fas fa-spinner"></i>
-                                </div>
-                                In Progress
-                            </div>
-                            <span class="column-count" id="progress-count">0</span>
-                        </div>
-                        <div class="tasks-container" id="progress-tasks" ondrop="drop(event)" ondragover="allowDrop(event)" data-status="progress">
-                            <!-- Tasks will be added here -->
-                        </div>
-                    </div>
-
-                    <!-- Completed Column -->
-                    <div class="kanban-column">
-                        <div class="column-header">
-                            <div class="column-title">
-                                <div class="column-icon completed">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
-                                Completed
-                            </div>
-                            <span class="column-count" id="completed-count">0</span>
-                        </div>
-                        <div class="tasks-container" id="completed-tasks" ondrop="drop(event)" ondragover="allowDrop(event)" data-status="completed">
-                            <!-- Tasks will be added here -->
+                        <div class="classes-list" id="classesList">
+                            <!-- Classes will be rendered here -->
                         </div>
                     </div>
                 </div>
@@ -905,252 +724,170 @@
         </div>
     </div>
 
-    <!-- Add Task Modal -->
-    <div class="modal" id="taskModal">
+    <!-- Add/Edit Class Modal -->
+    <div class="modal" id="classModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Add New Task</h2>
-                <button class="close-modal" onclick="closeModal()">×</button>
+                <h2 class="modal-title" id="modalTitle">Add New Class</h2>
+                <button class="close-modal" onclick="closeClassModal()">×</button>
             </div>
-            <form id="taskForm" onsubmit="addTask(event)">
+            <form id="classForm" onsubmit="saveClass(event)">
                 <div class="form-group">
-                    <label class="form-label">Task Title <span style="color: #ef4444;">*</span></label>
-                    <input type="text" class="form-input" id="taskTitle" required placeholder="Enter task title">
+                    <label class="form-label">Class Name <span style="color: #ef4444;">*</span></label>
+                    <input type="text" class="form-input" id="className" required placeholder="e.g., AP Calculus">
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">Description</label>
-                    <textarea class="form-textarea" id="taskDescription" placeholder="Add task description"></textarea>
+                    <label class="form-label">Teacher Name</label>
+                    <input type="text" class="form-input" id="classTeacher" placeholder="e.g., Mr. Smith">
                 </div>
                 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">Class/Subject</label>
-                        <select class="form-select" id="taskClass">
-                            <option value="">Select class (optional)</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Priority <span style="color: #ef4444;">*</span></label>
-                        <select class="form-select" id="taskPriority" required>
-                            <option value="">Select priority</option>
-                            <option value="high">High</option>
-                            <option value="medium">Medium</option>
-                            <option value="low">Low</option>
-                        </select>
+                <div class="form-group">
+                    <label class="form-label">Choose Color <span style="color: #ef4444;">*</span></label>
+                    <div class="color-picker-grid" id="colorPicker">
+                        <!-- Colors will be generated -->
                     </div>
                 </div>
                 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">Status <span style="color: #ef4444;">*</span></label>
-                        <select class="form-select" id="taskStatus" required>
-                            <option value="todo">To Do</option>
-                            <option value="progress">In Progress</option>
-                            <option value="completed">Completed</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Due Date</label>
-                        <input type="date" class="form-input" id="taskDue">
-                    </div>
-                </div>
+                <input type="hidden" id="editingClassId" value="">
                 
                 <button type="submit" class="submit-btn">
-                    <i class="fas fa-plus"></i> Add Task
+                    <i class="fas fa-save"></i> Save Class
                 </button>
             </form>
         </div>
     </div>
 
     <script>
-        // Task storage
-        let tasks = JSON.parse(localStorage.getItem('studyDeckTasks')) || [];
+        const colors = [
+            '#8b5cf6', '#3b82f6', '#22c55e', '#f59e0b', 
+            '#ef4444', '#ec4899', '#06b6d4', '#84cc16',
+            '#f97316', '#6366f1', '#14b8a6', '#a855f7'
+        ];
+
+        let selectedColor = colors[0];
         let classes = JSON.parse(localStorage.getItem('studyDeckClasses')) || [];
 
-        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            populateClassSelect();
-            renderTasks();
+            renderColorPicker();
+            renderClasses();
         });
 
-        function populateClassSelect() {
-            const select = document.getElementById('taskClass');
-            select.innerHTML = '<option value="">Select class</option>';
-            classes.forEach(cls => {
-                select.innerHTML += `<option value="${cls.id}">${cls.name}</option>`;
-            });
-        }
-
         function toggleDropdown() {
-            const dropdown = document.querySelector('.ai-dropdown');
-            dropdown.classList.toggle('open');
+            document.querySelector('.ai-dropdown').classList.toggle('open');
         }
 
         function toggleMathDropdown() {
-            const dropdown = document.querySelector('.math-dropdown');
-            dropdown.classList.toggle('open');
+            document.querySelector('.math-dropdown').classList.toggle('open');
         }
 
         function toggleMobileMenu() {
-            const sidebar = document.querySelector('.sidebar');
-            const overlay = document.querySelector('.mobile-overlay');
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
+            document.querySelector('.sidebar').classList.toggle('active');
+            document.querySelector('.mobile-overlay').classList.toggle('active');
         }
 
         function handleSignout() {
             if (confirm('Are you sure you want to sign out?')) {
-                console.log('User signed out');
                 alert('Signed out successfully!');
             }
         }
 
-        function openModal() {
-            document.getElementById('taskModal').classList.add('active');
-            document.getElementById('taskForm').reset();
+        function renderColorPicker() {
+            const picker = document.getElementById('colorPicker');
+            picker.innerHTML = colors.map(color => 
+                `<div class="color-option ${color === selectedColor ? 'selected' : ''}" 
+                      style="background: ${color}" 
+                      onclick="selectColor('${color}')"></div>`
+            ).join('');
         }
 
-        function closeModal() {
-            document.getElementById('taskModal').classList.remove('active');
+        function selectColor(color) {
+            selectedColor = color;
+            renderColorPicker();
         }
 
-        function addTask(event) {
-            event.preventDefault();
-            
-            const task = {
-                id: Date.now(),
-                title: document.getElementById('taskTitle').value,
-                description: document.getElementById('taskDescription').value,
-                class: document.getElementById('taskClass').value,
-                priority: document.getElementById('taskPriority').value,
-                status: document.getElementById('taskStatus').value,
-                due: document.getElementById('taskDue').value
-            };
-            
-            tasks.push(task);
-            saveTasks();
-            renderTasks();
-            closeModal();
-        }
+        function renderClasses() {
+            const list = document.getElementById('classesList');
+            if (classes.length === 0) {
+                list.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 20px;">No classes added yet. Click "Add Class" to get started!</p>';
+                return;
+            }
 
-        function renderTasks() {
-            // Clear all columns
-            document.getElementById('todo-tasks').innerHTML = '';
-            document.getElementById('progress-tasks').innerHTML = '';
-            document.getElementById('completed-tasks').innerHTML = '';
-            
-            // Count tasks
-            let todoCnt = 0, progressCnt = 0, completedCnt = 0;
-            
-            // Render each task
-            tasks.forEach(task => {
-                const taskCard = createTaskCard(task);
-                const container = document.getElementById(task.status + '-tasks');
-                container.appendChild(taskCard);
-                
-                if (task.status === 'todo') todoCnt++;
-                else if (task.status === 'progress') progressCnt++;
-                else completedCnt++;
-            });
-            
-            // Update counts
-            document.getElementById('todo-count').textContent = todoCnt;
-            document.getElementById('progress-count').textContent = progressCnt;
-            document.getElementById('completed-count').textContent = completedCnt;
-        }
-
-        function createTaskCard(task) {
-            const card = document.createElement('div');
-            card.className = 'task-card';
-            card.draggable = true;
-            card.dataset.taskId = task.id;
-            card.ondragstart = drag;
-            
-            const priorityIcon = {
-                high: 'fa-exclamation-circle',
-                medium: 'fa-minus-circle',
-                low: 'fa-info-circle'
-            };
-            
-            // Find class from settings
-            const taskClass = classes.find(c => c.id == task.class);
-            const className = taskClass ? taskClass.name : 'No Class';
-            const classColor = taskClass ? taskClass.color : '#64748b';
-            
-            card.innerHTML = `
-                <div class="task-header">
-                    <div class="task-title">${task.title}</div>
-                    <div class="task-menu" onclick="deleteTask(${task.id})">
-                        <i class="fas fa-trash"></i>
+            list.innerHTML = classes.map(cls => `
+                <div class="class-item">
+                    <div class="class-color" style="background: ${cls.color}"></div>
+                    <div class="class-info">
+                        <div class="class-name">${cls.name}</div>
+                        ${cls.teacher ? `<div class="class-teacher">${cls.teacher}</div>` : ''}
+                    </div>
+                    <div class="class-actions">
+                        <button class="icon-btn" onclick="editClass(${cls.id})" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="icon-btn delete" onclick="deleteClass(${cls.id})" title="Delete">
+                            <i class="fas fa-trash"></i>
+                        </button>
                     </div>
                 </div>
-                ${task.description ? `<div class="task-description">${task.description}</div>` : ''}
-                <div class="task-meta">
-                    <span class="task-class" style="background: ${classColor}20; color: ${classColor}">
-                        <i class="fas fa-book"></i>
-                        ${className}
-                    </span>
-                    <span class="task-priority ${task.priority}">
-                        <i class="fas ${priorityIcon[task.priority]}"></i>
-                        ${task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
-                    </span>
-                    ${task.due ? `
-                        <span class="task-due">
-                            <i class="fas fa-calendar"></i>
-                            ${new Date(task.due).toLocaleDateString()}
-                        </span>
-                    ` : ''}
-                </div>
-            `;
-            
-            return card;
+            `).join('');
         }
 
-        function deleteTask(id) {
-            if (confirm('Are you sure you want to delete this task?')) {
-                tasks = tasks.filter(task => task.id !== id);
-                saveTasks();
-                renderTasks();
+        function openClassModal() {
+            document.getElementById('modalTitle').textContent = 'Add New Class';
+            document.getElementById('classForm').reset();
+            document.getElementById('editingClassId').value = '';
+            selectedColor = colors[0];
+            renderColorPicker();
+            document.getElementById('classModal').classList.add('active');
+        }
+
+        function closeClassModal() {
+            document.getElementById('classModal').classList.remove('active');
+        }
+
+        function saveClass(event) {
+            event.preventDefault();
+            
+            const id = document.getElementById('editingClassId').value;
+            const classData = {
+                id: id ? parseInt(id) : Date.now(),
+                name: document.getElementById('className').value,
+                teacher: document.getElementById('classTeacher').value,
+                color: selectedColor
+            };
+
+            if (id) {
+                const index = classes.findIndex(c => c.id === parseInt(id));
+                classes[index] = classData;
+            } else {
+                classes.push(classData);
+            }
+
+            localStorage.setItem('studyDeckClasses', JSON.stringify(classes));
+            renderClasses();
+            closeClassModal();
+        }
+
+        function editClass(id) {
+            const cls = classes.find(c => c.id === id);
+            if (!cls) return;
+
+            document.getElementById('modalTitle').textContent = 'Edit Class';
+            document.getElementById('className').value = cls.name;
+            document.getElementById('classTeacher').value = cls.teacher;
+            document.getElementById('editingClassId').value = cls.id;
+            selectedColor = cls.color;
+            renderColorPicker();
+            document.getElementById('classModal').classList.add('active');
+        }
+
+        function deleteClass(id) {
+            if (confirm('Are you sure you want to delete this class? This action cannot be undone.')) {
+                classes = classes.filter(c => c.id !== id);
+                localStorage.setItem('studyDeckClasses', JSON.stringify(classes));
+                renderClasses();
             }
         }
-
-        function saveTasks() {
-            localStorage.setItem('studyDeckTasks', JSON.stringify(tasks));
-        }
-
-        // Drag and Drop functions
-        function allowDrop(event) {
-            event.preventDefault();
-        }
-
-        function drag(event) {
-            event.dataTransfer.setData('taskId', event.target.dataset.taskId);
-            event.target.classList.add('dragging');
-        }
-
-        function drop(event) {
-            event.preventDefault();
-            const taskId = parseInt(event.dataTransfer.getData('taskId'));
-            const newStatus = event.currentTarget.dataset.status;
-            
-            // Remove dragging class
-            document.querySelectorAll('.task-card').forEach(card => {
-                card.classList.remove('dragging');
-            });
-            
-            // Update task status
-            const task = tasks.find(t => t.id === taskId);
-            if (task) {
-                task.status = newStatus;
-                saveTasks();
-                renderTasks();
-            }
-        }
-
-
     </script>
 </body>
 </html>

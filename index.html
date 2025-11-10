@@ -52,6 +52,17 @@
 
         .logo-text {
             color: white;
+            flex: 1;
+        }
+
+        .pro-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #1e293b;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
         }
 
         .nav-menu {
@@ -684,38 +695,40 @@
             <div class="logo">
                 <img src="studydeck.png" alt="StudyDeck">
                 <span class="logo-text">StudyDeck</span>
+                <span class="pro-badge">PRO</span>
             </div>
             
             <nav class="nav-menu">
-                <div class="nav-item active">
+                <a href="index.html" class="nav-item active">
                     <i class="fas fa-home"></i>
                     <span>Home</span>
-                </div>
+                </a>
                 
-                <div class="nav-item">
+                <a href="flashcards.html" class="nav-item">
                     <i class="fas fa-layer-group"></i>
                     <span>Flashcards</span>
-                </div>
+                </a>
                 
-                <div class="nav-item">
+                <a href="todo.html" class="nav-item">
                     <i class="fas fa-list-check"></i>
                     <span>To-Do List</span>
-                </div>
+                </a>
                 
                 <div class="nav-item">
                     <i class="fas fa-calendar-days"></i>
                     <span>Study Schedule</span>
+                    <i class="fas fa-wrench" style="margin-left: auto; font-size: 12px; color: #f59e0b;" title="Work in Progress"></i>
                 </div>
                 
-                <div class="nav-item">
+                <a href="pomodoro.html" class="nav-item">
                     <i class="fas fa-clock"></i>
                     <span>Pomodoro Timer</span>
-                </div>
+                </a>
                 
-                <div class="nav-item">
+                <a href="notes.html" class="nav-item">
                     <i class="fas fa-book-open"></i>
                     <span>Take Notes</span>
-                </div>
+                </a>
                 
                 <a href="progress-tracker.html" class="nav-item">
                     <i class="fas fa-chart-line"></i>
@@ -774,10 +787,10 @@
                     </div>
                 </div>
                 
-                <div class="nav-item">
+                <a href="settings.html" class="nav-item">
                     <i class="fas fa-cog"></i>
                     <span>Settings</span>
-                </div>
+                </a>
             </nav>
             
             <div class="user-profile">
@@ -786,9 +799,6 @@
                 </div>
                 <div class="user-info">
                     <div class="user-name">Ayham Issa</div>
-                    <span class="user-badge">
-                        <i class="fas fa-crown"></i> Premium
-                    </span>
                 </div>
                 <button class="signout-btn" onclick="handleSignout()" title="Sign Out">
                     <i class="fas fa-right-from-bracket"></i>
@@ -811,34 +821,34 @@
                         </div>
                         <h3>Flashcard Decks</h3>
                         <p>Total decks created</p>
-                        <div class="card-number">12</div>
+                        <div class="card-number" id="deckCount">0</div>
                     </div>
                     
                     <div class="card">
                         <div class="card-icon purple">
                             <i class="fas fa-list-check"></i>
                         </div>
-                        <h3>Tasks Completed</h3>
-                        <p>This week</p>
-                        <div class="card-number">24</div>
+                        <h3>Active Tasks</h3>
+                        <p>To-do items</p>
+                        <div class="card-number" id="taskCount">0</div>
                     </div>
                     
                     <div class="card">
                         <div class="card-icon green">
-                            <i class="fas fa-fire"></i>
+                            <i class="fas fa-book-open"></i>
                         </div>
-                        <h3>Study Streak</h3>
-                        <p>Consecutive days</p>
-                        <div class="card-number">7</div>
+                        <h3>Notes</h3>
+                        <p>Total notes saved</p>
+                        <div class="card-number" id="noteCount">0</div>
                     </div>
                     
                     <div class="card">
                         <div class="card-icon orange">
-                            <i class="fas fa-brain"></i>
+                            <i class="fas fa-graduation-cap"></i>
                         </div>
-                        <h3>AI Sessions</h3>
-                        <p>AI tools used</p>
-                        <div class="card-number">18</div>
+                        <h3>Classes</h3>
+                        <p>Enrolled courses</p>
+                        <div class="card-number" id="classCount">0</div>
                     </div>
                 </div>
 
@@ -846,66 +856,44 @@
                 <div class="section">
                     <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
                     <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                        <button class="quick-action-btn blue">
+                        <a href="flashcards.html" class="quick-action-btn blue" style="text-decoration: none;">
                             <i class="fas fa-plus"></i>
-                            <span>New Flashcard Deck</span>
-                        </button>
-                        <button class="quick-action-btn purple">
+                            <span>Create Flashcard Deck</span>
+                        </a>
+                        <a href="todo.html" class="quick-action-btn purple" style="text-decoration: none;">
                             <i class="fas fa-check-square"></i>
-                            <span>Add Task</span>
-                        </button>
-                        <button class="quick-action-btn green">
-                            <i class="fas fa-play"></i>
-                            <span>Start Study Session</span>
-                        </button>
-                        <button class="quick-action-btn orange">
-                            <i class="fas fa-robot"></i>
-                            <span>Ask AI Assistant</span>
-                        </button>
+                            <span>Add New Task</span>
+                        </a>
+                        <a href="pomodoro.html" class="quick-action-btn green" style="text-decoration: none;">
+                            <i class="fas fa-clock"></i>
+                            <span>Start Pomodoro Timer</span>
+                        </a>
+                        <a href="notes.html" class="quick-action-btn orange" style="text-decoration: none;">
+                            <i class="fas fa-book-open"></i>
+                            <span>Take Notes</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Your Classes -->
+                <div class="section" id="classesSection" style="display: none;">
+                    <h2><i class="fas fa-graduation-cap"></i> Your Classes</h2>
+                    <div id="classesList" class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                    </div>
+                    <div id="emptyClasses" style="display: none; text-align: center; color: #94a3b8; padding: 30px;">
+                        <i class="fas fa-graduation-cap" style="font-size: 48px; margin-bottom: 15px; opacity: 0.3;"></i>
+                        <p>No classes yet. <a href="settings.html" style="color: #3b82f6;">Add your first class</a> to get started!</p>
                     </div>
                 </div>
 
                 <!-- Recent Activity -->
                 <div class="section">
                     <h2><i class="fas fa-clock"></i> Recent Activity</h2>
-                    
-                    <div class="activity-item">
-                        <div class="activity-icon blue">
-                            <i class="fas fa-layer-group"></i>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">Reviewed Biology Flashcards</div>
-                            <div class="activity-time">2 hours ago</div>
-                        </div>
-                    </div>
-                    
-                    <div class="activity-item">
-                        <div class="activity-icon purple">
-                            <i class="fas fa-spell-check"></i>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">Used AI Proofread on Essay</div>
-                            <div class="activity-time">5 hours ago</div>
-                        </div>
-                    </div>
-                    
-                    <div class="activity-item">
-                        <div class="activity-icon green">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">Completed 8 Tasks</div>
-                            <div class="activity-time">Yesterday</div>
-                        </div>
-                    </div>
-                    
-                    <div class="activity-item">
-                        <div class="activity-icon orange">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">AI QuickGrader - Math Assignment</div>
-                            <div class="activity-time">2 days ago</div>
+                    <div id="activityList">
+                        <div style="text-align: center; color: #94a3b8; padding: 30px;">
+                            <i class="fas fa-clock" style="font-size: 48px; margin-bottom: 15px; opacity: 0.3;"></i>
+                            <p>Your recent activity will appear here as you use the app.</p>
+                            <p style="margin-top: 10px; font-size: 14px;">Try creating a flashcard deck, adding a task, or starting a study session!</p>
                         </div>
                     </div>
                 </div>
@@ -960,6 +948,179 @@
                 alert('Signed out successfully!');
             }
         }
+
+        // Load and display statistics
+        function loadStatistics() {
+            // Load flashcard decks
+            const flashcards = JSON.parse(localStorage.getItem('studyDeckFlashcards') || '[]');
+            document.getElementById('deckCount').textContent = flashcards.length;
+
+            // Load todos
+            const todos = JSON.parse(localStorage.getItem('studyDeckTodos') || '[]');
+            const activeTodos = todos.filter(t => !t.completed);
+            document.getElementById('taskCount').textContent = activeTodos.length;
+
+            // Load notes
+            const notes = JSON.parse(localStorage.getItem('studyDeckNotes') || '[]');
+            document.getElementById('noteCount').textContent = notes.length;
+
+            // Load classes
+            const classes = JSON.parse(localStorage.getItem('studyDeckClasses') || '[]');
+            document.getElementById('classCount').textContent = classes.length;
+
+            // Display classes
+            displayClasses(classes);
+        }
+
+        // Display classes section
+        function displayClasses(classes) {
+            const classesSection = document.getElementById('classesSection');
+            const classesList = document.getElementById('classesList');
+            const emptyClasses = document.getElementById('emptyClasses');
+
+            if (classes.length === 0) {
+                classesSection.style.display = 'block';
+                classesList.style.display = 'none';
+                emptyClasses.style.display = 'block';
+                return;
+            }
+
+            classesSection.style.display = 'block';
+            classesList.style.display = 'grid';
+            emptyClasses.style.display = 'none';
+
+            classesList.innerHTML = classes.map(cls => `
+                <div class="card" style="cursor: pointer;" onclick="window.location.href='settings.html'">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                        <div style="width: 12px; height: 12px; border-radius: 50%; background: ${cls.color};"></div>
+                        <h3 style="margin: 0; font-size: 16px;">${cls.name}</h3>
+                    </div>
+                    ${cls.teacher ? `<p style="font-size: 13px; color: #64748b; margin: 0;">
+                        <i class="fas fa-user" style="margin-right: 5px;"></i>${cls.teacher}
+                    </p>` : '<p style="font-size: 13px; color: #94a3b8; margin: 0; font-style: italic;">No teacher assigned</p>'}
+                </div>
+            `).join('');
+        }
+
+        // Load recent activity
+        function loadRecentActivity() {
+            const activityList = document.getElementById('activityList');
+            const activities = [];
+
+            // Get recent todos
+            const todos = JSON.parse(localStorage.getItem('studyDeckTodos') || '[]');
+            const recentCompletedTodos = todos
+                .filter(t => t.completed && t.updated)
+                .sort((a, b) => new Date(b.updated) - new Date(a.updated))
+                .slice(0, 2);
+
+            recentCompletedTodos.forEach(todo => {
+                activities.push({
+                    icon: 'fas fa-check-circle',
+                    color: 'green',
+                    title: `Completed: ${todo.title}`,
+                    time: getRelativeTime(todo.updated)
+                });
+            });
+
+            // Get recent flashcard decks
+            const flashcards = JSON.parse(localStorage.getItem('studyDeckFlashcards') || '[]');
+            const recentDecks = flashcards
+                .sort((a, b) => new Date(b.created) - new Date(a.created))
+                .slice(0, 2);
+
+            recentDecks.forEach(deck => {
+                activities.push({
+                    icon: 'fas fa-layer-group',
+                    color: 'blue',
+                    title: `Created flashcard deck: ${deck.name}`,
+                    time: getRelativeTime(deck.created)
+                });
+            });
+
+            // Get recent notes
+            const notes = JSON.parse(localStorage.getItem('studyDeckNotes') || '[]');
+            const recentNotes = notes
+                .sort((a, b) => new Date(b.updated) - new Date(a.updated))
+                .slice(0, 2);
+
+            recentNotes.forEach(note => {
+                activities.push({
+                    icon: 'fas fa-book-open',
+                    color: 'orange',
+                    title: `Updated note: ${note.title}`,
+                    time: getRelativeTime(note.updated)
+                });
+            });
+
+            // Sort activities by time
+            activities.sort((a, b) => {
+                const timeA = parseRelativeTime(a.time);
+                const timeB = parseRelativeTime(b.time);
+                return timeA - timeB;
+            });
+
+            if (activities.length === 0) {
+                activityList.innerHTML = `
+                    <div style="text-align: center; color: #94a3b8; padding: 30px;">
+                        <i class="fas fa-clock" style="font-size: 48px; margin-bottom: 15px; opacity: 0.3;"></i>
+                        <p>Your recent activity will appear here as you use the app.</p>
+                        <p style="margin-top: 10px; font-size: 14px;">Try creating a flashcard deck, adding a task, or starting a study session!</p>
+                    </div>
+                `;
+            } else {
+                activityList.innerHTML = activities.slice(0, 5).map(activity => `
+                    <div class="activity-item">
+                        <div class="activity-icon ${activity.color}">
+                            <i class="${activity.icon}"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">${activity.title}</div>
+                            <div class="activity-time">${activity.time}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Helper function to get relative time
+        function getRelativeTime(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+
+            if (diffMins < 1) return 'Just now';
+            if (diffMins < 60) return `${diffMins} minute${diffMins > 1 ? 's' : ''} ago`;
+            if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+            if (diffDays === 1) return 'Yesterday';
+            if (diffDays < 7) return `${diffDays} days ago`;
+            return date.toLocaleDateString();
+        }
+
+        // Helper function to parse relative time for sorting
+        function parseRelativeTime(timeString) {
+            if (timeString === 'Just now') return 0;
+            if (timeString === 'Yesterday') return 1440;
+            
+            const match = timeString.match(/(\d+)\s+(minute|hour|day)s?\s+ago/);
+            if (match) {
+                const value = parseInt(match[1]);
+                const unit = match[2];
+                if (unit === 'minute') return value;
+                if (unit === 'hour') return value * 60;
+                if (unit === 'day') return value * 1440;
+            }
+            return 10000; // Old dates
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadStatistics();
+            loadRecentActivity();
+        });
 
         // Add click handlers for navigation items
         document.querySelectorAll('.nav-item:not(.ai-dropdown):not(.math-dropdown)').forEach(item => {

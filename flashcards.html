@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyDeck - Progress Tracker</title>
+    <title>StudyDeck - Flashcards</title>
     <link rel="icon" href="studydeck.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -24,7 +24,7 @@
             height: 100vh;
         }
 
-        /* Sidebar */
+        /* Sidebar styles - same as settings */
         .sidebar {
             width: 280px;
             background: #1e293b;
@@ -98,7 +98,6 @@
             font-size: 18px;
         }
 
-        /* AI & Math Dropdowns */
         .ai-dropdown, .math-dropdown {
             position: relative;
         }
@@ -175,7 +174,6 @@
             text-align: center;
         }
 
-        /* User Profile */
         .user-profile {
             padding: 20px 25px;
             border-top: 1px solid rgba(255,255,255,0.1);
@@ -233,11 +231,8 @@
         .signout-btn:hover {
             background: #ef4444;
             color: white;
+            flex: 1;
             transform: scale(1.05);
-        }
-
-        .signout-btn i {
-            font-size: 16px;
         }
 
         /* Main Content */
@@ -260,7 +255,7 @@
             color: #1e293b;
         }
 
-        .add-task-btn {
+        .add-deck-btn {
             background: #3b82f6;
             color: white;
             border: none;
@@ -275,7 +270,7 @@
             transition: all 0.3s;
         }
 
-        .add-task-btn:hover {
+        .add-deck-btn:hover {
             background: #2563eb;
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
@@ -285,200 +280,201 @@
             padding: 40px;
         }
 
-        /* Kanban Board */
-        .kanban-board {
+        .decks-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
-            margin-bottom: 40px;
         }
 
-        .kanban-column {
+        .deck-card {
             background: white;
             border-radius: 12px;
-            padding: 20px;
+            padding: 25px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            min-height: 500px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid #3b82f6;
         }
 
-        .column-header {
+        .deck-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .deck-header {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f1f5f9;
+            align-items: start;
+            margin-bottom: 15px;
         }
 
-        .column-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .deck-title {
             font-size: 18px;
             font-weight: 600;
             color: #1e293b;
         }
 
-        .column-count {
-            background: #f1f5f9;
-            color: #64748b;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .column-icon {
-            width: 35px;
-            height: 35px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
-
-        .column-icon.todo {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
-        }
-
-        .column-icon.progress {
-            background: rgba(249, 115, 22, 0.1);
-            color: #f97316;
-        }
-
-        .column-icon.completed {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-        }
-
-        .tasks-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            min-height: 400px;
-        }
-
-        .task-card {
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 15px;
-            cursor: grab;
-            transition: all 0.3s;
-        }
-
-        .task-card:hover {
-            border-color: #3b82f6;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
-        }
-
-        .task-card.dragging {
-            opacity: 0.5;
-            cursor: grabbing;
-        }
-
-        .task-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 10px;
-        }
-
-        .task-title {
-            font-weight: 600;
-            color: #1e293b;
-            font-size: 15px;
-            flex: 1;
-        }
-
-        .task-menu {
+        .deck-menu {
             color: #94a3b8;
             cursor: pointer;
             padding: 4px;
-            transition: color 0.3s;
         }
 
-        .task-menu:hover {
+        .deck-menu:hover {
             color: #3b82f6;
         }
 
-        .task-description {
-            font-size: 13px;
-            color: #64748b;
-            margin-bottom: 12px;
-            line-height: 1.5;
-        }
-
-        .task-meta {
+        .deck-stats {
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f1f5f9;
         }
 
-        .task-class {
-            display: inline-flex;
+        .deck-stat {
+            display: flex;
             align-items: center;
             gap: 5px;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
+            color: #64748b;
+            font-size: 14px;
         }
 
-        .task-class.math {
-            background: rgba(139, 92, 246, 0.1);
-            color: #8b5cf6;
-        }
-
-        .task-class.science {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-        }
-
-        .task-class.english {
-            background: rgba(59, 130, 246, 0.1);
+        .deck-stat i {
             color: #3b82f6;
         }
 
-        .task-class.history {
-            background: rgba(249, 115, 22, 0.1);
-            color: #f97316;
-        }
-
-        .task-class.other {
-            background: rgba(100, 116, 139, 0.1);
-            color: #64748b;
-        }
-
-        .task-priority {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
+        .deck-class-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
+            margin-top: 10px;
         }
 
-        .task-priority.high {
-            color: #ef4444;
-        }
-
-        .task-priority.medium {
-            color: #f59e0b;
-        }
-
-        .task-priority.low {
-            color: #3b82f6;
-        }
-
-        .task-due {
-            display: inline-flex;
+        /* Study Mode */
+        .study-mode {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
             align-items: center;
-            gap: 4px;
-            font-size: 12px;
-            color: #64748b;
+            justify-content: center;
+        }
+
+        .study-mode.active {
+            display: flex;
+        }
+
+        .study-container {
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .study-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            color: white;
+            flex: 1;
+        }
+
+        .study-progress {
+            font-size: 18px;
+        }
+
+        .close-study {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            flex: 1;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+
+        .close-study:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .flashcard {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 24px;
+            color: #1e293b;
+            cursor: pointer;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            backface-visibility: hidden;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        .study-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .study-btn {
+            background: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .study-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255,255,255,0.3);
+        }
+
+        .study-btn.correct {
+            background: #22c55e;
+            color: white;
+            flex: 1;
+        }
+
+        .study-btn.wrong {
+            background: #ef4444;
+            color: white;
+            flex: 1;
         }
 
         /* Modal */
@@ -503,7 +499,7 @@
             background: white;
             border-radius: 12px;
             padding: 30px;
-            max-width: 500px;
+            max-width: 600px;
             width: 90%;
             max-height: 90vh;
             overflow-y: auto;
@@ -528,13 +524,6 @@
             font-size: 24px;
             color: #94a3b8;
             cursor: pointer;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-        }
-
-        .close-modal:hover {
-            color: #1e293b;
         }
 
         .form-group {
@@ -549,40 +538,40 @@
             font-size: 14px;
         }
 
-        .form-input,
-        .form-select,
-        .form-textarea {
+        .form-input, .form-select {
             width: 100%;
             padding: 12px;
             border: 2px solid #e2e8f0;
             border-radius: 8px;
             font-size: 14px;
             font-family: inherit;
-            transition: border-color 0.3s;
         }
 
-        .form-input:focus,
-        .form-select:focus,
-        .form-textarea:focus {
+        .form-input:focus, .form-select:focus {
             outline: none;
             border-color: #3b82f6;
         }
 
-        .form-textarea {
-            resize: vertical;
-            min-height: 80px;
+        .flashcard-inputs {
+            display: grid;
+            gap: 15px;
+            margin-top: 15px;
         }
 
-        .form-row {
+        .flashcard-input-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 10px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 8px;
         }
 
         .submit-btn {
             width: 100%;
             background: #3b82f6;
             color: white;
+            flex: 1;
             border: none;
             padding: 14px;
             border-radius: 8px;
@@ -594,10 +583,24 @@
 
         .submit-btn:hover {
             background: #2563eb;
-            transform: translateY(-2px);
         }
 
-        /* Mobile Menu Toggle */
+        .add-card-btn {
+            background: #f1f5f9;
+            color: #3b82f6;
+            border: 2px dashed #cbd5e1;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-card-btn:hover {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
         .mobile-menu-toggle {
             display: none;
             position: fixed;
@@ -606,21 +609,13 @@
             z-index: 1000;
             background: #3b82f6;
             color: white;
+            flex: 1;
             border: none;
             width: 45px;
             height: 45px;
             border-radius: 10px;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-            transition: all 0.3s;
-        }
-
-        .mobile-menu-toggle:active {
-            transform: scale(0.95);
-        }
-
-        .mobile-menu-toggle i {
-            font-size: 20px;
         }
 
         .mobile-overlay {
@@ -633,14 +628,12 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 998;
             opacity: 0;
-            transition: opacity 0.3s;
         }
 
         .mobile-overlay.active {
             opacity: 1;
         }
 
-        /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .sidebar {
                 position: fixed;
@@ -665,10 +658,6 @@
                 display: block;
             }
 
-            .main-content {
-                width: 100%;
-            }
-
             .header {
                 padding: 20px 20px 20px 75px;
                 flex-direction: column;
@@ -676,55 +665,32 @@
                 align-items: flex-start;
             }
 
-            .header h1 {
-                font-size: 22px;
-            }
-
             .content {
                 padding: 20px;
             }
 
-            .kanban-board {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .kanban-column {
-                min-height: auto;
-            }
-
-            .modal-content {
-                padding: 20px;
-            }
-
-            .form-row {
+            .decks-grid {
                 grid-template-columns: 1fr;
             }
-        }
 
-        @media (max-width: 480px) {
-            .header h1 {
+            .flashcard {
+                padding: 40px 20px;
                 font-size: 18px;
             }
 
-            .add-task-btn {
-                width: 100%;
-                justify-content: center;
+            .flashcard-input-group {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Mobile Menu Toggle -->
     <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
         <i class="fas fa-bars"></i>
     </button>
-
-    <!-- Mobile Overlay -->
     <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
 
     <div class="container">
-        <!-- Sidebar -->
         <div class="sidebar">
             <div class="logo">
                 <img src="studydeck.png" alt="StudyDeck">
@@ -738,7 +704,7 @@
                     <span>Home</span>
                 </a>
                 
-                <a href="flashcards.html" class="nav-item">
+                <a href="flashcards.html" class="nav-item active">
                     <i class="fas fa-layer-group"></i>
                     <span>Flashcards</span>
                 </a>
@@ -764,7 +730,7 @@
                     <span>Take Notes</span>
                 </a>
                 
-                <a href="progress-tracker.html" class="nav-item active">
+                <a href="progress-tracker.html" class="nav-item">
                     <i class="fas fa-chart-line"></i>
                     <span>Progress Tracker</span>
                 </a>
@@ -828,9 +794,7 @@
             </nav>
             
             <div class="user-profile">
-                <div class="user-avatar">
-                    AI
-                </div>
+                <div class="user-avatar">AI</div>
                 <div class="user-info">
                     <div class="user-name">Ayham Issa</div>
                 </div>
@@ -840,314 +804,254 @@
             </div>
         </div>
 
-        <!-- Main Content -->
         <div class="main-content">
             <div class="header">
-                <h1><i class="fas fa-chart-line"></i> Progress Tracker</h1>
-                <button class="add-task-btn" onclick="openModal()">
+                <h1><i class="fas fa-layer-group"></i> Flashcards</h1>
+                <button class="add-deck-btn" onclick="openDeckModal()">
                     <i class="fas fa-plus"></i>
-                    Add New Task
+                    Create Deck
                 </button>
             </div>
             
             <div class="content">
-                <!-- Kanban Board -->
-                <div class="kanban-board">
-                    <!-- To Do Column -->
-                    <div class="kanban-column">
-                        <div class="column-header">
-                            <div class="column-title">
-                                <div class="column-icon todo">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                To Do
-                            </div>
-                            <span class="column-count" id="todo-count">0</span>
-                        </div>
-                        <div class="tasks-container" id="todo-tasks" ondrop="drop(event)" ondragover="allowDrop(event)" data-status="todo">
-                            <!-- Tasks will be added here -->
-                        </div>
-                    </div>
-
-                    <!-- In Progress Column -->
-                    <div class="kanban-column">
-                        <div class="column-header">
-                            <div class="column-title">
-                                <div class="column-icon progress">
-                                    <i class="fas fa-spinner"></i>
-                                </div>
-                                In Progress
-                            </div>
-                            <span class="column-count" id="progress-count">0</span>
-                        </div>
-                        <div class="tasks-container" id="progress-tasks" ondrop="drop(event)" ondragover="allowDrop(event)" data-status="progress">
-                            <!-- Tasks will be added here -->
-                        </div>
-                    </div>
-
-                    <!-- Completed Column -->
-                    <div class="kanban-column">
-                        <div class="column-header">
-                            <div class="column-title">
-                                <div class="column-icon completed">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
-                                Completed
-                            </div>
-                            <span class="column-count" id="completed-count">0</span>
-                        </div>
-                        <div class="tasks-container" id="completed-tasks" ondrop="drop(event)" ondragover="allowDrop(event)" data-status="completed">
-                            <!-- Tasks will be added here -->
-                        </div>
-                    </div>
+                <div class="decks-grid" id="decksGrid">
+                    <!-- Decks will be rendered here -->
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Add Task Modal -->
-    <div class="modal" id="taskModal">
+    <!-- Study Mode -->
+    <div class="study-mode" id="studyMode">
+        <div class="study-container">
+            <div class="study-header">
+                <div class="study-progress" id="studyProgress">1 / 10</div>
+                <button class="close-study" onclick="closeStudyMode()">✕</button>
+            </div>
+            <div class="flashcard" id="flashcard" onclick="flipCard()">
+                <div class="card-face card-front" id="cardFront">
+                    Question appears here
+                </div>
+                <div class="card-face card-back" id="cardBack">
+                    Answer appears here
+                </div>
+            </div>
+            <div class="study-controls">
+                <button class="study-btn wrong" onclick="nextCard()">
+                    <i class="fas fa-times"></i> Needs Practice
+                </button>
+                <button class="study-btn correct" onclick="nextCard()">
+                    <i class="fas fa-check"></i> Got It!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Deck Modal -->
+    <div class="modal" id="deckModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Add New Task</h2>
-                <button class="close-modal" onclick="closeModal()">×</button>
+                <h2 class="modal-title">Create New Deck</h2>
+                <button class="close-modal" onclick="closeDeckModal()">×</button>
             </div>
-            <form id="taskForm" onsubmit="addTask(event)">
+            <form id="deckForm" onsubmit="saveDeck(event)">
                 <div class="form-group">
-                    <label class="form-label">Task Title <span style="color: #ef4444;">*</span></label>
-                    <input type="text" class="form-input" id="taskTitle" required placeholder="Enter task title">
+                    <label class="form-label">Deck Name <span style="color: #ef4444;">*</span></label>
+                    <input type="text" class="form-input" id="deckName" required placeholder="e.g., Spanish Vocabulary">
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">Description</label>
-                    <textarea class="form-textarea" id="taskDescription" placeholder="Add task description"></textarea>
+                    <label class="form-label">Class</label>
+                    <select class="form-select" id="deckClass">
+                        <option value="">Select a class (optional)</option>
+                    </select>
                 </div>
                 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">Class/Subject</label>
-                        <select class="form-select" id="taskClass">
-                            <option value="">Select class (optional)</option>
-                        </select>
+                <div class="form-group">
+                    <label class="form-label">Flashcards</label>
+                    <div class="flashcard-inputs" id="flashcardInputs">
+                        <div class="flashcard-input-group">
+                            <input type="text" class="form-input" placeholder="Question" required>
+                            <input type="text" class="form-input" placeholder="Answer" required>
+                        </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Priority <span style="color: #ef4444;">*</span></label>
-                        <select class="form-select" id="taskPriority" required>
-                            <option value="">Select priority</option>
-                            <option value="high">High</option>
-                            <option value="medium">Medium</option>
-                            <option value="low">Low</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">Status <span style="color: #ef4444;">*</span></label>
-                        <select class="form-select" id="taskStatus" required>
-                            <option value="todo">To Do</option>
-                            <option value="progress">In Progress</option>
-                            <option value="completed">Completed</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Due Date</label>
-                        <input type="date" class="form-input" id="taskDue">
-                    </div>
+                    <button type="button" class="add-card-btn" onclick="addCardInput()">
+                        <i class="fas fa-plus"></i> Add Another Card
+                    </button>
                 </div>
                 
                 <button type="submit" class="submit-btn">
-                    <i class="fas fa-plus"></i> Add Task
+                    Create Deck
                 </button>
             </form>
         </div>
     </div>
 
     <script>
-        // Task storage
-        let tasks = JSON.parse(localStorage.getItem('studyDeckTasks')) || [];
+        let decks = JSON.parse(localStorage.getItem('studyDeckFlashcards')) || [];
         let classes = JSON.parse(localStorage.getItem('studyDeckClasses')) || [];
+        let currentDeck = null;
+        let currentCardIndex = 0;
 
-        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
+            renderDecks();
             populateClassSelect();
-            renderTasks();
         });
 
+        function toggleDropdown() {
+            document.querySelector('.ai-dropdown').classList.toggle('open');
+        }
+
+        function toggleMathDropdown() {
+            document.querySelector('.math-dropdown').classList.toggle('open');
+        }
+
+        function toggleMobileMenu() {
+            document.querySelector('.sidebar').classList.toggle('active');
+            document.querySelector('.mobile-overlay').classList.toggle('active');
+        }
+
+        function handleSignout() {
+            if (confirm('Are you sure you want to sign out?')) {
+                alert('Signed out successfully!');
+            }
+        }
+
         function populateClassSelect() {
-            const select = document.getElementById('taskClass');
-            select.innerHTML = '<option value="">Select class</option>';
+            const select = document.getElementById('deckClass');
+            select.innerHTML = '<option value="">Select a class (optional)</option>';
             classes.forEach(cls => {
                 select.innerHTML += `<option value="${cls.id}">${cls.name}</option>`;
             });
         }
 
-        function toggleDropdown() {
-            const dropdown = document.querySelector('.ai-dropdown');
-            dropdown.classList.toggle('open');
-        }
-
-        function toggleMathDropdown() {
-            const dropdown = document.querySelector('.math-dropdown');
-            dropdown.classList.toggle('open');
-        }
-
-        function toggleMobileMenu() {
-            const sidebar = document.querySelector('.sidebar');
-            const overlay = document.querySelector('.mobile-overlay');
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-        }
-
-        function handleSignout() {
-            if (confirm('Are you sure you want to sign out?')) {
-                console.log('User signed out');
-                alert('Signed out successfully!');
+        function renderDecks() {
+            const grid = document.getElementById('decksGrid');
+            if (decks.length === 0) {
+                grid.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 40px; grid-column: 1/-1;">No flashcard decks yet. Click "Create Deck" to get started!</p>';
+                return;
             }
-        }
 
-        function openModal() {
-            document.getElementById('taskModal').classList.add('active');
-            document.getElementById('taskForm').reset();
-        }
-
-        function closeModal() {
-            document.getElementById('taskModal').classList.remove('active');
-        }
-
-        function addTask(event) {
-            event.preventDefault();
-            
-            const task = {
-                id: Date.now(),
-                title: document.getElementById('taskTitle').value,
-                description: document.getElementById('taskDescription').value,
-                class: document.getElementById('taskClass').value,
-                priority: document.getElementById('taskPriority').value,
-                status: document.getElementById('taskStatus').value,
-                due: document.getElementById('taskDue').value
-            };
-            
-            tasks.push(task);
-            saveTasks();
-            renderTasks();
-            closeModal();
-        }
-
-        function renderTasks() {
-            // Clear all columns
-            document.getElementById('todo-tasks').innerHTML = '';
-            document.getElementById('progress-tasks').innerHTML = '';
-            document.getElementById('completed-tasks').innerHTML = '';
-            
-            // Count tasks
-            let todoCnt = 0, progressCnt = 0, completedCnt = 0;
-            
-            // Render each task
-            tasks.forEach(task => {
-                const taskCard = createTaskCard(task);
-                const container = document.getElementById(task.status + '-tasks');
-                container.appendChild(taskCard);
-                
-                if (task.status === 'todo') todoCnt++;
-                else if (task.status === 'progress') progressCnt++;
-                else completedCnt++;
-            });
-            
-            // Update counts
-            document.getElementById('todo-count').textContent = todoCnt;
-            document.getElementById('progress-count').textContent = progressCnt;
-            document.getElementById('completed-count').textContent = completedCnt;
-        }
-
-        function createTaskCard(task) {
-            const card = document.createElement('div');
-            card.className = 'task-card';
-            card.draggable = true;
-            card.dataset.taskId = task.id;
-            card.ondragstart = drag;
-            
-            const priorityIcon = {
-                high: 'fa-exclamation-circle',
-                medium: 'fa-minus-circle',
-                low: 'fa-info-circle'
-            };
-            
-            // Find class from settings
-            const taskClass = classes.find(c => c.id == task.class);
-            const className = taskClass ? taskClass.name : 'No Class';
-            const classColor = taskClass ? taskClass.color : '#64748b';
-            
-            card.innerHTML = `
-                <div class="task-header">
-                    <div class="task-title">${task.title}</div>
-                    <div class="task-menu" onclick="deleteTask(${task.id})">
-                        <i class="fas fa-trash"></i>
+            grid.innerHTML = decks.map(deck => {
+                const deckClass = classes.find(c => c.id === deck.classId);
+                return `
+                    <div class="deck-card" style="border-left-color: ${deckClass?.color || '#3b82f6'}" onclick="startStudy(${deck.id})">
+                        <div class="deck-header">
+                            <div class="deck-title">${deck.name}</div>
+                            <div class="deck-menu" onclick="event.stopPropagation(); deleteDeck(${deck.id})">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                        ${deckClass ? `<span class="deck-class-badge" style="background: ${deckClass.color}20; color: ${deckClass.color}">${deckClass.name}</span>` : ''}
+                        <div class="deck-stats">
+                            <div class="deck-stat">
+                                <i class="fas fa-layer-group"></i>
+                                ${deck.cards.length} cards
+                            </div>
+                        </div>
                     </div>
-                </div>
-                ${task.description ? `<div class="task-description">${task.description}</div>` : ''}
-                <div class="task-meta">
-                    <span class="task-class" style="background: ${classColor}20; color: ${classColor}">
-                        <i class="fas fa-book"></i>
-                        ${className}
-                    </span>
-                    <span class="task-priority ${task.priority}">
-                        <i class="fas ${priorityIcon[task.priority]}"></i>
-                        ${task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
-                    </span>
-                    ${task.due ? `
-                        <span class="task-due">
-                            <i class="fas fa-calendar"></i>
-                            ${new Date(task.due).toLocaleDateString()}
-                        </span>
-                    ` : ''}
+                `;
+            }).join('');
+        }
+
+        function openDeckModal() {
+            populateClassSelect();
+            document.getElementById('deckModal').classList.add('active');
+            document.getElementById('flashcardInputs').innerHTML = `
+                <div class="flashcard-input-group">
+                    <input type="text" class="form-input" placeholder="Question" required>
+                    <input type="text" class="form-input" placeholder="Answer" required>
                 </div>
             `;
-            
-            return card;
         }
 
-        function deleteTask(id) {
-            if (confirm('Are you sure you want to delete this task?')) {
-                tasks = tasks.filter(task => task.id !== id);
-                saveTasks();
-                renderTasks();
-            }
+        function closeDeckModal() {
+            document.getElementById('deckModal').classList.remove('active');
+            document.getElementById('deckForm').reset();
         }
 
-        function saveTasks() {
-            localStorage.setItem('studyDeckTasks', JSON.stringify(tasks));
+        function addCardInput() {
+            const container = document.getElementById('flashcardInputs');
+            const newInput = document.createElement('div');
+            newInput.className = 'flashcard-input-group';
+            newInput.innerHTML = `
+                <input type="text" class="form-input" placeholder="Question" required>
+                <input type="text" class="form-input" placeholder="Answer" required>
+            `;
+            container.appendChild(newInput);
         }
 
-        // Drag and Drop functions
-        function allowDrop(event) {
+        function saveDeck(event) {
             event.preventDefault();
-        }
-
-        function drag(event) {
-            event.dataTransfer.setData('taskId', event.target.dataset.taskId);
-            event.target.classList.add('dragging');
-        }
-
-        function drop(event) {
-            event.preventDefault();
-            const taskId = parseInt(event.dataTransfer.getData('taskId'));
-            const newStatus = event.currentTarget.dataset.status;
             
-            // Remove dragging class
-            document.querySelectorAll('.task-card').forEach(card => {
-                card.classList.remove('dragging');
+            const cardGroups = document.querySelectorAll('.flashcard-input-group');
+            const cards = Array.from(cardGroups).map(group => {
+                const inputs = group.querySelectorAll('.form-input');
+                return {
+                    question: inputs[0].value,
+                    answer: inputs[1].value
+                };
             });
+
+            const classId = document.getElementById('deckClass').value;
             
-            // Update task status
-            const task = tasks.find(t => t.id === taskId);
-            if (task) {
-                task.status = newStatus;
-                saveTasks();
-                renderTasks();
+            const deck = {
+                id: Date.now(),
+                name: document.getElementById('deckName').value,
+                classId: classId ? parseInt(classId) : null,
+                cards: cards,
+                created: new Date().toISOString()
+            };
+
+            decks.push(deck);
+            localStorage.setItem('studyDeckFlashcards', JSON.stringify(decks));
+            renderDecks();
+            closeDeckModal();
+        }
+
+        function deleteDeck(id) {
+            if (confirm('Are you sure you want to delete this deck?')) {
+                decks = decks.filter(d => d.id !== id);
+                localStorage.setItem('studyDeckFlashcards', JSON.stringify(decks));
+                renderDecks();
             }
+        }
+
+        function startStudy(deckId) {
+            currentDeck = decks.find(d => d.id === deckId);
+            if (!currentDeck || currentDeck.cards.length === 0) return;
+            
+            currentCardIndex = 0;
+            showCard();
+            document.getElementById('studyMode').classList.add('active');
+        }
+
+        function showCard() {
+            const card = currentDeck.cards[currentCardIndex];
+            document.getElementById('cardFront').textContent = card.question;
+            document.getElementById('cardBack').textContent = card.answer;
+            document.getElementById('studyProgress').textContent = `${currentCardIndex + 1} / ${currentDeck.cards.length}`;
+            document.getElementById('flashcard').classList.remove('flipped');
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard').classList.toggle('flipped');
+        }
+
+        function nextCard() {
+            currentCardIndex++;
+            if (currentCardIndex >= currentDeck.cards.length) {
+                alert('Great job! You completed this deck! 🎉');
+                closeStudyMode();
+                return;
+            }
+            showCard();
+        }
+
+        function closeStudyMode() {
+            document.getElementById('studyMode').classList.remove('active');
+            currentDeck = null;
+            currentCardIndex = 0;
         }
 
 

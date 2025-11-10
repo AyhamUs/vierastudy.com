@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyDeck - Progress Tracker</title>
+    <title>StudyDeck - To-Do List</title>
     <link rel="icon" href="studydeck.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -24,7 +24,6 @@
             height: 100vh;
         }
 
-        /* Sidebar */
         .sidebar {
             width: 280px;
             background: #1e293b;
@@ -98,7 +97,6 @@
             font-size: 18px;
         }
 
-        /* AI & Math Dropdowns */
         .ai-dropdown, .math-dropdown {
             position: relative;
         }
@@ -119,8 +117,7 @@
             flex: 1;
         }
 
-        .dropdown-header i.fa-brain,
-        .dropdown-header i.fa-calculator {
+        .dropdown-header i.fa-brain, .dropdown-header i.fa-calculator {
             width: 25px;
             margin-right: 15px;
             font-size: 18px;
@@ -175,7 +172,6 @@
             text-align: center;
         }
 
-        /* User Profile */
         .user-profile {
             padding: 20px 25px;
             border-top: 1px solid rgba(255,255,255,0.1);
@@ -236,11 +232,6 @@
             transform: scale(1.05);
         }
 
-        .signout-btn i {
-            font-size: 16px;
-        }
-
-        /* Main Content */
         .main-content {
             flex: 1;
             overflow-y: auto;
@@ -260,7 +251,12 @@
             color: #1e293b;
         }
 
-        .add-task-btn {
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .add-todo-btn {
             background: #3b82f6;
             color: white;
             border: none;
@@ -275,150 +271,120 @@
             transition: all 0.3s;
         }
 
-        .add-task-btn:hover {
+        .add-todo-btn:hover {
             background: #2563eb;
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
         }
 
         .content {
             padding: 40px;
         }
 
-        /* Kanban Board */
-        .kanban-board {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .kanban-column {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            min-height: 500px;
-        }
-
-        .column-header {
+        .filters {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f1f5f9;
-        }
-
-        .column-title {
-            display: flex;
-            align-items: center;
             gap: 10px;
-            font-size: 18px;
-            font-weight: 600;
-            color: #1e293b;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
         }
 
-        .column-count {
-            background: #f1f5f9;
-            color: #64748b;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .column-icon {
-            width: 35px;
-            height: 35px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
-
-        .column-icon.todo {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
-        }
-
-        .column-icon.progress {
-            background: rgba(249, 115, 22, 0.1);
-            color: #f97316;
-        }
-
-        .column-icon.completed {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-        }
-
-        .tasks-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            min-height: 400px;
-        }
-
-        .task-card {
-            background: #f8fafc;
+        .filter-btn {
+            background: white;
             border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 15px;
-            cursor: grab;
-            transition: all 0.3s;
-        }
-
-        .task-card:hover {
-            border-color: #3b82f6;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
-        }
-
-        .task-card.dragging {
-            opacity: 0.5;
-            cursor: grabbing;
-        }
-
-        .task-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 10px;
-        }
-
-        .task-title {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
             font-weight: 600;
-            color: #1e293b;
-            font-size: 15px;
-            flex: 1;
-        }
-
-        .task-menu {
-            color: #94a3b8;
             cursor: pointer;
-            padding: 4px;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            color: #64748b;
         }
 
-        .task-menu:hover {
+        .filter-btn:hover {
+            border-color: #3b82f6;
             color: #3b82f6;
         }
 
-        .task-description {
-            font-size: 13px;
-            color: #64748b;
-            margin-bottom: 12px;
-            line-height: 1.5;
+        .filter-btn.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
         }
 
-        .task-meta {
+        .todos-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+            cursor: grab;
+        }
+
+        .todo-item:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.1);
+        }
+
+        .todo-item.completed {
+            opacity: 0.6;
+        }
+
+        .todo-item.completed .todo-title {
+            text-decoration: line-through;
+        }
+
+        .todo-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .todo-checkbox:hover {
+            border-color: #3b82f6;
+        }
+
+        .todo-checkbox.checked {
+            background: #22c55e;
+            border-color: #22c55e;
+            color: white;
+        }
+
+        .todo-content {
+            flex: 1;
+        }
+
+        .todo-title {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .todo-meta {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
             align-items: center;
         }
 
-        .task-class {
+        .todo-class, .todo-priority, .todo-due {
             display: inline-flex;
             align-items: center;
             gap: 5px;
@@ -428,60 +394,50 @@
             font-weight: 600;
         }
 
-        .task-class.math {
-            background: rgba(139, 92, 246, 0.1);
-            color: #8b5cf6;
+        .todo-priority.high {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
         }
 
-        .task-class.science {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-        }
-
-        .task-class.english {
-            background: rgba(59, 130, 246, 0.1);
-            color: #3b82f6;
-        }
-
-        .task-class.history {
+        .todo-priority.medium {
             background: rgba(249, 115, 22, 0.1);
             color: #f97316;
         }
 
-        .task-class.other {
+        .todo-priority.low {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .todo-due {
             background: rgba(100, 116, 139, 0.1);
             color: #64748b;
         }
 
-        .task-priority {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 12px;
-            font-weight: 600;
+        .todo-actions {
+            display: flex;
+            gap: 5px;
         }
 
-        .task-priority.high {
-            color: #ef4444;
+        .icon-btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+            transition: all 0.3s;
         }
 
-        .task-priority.medium {
-            color: #f59e0b;
-        }
-
-        .task-priority.low {
+        .icon-btn:hover {
+            background: #f1f5f9;
             color: #3b82f6;
         }
 
-        .task-due {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 12px;
-            color: #64748b;
+        .icon-btn.delete:hover {
+            color: #ef4444;
         }
 
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -505,8 +461,6 @@
             padding: 30px;
             max-width: 500px;
             width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
         }
 
         .modal-header {
@@ -528,13 +482,6 @@
             font-size: 24px;
             color: #94a3b8;
             cursor: pointer;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-        }
-
-        .close-modal:hover {
-            color: #1e293b;
         }
 
         .form-group {
@@ -549,21 +496,16 @@
             font-size: 14px;
         }
 
-        .form-input,
-        .form-select,
-        .form-textarea {
+        .form-input, .form-select, .form-textarea {
             width: 100%;
             padding: 12px;
             border: 2px solid #e2e8f0;
             border-radius: 8px;
             font-size: 14px;
             font-family: inherit;
-            transition: border-color 0.3s;
         }
 
-        .form-input:focus,
-        .form-select:focus,
-        .form-textarea:focus {
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
             outline: none;
             border-color: #3b82f6;
         }
@@ -594,10 +536,8 @@
 
         .submit-btn:hover {
             background: #2563eb;
-            transform: translateY(-2px);
         }
 
-        /* Mobile Menu Toggle */
         .mobile-menu-toggle {
             display: none;
             position: fixed;
@@ -611,16 +551,6 @@
             height: 45px;
             border-radius: 10px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-            transition: all 0.3s;
-        }
-
-        .mobile-menu-toggle:active {
-            transform: scale(0.95);
-        }
-
-        .mobile-menu-toggle i {
-            font-size: 20px;
         }
 
         .mobile-overlay {
@@ -633,14 +563,12 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 998;
             opacity: 0;
-            transition: opacity 0.3s;
         }
 
         .mobile-overlay.active {
             opacity: 1;
         }
 
-        /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .sidebar {
                 position: fixed;
@@ -665,10 +593,6 @@
                 display: block;
             }
 
-            .main-content {
-                width: 100%;
-            }
-
             .header {
                 padding: 20px 20px 20px 75px;
                 flex-direction: column;
@@ -676,55 +600,27 @@
                 align-items: flex-start;
             }
 
-            .header h1 {
-                font-size: 22px;
-            }
-
             .content {
-                padding: 20px;
-            }
-
-            .kanban-board {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .kanban-column {
-                min-height: auto;
-            }
-
-            .modal-content {
                 padding: 20px;
             }
 
             .form-row {
                 grid-template-columns: 1fr;
             }
-        }
 
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 18px;
-            }
-
-            .add-task-btn {
-                width: 100%;
-                justify-content: center;
+            .todo-item {
+                flex-wrap: wrap;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Mobile Menu Toggle -->
     <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
         <i class="fas fa-bars"></i>
     </button>
-
-    <!-- Mobile Overlay -->
     <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
 
     <div class="container">
-        <!-- Sidebar -->
         <div class="sidebar">
             <div class="logo">
                 <img src="studydeck.png" alt="StudyDeck">
@@ -743,7 +639,7 @@
                     <span>Flashcards</span>
                 </a>
                 
-                <a href="todo.html" class="nav-item">
+                <a href="todo.html" class="nav-item active">
                     <i class="fas fa-list-check"></i>
                     <span>To-Do List</span>
                 </a>
@@ -764,7 +660,7 @@
                     <span>Take Notes</span>
                 </a>
                 
-                <a href="progress-tracker.html" class="nav-item active">
+                <a href="progress-tracker.html" class="nav-item">
                     <i class="fas fa-chart-line"></i>
                     <span>Progress Tracker</span>
                 </a>
@@ -828,9 +724,7 @@
             </nav>
             
             <div class="user-profile">
-                <div class="user-avatar">
-                    AI
-                </div>
+                <div class="user-avatar">AI</div>
                 <div class="user-info">
                     <div class="user-name">Ayham Issa</div>
                 </div>
@@ -840,317 +734,246 @@
             </div>
         </div>
 
-        <!-- Main Content -->
         <div class="main-content">
             <div class="header">
-                <h1><i class="fas fa-chart-line"></i> Progress Tracker</h1>
-                <button class="add-task-btn" onclick="openModal()">
+                <h1><i class="fas fa-list-check"></i> To-Do List</h1>
+                <button class="add-todo-btn" onclick="openTodoModal()">
                     <i class="fas fa-plus"></i>
-                    Add New Task
+                    Add Task
                 </button>
             </div>
             
             <div class="content">
-                <!-- Kanban Board -->
-                <div class="kanban-board">
-                    <!-- To Do Column -->
-                    <div class="kanban-column">
-                        <div class="column-header">
-                            <div class="column-title">
-                                <div class="column-icon todo">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                To Do
-                            </div>
-                            <span class="column-count" id="todo-count">0</span>
-                        </div>
-                        <div class="tasks-container" id="todo-tasks" ondrop="drop(event)" ondragover="allowDrop(event)" data-status="todo">
-                            <!-- Tasks will be added here -->
-                        </div>
-                    </div>
+                <div class="filters">
+                    <button class="filter-btn active" onclick="filterTodos('all')">All</button>
+                    <button class="filter-btn" onclick="filterTodos('active')">Active</button>
+                    <button class="filter-btn" onclick="filterTodos('completed')">Completed</button>
+                    <button class="filter-btn" onclick="filterTodos('high')">High Priority</button>
+                </div>
 
-                    <!-- In Progress Column -->
-                    <div class="kanban-column">
-                        <div class="column-header">
-                            <div class="column-title">
-                                <div class="column-icon progress">
-                                    <i class="fas fa-spinner"></i>
-                                </div>
-                                In Progress
-                            </div>
-                            <span class="column-count" id="progress-count">0</span>
-                        </div>
-                        <div class="tasks-container" id="progress-tasks" ondrop="drop(event)" ondragover="allowDrop(event)" data-status="progress">
-                            <!-- Tasks will be added here -->
-                        </div>
-                    </div>
-
-                    <!-- Completed Column -->
-                    <div class="kanban-column">
-                        <div class="column-header">
-                            <div class="column-title">
-                                <div class="column-icon completed">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
-                                Completed
-                            </div>
-                            <span class="column-count" id="completed-count">0</span>
-                        </div>
-                        <div class="tasks-container" id="completed-tasks" ondrop="drop(event)" ondragover="allowDrop(event)" data-status="completed">
-                            <!-- Tasks will be added here -->
-                        </div>
+                <div class="todos-section">
+                    <div id="todosList">
+                        <!-- Todos will be rendered here -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Add Task Modal -->
-    <div class="modal" id="taskModal">
+    <!-- Add/Edit Todo Modal -->
+    <div class="modal" id="todoModal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">Add New Task</h2>
-                <button class="close-modal" onclick="closeModal()">×</button>
+                <button class="close-modal" onclick="closeTodoModal()">×</button>
             </div>
-            <form id="taskForm" onsubmit="addTask(event)">
+            <form id="todoForm" onsubmit="saveTodo(event)">
                 <div class="form-group">
                     <label class="form-label">Task Title <span style="color: #ef4444;">*</span></label>
-                    <input type="text" class="form-input" id="taskTitle" required placeholder="Enter task title">
+                    <input type="text" class="form-input" id="todoTitle" required placeholder="What needs to be done?">
                 </div>
                 
                 <div class="form-group">
                     <label class="form-label">Description</label>
-                    <textarea class="form-textarea" id="taskDescription" placeholder="Add task description"></textarea>
+                    <textarea class="form-textarea" id="todoDescription" placeholder="Add details..."></textarea>
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">Class/Subject</label>
-                        <select class="form-select" id="taskClass">
-                            <option value="">Select class (optional)</option>
+                        <label class="form-label">Class</label>
+                        <select class="form-select" id="todoClass">
+                            <option value="">Select class</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
                         <label class="form-label">Priority <span style="color: #ef4444;">*</span></label>
-                        <select class="form-select" id="taskPriority" required>
-                            <option value="">Select priority</option>
-                            <option value="high">High</option>
-                            <option value="medium">Medium</option>
+                        <select class="form-select" id="todoPriority" required>
                             <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
                         </select>
                     </div>
                 </div>
                 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">Status <span style="color: #ef4444;">*</span></label>
-                        <select class="form-select" id="taskStatus" required>
-                            <option value="todo">To Do</option>
-                            <option value="progress">In Progress</option>
-                            <option value="completed">Completed</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Due Date</label>
-                        <input type="date" class="form-input" id="taskDue">
-                    </div>
+                <div class="form-group">
+                    <label class="form-label">Due Date</label>
+                    <input type="date" class="form-input" id="todoDue">
                 </div>
+                
+                <input type="hidden" id="editingTodoId" value="">
                 
                 <button type="submit" class="submit-btn">
-                    <i class="fas fa-plus"></i> Add Task
+                    Save Task
                 </button>
             </form>
         </div>
     </div>
 
     <script>
-        // Task storage
-        let tasks = JSON.parse(localStorage.getItem('studyDeckTasks')) || [];
+        let todos = JSON.parse(localStorage.getItem('studyDeckTodos')) || [];
         let classes = JSON.parse(localStorage.getItem('studyDeckClasses')) || [];
+        let currentFilter = 'all';
 
-        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             populateClassSelect();
-            renderTasks();
+            renderTodos();
         });
 
+        function toggleDropdown() {
+            document.querySelector('.ai-dropdown').classList.toggle('open');
+        }
+
+        function toggleMathDropdown() {
+            document.querySelector('.math-dropdown').classList.toggle('open');
+        }
+
+        function toggleMobileMenu() {
+            document.querySelector('.sidebar').classList.toggle('active');
+            document.querySelector('.mobile-overlay').classList.toggle('active');
+        }
+
+        function handleSignout() {
+            if (confirm('Are you sure you want to sign out?')) {
+                alert('Signed out successfully!');
+            }
+        }
+
         function populateClassSelect() {
-            const select = document.getElementById('taskClass');
+            const select = document.getElementById('todoClass');
             select.innerHTML = '<option value="">Select class</option>';
             classes.forEach(cls => {
                 select.innerHTML += `<option value="${cls.id}">${cls.name}</option>`;
             });
         }
 
-        function toggleDropdown() {
-            const dropdown = document.querySelector('.ai-dropdown');
-            dropdown.classList.toggle('open');
+        function filterTodos(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderTodos();
         }
 
-        function toggleMathDropdown() {
-            const dropdown = document.querySelector('.math-dropdown');
-            dropdown.classList.toggle('open');
-        }
+        function renderTodos() {
+            const container = document.getElementById('todosList');
+            let filteredTodos = todos;
 
-        function toggleMobileMenu() {
-            const sidebar = document.querySelector('.sidebar');
-            const overlay = document.querySelector('.mobile-overlay');
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-        }
-
-        function handleSignout() {
-            if (confirm('Are you sure you want to sign out?')) {
-                console.log('User signed out');
-                alert('Signed out successfully!');
+            if (currentFilter === 'active') {
+                filteredTodos = todos.filter(t => !t.completed);
+            } else if (currentFilter === 'completed') {
+                filteredTodos = todos.filter(t => t.completed);
+            } else if (currentFilter === 'high') {
+                filteredTodos = todos.filter(t => t.priority === 'high' && !t.completed);
             }
-        }
 
-        function openModal() {
-            document.getElementById('taskModal').classList.add('active');
-            document.getElementById('taskForm').reset();
-        }
+            if (filteredTodos.length === 0) {
+                container.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 40px;">No tasks found. Add some tasks to get started!</p>';
+                return;
+            }
 
-        function closeModal() {
-            document.getElementById('taskModal').classList.remove('active');
-        }
-
-        function addTask(event) {
-            event.preventDefault();
-            
-            const task = {
-                id: Date.now(),
-                title: document.getElementById('taskTitle').value,
-                description: document.getElementById('taskDescription').value,
-                class: document.getElementById('taskClass').value,
-                priority: document.getElementById('taskPriority').value,
-                status: document.getElementById('taskStatus').value,
-                due: document.getElementById('taskDue').value
-            };
-            
-            tasks.push(task);
-            saveTasks();
-            renderTasks();
-            closeModal();
-        }
-
-        function renderTasks() {
-            // Clear all columns
-            document.getElementById('todo-tasks').innerHTML = '';
-            document.getElementById('progress-tasks').innerHTML = '';
-            document.getElementById('completed-tasks').innerHTML = '';
-            
-            // Count tasks
-            let todoCnt = 0, progressCnt = 0, completedCnt = 0;
-            
-            // Render each task
-            tasks.forEach(task => {
-                const taskCard = createTaskCard(task);
-                const container = document.getElementById(task.status + '-tasks');
-                container.appendChild(taskCard);
-                
-                if (task.status === 'todo') todoCnt++;
-                else if (task.status === 'progress') progressCnt++;
-                else completedCnt++;
-            });
-            
-            // Update counts
-            document.getElementById('todo-count').textContent = todoCnt;
-            document.getElementById('progress-count').textContent = progressCnt;
-            document.getElementById('completed-count').textContent = completedCnt;
-        }
-
-        function createTaskCard(task) {
-            const card = document.createElement('div');
-            card.className = 'task-card';
-            card.draggable = true;
-            card.dataset.taskId = task.id;
-            card.ondragstart = drag;
-            
-            const priorityIcon = {
-                high: 'fa-exclamation-circle',
-                medium: 'fa-minus-circle',
-                low: 'fa-info-circle'
-            };
-            
-            // Find class from settings
-            const taskClass = classes.find(c => c.id == task.class);
-            const className = taskClass ? taskClass.name : 'No Class';
-            const classColor = taskClass ? taskClass.color : '#64748b';
-            
-            card.innerHTML = `
-                <div class="task-header">
-                    <div class="task-title">${task.title}</div>
-                    <div class="task-menu" onclick="deleteTask(${task.id})">
-                        <i class="fas fa-trash"></i>
+            container.innerHTML = filteredTodos.map(todo => {
+                const todoClass = classes.find(c => c.id === todo.classId);
+                return `
+                    <div class="todo-item ${todo.completed ? 'completed' : ''}" draggable="true">
+                        <div class="todo-checkbox ${todo.completed ? 'checked' : ''}" onclick="toggleTodo(${todo.id})">
+                            ${todo.completed ? '<i class="fas fa-check"></i>' : ''}
+                        </div>
+                        <div class="todo-content">
+                            <div class="todo-title">${todo.title}</div>
+                            <div class="todo-meta">
+                                ${todoClass ? `<span class="todo-class" style="background: ${todoClass.color}20; color: ${todoClass.color}"><i class="fas fa-book"></i> ${todoClass.name}</span>` : ''}
+                                <span class="todo-priority ${todo.priority}">
+                                    <i class="fas fa-flag"></i>
+                                    ${todo.priority.charAt(0).toUpperCase() + todo.priority.slice(1)}
+                                </span>
+                                ${todo.due ? `<span class="todo-due"><i class="fas fa-calendar"></i> ${new Date(todo.due).toLocaleDateString()}</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="todo-actions">
+                            <button class="icon-btn" onclick="editTodo(${todo.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="icon-btn delete" onclick="deleteTodo(${todo.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                ${task.description ? `<div class="task-description">${task.description}</div>` : ''}
-                <div class="task-meta">
-                    <span class="task-class" style="background: ${classColor}20; color: ${classColor}">
-                        <i class="fas fa-book"></i>
-                        ${className}
-                    </span>
-                    <span class="task-priority ${task.priority}">
-                        <i class="fas ${priorityIcon[task.priority]}"></i>
-                        ${task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
-                    </span>
-                    ${task.due ? `
-                        <span class="task-due">
-                            <i class="fas fa-calendar"></i>
-                            ${new Date(task.due).toLocaleDateString()}
-                        </span>
-                    ` : ''}
-                </div>
-            `;
-            
-            return card;
+                `;
+            }).join('');
         }
 
-        function deleteTask(id) {
+        function openTodoModal() {
+            populateClassSelect();
+            document.getElementById('todoModal').classList.add('active');
+            document.getElementById('todoForm').reset();
+            document.getElementById('editingTodoId').value = '';
+            document.querySelector('.modal-title').textContent = 'Add New Task';
+        }
+
+        function closeTodoModal() {
+            document.getElementById('todoModal').classList.remove('active');
+        }
+
+        function saveTodo(event) {
+            event.preventDefault();
+            
+            const id = document.getElementById('editingTodoId').value;
+            const classId = document.getElementById('todoClass').value;
+            
+            const todoData = {
+                id: id ? parseInt(id) : Date.now(),
+                title: document.getElementById('todoTitle').value,
+                description: document.getElementById('todoDescription').value,
+                classId: classId ? parseInt(classId) : null,
+                priority: document.getElementById('todoPriority').value,
+                due: document.getElementById('todoDue').value,
+                completed: false,
+                created: new Date().toISOString()
+            };
+
+            if (id) {
+                const index = todos.findIndex(t => t.id === parseInt(id));
+                todos[index] = { ...todos[index], ...todoData };
+            } else {
+                todos.push(todoData);
+            }
+
+            localStorage.setItem('studyDeckTodos', JSON.stringify(todos));
+            renderTodos();
+            closeTodoModal();
+        }
+
+        function editTodo(id) {
+            const todo = todos.find(t => t.id === id);
+            if (!todo) return;
+
+            document.querySelector('.modal-title').textContent = 'Edit Task';
+            document.getElementById('todoTitle').value = todo.title;
+            document.getElementById('todoDescription').value = todo.description || '';
+            document.getElementById('todoClass').value = todo.classId || '';
+            document.getElementById('todoPriority').value = todo.priority;
+            document.getElementById('todoDue').value = todo.due || '';
+            document.getElementById('editingTodoId').value = todo.id;
+            document.getElementById('todoModal').classList.add('active');
+        }
+
+        function toggleTodo(id) {
+            const todo = todos.find(t => t.id === id);
+            if (todo) {
+                todo.completed = !todo.completed;
+                todo.updated = new Date().toISOString();
+                localStorage.setItem('studyDeckTodos', JSON.stringify(todos));
+                renderTodos();
+            }
+        }
+
+        function deleteTodo(id) {
             if (confirm('Are you sure you want to delete this task?')) {
-                tasks = tasks.filter(task => task.id !== id);
-                saveTasks();
-                renderTasks();
+                todos = todos.filter(t => t.id !== id);
+                localStorage.setItem('studyDeckTodos', JSON.stringify(todos));
+                renderTodos();
             }
         }
-
-        function saveTasks() {
-            localStorage.setItem('studyDeckTasks', JSON.stringify(tasks));
-        }
-
-        // Drag and Drop functions
-        function allowDrop(event) {
-            event.preventDefault();
-        }
-
-        function drag(event) {
-            event.dataTransfer.setData('taskId', event.target.dataset.taskId);
-            event.target.classList.add('dragging');
-        }
-
-        function drop(event) {
-            event.preventDefault();
-            const taskId = parseInt(event.dataTransfer.getData('taskId'));
-            const newStatus = event.currentTarget.dataset.status;
-            
-            // Remove dragging class
-            document.querySelectorAll('.task-card').forEach(card => {
-                card.classList.remove('dragging');
-            });
-            
-            // Update task status
-            const task = tasks.find(t => t.id === taskId);
-            if (task) {
-                task.status = newStatus;
-                saveTasks();
-                renderTasks();
-            }
-        }
-
-
     </script>
 </body>
 </html>
