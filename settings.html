@@ -1041,13 +1041,17 @@
 
         async function handleSignout() {
             const confirmed = await showConfirmation(
-                'Are you sure you want to sign out?',
+                'Are you sure you want to sign out? This will clear your profile data.',
                 'Sign Out',
-                'info'
+                'warning'
             );
             
             if (confirmed) {
-                showNotification('You have been signed out successfully!', 'success', 'Signed Out');
+                // Clear user profile from localStorage
+                localStorage.removeItem('studyDeckUserProfile');
+                
+                // Redirect to home page which will show the onboarding screen
+                window.location.href = 'index.html';
             }
         }
 

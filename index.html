@@ -804,10 +804,29 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: white;
+            background: #1e293b;
             z-index: 20000;
             align-items: center;
             justify-content: center;
+            overflow: auto;
+        }
+
+        .welcome-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+            animation: gradient-shift 15s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         .welcome-overlay.show {
@@ -815,53 +834,96 @@
         }
 
         .welcome-card {
-            background: #1e293b;
+            position: relative;
+            background: white;
             border-radius: 16px;
-            padding: 50px 40px;
-            max-width: 480px;
+            padding: 50px 45px;
+            max-width: 450px;
             width: 90%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             text-align: center;
-            animation: slideIn 0.5s ease;
+            animation: welcomeSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1;
+        }
+
+        @keyframes welcomeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-logo-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
         }
 
         .welcome-logo {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 25px;
-            border-radius: 12px;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.1);
+            width: 80px;
+            height: 80px;
+            margin: 0;
+            border-radius: 16px;
+            padding: 12px;
+            background: rgba(59, 130, 246, 0.1);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
         }
 
         .welcome-title {
             font-size: 28px;
-            font-weight: 600;
-            color: white;
+            font-weight: 700;
+            color: #1e293b;
             margin-bottom: 12px;
+            letter-spacing: -0.5px;
         }
 
         .welcome-subtitle {
             font-size: 15px;
-            color: #cbd5e1;
-            margin-bottom: 35px;
+            color: #64748b;
+            margin-bottom: 32px;
             line-height: 1.6;
+            font-weight: 400;
         }
 
         .welcome-form {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 18px;
+        }
+
+        .input-group {
+            position: relative;
+            text-align: left;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
         }
 
         .welcome-input {
-            padding: 14px 18px;
+            width: 100%;
+            padding: 14px 16px;
             border: 2px solid #e2e8f0;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 15px;
             font-family: 'Poppins', sans-serif;
             transition: all 0.3s;
-            background: #f8fafc;
+            background: white;
+            color: #1e293b;
+            box-sizing: border-box;
+        }
+
+        .welcome-input::placeholder {
+            color: #94a3b8;
         }
 
         .welcome-input:focus {
@@ -871,23 +933,28 @@
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
+        .welcome-input:hover:not(:focus) {
+            border-color: #cbd5e1;
+        }
+
         .welcome-btn {
-            background: white;
-            color: #1e293b;
+            background: #3b82f6;
+            color: white;
             border: none;
-            padding: 14px 30px;
-            border-radius: 8px;
+            padding: 15px 32px;
+            border-radius: 10px;
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            margin-top: 10px;
+            margin-top: 8px;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
         .welcome-btn:hover {
-            background: #f8fafc;
+            background: #2563eb;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
         }
 
         .welcome-btn:active {
@@ -900,17 +967,105 @@
             transform: none;
         }
 
+        .welcome-footer {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .welcome-footer a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .welcome-footer a:hover {
+            color: #2563eb;
+        }
+
+        .welcome-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .welcome-feature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .welcome-feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .welcome-feature-text {
+            font-size: 11px;
+            color: #64748b;
+            font-weight: 500;
+            text-align: center;
+        }
+
         @media (max-width: 480px) {
             .welcome-card {
                 padding: 40px 30px;
             }
 
+            .welcome-logo {
+                width: 65px;
+                height: 65px;
+                padding: 10px;
+            }
+
+            .welcome-logo-container {
+                width: 65px;
+                height: 65px;
+            }
+
             .welcome-title {
-                font-size: 26px;
+                font-size: 24px;
             }
 
             .welcome-subtitle {
                 font-size: 14px;
+                margin-bottom: 25px;
+            }
+
+            .welcome-input {
+                padding: 13px 14px;
+                font-size: 14px;
+            }
+
+            .welcome-btn {
+                padding: 14px 28px;
+                font-size: 14px;
+            }
+
+            .welcome-features {
+                gap: 12px;
+            }
+
+            .welcome-feature-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+
+            .welcome-feature-text {
+                font-size: 10px;
             }
         }
     </style>
@@ -919,30 +1074,58 @@
     <!-- Welcome Overlay -->
     <div id="welcomeOverlay" class="welcome-overlay">
         <div class="welcome-card">
-            <img src="studydeck.png" alt="StudyDeck" class="welcome-logo">
-            <h1 class="welcome-title">Welcome to StudyDeck! 👋</h1>
-            <p class="welcome-subtitle">Let's get started by setting up your profile. Please enter your name below.</p>
+            <div class="welcome-logo-container">
+                <img src="studydeck.png" alt="StudyDeck" class="welcome-logo">
+            </div>
+            <h1 class="welcome-title">Welcome to StudyDeck!</h1>
+            <p class="welcome-subtitle">Let's get started by setting up your profile. Please enter your name below to begin your study journey.</p>
             <form class="welcome-form" onsubmit="saveUserProfile(event)">
-                <input 
-                    type="text" 
-                    id="firstNameInput" 
-                    class="welcome-input" 
-                    placeholder="First Name" 
-                    required
-                    autocomplete="given-name"
-                >
-                <input 
-                    type="text" 
-                    id="lastNameInput" 
-                    class="welcome-input" 
-                    placeholder="Last Name" 
-                    required
-                    autocomplete="family-name"
-                >
+                <div class="input-group">
+                    <label class="input-label" for="firstNameInput">First Name</label>
+                    <input 
+                        type="text" 
+                        id="firstNameInput" 
+                        class="welcome-input" 
+                        placeholder="Enter your first name" 
+                        required
+                        autocomplete="given-name"
+                    >
+                </div>
+                <div class="input-group">
+                    <label class="input-label" for="lastNameInput">Last Name</label>
+                    <input 
+                        type="text" 
+                        id="lastNameInput" 
+                        class="welcome-input" 
+                        placeholder="Enter your last name" 
+                        required
+                        autocomplete="family-name"
+                    >
+                </div>
                 <button type="submit" class="welcome-btn">
                     Get Started 🚀
                 </button>
             </form>
+            <div class="welcome-features">
+                <div class="welcome-feature">
+                    <div class="welcome-feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <span class="welcome-feature-text">AI Tools</span>
+                </div>
+                <div class="welcome-feature">
+                    <div class="welcome-feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <span class="welcome-feature-text">Progress</span>
+                </div>
+                <div class="welcome-feature">
+                    <div class="welcome-feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <span class="welcome-feature-text">Study Smart</span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1259,7 +1442,7 @@
                 document.getElementById('userName').textContent = fullName;
                 
                 // Update welcome message
-                document.getElementById('welcomeMessage').textContent = `Welcome back, ${firstName}! 👋`;
+                document.getElementById('welcomeMessage').textContent = `Welcome back, ${firstName}!`;
             }
         }
 
@@ -1390,15 +1573,28 @@
 
         async function handleSignout() {
             const confirmed = await showConfirmation(
-                'Are you sure you want to sign out?',
+                'Are you sure you want to sign out? This will clear your profile data.',
                 'Sign Out',
-                'info'
+                'warning'
             );
             
             if (confirmed) {
-                console.log('User signed out');
-                // Add your signout logic here
-                showNotification('You have been signed out successfully!', 'success', 'Signed Out');
+                // Clear user profile from localStorage
+                localStorage.removeItem('studyDeckUserProfile');
+                
+                // Show the welcome overlay
+                document.getElementById('welcomeOverlay').classList.add('show');
+                
+                // Reset user display
+                document.getElementById('userAvatar').textContent = 'AI';
+                document.getElementById('userName').textContent = 'Ayham Issa';
+                document.getElementById('welcomeMessage').textContent = 'Welcome back, Ayham!';
+                
+                // Clear form inputs
+                document.getElementById('firstNameInput').value = '';
+                document.getElementById('lastNameInput').value = '';
+                
+                console.log('User signed out successfully');
             }
         }
 
