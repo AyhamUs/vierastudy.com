@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyDeck - To-Do List</title>
+    <title>StudyDeck - My Classes</title>
     <link rel="icon" href="studydeck.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,50 +41,26 @@
             color: #e2e8f0;
         }
 
-        body.dark-mode .todo-header {
+        body.dark-mode .setting-section {
             background: #1e293b;
-            border-color: #334155;
+            border: 1px solid #334155;
         }
 
-        body.dark-mode .add-todo-btn {
-            background: #3b82f6;
+        body.dark-mode .section-title {
+            color: #e2e8f0;
         }
 
-        body.dark-mode .todo-filters button {
+        body.dark-mode .class-item {
             background: #334155;
-            color: #94a3b8;
-        }
-
-        body.dark-mode .todo-filters button.active {
-            background: #3b82f6;
-            color: white;
-        }
-
-        body.dark-mode .todo-item {
-            background: #1e293b;
-            border-color: #334155;
-        }
-
-        body.dark-mode .todo-text {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .todo-title {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .todo-class,
-        body.dark-mode .todo-priority {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .todo-due {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .todo-checkbox {
             border-color: #475569;
-            background: #334155;
+        }
+
+        body.dark-mode .class-name {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .class-teacher {
+            color: #94a3b8;
         }
 
         body.dark-mode .modal-content {
@@ -100,23 +76,37 @@
         }
 
         body.dark-mode .form-input,
-        body.dark-mode .form-select,
-        body.dark-mode .form-textarea {
+        body.dark-mode .form-select {
             background: #334155;
             border-color: #475569;
             color: #e2e8f0;
         }
 
-        body.dark-mode .form-input::placeholder,
-        body.dark-mode .form-textarea::placeholder {
+        body.dark-mode .form-input::placeholder {
             color: #64748b;
         }
 
         body.dark-mode .form-input:focus,
-        body.dark-mode .form-select:focus,
-        body.dark-mode .form-textarea:focus {
+        body.dark-mode .form-select:focus {
             background: #334155;
             border-color: #3b82f6;
+        }
+
+        body.dark-mode .modal-header {
+            border-color: #334155;
+        }
+
+        body.dark-mode .color-option.selected {
+            border-color: #e2e8f0;
+            box-shadow: 0 0 0 2px #1e293b, 0 0 0 4px #e2e8f0;
+        }
+
+        body.dark-mode .submit-btn {
+            background: #3b82f6;
+        }
+
+        body.dark-mode .submit-btn:hover {
+            background: #2563eb;
         }
 
         body.dark-mode .notification-content {
@@ -154,54 +144,8 @@
             color: #e2e8f0;
         }
 
-        body.dark-mode .empty-state {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .add-todo-section {
+        body.dark-mode .section-header {
             border-color: #334155;
-        }
-
-        body.dark-mode .filter-btn {
-            background: #334155;
-            border-color: #475569;
-            color: #94a3b8;
-        }
-
-        body.dark-mode .filter-btn:hover {
-            border-color: #3b82f6;
-            color: #3b82f6;
-            background: #475569;
-        }
-
-        body.dark-mode .filter-btn.active {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
-        }
-
-        body.dark-mode .todos-section {
-            background: #1e293b;
-            border: 1px solid #334155;
-        }
-
-        body.dark-mode .add-todo-section {
-            background: #334155;
-            border-color: #475569;
-        }
-
-        body.dark-mode .todo-input {
-            background: #1e293b;
-            border-color: #475569;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .todo-input::placeholder {
-            color: #64748b;
-        }
-
-        body.dark-mode .priority-badge {
-            opacity: 0.9;
         }
 
         .container {
@@ -209,6 +153,7 @@
             height: 100vh;
         }
 
+        /* Sidebar */
         .sidebar {
             width: 280px;
             background: #1e293b;
@@ -396,7 +341,8 @@
             flex: 1;
         }
 
-        .dropdown-header i.fa-brain, .dropdown-header i.fa-calculator {
+        .dropdown-header i.fa-brain,
+        .dropdown-header i.fa-calculator {
             width: 25px;
             margin-right: 15px;
             font-size: 18px;
@@ -508,9 +454,15 @@
         .signout-btn:hover {
             background: #ef4444;
             color: white;
+            flex: 1;
             transform: scale(1.05);
         }
 
+        .signout-btn i {
+            font-size: 16px;
+        }
+
+        /* Main Content */
         .main-content {
             flex: 1;
             overflow-y: auto;
@@ -520,9 +472,6 @@
             background: white;
             padding: 25px 40px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         .header h1 {
@@ -530,17 +479,50 @@
             color: #1e293b;
         }
 
-        .header-actions {
+        .content {
+            padding: 40px;
+        }
+
+        .settings-grid {
+            display: grid;
+            gap: 25px;
+        }
+
+        .setting-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .section-header {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
             gap: 10px;
         }
 
-        .add-todo-btn {
+        .section-title i {
+            color: #3b82f6;
+        }
+
+        .add-class-btn {
             background: #3b82f6;
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 10px;
+            padding: 10px 20px;
+            border-radius: 8px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
@@ -550,152 +532,60 @@
             transition: all 0.3s;
         }
 
-        .add-todo-btn:hover {
+        .add-class-btn:hover {
             background: #2563eb;
             transform: translateY(-2px);
         }
 
-        .content {
-            padding: 40px;
+        .classes-list {
+            display: grid;
+            gap: 15px;
         }
 
-        .filters {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: white;
-            border: 2px solid #e2e8f0;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: #64748b;
-        }
-
-        .filter-btn:hover {
-            border-color: #3b82f6;
-            color: #3b82f6;
-        }
-
-        .filter-btn.active {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
-        }
-
-        .todos-section {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .todo-item {
+        .class-item {
             display: flex;
             align-items: center;
             gap: 15px;
-            padding: 20px;
+            padding: 15px;
             background: #f8fafc;
             border: 2px solid #e2e8f0;
             border-radius: 10px;
-            margin-bottom: 15px;
             transition: all 0.3s;
-            cursor: grab;
         }
 
-        .todo-item:hover {
+        .class-item:hover {
             border-color: #3b82f6;
             box-shadow: 0 2px 10px rgba(59, 130, 246, 0.1);
         }
 
-        .todo-item.completed {
-            opacity: 0.6;
-        }
-
-        .todo-item.completed .todo-title {
-            text-decoration: line-through;
-        }
-
-        .todo-checkbox {
-            width: 24px;
-            height: 24px;
-            border: 2px solid #cbd5e1;
-            border-radius: 6px;
+        .class-color {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            flex-shrink: 0;
+            border: 2px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .todo-checkbox:hover {
-            border-color: #3b82f6;
-        }
-
-        .todo-checkbox.checked {
-            background: #22c55e;
-            border-color: #22c55e;
-            color: white;
-        }
-
-        .todo-content {
+        .class-info {
             flex: 1;
         }
 
-        .todo-title {
+        .class-name {
             font-weight: 600;
             color: #1e293b;
             font-size: 16px;
-            margin-bottom: 5px;
         }
 
-        .todo-meta {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .todo-class, .todo-priority, .todo-due {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .todo-priority.high {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
-        }
-
-        .todo-priority.medium {
-            background: rgba(249, 115, 22, 0.1);
-            color: #f97316;
-        }
-
-        .todo-priority.low {
-            background: rgba(59, 130, 246, 0.1);
-            color: #3b82f6;
-        }
-
-        .todo-due {
-            background: rgba(100, 116, 139, 0.1);
+        .class-teacher {
+            font-size: 13px;
             color: #64748b;
+            margin-top: 2px;
         }
 
-        .todo-actions {
+        .class-actions {
             display: flex;
-            gap: 5px;
+            gap: 8px;
         }
 
         .icon-btn {
@@ -717,6 +607,7 @@
             color: #ef4444;
         }
 
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -763,6 +654,10 @@
             cursor: pointer;
         }
 
+        .close-modal:hover {
+            color: #1e293b;
+        }
+
         .form-group {
             margin-bottom: 20px;
         }
@@ -775,35 +670,50 @@
             font-size: 14px;
         }
 
-        .form-input, .form-select, .form-textarea {
+        .form-input {
             width: 100%;
             padding: 12px;
             border: 2px solid #e2e8f0;
             border-radius: 8px;
             font-size: 14px;
             font-family: inherit;
+            transition: border-color 0.3s;
         }
 
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
+        .form-input:focus {
             outline: none;
             border-color: #3b82f6;
         }
 
-        .form-textarea {
-            resize: vertical;
-            min-height: 80px;
+        .color-picker-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
         }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+        .color-option {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+
+        .color-option.selected {
+            border-color: #1e293b;
+            box-shadow: 0 0 0 2px white, 0 0 0 4px #1e293b;
         }
 
         .submit-btn {
             width: 100%;
             background: #3b82f6;
             color: white;
+            flex: 1;
             border: none;
             padding: 14px;
             border-radius: 8px;
@@ -815,6 +725,7 @@
 
         .submit-btn:hover {
             background: #2563eb;
+            transform: translateY(-2px);
         }
 
         .mobile-menu-toggle {
@@ -825,11 +736,13 @@
             z-index: 1000;
             background: #3b82f6;
             color: white;
+            flex: 1;
             border: none;
             width: 45px;
             height: 45px;
             border-radius: 10px;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
         }
 
         .mobile-overlay {
@@ -842,6 +755,7 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 998;
             opacity: 0;
+            transition: opacity 0.3s;
         }
 
         .mobile-overlay.active {
@@ -874,21 +788,14 @@
 
             .header {
                 padding: 20px 20px 20px 75px;
-                flex-direction: column;
-                gap: 15px;
-                align-items: flex-start;
             }
 
             .content {
                 padding: 20px;
             }
 
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .todo-item {
-                flex-wrap: wrap;
+            .color-picker-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
         }
 
@@ -1027,7 +934,7 @@
                     <span>Flashcards</span>
                 </a>
                 
-                <a href="todo.html" class="nav-item active">
+                <a href="todo.html" class="nav-item">
                     <i class="fas fa-list-check"></i>
                     <span>To-Do List</span>
                 </a>
@@ -1104,7 +1011,7 @@
                     </div>
                 </div>
                 
-                <a href="classes.html" class="nav-item">
+                <a href="classes.html" class="nav-item active">
                     <i class="fas fa-book"></i>
                     <span>My Classes</span>
                 </a>
@@ -1128,75 +1035,60 @@
 
         <div class="main-content">
             <div class="header">
-                <h1><i class="fas fa-list-check"></i> To-Do List</h1>
-                <button class="add-todo-btn" onclick="openTodoModal()">
-                    <i class="fas fa-plus"></i>
-                    Add Task
-                </button>
+                <h1><i class="fas fa-book"></i> My Classes</h1>
             </div>
             
             <div class="content">
-                <div class="filters">
-                    <button class="filter-btn active" onclick="filterTodos('all')">All</button>
-                    <button class="filter-btn" onclick="filterTodos('active')">Active</button>
-                    <button class="filter-btn" onclick="filterTodos('completed')">Completed</button>
-                    <button class="filter-btn" onclick="filterTodos('high')">High Priority</button>
-                </div>
-
-                <div class="todos-section">
-                    <div id="todosList">
-                        <!-- Todos will be rendered here -->
+                <div class="settings-grid">
+                    <div class="setting-section">
+                        <div class="section-header">
+                            <div class="section-title">
+                                <i class="fas fa-graduation-cap"></i>
+                                Manage Your Classes
+                            </div>
+                            <button class="add-class-btn" onclick="openClassModal()">
+                                <i class="fas fa-plus"></i>
+                                Add Class
+                            </button>
+                        </div>
+                        <div class="classes-list" id="classesList">
+                            <!-- Classes will be rendered here -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Add/Edit Todo Modal -->
-    <div class="modal" id="todoModal">
+    <!-- Add/Edit Class Modal -->
+    <div class="modal" id="classModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Add New Task</h2>
-                <button class="close-modal" onclick="closeTodoModal()">×</button>
+                <h2 class="modal-title" id="modalTitle">Add New Class</h2>
+                <button class="close-modal" onclick="closeClassModal()">×</button>
             </div>
-            <form id="todoForm" onsubmit="saveTodo(event)">
+            <form id="classForm" onsubmit="saveClass(event)">
                 <div class="form-group">
-                    <label class="form-label">Task Title <span style="color: #ef4444;">*</span></label>
-                    <input type="text" class="form-input" id="todoTitle" required placeholder="What needs to be done?">
+                    <label class="form-label">Class Name <span style="color: #ef4444;">*</span></label>
+                    <input type="text" class="form-input" id="className" required placeholder="e.g., AP Calculus">
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">Description</label>
-                    <textarea class="form-textarea" id="todoDescription" placeholder="Add details..."></textarea>
+                    <label class="form-label">Teacher Name</label>
+                    <input type="text" class="form-input" id="classTeacher" placeholder="e.g., Mr. Smith">
                 </div>
                 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">Class</label>
-                        <select class="form-select" id="todoClass">
-                            <option value="">Select class</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Priority <span style="color: #ef4444;">*</span></label>
-                        <select class="form-select" id="todoPriority" required>
-                            <option value="low">Low</option>
-                            <option value="medium" selected>Medium</option>
-                            <option value="high">High</option>
-                        </select>
+                <div class="form-group">
+                    <label class="form-label">Choose Color <span style="color: #ef4444;">*</span></label>
+                    <div class="color-picker-grid" id="colorPicker">
+                        <!-- Colors will be generated -->
                     </div>
                 </div>
                 
-                <div class="form-group">
-                    <label class="form-label">Due Date</label>
-                    <input type="date" class="form-input" id="todoDue">
-                </div>
-                
-                <input type="hidden" id="editingTodoId" value="">
+                <input type="hidden" id="editingClassId" value="">
                 
                 <button type="submit" class="submit-btn">
-                    Save Task
+                    <i class="fas fa-save"></i> Save Class
                 </button>
             </form>
         </div>
@@ -1276,30 +1168,19 @@
                 const icon = document.getElementById('confirmationIcon');
                 const titleEl = document.getElementById('confirmationTitle');
                 const messageEl = document.getElementById('confirmationMessage');
-                const confirmBtn = document.getElementById('confirmButton');
                 
                 const icons = {
+                    success: 'fa-check',
+                    info: 'fa-info',
                     warning: 'fa-exclamation-triangle',
-                    danger: 'fa-exclamation-circle',
-                    info: 'fa-question-circle'
+                    danger: 'fa-exclamation-triangle',
+                    error: 'fa-times'
                 };
                 
-                const iconColors = {
-                    warning: 'warning',
-                    danger: 'error',
-                    info: 'info'
-                };
-                
-                icon.className = `notification-icon ${iconColors[type] || 'warning'}`;
-                icon.innerHTML = `<i class="fas ${icons[type] || 'fa-exclamation-triangle'}"></i>`;
+                icon.className = `notification-icon ${type}`;
+                icon.innerHTML = `<i class="fas ${icons[type] || icons.warning}"></i>`;
                 titleEl.textContent = title;
                 messageEl.textContent = message;
-                
-                if (type === 'danger') {
-                    confirmBtn.style.background = '#ef4444';
-                } else {
-                    confirmBtn.style.background = '#3b82f6';
-                }
                 
                 confirmCallback = resolve;
                 modal.classList.add('show');
@@ -1307,22 +1188,25 @@
         }
 
         function confirmAction() {
-            const modal = document.getElementById('confirmationModal');
-            modal.classList.remove('show');
             if (confirmCallback) {
                 confirmCallback(true);
                 confirmCallback = null;
             }
+            document.getElementById('confirmationModal').classList.remove('show');
         }
 
         function cancelConfirmation() {
-            const modal = document.getElementById('confirmationModal');
-            modal.classList.remove('show');
             if (confirmCallback) {
                 confirmCallback(false);
                 confirmCallback = null;
             }
+            document.getElementById('confirmationModal').classList.remove('show');
         }
+
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('confirmationModal');
+            if (e.target === modal) cancelConfirmation();
+        });
 
         // Load User Profile
         function loadUserProfile() {
@@ -1339,11 +1223,16 @@
             }
         }
 
-        let todos = JSON.parse(localStorage.getItem('studyDeckTodos')) || [];
-        let classes = JSON.parse(localStorage.getItem('studyDeckClasses')) || [];
-        let currentFilter = 'all';
+        const colors = [
+            '#8b5cf6', '#3b82f6', '#22c55e', '#f59e0b', 
+            '#ef4444', '#ec4899', '#06b6d4', '#84cc16',
+            '#f97316', '#6366f1', '#14b8a6', '#a855f7'
+        ];
 
-        // Load dark mode immediately to prevent flash
+        let selectedColor = colors[0];
+        let classes = JSON.parse(localStorage.getItem('studyDeckClasses')) || [];
+
+        // Load dark mode on page load
         (function() {
             const darkMode = localStorage.getItem('studyDeckDarkMode') === 'true';
             if (darkMode) {
@@ -1353,8 +1242,8 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             loadUserProfile();
-            populateClassSelect();
-            renderTodos();
+            renderColorPicker();
+            renderClasses();
         });
 
         function toggleDropdown() {
@@ -1386,189 +1275,107 @@
             }
         }
 
-        function populateClassSelect() {
-            const select = document.getElementById('todoClass');
-            select.innerHTML = '<option value="">Select class</option>';
-            classes.forEach(cls => {
-                select.innerHTML += `<option value="${cls.id}">${cls.name}</option>`;
-            });
+        function renderColorPicker() {
+            const picker = document.getElementById('colorPicker');
+            picker.innerHTML = colors.map(color => 
+                `<div class="color-option ${color === selectedColor ? 'selected' : ''}" 
+                      style="background: ${color}" 
+                      onclick="selectColor('${color}')"></div>`
+            ).join('');
         }
 
-        function filterTodos(filter) {
-            currentFilter = filter;
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            renderTodos();
+        function selectColor(color) {
+            selectedColor = color;
+            renderColorPicker();
         }
 
-        function renderTodos() {
-            const container = document.getElementById('todosList');
-            let filteredTodos = todos;
-
-            if (currentFilter === 'active') {
-                filteredTodos = todos.filter(t => !t.completed);
-            } else if (currentFilter === 'completed') {
-                filteredTodos = todos.filter(t => t.completed);
-            } else if (currentFilter === 'high') {
-                filteredTodos = todos.filter(t => t.priority === 'high' && !t.completed);
-            }
-
-            if (filteredTodos.length === 0) {
-                container.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 40px;">No tasks found. Add some tasks to get started!</p>';
+        function renderClasses() {
+            const list = document.getElementById('classesList');
+            if (classes.length === 0) {
+                list.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 20px;">No classes added yet. Click "Add Class" to get started!</p>';
                 return;
             }
 
-            container.innerHTML = filteredTodos.map(todo => {
-                const todoClass = classes.find(c => c.id === todo.classId);
-                return `
-                    <div class="todo-item ${todo.completed ? 'completed' : ''}" draggable="true">
-                        <div class="todo-checkbox ${todo.completed ? 'checked' : ''}" onclick="toggleTodo(${todo.id})">
-                            ${todo.completed ? '<i class="fas fa-check"></i>' : ''}
-                        </div>
-                        <div class="todo-content">
-                            <div class="todo-title">${todo.title}</div>
-                            <div class="todo-meta">
-                                ${todoClass ? `<span class="todo-class" style="background: ${todoClass.color}20; color: ${todoClass.color}"><i class="fas fa-book"></i> ${todoClass.name}</span>` : ''}
-                                <span class="todo-priority ${todo.priority}">
-                                    <i class="fas fa-flag"></i>
-                                    ${todo.priority.charAt(0).toUpperCase() + todo.priority.slice(1)}
-                                </span>
-                                ${todo.due ? `<span class="todo-due"><i class="fas fa-calendar"></i> ${new Date(todo.due).toLocaleDateString()}</span>` : ''}
-                            </div>
-                        </div>
-                        <div class="todo-actions">
-                            <button class="icon-btn" onclick="editTodo(${todo.id})">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="icon-btn delete" onclick="deleteTodo(${todo.id})">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
+            list.innerHTML = classes.map(cls => `
+                <div class="class-item">
+                    <div class="class-color" style="background: ${cls.color}"></div>
+                    <div class="class-info">
+                        <div class="class-name">${cls.name}</div>
+                        ${cls.teacher ? `<div class="class-teacher">${cls.teacher}</div>` : ''}
                     </div>
-                `;
-            }).join('');
+                    <div class="class-actions">
+                        <button class="icon-btn" onclick="editClass(${cls.id})" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="icon-btn delete" onclick="deleteClass(${cls.id})" title="Delete">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function openTodoModal() {
-            populateClassSelect();
-            document.getElementById('todoModal').classList.add('active');
-            document.getElementById('todoForm').reset();
-            document.getElementById('editingTodoId').value = '';
-            document.querySelector('.modal-title').textContent = 'Add New Task';
+        function openClassModal() {
+            document.getElementById('modalTitle').textContent = 'Add New Class';
+            document.getElementById('classForm').reset();
+            document.getElementById('editingClassId').value = '';
+            selectedColor = colors[0];
+            renderColorPicker();
+            document.getElementById('classModal').classList.add('active');
         }
 
-        function closeTodoModal() {
-            document.getElementById('todoModal').classList.remove('active');
+        function closeClassModal() {
+            document.getElementById('classModal').classList.remove('active');
         }
 
-        function saveTodo(event) {
+        function saveClass(event) {
             event.preventDefault();
             
-            const id = document.getElementById('editingTodoId').value;
-            const classId = document.getElementById('todoClass').value;
-            
-            const todoData = {
+            const id = document.getElementById('editingClassId').value;
+            const classData = {
                 id: id ? parseInt(id) : Date.now(),
-                title: document.getElementById('todoTitle').value,
-                description: document.getElementById('todoDescription').value,
-                classId: classId ? parseInt(classId) : null,
-                priority: document.getElementById('todoPriority').value,
-                due: document.getElementById('todoDue').value,
-                completed: false,
-                created: new Date().toISOString()
+                name: document.getElementById('className').value,
+                teacher: document.getElementById('classTeacher').value,
+                color: selectedColor
             };
 
             if (id) {
-                const index = todos.findIndex(t => t.id === parseInt(id));
-                todos[index] = { ...todos[index], ...todoData };
+                const index = classes.findIndex(c => c.id === parseInt(id));
+                classes[index] = classData;
             } else {
-                todos.push(todoData);
+                classes.push(classData);
             }
 
-            localStorage.setItem('studyDeckTodos', JSON.stringify(todos));
-            
-            // Sync with study schedule if due date is set
-            if (todoData.due) {
-                syncToSchedule(todoData);
-            }
-            
-            renderTodos();
-            closeTodoModal();
+            localStorage.setItem('studyDeckClasses', JSON.stringify(classes));
+            renderClasses();
+            closeClassModal();
         }
 
-        function syncToSchedule(todo) {
-            // Get existing events from schedule
-            let events = JSON.parse(localStorage.getItem('studyDeckEvents')) || [];
-            
-            // Check if event already exists for this todo
-            const existingEventIndex = events.findIndex(e => e.todoId === todo.id);
-            
-            // Get class info for color
-            const todoClass = classes.find(c => c.id === todo.classId);
-            
-            const eventData = {
-                id: existingEventIndex >= 0 ? events[existingEventIndex].id : Date.now(),
-                todoId: todo.id,
-                title: `📝 ${todo.title}`,
-                description: todo.description || '',
-                date: todo.due,
-                startTime: '09:00',
-                endTime: '10:00',
-                color: todoClass?.color || '#3b82f6',
-                type: 'todo'
-            };
-            
-            if (existingEventIndex >= 0) {
-                events[existingEventIndex] = eventData;
-            } else {
-                events.push(eventData);
-            }
-            
-            localStorage.setItem('studyDeckEvents', JSON.stringify(events));
+        function editClass(id) {
+            const cls = classes.find(c => c.id === id);
+            if (!cls) return;
+
+            document.getElementById('modalTitle').textContent = 'Edit Class';
+            document.getElementById('className').value = cls.name;
+            document.getElementById('classTeacher').value = cls.teacher;
+            document.getElementById('editingClassId').value = cls.id;
+            selectedColor = cls.color;
+            renderColorPicker();
+            document.getElementById('classModal').classList.add('active');
         }
 
-        function editTodo(id) {
-            const todo = todos.find(t => t.id === id);
-            if (!todo) return;
-
-            document.querySelector('.modal-title').textContent = 'Edit Task';
-            document.getElementById('todoTitle').value = todo.title;
-            document.getElementById('todoDescription').value = todo.description || '';
-            document.getElementById('todoClass').value = todo.classId || '';
-            document.getElementById('todoPriority').value = todo.priority;
-            document.getElementById('todoDue').value = todo.due || '';
-            document.getElementById('editingTodoId').value = todo.id;
-            document.getElementById('todoModal').classList.add('active');
-        }
-
-        function toggleTodo(id) {
-            const todo = todos.find(t => t.id === id);
-            if (todo) {
-                todo.completed = !todo.completed;
-                todo.updated = new Date().toISOString();
-                localStorage.setItem('studyDeckTodos', JSON.stringify(todos));
-                renderTodos();
-            }
-        }
-
-        async function deleteTodo(id) {
+        async function deleteClass(id) {
             const confirmed = await showConfirmation(
-                'This task will be permanently deleted. This action cannot be undone.',
-                'Delete Task?',
+                'This class will be permanently deleted from all your notes, flashcards, and tasks. This action cannot be undone.',
+                'Delete Class?',
                 'danger'
             );
             
             if (confirmed) {
-                todos = todos.filter(t => t.id !== id);
-                localStorage.setItem('studyDeckTodos', JSON.stringify(todos));
-                
-                // Remove from schedule
-                let events = JSON.parse(localStorage.getItem('studyDeckEvents')) || [];
-                events = events.filter(e => e.todoId !== id);
-                localStorage.setItem('studyDeckEvents', JSON.stringify(events));
-                
-                renderTodos();
-                showNotification('Task deleted successfully', 'success', 'Task Deleted');
+                classes = classes.filter(c => c.id !== id);
+                localStorage.setItem('studyDeckClasses', JSON.stringify(classes));
+                renderClasses();
+                showNotification('Class deleted successfully', 'success', 'Class Deleted');
             }
         }
     </script>

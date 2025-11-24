@@ -20,6 +20,332 @@
             font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #f5f7fa;
             color: #333;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .main-content {
+            background: #0f172a;
+        }
+
+        body.dark-mode .header {
+            background: #1e293b;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .header h1 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .calendar-container {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        body.dark-mode .calendar-header {
+            border-color: #334155;
+        }
+
+        body.dark-mode .calendar-header h2 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .calendar-nav button {
+            background: #334155;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .weekdays,
+        body.dark-mode .calendar-grid {
+            border-color: #334155;
+        }
+
+        body.dark-mode .weekday {
+            color: #94a3b8;
+            background: #1e293b;
+        }
+
+        body.dark-mode .day {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        body.dark-mode .day:hover {
+            background: #334155;
+        }
+
+        body.dark-mode .day.today {
+            background: #334155;
+        }
+
+        body.dark-mode .day-number {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .event-item {
+            border-left-color: #3b82f6;
+        }
+
+        body.dark-mode .event-item span {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .events-sidebar {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        body.dark-mode .events-sidebar h3 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .event-list-item {
+            background: #334155;
+            border-color: #475569;
+        }
+
+        body.dark-mode .event-title {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .event-time,
+        body.dark-mode .event-class {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .modal-content {
+            background: #1e293b;
+        }
+
+        body.dark-mode .modal-title {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .form-label {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .form-input,
+        body.dark-mode .form-select,
+        body.dark-mode .form-textarea {
+            background: #334155;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .form-input::placeholder,
+        body.dark-mode .form-textarea::placeholder {
+            color: #64748b;
+        }
+
+        body.dark-mode .form-input:focus,
+        body.dark-mode .form-select:focus,
+        body.dark-mode .form-textarea:focus {
+            background: #334155;
+            border-color: #3b82f6;
+        }
+
+        body.dark-mode .notification-content {
+            background: #1e293b;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .notification-title {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .notification-message {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .btn {
+            background: #334155;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .btn:hover {
+            background: #475569;
+        }
+
+        body.dark-mode .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        body.dark-mode .btn-primary:hover {
+            background: #2563eb;
+        }
+
+        body.dark-mode .btn-secondary {
+            background: #64748b;
+            color: white;
+        }
+
+        body.dark-mode .btn-secondary:hover {
+            background: #475569;
+        }
+
+        body.dark-mode .add-event-btn {
+            background: #3b82f6;
+        }
+
+        body.dark-mode .add-event-btn:hover {
+            background: #2563eb;
+        }
+
+        body.dark-mode .icon-btn {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .icon-btn:hover {
+            background: #475569;
+            color: #3b82f6;
+        }
+
+        body.dark-mode .icon-btn.delete:hover {
+            background: #475569;
+            color: #ef4444;
+        }
+
+        body.dark-mode .close-modal {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .close-modal:hover {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .close-btn {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .close-btn:hover {
+            color: #ef4444;
+        }
+
+        body.dark-mode .color-option.selected {
+            border-color: #e2e8f0;
+        }
+
+        body.dark-mode .day.other-month .day-number {
+            color: #475569;
+        }
+
+        body.dark-mode .view-toggle {
+            background: #334155;
+        }
+
+        body.dark-mode .view-btn {
+            background: transparent;
+            color: #94a3b8;
+        }
+
+        body.dark-mode .view-btn:hover {
+            background: #475569;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .view-btn.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        body.dark-mode .calendar-container {
+            background: #1e293b;
+            border: 1px solid #334155;
+        }
+
+        body.dark-mode .events-sidebar {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        body.dark-mode .no-events {
+            color: #64748b;
+        }
+
+        body.dark-mode .event-details {
+            background: #334155;
+            border-color: #475569;
+        }
+
+        body.dark-mode .detail-label {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .detail-value {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .time-slot {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        body.dark-mode .time-slot:hover {
+            background: #334155;
+        }
+
+        body.dark-mode .time-label {
+            background: #0f172a;
+            color: #94a3b8;
+        }
+
+        body.dark-mode .day-header {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .day-header.today {
+            background: #3b82f6;
+            color: white;
+        }
+
+        body.dark-mode .week-grid {
+            background: #475569;
+        }
+
+        body.dark-mode .event-block {
+            background: #3b82f6;
+        }
+
+        body.dark-mode .events-list {
+            background: #1e293b;
+            border: 1px solid #334155;
+        }
+
+        body.dark-mode .event-item {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        body.dark-mode .event-item:hover {
+            background: #334155;
+        }
+
+        body.dark-mode .event-item-title {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .event-item-time,
+        body.dark-mode .event-item-class {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .calendar-header {
+            border-color: #334155;
+        }
+
+        body.dark-mode .modal-header {
+            border-color: #334155;
+        }
+
+        body.dark-mode .modal-header h2 {
+            color: #e2e8f0;
         }
 
         .container {
@@ -95,14 +421,103 @@
 
         .nav-item.active {
             background: rgba(59, 130, 246, 0.15);
-            color: #3b82f6;
             border-left: 3px solid #3b82f6;
+        }
+
+        a[href="index.html"].nav-item.active,
+        a[href="index.html"].nav-item:hover {
+            color: #3b82f6;
+        }
+
+        a[href="flashcards.html"].nav-item.active,
+        a[href="flashcards.html"].nav-item:hover {
+            color: #8b5cf6;
+        }
+
+        a[href="todo.html"].nav-item.active,
+        a[href="todo.html"].nav-item:hover {
+            color: #10b981;
+        }
+
+        a[href="schedule.html"].nav-item.active,
+        a[href="schedule.html"].nav-item:hover {
+            color: #f59e0b;
+        }
+
+        a[href="pomodoro.html"].nav-item.active,
+        a[href="pomodoro.html"].nav-item:hover {
+            color: #ef4444;
+        }
+
+        a[href="notes.html"].nav-item.active,
+        a[href="notes.html"].nav-item:hover {
+            color: #06b6d4;
+        }
+
+        a[href="progress-tracker.html"].nav-item.active,
+        a[href="progress-tracker.html"].nav-item:hover {
+            color: #ec4899;
+        }
+
+        a[href="classes.html"].nav-item.active,
+        a[href="classes.html"].nav-item:hover {
+            color: #f97316;
+        }
+
+        a[href="settings.html"].nav-item.active,
+        a[href="settings.html"].nav-item:hover {
+            color: #64748b;
         }
 
         .nav-item i {
             width: 25px;
             margin-right: 15px;
             font-size: 18px;
+        }
+
+        .nav-item .fa-home {
+            color: #3b82f6;
+        }
+
+        .nav-item .fa-layer-group {
+            color: #8b5cf6;
+        }
+
+        .nav-item .fa-list-check {
+            color: #10b981;
+        }
+
+        .nav-item .fa-calendar-days {
+            color: #f59e0b;
+        }
+
+        .nav-item .fa-clock {
+            color: #ef4444;
+        }
+
+        .nav-item .fa-book-open {
+            color: #06b6d4;
+        }
+
+        .nav-item .fa-chart-line {
+            color: #ec4899;
+        }
+
+        .nav-item .fa-brain {
+            color: #6366f1;
+        }
+
+        .nav-item .fa-calculator {
+            color: #84cc16;
+        }
+
+        .nav-item .fa-book {
+            color: #f97316;
+        }
+
+        .nav-item .fa-gear,
+        .nav-item .fa-cog {
+            color: #64748b;
         }
 
         /* AI Dropdown */
@@ -269,10 +684,6 @@
             display: flex;
             align-items: center;
             gap: 12px;
-        }
-
-        .header h1 i {
-            color: #3b82f6;
         }
 
         .header-actions {
@@ -1089,6 +1500,11 @@
                         </div>
                     </div>
                 </div>
+                
+                <a href="classes.html" class="nav-item">
+                    <i class="fas fa-book"></i>
+                    <span>My Classes</span>
+                </a>
                 
                 <a href="settings.html" class="nav-item">
                     <i class="fas fa-cog"></i>
@@ -1973,6 +2389,14 @@
         });
 
         // Initialize on page load
+        // Load dark mode immediately to prevent flash
+        (function() {
+            const darkMode = localStorage.getItem('studyDeckDarkMode') === 'true';
+            if (darkMode) {
+                document.body.classList.add('dark-mode');
+            }
+        })();
+
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>

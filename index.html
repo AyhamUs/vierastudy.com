@@ -20,6 +20,176 @@
             font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #f5f7fa;
             color: #333;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .main-content {
+            background: #0f172a;
+        }
+
+        body.dark-mode .header {
+            background: #1e293b;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .header h1 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+        }
+
+        body.dark-mode .card h3 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .card p {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .card-number {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .section {
+            background: #1e293b;
+            border: 1px solid #334155;
+        }
+
+        body.dark-mode .section h2 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .activity-item {
+            border-color: #334155;
+        }
+
+        body.dark-mode .activity-title {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .activity-time {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .footer {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        body.dark-mode .activity-item {
+            border-color: #334155;
+        }
+
+        body.dark-mode hr,
+        body.dark-mode [style*="border"] {
+            border-color: #334155 !important;
+        }
+
+        body.dark-mode .footer-left,
+        body.dark-mode .footer-left span,
+        body.dark-mode .footer-left strong,
+        body.dark-mode .footer-left p,
+        body.dark-mode .footer-links a {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .modal-content {
+            background: #1e293b;
+        }
+
+        body.dark-mode .modal h2 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .form-group label {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .form-group input {
+            background: #334155;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .welcome-section {
+            background: #1e293b;
+        }
+
+        body.dark-mode .welcome-section h1,
+        body.dark-mode .welcome-section p {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .welcome-card {
+            background: #1e293b;
+        }
+
+        body.dark-mode .welcome-card h1 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .welcome-card p {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .welcome-input {
+            background: #334155;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .welcome-input:focus {
+            background: #334155;
+            border-color: #3b82f6;
+        }
+
+        body.dark-mode .welcome-input::placeholder {
+            color: #64748b;
+        }
+
+        body.dark-mode .notification-content {
+            background: #1e293b;
+        }
+
+        body.dark-mode .quick-action-btn {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        body.dark-mode .quick-action-btn:hover {
+            background: #334155;
+        }
+
+        body.dark-mode .quick-action-btn.blue:hover {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            color: white;
+        }
+
+        body.dark-mode .quick-action-btn.purple:hover {
+            background: #8b5cf6;
+            border-color: #8b5cf6;
+            color: white;
+        }
+
+        body.dark-mode .quick-action-btn.green:hover {
+            background: #22c55e;
+            border-color: #22c55e;
+            color: white;
+        }
+
+        body.dark-mode .quick-action-btn.orange:hover {
+            background: #f97316;
+            border-color: #f97316;
+            color: white;
         }
 
         .container {
@@ -95,14 +265,107 @@
 
         .nav-item.active {
             background: rgba(59, 130, 246, 0.15);
-            color: #3b82f6;
             border-left: 3px solid #3b82f6;
+        }
+
+        .nav-item.active span {
+            color: inherit;
+        }
+
+        a[href="index.html"].nav-item.active,
+        a[href="index.html"].nav-item:hover {
+            color: #3b82f6;
+        }
+
+        a[href="flashcards.html"].nav-item.active,
+        a[href="flashcards.html"].nav-item:hover {
+            color: #8b5cf6;
+        }
+
+        a[href="todo.html"].nav-item.active,
+        a[href="todo.html"].nav-item:hover {
+            color: #10b981;
+        }
+
+        a[href="schedule.html"].nav-item.active,
+        a[href="schedule.html"].nav-item:hover {
+            color: #f59e0b;
+        }
+
+        a[href="pomodoro.html"].nav-item.active,
+        a[href="pomodoro.html"].nav-item:hover {
+            color: #ef4444;
+        }
+
+        a[href="notes.html"].nav-item.active,
+        a[href="notes.html"].nav-item:hover {
+            color: #06b6d4;
+        }
+
+        a[href="progress-tracker.html"].nav-item.active,
+        a[href="progress-tracker.html"].nav-item:hover {
+            color: #ec4899;
+        }
+
+        a[href="classes.html"].nav-item.active,
+        a[href="classes.html"].nav-item:hover {
+            color: #f97316;
+        }
+
+        a[href="settings.html"].nav-item.active,
+        a[href="settings.html"].nav-item:hover {
+            color: #64748b;
         }
 
         .nav-item i {
             width: 25px;
             margin-right: 15px;
             font-size: 18px;
+        }
+
+        .nav-item .fa-home {
+            color: #3b82f6;
+        }
+
+        .nav-item .fa-layer-group {
+            color: #8b5cf6;
+        }
+
+        .nav-item .fa-list-check {
+            color: #10b981;
+        }
+
+        .nav-item .fa-calendar-days {
+            color: #f59e0b;
+        }
+
+        .nav-item .fa-clock {
+            color: #ef4444;
+        }
+
+        .nav-item .fa-book-open {
+            color: #06b6d4;
+        }
+
+        .nav-item .fa-chart-line {
+            color: #ec4899;
+        }
+
+        .nav-item .fa-brain {
+            color: #6366f1;
+        }
+
+        .nav-item .fa-calculator {
+            color: #84cc16;
+        }
+
+        .nav-item .fa-book {
+            color: #f97316;
+        }
+
+        .nav-item .fa-gear,
+        .nav-item .fa-cog {
+            color: #64748b;
         }
 
         /* AI Dropdown */
@@ -423,6 +686,12 @@
             font-size: 14px;
         }
 
+        .footer-left img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
         .footer-left i {
             color: #3b82f6;
             font-size: 18px;
@@ -502,42 +771,74 @@
         }
 
         .quick-action-btn.blue {
-            border-color: #3b82f6;
-            color: #3b82f6;
-        }
-
-        .quick-action-btn.blue:hover {
-            background: #3b82f6;
-            color: white;
-        }
-
-        .quick-action-btn.purple {
             border-color: #8b5cf6;
             color: #8b5cf6;
         }
 
-        .quick-action-btn.purple:hover {
+        .quick-action-btn.blue i {
+            color: #8b5cf6;
+        }
+
+        .quick-action-btn.blue:hover {
             background: #8b5cf6;
             color: white;
         }
 
+        .quick-action-btn.blue:hover i {
+            color: white;
+        }
+
+        .quick-action-btn.purple {
+            border-color: #10b981;
+            color: #10b981;
+        }
+
+        .quick-action-btn.purple i {
+            color: #10b981;
+        }
+
+        .quick-action-btn.purple:hover {
+            background: #10b981;
+            color: white;
+        }
+
+        .quick-action-btn.purple:hover i {
+            color: white;
+        }
+
         .quick-action-btn.green {
-            border-color: #22c55e;
-            color: #22c55e;
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+
+        .quick-action-btn.green i {
+            color: #ef4444;
         }
 
         .quick-action-btn.green:hover {
-            background: #22c55e;
+            background: #ef4444;
+            color: white;
+        }
+
+        .quick-action-btn.green:hover i {
             color: white;
         }
 
         .quick-action-btn.orange {
-            border-color: #f97316;
-            color: #f97316;
+            border-color: #06b6d4;
+            color: #06b6d4;
+        }
+
+        .quick-action-btn.orange i {
+            color: #06b6d4;
         }
 
         .quick-action-btn.orange:hover {
-            background: #f97316;
+            background: #06b6d4;
+            color: white;
+        }
+
+        .quick-action-btn.orange:hover i {
             color: white;
         }
 
@@ -806,9 +1107,7 @@
             height: 100%;
             background: #1e293b;
             z-index: 20000;
-            align-items: center;
-            justify-content: center;
-            overflow: auto;
+            overflow: hidden;
         }
 
         .welcome-overlay::before {
@@ -818,32 +1117,99 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
-            animation: gradient-shift 15s ease infinite;
+            background: none;
         }
 
         @keyframes gradient-shift {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+            0%, 100% { 
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
         }
 
         .welcome-overlay.show {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: stretch;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .welcome-hero {
+            position: relative;
+            height: 100vh;
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            color: white;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .welcome-hero-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+        }
+
+        .welcome-hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .welcome-hero p {
+            font-size: 18px;
+            opacity: 0.95;
+            max-width: 500px;
+            line-height: 1.6;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .welcome-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+            max-width: 500px;
+        }
+
+        .welcome-stat {
+            text-align: center;
+        }
+
+        .welcome-stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .welcome-stat-label {
+            font-size: 13px;
+            opacity: 0.9;
         }
 
         .welcome-card {
             position: relative;
             background: white;
-            border-radius: 16px;
-            padding: 50px 45px;
-            max-width: 450px;
-            width: 90%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 50px;
             text-align: center;
-            animation: welcomeSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: 1;
+            overflow-y: auto;
         }
 
         @keyframes welcomeSlideUp {
@@ -857,43 +1223,38 @@
             }
         }
 
-        .welcome-logo-container {
-            position: relative;
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 25px;
-        }
-
-        .welcome-logo {
-            width: 80px;
-            height: 80px;
-            margin: 0;
-            border-radius: 16px;
-            padding: 12px;
-            background: rgba(59, 130, 246, 0.1);
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+        .welcome-card-logo {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #1e293b;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(30, 41, 59, 0.3);
         }
 
         .welcome-title {
             font-size: 28px;
             font-weight: 700;
             color: #1e293b;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
 
         .welcome-subtitle {
-            font-size: 15px;
+            font-size: 14px;
             color: #64748b;
-            margin-bottom: 32px;
-            line-height: 1.6;
+            margin-bottom: 25px;
+            line-height: 1.5;
             font-weight: 400;
         }
 
         .welcome-form {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 15px;
+            width: 100%;
+            max-width: 450px;
         }
 
         .input-group {
@@ -928,9 +1289,9 @@
 
         .welcome-input:focus {
             outline: none;
-            border-color: #3b82f6;
+            border-color: #1e293b;
             background: white;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.1);
         }
 
         .welcome-input:hover:not(:focus) {
@@ -938,23 +1299,24 @@
         }
 
         .welcome-btn {
-            background: #3b82f6;
+            background: #1e293b;
             color: white;
             border: none;
-            padding: 15px 32px;
-            border-radius: 10px;
-            font-size: 15px;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            margin-top: 8px;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            margin-top: 10px;
+            box-shadow: 0 8px 24px rgba(30, 41, 59, 0.4);
+            width: 100%;
         }
 
         .welcome-btn:hover {
-            background: #2563eb;
+            background: #334155;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 12px 32px rgba(30, 41, 59, 0.5);
         }
 
         .welcome-btn:active {
@@ -967,6 +1329,14 @@
             transform: none;
         }
 
+        .welcome-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+            margin: 20px 0;
+            max-width: 450px;
+        }
+
         .welcome-footer {
             margin-top: 25px;
             font-size: 12px;
@@ -974,65 +1344,115 @@
         }
 
         .welcome-footer a {
-            color: #3b82f6;
+            color: #1e293b;
             text-decoration: none;
             font-weight: 600;
             transition: color 0.3s;
         }
 
         .welcome-footer a:hover {
-            color: #2563eb;
+            color: #334155;
         }
 
         .welcome-features {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            margin-top: 30px;
-            padding-top: 25px;
-            border-top: 1px solid #e2e8f0;
+            width: 100%;
+            max-width: 450px;
+            margin-top: 10px;
         }
 
         .welcome-feature {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 12px;
+            transition: all 0.3s;
+            text-align: left;
+        }
+
+        .welcome-feature:hover {
+            background: #f1f5f9;
+            transform: translateY(-2px);
         }
 
         .welcome-feature-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            background: rgba(59, 130, 246, 0.1);
-            color: #3b82f6;
+            font-size: 22px;
+            background: #1e293b;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .welcome-feature-content {
+            flex: 1;
+        }
+
+        .welcome-feature-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 3px;
         }
 
         .welcome-feature-text {
-            font-size: 11px;
+            font-size: 12px;
             color: #64748b;
-            font-weight: 500;
-            text-align: center;
+            line-height: 1.4;
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 1024px) {
+            .welcome-overlay.show {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-hero {
+                display: none;
+            }
+
+            .welcome-card {
+                border-radius: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
             .welcome-card {
                 padding: 40px 30px;
             }
 
-            .welcome-logo {
-                width: 65px;
-                height: 65px;
-                padding: 10px;
+            .welcome-title {
+                font-size: 26px;
             }
 
-            .welcome-logo-container {
-                width: 65px;
-                height: 65px;
+            .welcome-hero h1 {
+                font-size: 36px;
+            }
+
+            .welcome-stats {
+                gap: 20px;
+            }
+
+            .welcome-stat-number {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-card {
+                padding: 30px 20px;
+            }
+
+            .welcome-card-logo {
+                width: 60px;
+                height: 60px;
             }
 
             .welcome-title {
@@ -1050,22 +1470,31 @@
             }
 
             .welcome-btn {
-                padding: 14px 28px;
-                font-size: 14px;
+                padding: 14px 32px;
+                font-size: 15px;
             }
 
             .welcome-features {
+                grid-template-columns: 1fr;
                 gap: 12px;
             }
 
+            .welcome-feature {
+                padding: 16px;
+            }
+
             .welcome-feature-icon {
-                width: 36px;
-                height: 36px;
-                font-size: 16px;
+                width: 42px;
+                height: 42px;
+                font-size: 18px;
+            }
+
+            .welcome-feature-title {
+                font-size: 13px;
             }
 
             .welcome-feature-text {
-                font-size: 10px;
+                font-size: 11px;
             }
         }
     </style>
@@ -1073,12 +1502,29 @@
 <body>
     <!-- Welcome Overlay -->
     <div id="welcomeOverlay" class="welcome-overlay">
-        <div class="welcome-card">
-            <div class="welcome-logo-container">
-                <img src="studydeck.png" alt="StudyDeck" class="welcome-logo">
+        <div class="welcome-hero">
+            <img src="studydeck.png" alt="StudyDeck" class="welcome-hero-logo">
+            <h1>Your Ultimate<br>Study Companion</h1>
+            <p>Organize your classes, create flashcards, track progress, and achieve your academic goals with StudyDeck's powerful suite of tools.</p>
+            <div class="welcome-stats">
+                <div class="welcome-stat">
+                    <div class="welcome-stat-number">8+</div>
+                    <div class="welcome-stat-label">Study Tools</div>
+                </div>
+                <div class="welcome-stat">
+                    <div class="welcome-stat-number">24/7</div>
+                    <div class="welcome-stat-label">Access Anywhere</div>
+                </div>
+                <div class="welcome-stat">
+                    <div class="welcome-stat-number">∞</div>
+                    <div class="welcome-stat-label">Unlimited Use</div>
+                </div>
             </div>
-            <h1 class="welcome-title">Welcome to StudyDeck!</h1>
-            <p class="welcome-subtitle">Let's get started by setting up your profile. Please enter your name below to begin your study journey.</p>
+        </div>
+        <div class="welcome-card">
+            <img src="studydeck.png" alt="StudyDeck" class="welcome-card-logo">
+            <h1 class="welcome-title">Create Your Account</h1>
+            <p class="welcome-subtitle">Start achieving your academic goals today</p>
             <form class="welcome-form" onsubmit="saveUserProfile(event)">
                 <div class="input-group">
                     <label class="input-label" for="firstNameInput">First Name</label>
@@ -1102,28 +1548,58 @@
                         autocomplete="family-name"
                     >
                 </div>
+                <div class="input-group">
+                    <label class="input-label" for="productKeyInput">Invite Code</label>
+                    <input 
+                        type="text" 
+                        id="productKeyInput" 
+                        class="welcome-input" 
+                        placeholder="Enter your invite code" 
+                        required
+                        autocomplete="off"
+                    >
+                </div>
                 <button type="submit" class="welcome-btn">
-                    Get Started 🚀
+                    Get Started →
                 </button>
             </form>
+            <div class="welcome-divider"></div>
             <div class="welcome-features">
                 <div class="welcome-feature">
                     <div class="welcome-feature-icon">
-                        <i class="fas fa-brain"></i>
+                        <i class="fas fa-layer-group"></i>
                     </div>
-                    <span class="welcome-feature-text">AI Tools</span>
+                    <div class="welcome-feature-content">
+                        <div class="welcome-feature-title">Smart Flashcards</div>
+                        <div class="welcome-feature-text">Create and study with AI-powered flashcards</div>
+                    </div>
                 </div>
                 <div class="welcome-feature">
                     <div class="welcome-feature-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <span class="welcome-feature-text">Progress</span>
+                    <div class="welcome-feature-content">
+                        <div class="welcome-feature-title">Track Progress</div>
+                        <div class="welcome-feature-text">Monitor your study habits and performance</div>
+                    </div>
                 </div>
                 <div class="welcome-feature">
                     <div class="welcome-feature-icon">
-                        <i class="fas fa-graduation-cap"></i>
+                        <i class="fas fa-calendar-alt"></i>
                     </div>
-                    <span class="welcome-feature-text">Study Smart</span>
+                    <div class="welcome-feature-content">
+                        <div class="welcome-feature-title">Schedule & Plan</div>
+                        <div class="welcome-feature-text">Organize study sessions and deadlines</div>
+                    </div>
+                </div>
+                <div class="welcome-feature">
+                    <div class="welcome-feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="welcome-feature-content">
+                        <div class="welcome-feature-title">Pomodoro Timer</div>
+                        <div class="welcome-feature-text">Stay focused with timed study sessions</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1234,6 +1710,11 @@
                     </div>
                 </div>
                 
+                <a href="classes.html" class="nav-item">
+                    <i class="fas fa-book"></i>
+                    <span>My Classes</span>
+                </a>
+                
                 <a href="settings.html" class="nav-item">
                     <i class="fas fa-cog"></i>
                     <span>Settings</span>
@@ -1329,7 +1810,7 @@
                     </div>
                     <div id="emptyClasses" style="display: none; text-align: center; color: #94a3b8; padding: 30px;">
                         <i class="fas fa-graduation-cap" style="font-size: 48px; margin-bottom: 15px; opacity: 0.3;"></i>
-                        <p>No classes yet. <a href="settings.html" style="color: #3b82f6;">Add your first class</a> to get started!</p>
+                        <p>No classes yet. <a href="classes.html" style="color: #3b82f6;">Add your first class</a> to get started!</p>
                     </div>
                 </div>
 
@@ -1349,20 +1830,14 @@
                 <div class="footer">
                     <div class="footer-content">
                         <div class="footer-left">
-                            <i class="fas fa-graduation-cap"></i>
-                            <span>© 2025 <strong>StudyDeck</strong> - All rights reserved</span>
+                            <img src="studydeck.png" alt="StudyDeck Logo">
+                            <span>Founded by <strong>Ayham I & Josh O</strong></span>
                         </div>
                         <div class="footer-links">
                             <a href="#" class="footer-link">About</a>
                             <a href="#" class="footer-link">Privacy Policy</a>
                             <a href="#" class="footer-link">Terms of Service</a>
                             <a href="#" class="footer-link">Contact</a>
-                            <a href="#" class="footer-link">Help Center</a>
-                        </div>
-                        <div class="footer-social">
-                            <div class="social-icon" title="GitHub">
-                                <i class="fab fa-github"></i>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -1413,11 +1888,19 @@
             
             const firstName = document.getElementById('firstNameInput').value.trim();
             const lastName = document.getElementById('lastNameInput').value.trim();
+            const productKey = document.getElementById('productKeyInput').value.trim().toUpperCase();
+            
+            // Validate product key
+            if (productKey !== 'STUDYDECK2025') {
+                showNotification('Invalid product key. Please check your key and try again.', 'error', 'Invalid Key');
+                return;
+            }
             
             if (firstName && lastName) {
                 const userProfile = {
                     firstName: firstName,
                     lastName: lastName,
+                    productKey: productKey,
                     createdAt: new Date().toISOString()
                 };
                 
@@ -1764,6 +2247,14 @@
             }
             return 10000; // Old dates
         }
+
+        // Load dark mode immediately to prevent flash
+        (function() {
+            const darkMode = localStorage.getItem('studyDeckDarkMode') === 'true';
+            if (darkMode) {
+                document.body.classList.add('dark-mode');
+            }
+        })();
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
