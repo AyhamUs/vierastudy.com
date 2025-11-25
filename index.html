@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>StudyDeck - Home</title>
     <link rel="icon" href="studydeck.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -206,6 +209,8 @@
             display: flex;
             flex-direction: column;
             box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .logo {
@@ -247,6 +252,8 @@
         .nav-menu {
             flex: 1;
             padding: 20px 0;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .nav-item {
@@ -428,6 +435,7 @@
         .math-dropdown.open .dropdown-content {
             max-height: 350px;
             opacity: 1;
+            overflow: visible;
         }
 
         .dropdown-item {
@@ -1897,10 +1905,10 @@
             
             <div class="user-profile">
                 <div class="user-avatar" id="userAvatar">
-                    AI
+                    ?
                 </div>
                 <div class="user-info">
-                    <div class="user-name" id="userName">Ayham Issa</div>
+                    <div class="user-name" id="userName">Guest</div>
                 </div>
                 <button class="signout-btn" onclick="handleSignout()" title="Sign Out">
                     <i class="fas fa-right-from-bracket"></i>
@@ -1911,7 +1919,7 @@
         <!-- Main Content -->
         <div class="main-content">
             <div class="header">
-                <h1 id="welcomeMessage">Welcome back, Ayham! 👋</h1>
+                <h1 id="welcomeMessage">Welcome to StudyDeck! 👋</h1>
             </div>
             
             <div class="content">
@@ -2098,9 +2106,48 @@
                 // Update name
                 document.getElementById('userName').textContent = fullName;
                 
-                // Update welcome message
-                document.getElementById('welcomeMessage').textContent = `Welcome back, ${firstName}!`;
+                // Update welcome message with time-based greeting
+                document.getElementById('welcomeMessage').innerHTML = getWelcomeMessage(firstName);
             }
+        }
+
+        function getWelcomeMessage(firstName) {
+            const hour = new Date().getHours();
+            const day = new Date().getDay();
+            const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            
+            let greeting = '';
+            let emoji = '';
+            
+            if (hour >= 5 && hour < 12) {
+                greeting = 'Good morning';
+                emoji = '☀️';
+            } else if (hour >= 12 && hour < 17) {
+                greeting = 'Good afternoon';
+                emoji = '🌤️';
+            } else if (hour >= 17 && hour < 21) {
+                greeting = 'Good evening';
+                emoji = '🌅';
+            } else {
+                greeting = 'Burning the midnight oil';
+                emoji = '🌙';
+            }
+            
+            // Random motivational messages
+            const motivationalMessages = [
+                "Ready to crush your goals?",
+                "Let's make today productive!",
+                "Time to learn something new!",
+                "Your future self will thank you!",
+                "Small steps lead to big wins!",
+                "Keep up the great work!",
+                "You've got this!",
+                "Let's get studying!"
+            ];
+            
+            const randomMessage = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
+            
+            return `${greeting}, ${firstName}! ${emoji} <span style="font-size: 0.65em; font-weight: 400; opacity: 0.8; display: block; margin-top: 4px;">${randomMessage}</span>`;
         }
 
         function getUserProfile() {
@@ -2258,9 +2305,9 @@
                 document.getElementById('welcomeOverlay').classList.add('show');
                 
                 // Reset user display
-                document.getElementById('userAvatar').textContent = 'AI';
-                document.getElementById('userName').textContent = 'Ayham Issa';
-                document.getElementById('welcomeMessage').textContent = 'Welcome back, Ayham!';
+                document.getElementById('userAvatar').textContent = '?';
+                document.getElementById('userName').textContent = 'Guest';
+                document.getElementById('welcomeMessage').textContent = 'Welcome to StudyDeck! 👋';
                 
                 // Clear form inputs
                 document.getElementById('firstNameInput').value = '';

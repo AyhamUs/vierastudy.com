@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>StudyDeck - Pomodoro Timer</title>
     <link rel="icon" href="studydeck.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -299,6 +302,8 @@
             display: flex;
             flex-direction: column;
             box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .logo {
@@ -341,6 +346,7 @@
             flex: 1;
             padding: 20px 0;
             overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .nav-item {
@@ -1290,9 +1296,9 @@
             </nav>
             
             <div class="user-profile">
-                <div class="user-avatar" id="userAvatar">AI</div>
+                <div class="user-avatar" id="userAvatar">?</div>
                 <div class="user-info">
-                    <div class="user-name" id="userName">Ayham Issa</div>
+                    <div class="user-name" id="userName">Guest</div>
                 </div>
                 <button class="signout-btn" onclick="handleSignout()" title="Sign Out">
                     <i class="fas fa-right-from-bracket"></i>
