@@ -1386,6 +1386,8 @@
             if (confirmed) {
                 // Clear user profile from localStorage
                 localStorage.removeItem('studyDeckUserProfile');
+                // Clear dark mode setting to prevent glitched sign-in screen
+                localStorage.removeItem('studyDeckDarkMode');
                 
                 // Redirect to home page which will show the onboarding screen
                 window.location.href = 'index.html';

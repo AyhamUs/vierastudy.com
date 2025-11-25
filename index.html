@@ -2301,6 +2301,10 @@
                 // Clear user profile from localStorage
                 localStorage.removeItem('studyDeckUserProfile');
                 
+                // Clear dark mode setting and reset to light mode
+                localStorage.removeItem('studyDeckDarkMode');
+                document.body.classList.remove('dark-mode');
+                
                 // Show the welcome overlay
                 document.getElementById('welcomeOverlay').classList.add('show');
                 
