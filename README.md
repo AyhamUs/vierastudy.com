@@ -1,14 +1,14 @@
-# 📚 StudyDeck - All-in-One Study Companion
+# 📚 VieraStudy - All-in-One Study Companion
 
 <div align="center">
 
-![StudyDeck Logo](studydeck.png)
+![VieraStudy Logo](studydeck.png)
 
 **The Ultimate Study Platform for Students**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-1.0.0-green.svg)](https://github.com/yourusername/studydeck)
-[![PRO](https://img.shields.io/badge/StudyDeck-PRO-gold.svg)](https://studydeck.com)
+[![Version](https://img.shields.io/badge/version-1.0.0-green.svg)](https://github.com/yourusername/VieraStudy)
+[![PRO](https://img.shields.io/badge/VieraStudy-PRO-gold.svg)](https://VieraStudy.com)
 
 [Live Demo](https://sd.babcoding.com) • [Features](#features) • [Getting Started](#getting-started) • [Documentation](#documentation)
 
@@ -18,9 +18,9 @@
 
 ## 🎯 Overview
 
-**StudyDeck** is a comprehensive, all-in-one study platform designed to help students maximize their learning potential. Built with a focus on productivity, organization, and effective study techniques, StudyDeck combines multiple essential study tools into one seamless, beautiful interface.
+**VieraStudy** is a comprehensive, all-in-one study platform designed to help students maximize their learning potential. Built with a focus on productivity, organization, and effective study techniques, VieraStudy combines multiple essential study tools into one seamless, beautiful interface.
 
-### 🌟 What Makes StudyDeck Special?
+### 🌟 What Makes VieraStudy Special?
 
 - **8 Integrated Study Tools** - Everything you need in one place
 - **Modern, Intuitive Interface** - Clean design that helps you focus
@@ -104,7 +104,7 @@ Organize all your courses in one place:
 - Quick access to class-specific materials
 
 ### 9. ⚙️ **Settings**
-Customize your StudyDeck experience:
+Customize your VieraStudy experience:
 - Dark/Light mode toggle
 - Notification preferences
 - Profile management
@@ -219,7 +219,7 @@ This valuation is based on:
 - Todoist ($200M+) - Task management
 - Forest App ($50M+) - Pomodoro timer
 
-**StudyDeck's Unique Position:**
+**VieraStudy's Unique Position:**
 - All-in-one solution vs. single-purpose tools
 - No subscription required (freemium potential)
 - Privacy-first approach
@@ -281,8 +281,8 @@ This valuation is based on:
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/yourusername/studydeck.git
-cd studydeck
+git clone https://github.com/yourusername/VieraStudy.git
+cd VieraStudy
 ```
 
 2. **Open in browser:**
@@ -297,7 +297,7 @@ python -m http.server 8000
 
 3. **Create your account:**
 - Enter your first and last name
-- Enter invite code: `STUDYDECK2025`
+- Enter invite code: `VieraStudy2025`
 - Click "Get Started"
 
 4. **Start studying!**
@@ -411,8 +411,8 @@ We welcome contributions! Here's how you can help:
 ### Development Setup
 ```bash
 # Fork the repository
-git clone https://github.com/yourusername/studydeck.git
-cd studydeck
+git clone https://github.com/yourusername/VieraStudy.git
+cd VieraStudy
 
 # Create a feature branch
 git checkout -b feature/your-feature-name
@@ -456,22 +456,22 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact & Support
 
 ### Get Help
-- 📧 Email: support@studydeck.com
+- 📧 Email: support@VieraStudy.com
 - 💬 Discord: [Join our community](#)
-- 🐦 Twitter: [@StudyDeckApp](#)
-- 📱 Instagram: [@studydeck](#)
+- 🐦 Twitter: [@VieraStudyApp](#)
+- 📱 Instagram: [@VieraStudy](#)
 
 ### Report Issues
-Found a bug? [Open an issue on GitHub](https://github.com/yourusername/studydeck/issues)
+Found a bug? [Open an issue on GitHub](https://github.com/yourusername/VieraStudy/issues)
 
 ### Feature Requests
-Have an idea? [Submit a feature request](https://github.com/yourusername/studydeck/issues/new?template=feature_request.md)
+Have an idea? [Submit a feature request](https://github.com/yourusername/VieraStudy/issues/new?template=feature_request.md)
 
 ---
 
 ## 🌟 Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=yourusername/studydeck&type=Date)](https://star-history.com/#yourusername/studydeck&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=yourusername/VieraStudy&type=Date)](https://star-history.com/#yourusername/VieraStudy&Date)
 
 ---
 
@@ -497,6 +497,6 @@ Have an idea? [Submit a feature request](https://github.com/yourusername/studyde
 
 **Built with ❤️ for students, by students**
 
-[⬆ Back to Top](#-studydeck---all-in-one-study-companion)
+[⬆ Back to Top](#-VieraStudy---all-in-one-study-companion)
 
 </div>

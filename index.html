@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>StudyDeck - Home</title>
+    <title>VieraStudy - Home</title>
     <link rel="icon" href="studydeck.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,6 +17,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
         }
 
         body {
@@ -161,6 +165,14 @@
 
         body.dark-mode .notification-content {
             background: #1e293b;
+        }
+
+        body.dark-mode .notification-title {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .notification-message {
+            color: #94a3b8;
         }
 
         body.dark-mode .quick-action-btn {
@@ -465,28 +477,28 @@
 
         /* AI Tools dropdown icon colors */
         .ai-dropdown .dropdown-item:nth-child(1) i {
-            color: #8b5cf6;
+            color: #6366f1;
         }
 
         .ai-dropdown .dropdown-item:nth-child(2) i {
-            color: #10b981;
+            color: #6366f1;
         }
 
         .ai-dropdown .dropdown-item:nth-child(3) i {
-            color: #f59e0b;
+            color: #6366f1;
         }
 
         .ai-dropdown .dropdown-item:nth-child(4) i {
-            color: #3b82f6;
+            color: #6366f1;
         }
 
         /* Math Tools dropdown icon colors */
         .math-dropdown .dropdown-item:nth-child(1) i {
-            color: #ec4899;
+            color: #84cc16;
         }
 
         .math-dropdown .dropdown-item:nth-child(2) i {
-            color: #06b6d4;
+            color: #84cc16;
         }
 
         /* User Profile */
@@ -547,7 +559,6 @@
         .signout-btn:hover {
             background: #ef4444;
             color: white;
-            transform: scale(1.05);
         }
 
         .signout-btn i {
@@ -1685,9 +1696,9 @@
     <!-- Welcome Overlay -->
     <div id="welcomeOverlay" class="welcome-overlay">
         <div class="welcome-hero">
-            <img src="studydeck.png" alt="StudyDeck" class="welcome-hero-logo">
+            <img src="studydeck.png" alt="VieraStudy" class="welcome-hero-logo">
             <h1>Your Ultimate<br>Study Companion</h1>
-            <p>Organize your classes, create flashcards, track progress, and achieve your academic goals with StudyDeck's powerful suite of tools.</p>
+            <p>Organize your classes, create flashcards, track progress, and achieve your academic goals with VieraStudy's powerful suite of tools.</p>
             <div class="welcome-stats">
                 <div class="welcome-stat">
                     <div class="welcome-stat-number">8+</div>
@@ -1704,7 +1715,7 @@
             </div>
         </div>
         <div class="welcome-card">
-            <img src="studydeck.png" alt="StudyDeck" class="welcome-card-logo">
+            <img src="studydeck.png" alt="VieraStudy" class="welcome-card-logo">
             <h1 class="welcome-title">Create Your Account</h1>
             <p class="welcome-subtitle">Start achieving your academic goals today</p>
             <form class="welcome-form" onsubmit="saveUserProfile(event)">
@@ -1799,8 +1810,8 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="logo">
-                <img src="studydeck.png" alt="StudyDeck">
-                <span class="logo-text">StudyDeck</span>
+                <img src="studydeck.png" alt="VieraStudy">
+                <span class="logo-text">VieraStudy</span>
                 <span class="pro-badge">PRO</span>
             </div>
             
@@ -1881,14 +1892,14 @@
                         </div>
                     </div>
                     <div class="dropdown-content">
-                        <div class="dropdown-item">
+                        <a href="graphing-calculator.html" class="dropdown-item">
                             <i class="fas fa-chart-line"></i>
                             <span>Graphing Calculator</span>
-                        </div>
-                        <div class="dropdown-item">
+                        </a>
+                        <a href="scientific-calculator.html" class="dropdown-item">
                             <i class="fas fa-calculator"></i>
                             <span>Scientific Calculator</span>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 
@@ -1919,7 +1930,7 @@
         <!-- Main Content -->
         <div class="main-content">
             <div class="header">
-                <h1 id="welcomeMessage">Welcome to StudyDeck! 👋</h1>
+                <h1 id="welcomeMessage">Welcome to VieraStudy! 👋</h1>
             </div>
             
             <div class="content">
@@ -2012,7 +2023,7 @@
                 <div class="footer">
                     <div class="footer-content">
                         <div class="footer-left">
-                            <img src="studydeck.png" alt="StudyDeck Logo">
+                            <img src="studydeck.png" alt="VieraStudy Logo">
                             <span>Founded by <strong>Ayham I & Josh O</strong></span>
                         </div>
                         <div class="footer-links">
@@ -2089,7 +2100,7 @@
                 localStorage.setItem('studyDeckUserProfile', JSON.stringify(userProfile));
                 document.getElementById('welcomeOverlay').classList.remove('show');
                 loadUserProfile();
-                showNotification(`Welcome to StudyDeck, ${firstName}! Let's start studying! 🎉`, 'success', 'Profile Created');
+                showNotification(`Welcome to VieraStudy, ${firstName}! Let's start studying! 🎉`, 'success', 'Profile Created');
             }
         }
 
@@ -2311,7 +2322,7 @@
                 // Reset user display
                 document.getElementById('userAvatar').textContent = '?';
                 document.getElementById('userName').textContent = 'Guest';
-                document.getElementById('welcomeMessage').textContent = 'Welcome to StudyDeck! 👋';
+                document.getElementById('welcomeMessage').textContent = 'Welcome to VieraStudy! 👋';
                 
                 // Clear form inputs
                 document.getElementById('firstNameInput').value = '';
@@ -2362,9 +2373,11 @@
             emptyClasses.style.display = 'none';
 
             classesList.innerHTML = classes.map(cls => `
-                <div class="card" style="cursor: pointer;" onclick="window.location.href='settings.html'">
+                <div class="card" style="cursor: pointer;" onclick="window.location.href='classes.html'">
                     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
-                        <div style="width: 12px; height: 12px; border-radius: 50%; background: ${cls.color};"></div>
+                        <div style="width: 32px; height: 32px; border-radius: 8px; background: ${cls.color}; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas ${cls.icon || 'fa-book'}" style="color: white; font-size: 14px;"></i>
+                        </div>
                         <h3 style="margin: 0; font-size: 16px;">${cls.name}</h3>
                     </div>
                     ${cls.teacher ? `<p style="font-size: 13px; color: #64748b; margin: 0;">

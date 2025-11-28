@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>StudyDeck - My Classes</title>
+    <title>VieraStudy - My Classes</title>
     <link rel="icon" href="studydeck.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,6 +17,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
         }
 
         body {
@@ -406,28 +410,28 @@
 
         /* AI Tools dropdown icon colors */
         .ai-dropdown .dropdown-item:nth-child(1) i {
-            color: #8b5cf6;
+            color: #6366f1;
         }
 
         .ai-dropdown .dropdown-item:nth-child(2) i {
-            color: #10b981;
+            color: #6366f1;
         }
 
         .ai-dropdown .dropdown-item:nth-child(3) i {
-            color: #f59e0b;
+            color: #6366f1;
         }
 
         .ai-dropdown .dropdown-item:nth-child(4) i {
-            color: #3b82f6;
+            color: #6366f1;
         }
 
         /* Math Tools dropdown icon colors */
         .math-dropdown .dropdown-item:nth-child(1) i {
-            color: #ec4899;
+            color: #84cc16;
         }
 
         .math-dropdown .dropdown-item:nth-child(2) i {
-            color: #06b6d4;
+            color: #84cc16;
         }
 
         .user-profile {
@@ -487,8 +491,6 @@
         .signout-btn:hover {
             background: #ef4444;
             color: white;
-            flex: 1;
-            transform: scale(1.05);
         }
 
         .signout-btn i {
@@ -756,6 +758,68 @@
             box-shadow: 0 0 0 2px white, 0 0 0 4px #1e293b;
         }
 
+        .icon-picker-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+        }
+
+        .icon-option {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid #e2e8f0;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #64748b;
+            transition: all 0.3s;
+        }
+
+        .icon-option:hover {
+            border-color: #3b82f6;
+            background: #eff6ff;
+            color: #3b82f6;
+        }
+
+        .icon-option.selected {
+            border-color: #3b82f6;
+            background: #3b82f6;
+            color: white;
+        }
+
+        body.dark-mode .icon-option {
+            background: #334155;
+            border-color: #475569;
+            color: #94a3b8;
+        }
+
+        body.dark-mode .icon-option:hover {
+            border-color: #3b82f6;
+            background: #475569;
+            color: #3b82f6;
+        }
+
+        body.dark-mode .icon-option.selected {
+            border-color: #3b82f6;
+            background: #3b82f6;
+            color: white;
+        }
+
+        .class-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+
         .submit-btn {
             width: 100%;
             background: #3b82f6;
@@ -1020,8 +1084,8 @@
     <div class="container">
         <div class="sidebar">
             <div class="logo">
-                <img src="studydeck.png" alt="StudyDeck">
-                <span class="logo-text">StudyDeck</span>
+                <img src="studydeck.png" alt="VieraStudy">
+                <span class="logo-text">VieraStudy</span>
                 <span class="pro-badge">PRO</span>
             </div>
             
@@ -1102,14 +1166,14 @@
                         </div>
                     </div>
                     <div class="dropdown-content">
-                        <div class="dropdown-item">
-                            <i class="fas fa-chart-line" style="color: #ec4899;"></i>
+                        <a href="graphing-calculator.html" class="dropdown-item">
+                            <i class="fas fa-chart-line"></i>
                             <span>Graphing Calculator</span>
-                        </div>
-                        <div class="dropdown-item">
+                        </a>
+                        <a href="scientific-calculator.html" class="dropdown-item">
                             <i class="fas fa-calculator"></i>
                             <span>Scientific Calculator</span>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 
@@ -1180,6 +1244,13 @@
                     <input type="text" class="form-input" id="classTeacher" placeholder="e.g., Mr. Smith">
                 </div>
                 
+                <div class="form-group">
+                    <label class="form-label">Choose Icon <span style="color: #ef4444;">*</span></label>
+                    <div class="icon-picker-grid" id="iconPicker">
+                        <!-- Icons will be generated -->
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label class="form-label">Choose Color <span style="color: #ef4444;">*</span></label>
                     <div class="color-picker-grid" id="colorPicker">
@@ -1331,7 +1402,29 @@
             '#f97316', '#6366f1', '#14b8a6', '#a855f7'
         ];
 
+        const icons = [
+            { icon: 'fa-calculator', label: 'Math' },
+            { icon: 'fa-flask', label: 'Science' },
+            { icon: 'fa-book', label: 'Literature' },
+            { icon: 'fa-globe', label: 'Geography' },
+            { icon: 'fa-landmark', label: 'History' },
+            { icon: 'fa-language', label: 'Language' },
+            { icon: 'fa-palette', label: 'Art' },
+            { icon: 'fa-music', label: 'Music' },
+            { icon: 'fa-laptop-code', label: 'Computer' },
+            { icon: 'fa-dumbbell', label: 'PE' },
+            { icon: 'fa-heartbeat', label: 'Health' },
+            { icon: 'fa-briefcase', label: 'Business' },
+            { icon: 'fa-atom', label: 'Physics' },
+            { icon: 'fa-dna', label: 'Biology' },
+            { icon: 'fa-vial', label: 'Chemistry' },
+            { icon: 'fa-square-root-variable', label: 'Algebra' },
+            { icon: 'fa-pen-fancy', label: 'Writing' },
+            { icon: 'fa-gavel', label: 'Law' }
+        ];
+
         let selectedColor = colors[0];
+        let selectedIcon = icons[0].icon;
         let classes = JSON.parse(localStorage.getItem('studyDeckClasses')) || [];
 
         // Load dark mode on page load
@@ -1408,6 +1501,21 @@
             renderColorPicker();
         }
 
+        function renderIconPicker() {
+            const picker = document.getElementById('iconPicker');
+            picker.innerHTML = icons.map(item => 
+                `<div class="icon-option ${item.icon === selectedIcon ? 'selected' : ''}" 
+                      onclick="selectIcon('${item.icon}')" title="${item.label}">
+                    <i class="fas ${item.icon}"></i>
+                </div>`
+            ).join('');
+        }
+
+        function selectIcon(icon) {
+            selectedIcon = icon;
+            renderIconPicker();
+        }
+
         function renderClasses() {
             const list = document.getElementById('classesList');
             if (classes.length === 0) {
@@ -1417,7 +1525,9 @@
 
             list.innerHTML = classes.map(cls => `
                 <div class="class-item">
-                    <div class="class-color" style="background: ${cls.color}"></div>
+                    <div class="class-icon" style="background: ${cls.color}">
+                        <i class="fas ${cls.icon || 'fa-book'}"></i>
+                    </div>
                     <div class="class-info">
                         <div class="class-name">${cls.name}</div>
                         ${cls.teacher ? `<div class="class-teacher">${cls.teacher}</div>` : ''}
@@ -1439,7 +1549,9 @@
             document.getElementById('classForm').reset();
             document.getElementById('editingClassId').value = '';
             selectedColor = colors[0];
+            selectedIcon = icons[0].icon;
             renderColorPicker();
+            renderIconPicker();
             document.getElementById('classModal').classList.add('active');
         }
 
@@ -1455,7 +1567,8 @@
                 id: id ? parseInt(id) : Date.now(),
                 name: document.getElementById('className').value,
                 teacher: document.getElementById('classTeacher').value,
-                color: selectedColor
+                color: selectedColor,
+                icon: selectedIcon
             };
 
             if (id) {
@@ -1479,7 +1592,9 @@
             document.getElementById('classTeacher').value = cls.teacher;
             document.getElementById('editingClassId').value = cls.id;
             selectedColor = cls.color;
+            selectedIcon = cls.icon || icons[0].icon;
             renderColorPicker();
+            renderIconPicker();
             document.getElementById('classModal').classList.add('active');
         }
 

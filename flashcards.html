@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>StudyDeck - Flashcards</title>
+    <title>VieraStudy - Flashcards</title>
     <link rel="icon" href="studydeck.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,6 +17,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
         }
 
         body {
@@ -521,28 +525,28 @@
 
         /* AI Tools dropdown icon colors */
         .ai-dropdown .dropdown-item:nth-child(1) i {
-            color: #8b5cf6;
+            color: #6366f1;
         }
 
         .ai-dropdown .dropdown-item:nth-child(2) i {
-            color: #10b981;
+            color: #6366f1;
         }
 
         .ai-dropdown .dropdown-item:nth-child(3) i {
-            color: #f59e0b;
+            color: #6366f1;
         }
 
         .ai-dropdown .dropdown-item:nth-child(4) i {
-            color: #3b82f6;
+            color: #6366f1;
         }
 
         /* Math Tools dropdown icon colors */
         .math-dropdown .dropdown-item:nth-child(1) i {
-            color: #ec4899;
+            color: #84cc16;
         }
 
         .math-dropdown .dropdown-item:nth-child(2) i {
-            color: #06b6d4;
+            color: #84cc16;
         }
 
         .user-profile {
@@ -602,8 +606,6 @@
         .signout-btn:hover {
             background: #ef4444;
             color: white;
-            flex: 1;
-            transform: scale(1.05);
         }
 
         /* Main Content */
@@ -1311,8 +1313,8 @@
     <div class="container">
         <div class="sidebar">
             <div class="logo">
-                <img src="studydeck.png" alt="StudyDeck">
-                <span class="logo-text">StudyDeck</span>
+                <img src="studydeck.png" alt="VieraStudy">
+                <span class="logo-text">VieraStudy</span>
                 <span class="pro-badge">PRO</span>
             </div>
             
@@ -1393,14 +1395,14 @@
                         </div>
                     </div>
                     <div class="dropdown-content">
-                        <div class="dropdown-item">
-                            <i class="fas fa-chart-line" style="color: #ec4899;"></i>
+                        <a href="graphing-calculator.html" class="dropdown-item">
+                            <i class="fas fa-chart-line"></i>
                             <span>Graphing Calculator</span>
-                        </div>
-                        <div class="dropdown-item">
+                        </a>
+                        <a href="scientific-calculator.html" class="dropdown-item">
                             <i class="fas fa-calculator"></i>
                             <span>Scientific Calculator</span>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 
@@ -1739,7 +1741,7 @@
                                 <i class="fas fa-trash"></i>
                             </div>
                         </div>
-                        ${deckClass ? `<span class="deck-class-badge" style="background: ${deckClass.color}20; color: ${deckClass.color}">${deckClass.name}</span>` : ''}
+                        ${deckClass ? `<span class="deck-class-badge" style="background: ${deckClass.color}20; color: ${deckClass.color}"><i class="fas ${deckClass.icon || 'fa-book'}" style="font-size: 11px;"></i> ${deckClass.name}</span>` : ''}
                         <div class="deck-stats">
                             <div class="deck-stat">
                                 <i class="fas fa-layer-group" style="color: #8b5cf6;"></i>

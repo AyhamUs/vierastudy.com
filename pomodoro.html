@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>StudyDeck - Pomodoro Timer</title>
+    <title>VieraStudy - Pomodoro Timer</title>
     <link rel="icon" href="studydeck.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,6 +17,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
         }
 
         body {
@@ -133,7 +137,8 @@
         }
 
         body.dark-mode .stat-card {
-            background: #334155;
+            background: #1e293b;
+            border: 1px solid #334155;
         }
 
         body.dark-mode .stat-title {
@@ -542,28 +547,28 @@
 
         /* AI Tools dropdown icon colors */
         .ai-dropdown .dropdown-item:nth-child(1) i {
-            color: #8b5cf6;
+            color: #6366f1;
         }
 
         .ai-dropdown .dropdown-item:nth-child(2) i {
-            color: #10b981;
+            color: #6366f1;
         }
 
         .ai-dropdown .dropdown-item:nth-child(3) i {
-            color: #f59e0b;
+            color: #6366f1;
         }
 
         .ai-dropdown .dropdown-item:nth-child(4) i {
-            color: #3b82f6;
+            color: #6366f1;
         }
 
         /* Math Tools dropdown icon colors */
         .math-dropdown .dropdown-item:nth-child(1) i {
-            color: #ec4899;
+            color: #84cc16;
         }
 
         .math-dropdown .dropdown-item:nth-child(2) i {
-            color: #06b6d4;
+            color: #84cc16;
         }
 
         .user-profile {
@@ -623,7 +628,6 @@
         .signout-btn:hover {
             background: #ef4444;
             color: white;
-            transform: scale(1.05);
         }
 
         .main-content {
@@ -705,6 +709,9 @@
 
         .circle-svg {
             transform: rotate(-90deg);
+            width: 100%;
+            height: 100%;
+            display: block;
         }
 
         .circle-bg {
@@ -970,6 +977,10 @@
             .timer-section {
                 grid-template-columns: 1fr;
             }
+            
+            .settings-panel {
+                order: 2;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1007,18 +1018,58 @@
                 padding: 20px;
             }
 
+            .timer-container {
+                padding: 25px 15px;
+            }
+
             .timer-circle {
-                width: 250px;
-                height: 250px;
+                width: 220px;
+                height: 220px;
+                margin: 20px auto;
             }
 
             .timer-display {
-                font-size: 48px;
+                font-size: 42px;
+            }
+
+            .timer-mode {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .mode-btn {
+                padding: 8px 16px;
+                font-size: 13px;
             }
 
             .control-btn {
                 padding: 12px 20px;
                 font-size: 14px;
+            }
+
+            .timer-controls {
+                gap: 10px;
+            }
+            
+            .settings-panel {
+                padding: 20px;
+            }
+            
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            
+            .stat-card {
+                padding: 15px;
+            }
+            
+            .stat-value {
+                font-size: 24px;
+            }
+            
+            .stat-header {
+                font-size: 12px;
             }
 
             .ai-dropdown.open .dropdown-content,
@@ -1066,6 +1117,59 @@
 
             .content {
                 padding: 15px;
+            }
+            
+            .timer-container {
+                padding: 20px 10px;
+            }
+
+            .timer-circle {
+                width: 180px;
+                height: 180px;
+                margin: 15px auto;
+            }
+
+            .timer-display {
+                font-size: 36px;
+            }
+            
+            .mode-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .control-btn {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+            
+            .stats-section {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            
+            .stat-card {
+                padding: 12px;
+            }
+            
+            .stat-value {
+                font-size: 20px;
+            }
+            
+            .stat-header {
+                font-size: 11px;
+            }
+            
+            .settings-panel {
+                padding: 15px;
+            }
+            
+            .setting-group h3 {
+                font-size: 13px;
+            }
+            
+            .setting-input {
+                padding: 10px;
             }
         }
 
@@ -1191,8 +1295,8 @@
     <div class="container">
         <div class="sidebar">
             <div class="logo">
-                <img src="studydeck.png" alt="StudyDeck">
-                <span class="logo-text">StudyDeck</span>
+                <img src="studydeck.png" alt="VieraStudy">
+                <span class="logo-text">VieraStudy</span>
                 <span class="pro-badge">PRO</span>
             </div>
             
@@ -1273,14 +1377,14 @@
                         </div>
                     </div>
                     <div class="dropdown-content">
-                        <div class="dropdown-item">
-                            <i class="fas fa-chart-line" style="color: #ec4899;"></i>
+                        <a href="graphing-calculator.html" class="dropdown-item">
+                            <i class="fas fa-chart-line"></i>
                             <span>Graphing Calculator</span>
-                        </div>
-                        <div class="dropdown-item">
+                        </a>
+                        <a href="scientific-calculator.html" class="dropdown-item">
                             <i class="fas fa-calculator"></i>
                             <span>Scientific Calculator</span>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 
@@ -1321,7 +1425,7 @@
                         </div>
 
                         <div class="timer-circle">
-                            <svg class="circle-svg" width="300" height="300">
+                            <svg class="circle-svg" viewBox="0 0 300 300" width="100%" height="100%">
                                 <circle class="circle-bg" cx="150" cy="150" r="140"></circle>
                                 <circle class="circle-progress" cx="150" cy="150" r="140" id="progressCircle"></circle>
                             </svg>
@@ -1810,8 +1914,8 @@
                 
                 return `
                     <div class="history-item">
-                        <div class="history-icon">
-                            <i class="fas fa-check" style="color: #10b981;"></i>
+                        <div class="history-icon" ${sessionClass ? `style="background: ${sessionClass.color};"` : ''}>
+                            <i class="fas ${sessionClass ? (sessionClass.icon || 'fa-book') : 'fa-check'}" style="color: ${sessionClass ? 'white' : '#10b981'};"></i>
                         </div>
                         <div class="history-info">
                             <div class="history-class">

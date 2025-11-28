@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>StudyDeck - Settings</title>
+    <title>VieraStudy - Settings</title>
     <link rel="icon" href="studydeck.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,6 +17,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
         }
 
         body {
@@ -85,6 +89,23 @@
 
         body.dark-mode .section-header {
             border-color: #334155;
+        }
+
+        body.dark-mode .danger-zone {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        body.dark-mode .danger-zone .section-title {
+            color: #ef4444;
+        }
+
+        body.dark-mode .reset-btn {
+            background: #dc2626;
+        }
+
+        body.dark-mode .reset-btn:hover {
+            background: #b91c1c;
         }
 
         .container {
@@ -341,28 +362,28 @@
 
         /* AI Tools dropdown icon colors */
         .ai-dropdown .dropdown-item:nth-child(1) i {
-            color: #8b5cf6;
+            color: #6366f1;
         }
 
         .ai-dropdown .dropdown-item:nth-child(2) i {
-            color: #10b981;
+            color: #6366f1;
         }
 
         .ai-dropdown .dropdown-item:nth-child(3) i {
-            color: #f59e0b;
+            color: #6366f1;
         }
 
         .ai-dropdown .dropdown-item:nth-child(4) i {
-            color: #3b82f6;
+            color: #6366f1;
         }
 
         /* Math Tools dropdown icon colors */
         .math-dropdown .dropdown-item:nth-child(1) i {
-            color: #ec4899;
+            color: #84cc16;
         }
 
         .math-dropdown .dropdown-item:nth-child(2) i {
-            color: #06b6d4;
+            color: #84cc16;
         }
 
         .user-profile {
@@ -422,8 +443,6 @@
         .signout-btn:hover {
             background: #ef4444;
             color: white;
-            flex: 1;
-            transform: scale(1.05);
         }
 
         .signout-btn i {
@@ -571,6 +590,76 @@
 
         .toggle-switch input:checked + .toggle-slider:hover {
             background-color: #2563eb;
+        }
+
+        .danger-zone {
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .danger-zone .section-title {
+            color: #ef4444;
+        }
+
+        .danger-zone .section-title i {
+            color: #ef4444;
+        }
+
+        .reset-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .reset-btn:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .reset-btn i {
+            font-size: 16px;
+        }
+
+        .data-warning {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .data-warning i {
+            color: #ef4444;
+            margin-top: 2px;
+        }
+
+        .data-warning p {
+            margin: 0;
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        body.dark-mode .data-warning {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        body.dark-mode .data-warning p {
+            color: #94a3b8;
         }
 
         .mobile-menu-toggle {
@@ -814,8 +903,8 @@
     <div class="container">
         <div class="sidebar">
             <div class="logo">
-                <img src="studydeck.png" alt="StudyDeck">
-                <span class="logo-text">StudyDeck</span>
+                <img src="studydeck.png" alt="VieraStudy">
+                <span class="logo-text">VieraStudy</span>
                 <span class="pro-badge">PRO</span>
             </div>
             
@@ -896,14 +985,14 @@
                         </div>
                     </div>
                     <div class="dropdown-content">
-                        <div class="dropdown-item">
-                            <i class="fas fa-chart-line" style="color: #ec4899;"></i>
+                        <a href="graphing-calculator.html" class="dropdown-item">
+                            <i class="fas fa-chart-line"></i>
                             <span>Graphing Calculator</span>
-                        </div>
-                        <div class="dropdown-item">
+                        </a>
+                        <a href="scientific-calculator.html" class="dropdown-item">
                             <i class="fas fa-calculator"></i>
                             <span>Scientific Calculator</span>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 
@@ -957,6 +1046,34 @@
                                 <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()">
                                 <span class="toggle-slider"></span>
                             </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-section danger-zone">
+                        <div class="section-header">
+                            <div class="section-title">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Danger Zone
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">
+                                    <i class="fas fa-trash-alt"></i>
+                                    Reset All Data
+                                </div>
+                                <div class="setting-description">
+                                    Delete all classes, notes, flashcards, todos, schedule, and progress data
+                                </div>
+                            </div>
+                            <button class="reset-btn" onclick="resetAllData()">
+                                <i class="fas fa-trash-alt"></i>
+                                Reset Data
+                            </button>
+                        </div>
+                        <div class="data-warning">
+                            <i class="fas fa-info-circle"></i>
+                            <p>This action will permanently delete all your study data. Your account profile will be preserved. This cannot be undone.</p>
                         </div>
                     </div>
                 </div>
@@ -1178,6 +1295,38 @@
             } else {
                 document.body.classList.remove('dark-mode');
                 showNotification('Light mode enabled', 'success', 'Theme Changed');
+            }
+        }
+
+        async function resetAllData() {
+            const confirmed = await showConfirmation(
+                'This will permanently delete ALL your study data including classes, notes, flashcards, todos, schedule events, and progress. Your account will be preserved. This action cannot be undone!',
+                'Reset All Data?',
+                'danger'
+            );
+            
+            if (confirmed) {
+                // Store profile and dark mode preference before clearing
+                const userProfile = localStorage.getItem('studyDeckUserProfile');
+                const darkMode = localStorage.getItem('studyDeckDarkMode');
+                
+                // Clear all study data
+                localStorage.removeItem('studyDeckClasses');
+                localStorage.removeItem('studyDeckNotes');
+                localStorage.removeItem('studyDeckFlashcards');
+                localStorage.removeItem('studyDeckTasks');
+                localStorage.removeItem('studyDeckTodos');
+                localStorage.removeItem('studyDeckEvents');
+                localStorage.removeItem('studyDeckProgress');
+                localStorage.removeItem('studyDeckPomodoro');
+                localStorage.removeItem('studyDeckPomodoroStats');
+                localStorage.removeItem('calculatorHistory');
+                
+                // Restore profile and settings
+                if (userProfile) localStorage.setItem('studyDeckUserProfile', userProfile);
+                if (darkMode) localStorage.setItem('studyDeckDarkMode', darkMode);
+                
+                showNotification('All study data has been reset. Your account profile was preserved.', 'success', 'Data Reset Complete');
             }
         }
 

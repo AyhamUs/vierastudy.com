@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>VieraStudy - Graphing Calculator</title>
+    <link rel="icon" href="studydeck.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            transition: background 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        body.dark-mode {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .main-content {
+            background: #0f172a;
+        }
+
+        body.dark-mode .header {
+            background: #1e293b;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .header h1 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .equation-panel {
+            background: #1e293b;
+            border: 1px solid #334155;
+        }
+
+        body.dark-mode .panel-title {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .equation-input {
+            background: #334155;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .equation-input::placeholder {
+            color: #64748b;
+        }
+
+        body.dark-mode .equation-item {
+            background: #334155;
+            border-color: #475569;
+        }
+
+        body.dark-mode .equation-text {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .graph-container {
+            background: #1e293b;
+            border: 1px solid #334155;
+        }
+
+        body.dark-mode .controls-panel {
+            background: #1e293b;
+            border: 1px solid #334155;
+        }
+
+        body.dark-mode .control-label {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .control-input {
+            background: #334155;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .zoom-btn {
+            background: #334155;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .zoom-btn:hover {
+            background: #475569;
+        }
+
+        body.dark-mode .examples-section {
+            border-color: #334155;
+        }
+
+        body.dark-mode .examples-title {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .example-btn {
+            background: #334155;
+            color: #94a3b8;
+        }
+
+        body.dark-mode .example-btn:hover {
+            background: #475569;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .empty-state {
+            color: #64748b;
+        }
+
+        body.dark-mode .empty-state i {
+            color: #475569;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: #1e293b;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .logo {
+            padding: 30px 25px;
+            font-size: 24px;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo img {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            color: white;
+        }
+
+        .pro-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #1e293b;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-menu {
+            flex: 1;
+            padding: 20px 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .nav-item {
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .nav-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .nav-item.active {
+            background: rgba(59, 130, 246, 0.15);
+            border-left: 3px solid #3b82f6;
+        }
+
+        a[href="index.html"].nav-item.active,
+        a[href="index.html"].nav-item:hover {
+            color: #3b82f6;
+        }
+
+        a[href="flashcards.html"].nav-item.active,
+        a[href="flashcards.html"].nav-item:hover {
+            color: #8b5cf6;
+        }
+
+        a[href="todo.html"].nav-item.active,
+        a[href="todo.html"].nav-item:hover {
+            color: #10b981;
+        }
+
+        a[href="schedule.html"].nav-item.active,
+        a[href="schedule.html"].nav-item:hover {
+            color: #f59e0b;
+        }
+
+        a[href="pomodoro.html"].nav-item.active,
+        a[href="pomodoro.html"].nav-item:hover {
+            color: #ef4444;
+        }
+
+        a[href="notes.html"].nav-item.active,
+        a[href="notes.html"].nav-item:hover {
+            color: #06b6d4;
+        }
+
+        a[href="progress-tracker.html"].nav-item.active,
+        a[href="progress-tracker.html"].nav-item:hover {
+            color: #ec4899;
+        }
+
+        a[href="classes.html"].nav-item.active,
+        a[href="classes.html"].nav-item:hover {
+            color: #f97316;
+        }
+
+        a[href="settings.html"].nav-item.active,
+        a[href="settings.html"].nav-item:hover {
+            color: #64748b;
+        }
+
+        .nav-item i {
+            width: 25px;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        .nav-item .fa-home { color: #3b82f6; }
+        .nav-item .fa-layer-group { color: #8b5cf6; }
+        .nav-item .fa-list-check { color: #10b981; }
+        .nav-item .fa-calendar-days { color: #f59e0b; }
+        .nav-item .fa-clock { color: #ef4444; }
+        .nav-item .fa-book-open { color: #06b6d4; }
+        .nav-item .fa-chart-line { color: #ec4899; }
+        .nav-item .fa-brain { color: #6366f1; }
+        .nav-item .fa-calculator { color: #84cc16; }
+        .nav-item .fa-book { color: #f97316; }
+        .nav-item .fa-gear, .nav-item .fa-cog { color: #64748b; }
+
+        .ai-dropdown, .math-dropdown {
+            position: relative;
+        }
+
+        .ai-dropdown .nav-item, .math-dropdown .nav-item {
+            padding: 15px 25px;
+        }
+
+        .dropdown-header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .dropdown-header .icon-text {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .dropdown-header i.fa-brain,
+        .dropdown-header i.fa-calculator {
+            width: 25px;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        .dropdown-header .fa-chevron-down {
+            font-size: 12px;
+            transition: transform 0.3s;
+            margin-left: auto;
+        }
+
+        .ai-dropdown.open .fa-chevron-down,
+        .math-dropdown.open .fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .ai-dropdown.open .dropdown-content,
+        .math-dropdown.open .dropdown-content {
+            max-height: 350px;
+            opacity: 1;
+        }
+
+        .dropdown-item {
+            padding: 12px 25px 12px 55px;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            border-left: 3px solid transparent;
+            text-decoration: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(59, 130, 246, 0.08);
+            color: #3b82f6;
+            padding-left: 60px;
+            border-left-color: #3b82f6;
+        }
+
+        .dropdown-item.active {
+            background: rgba(132, 204, 22, 0.1);
+            color: #84cc16;
+            border-left-color: #84cc16;
+        }
+
+        .dropdown-item i {
+            width: 18px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .ai-dropdown .dropdown-item:nth-child(1) i { color: #6366f1; }
+        .ai-dropdown .dropdown-item:nth-child(2) i { color: #6366f1; }
+        .ai-dropdown .dropdown-item:nth-child(3) i { color: #6366f1; }
+        .ai-dropdown .dropdown-item:nth-child(4) i { color: #6366f1; }
+
+        .math-dropdown .dropdown-item:nth-child(1) i { color: #84cc16; }
+        .math-dropdown .dropdown-item:nth-child(2) i { color: #84cc16; }
+
+        .user-profile {
+            padding: 20px 25px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .signout-btn {
+            background: rgba(239, 68, 68, 0.1);
+            border: none;
+            color: #ef4444;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .signout-btn:hover {
+            background: #ef4444;
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .header {
+            background: white;
+            padding: 25px 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header h1 i {
+            color: #84cc16;
+        }
+
+        .content {
+            padding: 30px 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .calculator-layout {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 25px;
+            height: calc(100vh - 180px);
+        }
+
+        .equation-panel {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .panel-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .equation-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .equation-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            transition: border-color 0.3s;
+        }
+
+        .equation-input:focus {
+            outline: none;
+            border-color: #84cc16;
+        }
+
+        .add-equation-btn {
+            padding: 12px 18px;
+            background: #84cc16;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-equation-btn:hover {
+            background: #65a30d;
+        }
+
+        .equations-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .equation-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            gap: 12px;
+        }
+
+        .equation-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid rgba(0,0,0,0.1);
+        }
+
+        .equation-text {
+            flex: 1;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #1e293b;
+        }
+
+        .equation-toggle, .equation-delete {
+            width: 28px;
+            height: 28px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .equation-toggle {
+            color: #64748b;
+        }
+
+        .equation-toggle:hover {
+            background: #e2e8f0;
+            color: #3b82f6;
+        }
+
+        .equation-toggle.hidden {
+            color: #cbd5e1;
+        }
+
+        .equation-delete {
+            color: #ef4444;
+        }
+
+        .equation-delete:hover {
+            background: #fef2f2;
+        }
+
+        .graph-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .graph-container {
+            flex: 1;
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: relative;
+            min-height: 400px;
+        }
+
+        .graph-canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .controls-panel {
+            background: white;
+            border-radius: 16px;
+            padding: 20px 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .control-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .control-input {
+            width: 80px;
+            padding: 8px 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .control-input:focus {
+            outline: none;
+            border-color: #84cc16;
+        }
+
+        .control-btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .zoom-btn {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .zoom-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .reset-btn {
+            background: #84cc16;
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background: #65a30d;
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            color: #94a3b8;
+            text-align: center;
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #cbd5e1;
+        }
+
+        .examples-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .examples-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+
+        .example-btn {
+            display: block;
+            width: 100%;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            background: #f1f5f9;
+            border: none;
+            border-radius: 8px;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .example-btn:hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        /* Mobile */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            width: 50px;
+            height: 50px;
+            background: #3b82f6;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+
+        @media (max-width: 1200px) {
+            .calculator-layout {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .graph-container {
+                min-height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -280px;
+                top: 0;
+                bottom: 0;
+                z-index: 999;
+                transition: left 0.3s ease;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .mobile-overlay {
+                display: block;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s;
+            }
+
+            .mobile-overlay.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .header {
+                padding: 20px 20px 20px 80px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .controls-panel {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+
+            .control-group {
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="studydeck.png" alt="VieraStudy">
+                <span class="logo-text">VieraStudy</span>
+                <span class="pro-badge">PRO</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                
+                <a href="flashcards.html" class="nav-item">
+                    <i class="fas fa-layer-group"></i>
+                    <span>Flashcards</span>
+                </a>
+                
+                <a href="todo.html" class="nav-item">
+                    <i class="fas fa-list-check"></i>
+                    <span>To-Do List</span>
+                </a>
+                
+                <a href="schedule.html" class="nav-item">
+                    <i class="fas fa-calendar-days"></i>
+                    <span>Study Schedule</span>
+                </a>
+                
+                <a href="pomodoro.html" class="nav-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Pomodoro Timer</span>
+                </a>
+                
+                <a href="notes.html" class="nav-item">
+                    <i class="fas fa-book-open"></i>
+                    <span>Take Notes</span>
+                </a>
+                
+                <a href="progress-tracker.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Progress Tracker</span>
+                </a>
+                
+                <div class="ai-dropdown">
+                    <div class="nav-item" onclick="toggleDropdown()">
+                        <div class="dropdown-header">
+                            <div class="icon-text">
+                                <i class="fas fa-brain"></i>
+                                <span>AI Tools</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="dropdown-content">
+                        <div class="dropdown-item">
+                            <i class="fas fa-spell-check"></i>
+                            <span>AI Proofread</span>
+                        </div>
+                        <div class="dropdown-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>AI QuickGrader</span>
+                        </div>
+                        <div class="dropdown-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Study Suggestions</span>
+                        </div>
+                        <div class="dropdown-item">
+                            <i class="fas fa-language"></i>
+                            <span>AI Translator</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="math-dropdown open">
+                    <div class="nav-item" onclick="toggleMathDropdown()">
+                        <div class="dropdown-header">
+                            <div class="icon-text">
+                                <i class="fas fa-calculator"></i>
+                                <span>Math Tools</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="dropdown-content">
+                        <a href="graphing-calculator.html" class="dropdown-item active">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Graphing Calculator</span>
+                        </a>
+                        <a href="scientific-calculator.html" class="dropdown-item">
+                            <i class="fas fa-calculator"></i>
+                            <span>Scientific Calculator</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <a href="classes.html" class="nav-item">
+                    <i class="fas fa-book"></i>
+                    <span>My Classes</span>
+                </a>
+                
+                <a href="settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            
+            <div class="user-profile">
+                <div class="user-avatar" id="userAvatar">?</div>
+                <div class="user-info">
+                    <div class="user-name" id="userName">Guest</div>
+                </div>
+                <button class="signout-btn" onclick="signOut()" title="Sign Out">
+                    <i class="fas fa-right-from-bracket"></i>
+                </button>
+            </div>
+        </div>
+
+        <main class="main-content">
+            <header class="header">
+                <h1><i class="fas fa-chart-line"></i> Graphing Calculator</h1>
+            </header>
+
+            <div class="content">
+                <div class="calculator-layout">
+                    <div class="equation-panel">
+                        <div class="panel-title">
+                            <i class="fas fa-function"></i>
+                            Equations
+                        </div>
+                        
+                        <div class="equation-form">
+                            <input type="text" class="equation-input" id="equationInput" placeholder="y = x^2 + 2*x - 1" onkeypress="if(event.key === 'Enter') addEquation()">
+                            <button class="add-equation-btn" onclick="addEquation()">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="equations-list" id="equationsList">
+                            <div class="empty-state">
+                                <i class="fas fa-chart-area"></i>
+                                <p>Add an equation to start graphing</p>
+                            </div>
+                        </div>
+                        
+                        <div class="examples-section">
+                            <div class="examples-title">Quick Examples</div>
+                            <button class="example-btn" onclick="addExample('x^2')">y = x²</button>
+                            <button class="example-btn" onclick="addExample('sin(x)')">y = sin(x)</button>
+                            <button class="example-btn" onclick="addExample('cos(x)')">y = cos(x)</button>
+                            <button class="example-btn" onclick="addExample('2^x')">y = 2^x</button>
+                            <button class="example-btn" onclick="addExample('1/x')">y = 1/x</button>
+                            <button class="example-btn" onclick="addExample('sqrt(x)')">y = √x</button>
+                        </div>
+                    </div>
+                    
+                    <div class="graph-section">
+                        <div class="graph-container">
+                            <canvas id="graphCanvas" class="graph-canvas"></canvas>
+                        </div>
+                        
+                        <div class="controls-panel">
+                            <div class="control-group">
+                                <span class="control-label">X Range:</span>
+                                <input type="number" class="control-input" id="xMin" value="-10" onchange="updateGraph()">
+                                <span>to</span>
+                                <input type="number" class="control-input" id="xMax" value="10" onchange="updateGraph()">
+                            </div>
+                            
+                            <div class="control-group">
+                                <span class="control-label">Y Range:</span>
+                                <input type="number" class="control-input" id="yMin" value="-10" onchange="updateGraph()">
+                                <span>to</span>
+                                <input type="number" class="control-input" id="yMax" value="10" onchange="updateGraph()">
+                            </div>
+                            
+                            <div class="control-group" style="margin-left: auto;">
+                                <button class="control-btn zoom-btn" onclick="zoomIn()">
+                                    <i class="fas fa-search-plus"></i> Zoom In
+                                </button>
+                                <button class="control-btn zoom-btn" onclick="zoomOut()">
+                                    <i class="fas fa-search-minus"></i> Zoom Out
+                                </button>
+                                <button class="control-btn reset-btn" onclick="resetView()">
+                                    <i class="fas fa-undo"></i> Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let equations = [];
+        const colors = ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16'];
+        let colorIndex = 0;
+        let canvas, ctx;
+        
+        function init() {
+            canvas = document.getElementById('graphCanvas');
+            ctx = canvas.getContext('2d');
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            loadDarkMode();
+            loadUserProfile();
+            updateGraph();
+        }
+        
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth - 40;
+            canvas.height = container.clientHeight - 40;
+            updateGraph();
+        }
+        
+        function loadDarkMode() {
+            const darkMode = localStorage.getItem('studyDeckDarkMode') === 'true';
+            if (darkMode) {
+                document.body.classList.add('dark-mode');
+            }
+        }
+        
+        function loadUserProfile() {
+            const profile = JSON.parse(localStorage.getItem('studyDeckUserProfile'));
+            if (profile) {
+                const firstInitial = profile.firstName ? profile.firstName.charAt(0).toUpperCase() : '';
+                const lastInitial = profile.lastName ? profile.lastName.charAt(0).toUpperCase() : '';
+                document.getElementById('userAvatar').textContent = firstInitial + lastInitial || '?';
+                document.getElementById('userName').textContent = profile.firstName || 'Guest';
+            }
+        }
+        
+        function parseEquation(expr, x) {
+            try {
+                let cleanExpr = expr.toLowerCase()
+                    .replace(/\^/g, '**')
+                    .replace(/sin/g, 'Math.sin')
+                    .replace(/cos/g, 'Math.cos')
+                    .replace(/tan/g, 'Math.tan')
+                    .replace(/sqrt/g, 'Math.sqrt')
+                    .replace(/abs/g, 'Math.abs')
+                    .replace(/log/g, 'Math.log10')
+                    .replace(/ln/g, 'Math.log')
+                    .replace(/pi/g, 'Math.PI')
+                    .replace(/e(?![a-z])/g, 'Math.E');
+                
+                cleanExpr = cleanExpr.replace(/(\d)([x])/g, '$1*$2');
+                cleanExpr = cleanExpr.replace(/([x])(\d)/g, '$1*$2');
+                cleanExpr = cleanExpr.replace(/\)(\d)/g, ')*$1');
+                cleanExpr = cleanExpr.replace(/(\d)\(/g, '$1*(');
+                cleanExpr = cleanExpr.replace(/\)\(/g, ')*(');
+                cleanExpr = cleanExpr.replace(/([x])\(/g, '$1*(');
+                cleanExpr = cleanExpr.replace(/\)([x])/g, ')*$1');
+                
+                return eval(cleanExpr);
+            } catch (e) {
+                return NaN;
+            }
+        }
+        
+        function addEquation() {
+            const input = document.getElementById('equationInput');
+            let expr = input.value.trim();
+            if (!expr) return;
+            
+            expr = expr.replace(/^y\s*=\s*/i, '');
+            
+            const equation = {
+                id: Date.now(),
+                expression: expr,
+                color: colors[colorIndex % colors.length],
+                visible: true
+            };
+            
+            equations.push(equation);
+            colorIndex++;
+            input.value = '';
+            renderEquationsList();
+            updateGraph();
+        }
+        
+        function addExample(expr) {
+            document.getElementById('equationInput').value = expr;
+            addEquation();
+        }
+        
+        function removeEquation(id) {
+            equations = equations.filter(eq => eq.id !== id);
+            renderEquationsList();
+            updateGraph();
+        }
+        
+        function toggleEquation(id) {
+            const eq = equations.find(e => e.id === id);
+            if (eq) {
+                eq.visible = !eq.visible;
+                renderEquationsList();
+                updateGraph();
+            }
+        }
+        
+        function changeColor(id, newColor) {
+            const eq = equations.find(e => e.id === id);
+            if (eq) {
+                eq.color = newColor;
+                renderEquationsList();
+                updateGraph();
+            }
+        }
+        
+        function renderEquationsList() {
+            const list = document.getElementById('equationsList');
+            
+            if (equations.length === 0) {
+                list.innerHTML = '<div class="empty-state"><i class="fas fa-chart-area"></i><p>Add an equation to start graphing</p></div>';
+                return;
+            }
+            
+            list.innerHTML = equations.map(eq => `
+                <div class="equation-item">
+                    <input type="color" class="equation-color" value="${eq.color}" onchange="changeColor(${eq.id}, this.value)">
+                    <span class="equation-text">y = ${eq.expression}</span>
+                    <button class="equation-toggle ${eq.visible ? '' : 'hidden'}" onclick="toggleEquation(${eq.id})">
+                        <i class="fas fa-eye${eq.visible ? '' : '-slash'}"></i>
+                    </button>
+                    <button class="equation-delete" onclick="removeEquation(${eq.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+        
+        function updateGraph() {
+            if (!canvas || !ctx) return;
+            
+            const xMin = parseFloat(document.getElementById('xMin').value);
+            const xMax = parseFloat(document.getElementById('xMax').value);
+            const yMin = parseFloat(document.getElementById('yMin').value);
+            const yMax = parseFloat(document.getElementById('yMax').value);
+            
+            const width = canvas.width;
+            const height = canvas.height;
+            const isDark = document.body.classList.contains('dark-mode');
+            
+            ctx.fillStyle = isDark ? '#1e293b' : '#ffffff';
+            ctx.fillRect(0, 0, width, height);
+            
+            const xScale = width / (xMax - xMin);
+            const yScale = height / (yMax - yMin);
+            
+            ctx.strokeStyle = isDark ? '#334155' : '#e2e8f0';
+            ctx.lineWidth = 1;
+            
+            for (let x = Math.ceil(xMin); x <= xMax; x++) {
+                const px = (x - xMin) * xScale;
+                ctx.beginPath();
+                ctx.moveTo(px, 0);
+                ctx.lineTo(px, height);
+                ctx.stroke();
+            }
+            
+            for (let y = Math.ceil(yMin); y <= yMax; y++) {
+                const py = height - (y - yMin) * yScale;
+                ctx.beginPath();
+                ctx.moveTo(0, py);
+                ctx.lineTo(width, py);
+                ctx.stroke();
+            }
+            
+            ctx.strokeStyle = isDark ? '#64748b' : '#94a3b8';
+            ctx.lineWidth = 2;
+            
+            if (yMin <= 0 && yMax >= 0) {
+                const yZero = height - (0 - yMin) * yScale;
+                ctx.beginPath();
+                ctx.moveTo(0, yZero);
+                ctx.lineTo(width, yZero);
+                ctx.stroke();
+            }
+            
+            if (xMin <= 0 && xMax >= 0) {
+                const xZero = (0 - xMin) * xScale;
+                ctx.beginPath();
+                ctx.moveTo(xZero, 0);
+                ctx.lineTo(xZero, height);
+                ctx.stroke();
+            }
+            
+            ctx.fillStyle = isDark ? '#94a3b8' : '#64748b';
+            ctx.font = '12px Poppins';
+            ctx.textAlign = 'center';
+            
+            for (let x = Math.ceil(xMin); x <= xMax; x++) {
+                if (x !== 0) {
+                    const px = (x - xMin) * xScale;
+                    const yZero = yMin <= 0 && yMax >= 0 ? height - (0 - yMin) * yScale : height - 15;
+                    ctx.fillText(x.toString(), px, Math.min(yZero + 15, height - 5));
+                }
+            }
+            
+            ctx.textAlign = 'right';
+            for (let y = Math.ceil(yMin); y <= yMax; y++) {
+                if (y !== 0) {
+                    const py = height - (y - yMin) * yScale;
+                    const xZero = xMin <= 0 && xMax >= 0 ? (0 - xMin) * xScale : 25;
+                    ctx.fillText(y.toString(), Math.max(xZero - 5, 25), py + 4);
+                }
+            }
+            
+            equations.filter(eq => eq.visible).forEach(eq => {
+                ctx.strokeStyle = eq.color;
+                ctx.lineWidth = 2.5;
+                ctx.beginPath();
+                
+                let started = false;
+                const step = (xMax - xMin) / width;
+                
+                for (let px = 0; px < width; px++) {
+                    const x = xMin + px * step;
+                    const y = parseEquation(eq.expression, x);
+                    
+                    if (!isNaN(y) && isFinite(y) && y >= yMin - 10 && y <= yMax + 10) {
+                        const py = height - (y - yMin) * yScale;
+                        if (!started) {
+                            ctx.moveTo(px, py);
+                            started = true;
+                        } else {
+                            ctx.lineTo(px, py);
+                        }
+                    } else {
+                        started = false;
+                    }
+                }
+                ctx.stroke();
+            });
+        }
+        
+        function zoomIn() {
+            const xMin = parseFloat(document.getElementById('xMin').value);
+            const xMax = parseFloat(document.getElementById('xMax').value);
+            const yMin = parseFloat(document.getElementById('yMin').value);
+            const yMax = parseFloat(document.getElementById('yMax').value);
+            
+            const xCenter = (xMin + xMax) / 2;
+            const yCenter = (yMin + yMax) / 2;
+            const xRange = (xMax - xMin) * 0.4;
+            const yRange = (yMax - yMin) * 0.4;
+            
+            document.getElementById('xMin').value = (xCenter - xRange).toFixed(1);
+            document.getElementById('xMax').value = (xCenter + xRange).toFixed(1);
+            document.getElementById('yMin').value = (yCenter - yRange).toFixed(1);
+            document.getElementById('yMax').value = (yCenter + yRange).toFixed(1);
+            updateGraph();
+        }
+        
+        function zoomOut() {
+            const xMin = parseFloat(document.getElementById('xMin').value);
+            const xMax = parseFloat(document.getElementById('xMax').value);
+            const yMin = parseFloat(document.getElementById('yMin').value);
+            const yMax = parseFloat(document.getElementById('yMax').value);
+            
+            const xCenter = (xMin + xMax) / 2;
+            const yCenter = (yMin + yMax) / 2;
+            const xRange = (xMax - xMin) * 0.75;
+            const yRange = (yMax - yMin) * 0.75;
+            
+            document.getElementById('xMin').value = (xCenter - xRange).toFixed(1);
+            document.getElementById('xMax').value = (xCenter + xRange).toFixed(1);
+            document.getElementById('yMin').value = (yCenter - yRange).toFixed(1);
+            document.getElementById('yMax').value = (yCenter + yRange).toFixed(1);
+            updateGraph();
+        }
+        
+        function resetView() {
+            document.getElementById('xMin').value = -10;
+            document.getElementById('xMax').value = 10;
+            document.getElementById('yMin').value = -10;
+            document.getElementById('yMax').value = 10;
+            updateGraph();
+        }
+        
+        function toggleMobileMenu() {
+            document.querySelector('.sidebar').classList.toggle('active');
+            document.querySelector('.mobile-overlay').classList.toggle('active');
+        }
+        
+        function toggleDropdown() {
+            document.querySelector('.ai-dropdown').classList.toggle('open');
+        }
+        
+        function toggleMathDropdown() {
+            document.querySelector('.math-dropdown').classList.toggle('open');
+        }
+        
+        function signOut() {
+            if (confirm('Are you sure you want to sign out? This will clear your profile data.')) {
+                localStorage.removeItem('studyDeckUserProfile');
+                localStorage.removeItem('studyDeckDarkMode');
+                window.location.href = 'index.html';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
