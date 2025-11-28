@@ -1386,8 +1386,19 @@
         }
         
         function confirmSignOut() {
+            // Clear all user data from localStorage
             localStorage.removeItem('studyDeckUserProfile');
             localStorage.removeItem('studyDeckDarkMode');
+            localStorage.removeItem('studyDeckFlashcards');
+            localStorage.removeItem('studyDeckTodos');
+            localStorage.removeItem('studyDeckNotes');
+            localStorage.removeItem('studyDeckClasses');
+            localStorage.removeItem('studyDeckActivityLog');
+            localStorage.removeItem('studyDeckTasks');
+            localStorage.removeItem('studyDeckPomodoroSessions');
+            localStorage.removeItem('studyDeckPomodoroSettings');
+            localStorage.removeItem('studyDeckPomodoroStats');
+            localStorage.removeItem('studyDeckEvents');
             window.location.href = 'index.html';
         }
         

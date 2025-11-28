@@ -175,37 +175,13 @@
             color: #94a3b8;
         }
 
-        body.dark-mode .quick-action-btn {
+        body.dark-mode .quick-action-card {
             background: #1e293b;
-            border-color: #334155;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
         }
 
-        body.dark-mode .quick-action-btn:hover {
-            background: #334155;
-        }
-
-        body.dark-mode .quick-action-btn.blue:hover {
-            background: #3b82f6;
-            border-color: #3b82f6;
-            color: white;
-        }
-
-        body.dark-mode .quick-action-btn.purple:hover {
-            background: #8b5cf6;
-            border-color: #8b5cf6;
-            color: white;
-        }
-
-        body.dark-mode .quick-action-btn.green:hover {
-            background: #22c55e;
-            border-color: #22c55e;
-            color: white;
-        }
-
-        body.dark-mode .quick-action-btn.orange:hover {
-            background: #f97316;
-            border-color: #f97316;
-            color: white;
+        body.dark-mode .quick-action-text {
+            color: #cbd5e1;
         }
 
         .container {
@@ -572,18 +548,269 @@
         }
 
         .header {
-            background: white;
-            padding: 25px 40px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .header h1 {
-            font-size: 28px;
-            color: #1e293b;
+            display: none;
         }
 
         .content {
-            padding: 40px;
+            padding: 30px 40px;
+        }
+
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+            border-radius: 20px;
+            padding: 32px 36px;
+            margin-bottom: 28px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(59, 130, 246, 0.3);
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: -80%;
+            right: -15%;
+            width: 450px;
+            height: 450px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .welcome-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -60%;
+            left: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .welcome-banner-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-greeting h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .welcome-greeting p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+
+        .welcome-date {
+            text-align: right;
+        }
+
+        .welcome-date-day {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .welcome-date-full {
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        .welcome-quote {
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-style: italic;
+            opacity: 0.9;
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Stats Cards - New Design */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 16px 0 0 16px;
+        }
+
+        .stat-card:nth-child(1)::before { background: linear-gradient(180deg, #3b82f6, #2563eb); }
+        .stat-card:nth-child(2)::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
+        .stat-card:nth-child(3)::before { background: linear-gradient(180deg, #10b981, #059669); }
+        .stat-card:nth-child(4)::before { background: linear-gradient(180deg, #f59e0b, #d97706); }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .stat-card:nth-child(1) .stat-icon { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+        .stat-card:nth-child(2) .stat-icon { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+        .stat-card:nth-child(3) .stat-icon { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .stat-card:nth-child(4) .stat-icon { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+
+        .stat-info {
+            flex: 1;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.2;
+        }
+
+        .stat-subtitle {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
+        body.dark-mode .stat-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+        }
+
+        body.dark-mode .stat-value {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .stat-label {
+            color: #94a3b8;
+        }
+
+        /* Quick Actions - New Design */
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .quick-action-card {
+            background: white;
+            border-radius: 14px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .quick-action-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .quick-action-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            transition: all 0.3s ease;
+        }
+
+        .quick-action-card:nth-child(1) .quick-action-icon { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+        .quick-action-card:nth-child(2) .quick-action-icon { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .quick-action-card:nth-child(3) .quick-action-icon { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+        .quick-action-card:nth-child(4) .quick-action-icon { background: rgba(6, 182, 212, 0.1); color: #06b6d4; }
+
+        .quick-action-card:nth-child(1):hover { border-color: #8b5cf6; background: rgba(139, 92, 246, 0.05); }
+        .quick-action-card:nth-child(2):hover { border-color: #10b981; background: rgba(16, 185, 129, 0.05); }
+        .quick-action-card:nth-child(3):hover { border-color: #ef4444; background: rgba(239, 68, 68, 0.05); }
+        .quick-action-card:nth-child(4):hover { border-color: #06b6d4; background: rgba(6, 182, 212, 0.05); }
+
+        .quick-action-card:nth-child(1):hover .quick-action-icon { background: #8b5cf6; color: white; }
+        .quick-action-card:nth-child(2):hover .quick-action-icon { background: #10b981; color: white; }
+        .quick-action-card:nth-child(3):hover .quick-action-icon { background: #ef4444; color: white; }
+        .quick-action-card:nth-child(4):hover .quick-action-icon { background: #06b6d4; color: white; }
+
+        .quick-action-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            text-align: center;
+        }
+
+        body.dark-mode .quick-action-card {
+            background: #1e293b;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-mode .quick-action-text {
+            color: #cbd5e1;
+        }
+
+        /* Dashboard Grid Layout */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 28px;
         }
 
         .cards-grid {
@@ -658,53 +885,170 @@
 
         .section {
             background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            margin-bottom: 25px;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            border: 1px solid #e2e8f0;
         }
 
         .section h2 {
-            font-size: 20px;
-            margin-bottom: 20px;
+            font-size: 17px;
+            margin-bottom: 18px;
             color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h2 i {
+            color: #64748b;
+            font-size: 16px;
         }
 
         .activity-item {
-            padding: 15px;
+            padding: 14px 0;
             border-bottom: 1px solid #f1f5f9;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 14px;
         }
 
         .activity-item:last-child {
             border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .activity-item:first-child {
+            padding-top: 0;
         }
 
         .activity-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 16px;
+            flex-shrink: 0;
         }
 
         .activity-content {
             flex: 1;
+            min-width: 0;
         }
 
         .activity-title {
             font-weight: 600;
             color: #1e293b;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .activity-time {
-            font-size: 13px;
+            font-size: 12px;
             color: #94a3b8;
+        }
+
+        /* Classes Preview */
+        .classes-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+
+        .class-preview-card {
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .class-preview-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .class-preview-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 20px;
+            color: white;
+        }
+
+        .class-preview-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .quick-actions-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            .welcome-banner {
+                padding: 24px;
+            }
+            .welcome-banner-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .welcome-date {
+                text-align: left;
+            }
+            .welcome-greeting h1 {
+                font-size: 22px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .stat-card {
+                padding: 18px;
+            }
+            .stat-value {
+                font-size: 24px;
+            }
+            .quick-actions-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-actions-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         /* Footer */
@@ -787,105 +1131,6 @@
             background: #3b82f6;
             color: white;
             transform: translateY(-2px);
-        }
-
-        /* Quick Action Buttons */
-        .quick-action-btn {
-            background: white;
-            border: 2px solid #e2e8f0;
-            padding: 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #1e293b;
-        }
-
-        .quick-action-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .quick-action-btn i {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-
-        .quick-action-btn.blue {
-            border-color: #8b5cf6;
-            color: #8b5cf6;
-        }
-
-        .quick-action-btn.blue i {
-            color: #8b5cf6;
-        }
-
-        .quick-action-btn.blue:hover {
-            background: #8b5cf6;
-            color: white;
-        }
-
-        .quick-action-btn.blue:hover i {
-            color: white;
-        }
-
-        .quick-action-btn.purple {
-            border-color: #10b981;
-            color: #10b981;
-        }
-
-        .quick-action-btn.purple i {
-            color: #10b981;
-        }
-
-        .quick-action-btn.purple:hover {
-            background: #10b981;
-            color: white;
-        }
-
-        .quick-action-btn.purple:hover i {
-            color: white;
-        }
-
-        .quick-action-btn.green {
-            border-color: #ef4444;
-            color: #ef4444;
-        }
-
-        .quick-action-btn.green i {
-            color: #ef4444;
-        }
-
-        .quick-action-btn.green:hover {
-            background: #ef4444;
-            color: white;
-        }
-
-        .quick-action-btn.green:hover i {
-            color: white;
-        }
-
-        .quick-action-btn.orange {
-            border-color: #06b6d4;
-            color: #06b6d4;
-        }
-
-        .quick-action-btn.orange i {
-            color: #06b6d4;
-        }
-
-        .quick-action-btn.orange:hover {
-            background: #06b6d4;
-            color: white;
-        }
-
-        .quick-action-btn.orange:hover i {
-            color: white;
         }
 
         /* Mobile Menu Toggle */
@@ -986,15 +1231,15 @@
                 padding: 20px;
             }
 
-            .quick-action-btn {
+            .quick-action-card {
                 padding: 15px;
-                font-size: 13px;
                 min-height: 44px;
                 touch-action: manipulation;
             }
 
-            .quick-action-btn i {
-                font-size: 20px;
+            .quick-action-icon {
+                width: 44px;
+                height: 44px;
             }
 
             /* Fix dropdown overflow on mobile */
@@ -1934,87 +2179,119 @@
             </div>
             
             <div class="content">
+                <!-- Welcome Banner -->
+                <div class="welcome-banner">
+                    <div class="welcome-banner-content">
+                        <div class="welcome-greeting">
+                            <h1 id="greeting-text">Good Morning ☀️</h1>
+                            <p>Welcome back, <span id="bannerUserName">Student</span>! Ready to learn?</p>
+                        </div>
+                        <div class="welcome-date">
+                            <div class="welcome-date-day" id="current-day">Friday</div>
+                            <div class="welcome-date-full" id="current-date">November 28, 2025</div>
+                        </div>
+                    </div>
+                    <div class="welcome-quote" id="daily-quote">
+                        "The secret of getting ahead is getting started." — Mark Twain
+                    </div>
+                </div>
+
                 <!-- Stats Cards -->
-                <div class="cards-grid">
-                    <div class="card">
-                        <div class="card-icon blue">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
                             <i class="fas fa-layer-group"></i>
                         </div>
-                        <h3>Flashcard Decks</h3>
-                        <p>Total decks created</p>
-                        <div class="card-number" id="deckCount">0</div>
+                        <div class="stat-info">
+                            <div class="stat-label">Flashcard Decks</div>
+                            <div class="stat-value" id="deckCount">0</div>
+                            <div class="stat-subtitle">Total created</div>
+                        </div>
                     </div>
                     
-                    <div class="card">
-                        <div class="card-icon purple">
+                    <div class="stat-card">
+                        <div class="stat-icon">
                             <i class="fas fa-list-check"></i>
                         </div>
-                        <h3>Active Tasks</h3>
-                        <p>To-do items</p>
-                        <div class="card-number" id="taskCount">0</div>
+                        <div class="stat-info">
+                            <div class="stat-label">Active Tasks</div>
+                            <div class="stat-value" id="taskCount">0</div>
+                            <div class="stat-subtitle">To-do items</div>
+                        </div>
                     </div>
                     
-                    <div class="card">
-                        <div class="card-icon green">
+                    <div class="stat-card">
+                        <div class="stat-icon">
                             <i class="fas fa-book-open"></i>
                         </div>
-                        <h3>Notes</h3>
-                        <p>Total notes saved</p>
-                        <div class="card-number" id="noteCount">0</div>
+                        <div class="stat-info">
+                            <div class="stat-label">Notes</div>
+                            <div class="stat-value" id="noteCount">0</div>
+                            <div class="stat-subtitle">Total saved</div>
+                        </div>
                     </div>
                     
-                    <div class="card">
-                        <div class="card-icon orange">
+                    <div class="stat-card">
+                        <div class="stat-icon">
                             <i class="fas fa-graduation-cap"></i>
                         </div>
-                        <h3>Classes</h3>
-                        <p>Enrolled courses</p>
-                        <div class="card-number" id="classCount">0</div>
+                        <div class="stat-info">
+                            <div class="stat-label">Classes</div>
+                            <div class="stat-value" id="classCount">0</div>
+                            <div class="stat-subtitle">Enrolled</div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Quick Actions -->
-                <div class="section">
-                    <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
-                    <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                        <a href="flashcards.html" class="quick-action-btn blue" style="text-decoration: none;">
+                <div class="quick-actions-grid">
+                    <a href="flashcards.html" class="quick-action-card">
+                        <div class="quick-action-icon">
                             <i class="fas fa-plus"></i>
-                            <span>Create Flashcard Deck</span>
-                        </a>
-                        <a href="todo.html" class="quick-action-btn purple" style="text-decoration: none;">
+                        </div>
+                        <span class="quick-action-text">Create Flashcards</span>
+                    </a>
+                    <a href="todo.html" class="quick-action-card">
+                        <div class="quick-action-icon">
                             <i class="fas fa-check-square"></i>
-                            <span>Add New Task</span>
-                        </a>
-                        <a href="pomodoro.html" class="quick-action-btn green" style="text-decoration: none;">
+                        </div>
+                        <span class="quick-action-text">Add Task</span>
+                    </a>
+                    <a href="pomodoro.html" class="quick-action-card">
+                        <div class="quick-action-icon">
                             <i class="fas fa-clock"></i>
-                            <span>Start Pomodoro Timer</span>
-                        </a>
-                        <a href="notes.html" class="quick-action-btn orange" style="text-decoration: none;">
-                            <i class="fas fa-book-open"></i>
-                            <span>Take Notes</span>
-                        </a>
-                    </div>
+                        </div>
+                        <span class="quick-action-text">Start Focus</span>
+                    </a>
+                    <a href="notes.html" class="quick-action-card">
+                        <div class="quick-action-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <span class="quick-action-text">Take Notes</span>
+                    </a>
                 </div>
 
-                <!-- Your Classes -->
-                <div class="section" id="classesSection" style="display: none;">
-                    <h2><i class="fas fa-graduation-cap"></i> Your Classes</h2>
-                    <div id="classesList" class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                <!-- Dashboard Grid: Classes + Activity -->
+                <div class="dashboard-grid">
+                    <!-- Your Classes -->
+                    <div class="section" id="classesSection">
+                        <h2><i class="fas fa-graduation-cap"></i> Your Classes</h2>
+                        <div id="classesList" class="classes-preview">
+                        </div>
+                        <div id="emptyClasses" style="display: none; text-align: center; color: #94a3b8; padding: 20px;">
+                            <i class="fas fa-graduation-cap" style="font-size: 36px; margin-bottom: 12px; opacity: 0.3;"></i>
+                            <p style="font-size: 14px;">No classes yet. <a href="classes.html" style="color: #3b82f6;">Add one</a></p>
+                        </div>
                     </div>
-                    <div id="emptyClasses" style="display: none; text-align: center; color: #94a3b8; padding: 30px;">
-                        <i class="fas fa-graduation-cap" style="font-size: 48px; margin-bottom: 15px; opacity: 0.3;"></i>
-                        <p>No classes yet. <a href="classes.html" style="color: #3b82f6;">Add your first class</a> to get started!</p>
-                    </div>
-                </div>
 
-                <!-- Recent Activity -->
-                <div class="section">
-                    <h2><i class="fas fa-clock"></i> Recent Activity</h2>
-                    <div id="activityList">
-                        <div style="text-align: center; color: #94a3b8; padding: 30px;">
-                            <i class="fas fa-clock" style="font-size: 48px; margin-bottom: 15px; opacity: 0.3;"></i>
-                            <p>Your recent activity will appear here as you use the app.</p>
-                            <p style="margin-top: 10px; font-size: 14px;">Try creating a flashcard deck, adding a task, or starting a study session!</p>
+                    <!-- Recent Activity -->
+                    <div class="section">
+                        <h2><i class="fas fa-clock"></i> Recent Activity</h2>
+                        <div id="activityList">
+                            <div style="text-align: center; color: #94a3b8; padding: 20px;">
+                                <i class="fas fa-clock" style="font-size: 36px; margin-bottom: 12px; opacity: 0.3;"></i>
+                                <p style="font-size: 14px;">Your activity will appear here</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2119,7 +2396,54 @@
                 
                 // Update welcome message with time-based greeting
                 document.getElementById('welcomeMessage').innerHTML = getWelcomeMessage(firstName);
+                
+                // Update welcome banner
+                updateWelcomeBanner(firstName);
             }
+        }
+
+        function updateWelcomeBanner(firstName) {
+            const hour = new Date().getHours();
+            const greetingEl = document.getElementById('greeting-text');
+            const bannerNameEl = document.getElementById('bannerUserName');
+            const dayEl = document.getElementById('current-day');
+            const dateEl = document.getElementById('current-date');
+            const quoteEl = document.getElementById('daily-quote');
+            
+            // Set greeting based on time
+            if (hour >= 5 && hour < 12) {
+                greetingEl.textContent = 'Good Morning ☀️';
+            } else if (hour >= 12 && hour < 17) {
+                greetingEl.textContent = 'Good Afternoon 🌤️';
+            } else if (hour >= 17 && hour < 21) {
+                greetingEl.textContent = 'Good Evening 🌅';
+            } else {
+                greetingEl.textContent = 'Good Night 🌙';
+            }
+            
+            // Set user name
+            bannerNameEl.textContent = firstName;
+            
+            // Set date
+            const now = new Date();
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            
+            dayEl.textContent = days[now.getDay()];
+            dateEl.textContent = `${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+            
+            // Set motivational quote
+            const quotes = [
+                '"The secret of getting ahead is getting started." — Mark Twain',
+                '"Success is the sum of small efforts repeated day in and day out." — Robert Collier',
+                '"Don\'t watch the clock; do what it does. Keep going." — Sam Levenson',
+                '"The only way to do great work is to love what you do." — Steve Jobs',
+                '"Believe you can and you\'re halfway there." — Theodore Roosevelt',
+                '"Education is the most powerful weapon you can use to change the world." — Nelson Mandela',
+                '"The beautiful thing about learning is that no one can take it away from you." — B.B. King',
+                '"Study hard what interests you the most in the most undisciplined way." — Richard Feynman'
+            ];
+            quoteEl.textContent = quotes[Math.floor(Math.random() * quotes.length)];
         }
 
         function getWelcomeMessage(firstName) {
@@ -2309,11 +2633,21 @@
             );
             
             if (confirmed) {
-                // Clear user profile from localStorage
+                // Clear all user data from localStorage
                 localStorage.removeItem('studyDeckUserProfile');
-                
-                // Clear dark mode setting and reset to light mode
                 localStorage.removeItem('studyDeckDarkMode');
+                localStorage.removeItem('studyDeckFlashcards');
+                localStorage.removeItem('studyDeckTodos');
+                localStorage.removeItem('studyDeckNotes');
+                localStorage.removeItem('studyDeckClasses');
+                localStorage.removeItem('studyDeckActivityLog');
+                localStorage.removeItem('studyDeckTasks');
+                localStorage.removeItem('studyDeckPomodoroSessions');
+                localStorage.removeItem('studyDeckPomodoroSettings');
+                localStorage.removeItem('studyDeckPomodoroStats');
+                localStorage.removeItem('studyDeckEvents');
+                
+                // Reset to light mode
                 document.body.classList.remove('dark-mode');
                 
                 // Show the welcome overlay
@@ -2362,29 +2696,29 @@
             const emptyClasses = document.getElementById('emptyClasses');
 
             if (classes.length === 0) {
-                classesSection.style.display = 'block';
                 classesList.style.display = 'none';
                 emptyClasses.style.display = 'block';
                 return;
             }
 
-            classesSection.style.display = 'block';
             classesList.style.display = 'grid';
             emptyClasses.style.display = 'none';
 
-            classesList.innerHTML = classes.map(cls => `
-                <div class="card" style="cursor: pointer;" onclick="window.location.href='classes.html'">
-                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
-                        <div style="width: 32px; height: 32px; border-radius: 8px; background: ${cls.color}; display: flex; align-items: center; justify-content: center;">
-                            <i class="fas ${cls.icon || 'fa-book'}" style="color: white; font-size: 14px;"></i>
-                        </div>
-                        <h3 style="margin: 0; font-size: 16px;">${cls.name}</h3>
+            classesList.innerHTML = classes.slice(0, 6).map(cls => `
+                <a href="classes.html" class="class-preview-card" style="background: ${cls.color};">
+                    <div class="class-preview-icon">
+                        <i class="fas ${cls.icon || 'fa-book'}"></i>
                     </div>
-                    ${cls.teacher ? `<p style="font-size: 13px; color: #64748b; margin: 0;">
-                        <i class="fas fa-user" style="margin-right: 5px;"></i>${cls.teacher}
-                    </p>` : '<p style="font-size: 13px; color: #94a3b8; margin: 0; font-style: italic;">No teacher assigned</p>'}
-                </div>
-            `).join('');
+                    <div class="class-preview-name">${cls.name}</div>
+                </a>
+            `).join('') + (classes.length > 6 ? `
+                <a href="classes.html" class="class-preview-card" style="background: linear-gradient(135deg, #64748b, #475569);">
+                    <div class="class-preview-icon">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                    <div class="class-preview-name">+${classes.length - 6} more</div>
+                </a>
+            ` : '');
         }
 
         // Load recent activity
@@ -2392,71 +2726,87 @@
             const activityList = document.getElementById('activityList');
             const activities = [];
 
-            // Get recent todos
-            const todos = JSON.parse(localStorage.getItem('studyDeckTodos') || '[]');
-            const recentCompletedTodos = todos
-                .filter(t => t.completed && t.updated)
-                .sort((a, b) => new Date(b.updated) - new Date(a.updated))
-                .slice(0, 2);
-
-            recentCompletedTodos.forEach(todo => {
+            // Get explicit activity log - this is the primary source
+            const activityLog = JSON.parse(localStorage.getItem('studyDeckActivityLog') || '[]');
+            activityLog.forEach(activity => {
                 activities.push({
-                    icon: 'fas fa-check-circle',
-                    color: 'green',
-                    title: `Completed: ${todo.title}`,
-                    time: getRelativeTime(todo.updated)
+                    ...activity,
+                    time: activity.timestamp ? getRelativeTime(new Date(activity.timestamp).toISOString()) : activity.time
                 });
             });
 
-            // Get recent flashcard decks
-            const flashcards = JSON.parse(localStorage.getItem('studyDeckFlashcards') || '[]');
-            const recentDecks = flashcards
-                .sort((a, b) => new Date(b.created) - new Date(a.created))
-                .slice(0, 2);
+            // Only pull from data sources if activity log is empty (for backwards compatibility)
+            if (activities.length === 0) {
+                // Get recent completed todos
+                const todos = JSON.parse(localStorage.getItem('studyDeckTodos') || '[]');
+                const recentCompletedTodos = todos
+                    .filter(t => t.completed && t.updated)
+                    .sort((a, b) => new Date(b.updated) - new Date(a.updated))
+                    .slice(0, 3);
 
-            recentDecks.forEach(deck => {
-                activities.push({
-                    icon: 'fas fa-layer-group',
-                    color: 'blue',
-                    title: `Created flashcard deck: ${deck.name}`,
-                    time: getRelativeTime(deck.created)
+                recentCompletedTodos.forEach(todo => {
+                    activities.push({
+                        icon: 'fas fa-check-circle',
+                        color: 'green',
+                        title: `Completed task: ${todo.title}`,
+                        time: getRelativeTime(todo.updated),
+                        timestamp: new Date(todo.updated).getTime()
+                    });
                 });
-            });
 
-            // Get recent notes
-            const notes = JSON.parse(localStorage.getItem('studyDeckNotes') || '[]');
-            const recentNotes = notes
-                .sort((a, b) => new Date(b.updated) - new Date(a.updated))
-                .slice(0, 2);
+                // Get recent flashcard decks
+                const flashcards = JSON.parse(localStorage.getItem('studyDeckFlashcards') || '[]');
+                const recentDecks = flashcards
+                    .filter(d => d.created)
+                    .sort((a, b) => new Date(b.created) - new Date(a.created))
+                    .slice(0, 2);
 
-            recentNotes.forEach(note => {
-                activities.push({
-                    icon: 'fas fa-book-open',
-                    color: 'orange',
-                    title: `Updated note: ${note.title}`,
-                    time: getRelativeTime(note.updated)
+                recentDecks.forEach(deck => {
+                    activities.push({
+                        icon: 'fas fa-layer-group',
+                        color: 'purple',
+                        title: `Created flashcard deck: ${deck.name}`,
+                        time: getRelativeTime(deck.created),
+                        timestamp: new Date(deck.created).getTime()
+                    });
                 });
-            });
 
-            // Sort activities by time
+                // Get recent notes
+                const notes = JSON.parse(localStorage.getItem('studyDeckNotes') || '[]');
+                const recentNotes = notes
+                    .filter(n => n.created)
+                    .sort((a, b) => new Date(b.created) - new Date(a.created))
+                    .slice(0, 2);
+
+                recentNotes.forEach(note => {
+                    activities.push({
+                        icon: 'fas fa-book-open',
+                        color: 'cyan',
+                        title: `Created note: ${note.title || 'Untitled'}`,
+                        time: getRelativeTime(note.created),
+                        timestamp: new Date(note.created).getTime()
+                    });
+                });
+            }
+
+            // Sort activities by timestamp (most recent first)
             activities.sort((a, b) => {
-                const timeA = parseRelativeTime(a.time);
-                const timeB = parseRelativeTime(b.time);
-                return timeA - timeB;
+                const timeA = a.timestamp || 0;
+                const timeB = b.timestamp || 0;
+                return timeB - timeA;
             });
 
             if (activities.length === 0) {
                 activityList.innerHTML = `
-                    <div style="text-align: center; color: #94a3b8; padding: 30px;">
-                        <i class="fas fa-clock" style="font-size: 48px; margin-bottom: 15px; opacity: 0.3;"></i>
-                        <p>Your recent activity will appear here as you use the app.</p>
-                        <p style="margin-top: 10px; font-size: 14px;">Try creating a flashcard deck, adding a task, or starting a study session!</p>
+                    <div style="text-align: center; color: #94a3b8; padding: 20px;">
+                        <i class="fas fa-clock" style="font-size: 36px; margin-bottom: 12px; opacity: 0.3;"></i>
+                        <p style="font-size: 14px;">Your activity will appear here</p>
                     </div>
                 `;
             } else {
                 activityList.innerHTML = activities.slice(0, 5).map(activity => `
                     <div class="activity-item">
-                        <div class="activity-icon ${activity.color}">
+                        <div class="activity-icon ${activity.color}" style="background: ${getActivityBg(activity.color)}; color: ${getActivityColor(activity.color)};">
                             <i class="${activity.icon}"></i>
                         </div>
                         <div class="activity-content">
@@ -2467,6 +2817,50 @@
                 `).join('');
             }
         }
+
+        function getActivityColor(color) {
+            const colors = {
+                'green': '#10b981',
+                'blue': '#3b82f6',
+                'purple': '#8b5cf6',
+                'orange': '#f59e0b',
+                'red': '#ef4444',
+                'cyan': '#06b6d4',
+                'pink': '#ec4899'
+            };
+            return colors[color] || '#64748b';
+        }
+
+        function getActivityBg(color) {
+            const bgs = {
+                'green': 'rgba(16, 185, 129, 0.1)',
+                'blue': 'rgba(59, 130, 246, 0.1)',
+                'purple': 'rgba(139, 92, 246, 0.1)',
+                'orange': 'rgba(245, 158, 11, 0.1)',
+                'red': 'rgba(239, 68, 68, 0.1)',
+                'cyan': 'rgba(6, 182, 212, 0.1)',
+                'pink': 'rgba(236, 72, 153, 0.1)'
+            };
+            return bgs[color] || 'rgba(100, 116, 139, 0.1)';
+        }
+
+        // Log activity helper function - can be called from other pages
+        function logActivity(icon, color, title) {
+            const activityLog = JSON.parse(localStorage.getItem('studyDeckActivityLog') || '[]');
+            activityLog.unshift({
+                icon: icon,
+                color: color,
+                title: title,
+                time: 'Just now',
+                timestamp: Date.now()
+            });
+            // Keep only last 50 activities
+            if (activityLog.length > 50) activityLog.pop();
+            localStorage.setItem('studyDeckActivityLog', JSON.stringify(activityLog));
+        }
+        
+        // Make logActivity available globally
+        window.logActivity = logActivity;
 
         // Helper function to get relative time
         function getRelativeTime(dateString) {

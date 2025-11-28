@@ -1435,6 +1435,49 @@
                 min-height: 44px;
                 touch-action: manipulation;
             }
+
+            .calendar-container {
+                padding: 15px;
+            }
+
+            .weekdays {
+                gap: 4px;
+            }
+
+            .weekday {
+                font-size: 11px;
+                padding: 8px 2px;
+            }
+
+            .calendar-grid {
+                gap: 4px;
+            }
+
+            .calendar-day {
+                min-height: 60px;
+                padding: 4px;
+                aspect-ratio: auto;
+            }
+
+            .day-number {
+                font-size: 11px;
+                margin-bottom: 4px;
+            }
+
+            .event-dot {
+                font-size: 9px;
+                padding: 2px 4px;
+                min-height: 16px;
+            }
+
+            .calendar-header h2 {
+                font-size: 18px;
+            }
+
+            .calendar-nav button {
+                width: 32px;
+                height: 32px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1449,6 +1492,48 @@
 
             .content {
                 padding: 15px;
+            }
+
+            .calendar-container {
+                padding: 10px;
+            }
+
+            .weekdays {
+                gap: 2px;
+            }
+
+            .weekday {
+                font-size: 10px;
+                padding: 6px 1px;
+            }
+
+            .calendar-grid {
+                gap: 2px;
+            }
+
+            .calendar-day {
+                min-height: 50px;
+                padding: 3px;
+            }
+
+            .day-number {
+                font-size: 10px;
+            }
+
+            .event-dot {
+                font-size: 8px;
+                padding: 1px 3px;
+                min-height: 14px;
+            }
+
+            .calendar-header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px;
+            }
+
+            .calendar-header h2 {
+                font-size: 16px;
             }
         }
 
@@ -1986,6 +2071,20 @@
         let currentView = 'month';
         let selectedColor = '#3b82f6';
 
+        // Log activity to localStorage for dashboard
+        function logActivity(icon, color, title) {
+            const activityLog = JSON.parse(localStorage.getItem('studyDeckActivityLog') || '[]');
+            activityLog.unshift({
+                icon: icon,
+                color: color,
+                title: title,
+                time: 'Just now',
+                timestamp: Date.now()
+            });
+            if (activityLog.length > 50) activityLog.pop();
+            localStorage.setItem('studyDeckActivityLog', JSON.stringify(activityLog));
+        }
+
         // Load User Profile
         function loadUserProfile() {
             const userProfile = JSON.parse(localStorage.getItem('studyDeckUserProfile'));
@@ -2061,11 +2160,19 @@
             );
             
             if (confirmed) {
-                // Clear user profile from localStorage
+                // Clear all user data from localStorage
                 localStorage.removeItem('studyDeckUserProfile');
-                
-                // Clear dark mode setting
                 localStorage.removeItem('studyDeckDarkMode');
+                localStorage.removeItem('studyDeckFlashcards');
+                localStorage.removeItem('studyDeckTodos');
+                localStorage.removeItem('studyDeckNotes');
+                localStorage.removeItem('studyDeckClasses');
+                localStorage.removeItem('studyDeckActivityLog');
+                localStorage.removeItem('studyDeckTasks');
+                localStorage.removeItem('studyDeckPomodoroSessions');
+                localStorage.removeItem('studyDeckPomodoroSettings');
+                localStorage.removeItem('studyDeckPomodoroStats');
+                localStorage.removeItem('studyDeckEvents');
                 
                 // Redirect to home page which will show the onboarding screen
                 window.location.href = 'index.html';
@@ -2507,6 +2614,7 @@
             
             // Find existing event to preserve taskId/todoId
             const existingEvent = events.find(ev => ev.id === parseInt(id));
+            const isNew = !existingEvent;
             
             const event = {
                 id: parseInt(id),
@@ -2532,6 +2640,11 @@
             }
             
             localStorage.setItem('studyDeckEvents', JSON.stringify(events));
+            
+            // Log activity for new events
+            if (isNew) {
+                logActivity('fas fa-calendar-plus', 'orange', `Scheduled: ${title}`);
+            }
             
             // Sync date change back to Progress Tracker if this event is linked to a task
             if (event.taskId) {

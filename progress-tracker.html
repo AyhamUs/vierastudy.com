@@ -1661,6 +1661,20 @@
         let tasks = JSON.parse(localStorage.getItem('studyDeckTasks')) || [];
         let classes = JSON.parse(localStorage.getItem('studyDeckClasses')) || [];
 
+        // Log activity to localStorage for dashboard
+        function logActivity(icon, color, title) {
+            const activityLog = JSON.parse(localStorage.getItem('studyDeckActivityLog') || '[]');
+            activityLog.unshift({
+                icon: icon,
+                color: color,
+                title: title,
+                time: 'Just now',
+                timestamp: Date.now()
+            });
+            if (activityLog.length > 50) activityLog.pop();
+            localStorage.setItem('studyDeckActivityLog', JSON.stringify(activityLog));
+        }
+
         // Helper function to parse date strings without timezone issues
         function parseLocalDate(dateString) {
             if (!dateString) return null;
@@ -1731,10 +1745,19 @@
             );
             
             if (confirmed) {
-                // Clear user profile from localStorage
+                // Clear all user data from localStorage
                 localStorage.removeItem('studyDeckUserProfile');
-                // Clear dark mode setting to prevent glitched sign-in screen
                 localStorage.removeItem('studyDeckDarkMode');
+                localStorage.removeItem('studyDeckFlashcards');
+                localStorage.removeItem('studyDeckTodos');
+                localStorage.removeItem('studyDeckNotes');
+                localStorage.removeItem('studyDeckClasses');
+                localStorage.removeItem('studyDeckActivityLog');
+                localStorage.removeItem('studyDeckTasks');
+                localStorage.removeItem('studyDeckPomodoroSessions');
+                localStorage.removeItem('studyDeckPomodoroSettings');
+                localStorage.removeItem('studyDeckPomodoroStats');
+                localStorage.removeItem('studyDeckEvents');
                 
                 // Redirect to home page which will show the onboarding screen
                 window.location.href = 'index.html';
@@ -1769,6 +1792,11 @@
                     task.priority = document.getElementById('taskPriority').value;
                     task.status = document.getElementById('taskStatus').value;
                     task.due = document.getElementById('taskDue').value;
+                    
+                    // Log activity if task is completed
+                    if (task.status === 'Completed') {
+                        logActivity('fas fa-trophy', 'green', `Completed: ${task.title}`);
+                    }
                 }
             } else {
                 // Create new task
@@ -1782,6 +1810,9 @@
                     due: document.getElementById('taskDue').value
                 };
                 tasks.push(task);
+                
+                // Log activity for new task
+                logActivity('fas fa-tasks', 'blue', `Added study task: ${task.title}`);
             }
             
             saveTasks();

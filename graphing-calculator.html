@@ -536,9 +536,29 @@
             font-family: 'Courier New', monospace;
             font-size: 14px;
             color: #1e293b;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
         }
 
-        .equation-toggle, .equation-delete {
+        .equation-text:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .equation-edit-input {
+            flex: 1;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #1e293b;
+            padding: 6px 10px;
+            border: 2px solid #3b82f6;
+            border-radius: 6px;
+            outline: none;
+            background: white;
+        }
+
+        .equation-edit, .equation-toggle, .equation-delete {
             width: 28px;
             height: 28px;
             border: none;
@@ -549,6 +569,14 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
+        }
+
+        .equation-edit {
+            color: #3b82f6;
+        }
+
+        .equation-edit:hover {
+            background: rgba(59, 130, 246, 0.1);
         }
 
         .equation-toggle {
@@ -1247,17 +1275,67 @@
             }
             
             list.innerHTML = equations.map(eq => `
-                <div class="equation-item">
+                <div class="equation-item" id="eq-${eq.id}">
                     <input type="color" class="equation-color" value="${eq.color}" onchange="changeColor(${eq.id}, this.value)">
-                    <span class="equation-text">y = ${eq.expression}</span>
-                    <button class="equation-toggle ${eq.visible ? '' : 'hidden'}" onclick="toggleEquation(${eq.id})">
+                    <span class="equation-text" onclick="startEditEquation(${eq.id})" title="Click to edit">y = ${eq.expression}</span>
+                    <button class="equation-edit" onclick="startEditEquation(${eq.id})" title="Edit equation">
+                        <i class="fas fa-pencil"></i>
+                    </button>
+                    <button class="equation-toggle ${eq.visible ? '' : 'hidden'}" onclick="toggleEquation(${eq.id})" title="${eq.visible ? 'Hide' : 'Show'}">
                         <i class="fas fa-eye${eq.visible ? '' : '-slash'}"></i>
                     </button>
-                    <button class="equation-delete" onclick="removeEquation(${eq.id})">
+                    <button class="equation-delete" onclick="removeEquation(${eq.id})" title="Delete">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>
             `).join('');
+        }
+        
+        function startEditEquation(id) {
+            const eq = equations.find(e => e.id === id);
+            if (!eq) return;
+            
+            const item = document.getElementById(`eq-${id}`);
+            const textSpan = item.querySelector('.equation-text');
+            const editBtn = item.querySelector('.equation-edit');
+            
+            // Replace text with input
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'equation-edit-input';
+            input.value = eq.expression;
+            input.setAttribute('data-id', id);
+            
+            // Handle save on Enter or blur
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    saveEditEquation(id, this.value);
+                } else if (e.key === 'Escape') {
+                    renderEquationsList();
+                }
+            });
+            
+            input.addEventListener('blur', function() {
+                saveEditEquation(id, this.value);
+            });
+            
+            textSpan.replaceWith(input);
+            editBtn.style.display = 'none';
+            input.focus();
+            input.select();
+        }
+        
+        function saveEditEquation(id, newExpression) {
+            const eq = equations.find(e => e.id === id);
+            if (!eq) return;
+            
+            newExpression = newExpression.trim().replace(/^y\s*=\s*/i, '');
+            if (newExpression) {
+                eq.expression = newExpression;
+            }
+            
+            renderEquationsList();
+            updateGraph();
         }
         
         function updateGraph() {
@@ -1431,8 +1509,19 @@
         }
         
         function confirmSignOut() {
+            // Clear all user data from localStorage
             localStorage.removeItem('studyDeckUserProfile');
             localStorage.removeItem('studyDeckDarkMode');
+            localStorage.removeItem('studyDeckFlashcards');
+            localStorage.removeItem('studyDeckTodos');
+            localStorage.removeItem('studyDeckNotes');
+            localStorage.removeItem('studyDeckClasses');
+            localStorage.removeItem('studyDeckActivityLog');
+            localStorage.removeItem('studyDeckTasks');
+            localStorage.removeItem('studyDeckPomodoroSessions');
+            localStorage.removeItem('studyDeckPomodoroSettings');
+            localStorage.removeItem('studyDeckPomodoroStats');
+            localStorage.removeItem('studyDeckEvents');
             window.location.href = 'index.html';
         }
         

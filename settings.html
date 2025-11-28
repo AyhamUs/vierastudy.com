@@ -1267,10 +1267,19 @@
             );
             
             if (confirmed) {
-                // Clear user profile from localStorage
+                // Clear all user data from localStorage
                 localStorage.removeItem('studyDeckUserProfile');
-                // Clear dark mode setting to prevent glitched sign-in screen
                 localStorage.removeItem('studyDeckDarkMode');
+                localStorage.removeItem('studyDeckFlashcards');
+                localStorage.removeItem('studyDeckTodos');
+                localStorage.removeItem('studyDeckNotes');
+                localStorage.removeItem('studyDeckClasses');
+                localStorage.removeItem('studyDeckActivityLog');
+                localStorage.removeItem('studyDeckTasks');
+                localStorage.removeItem('studyDeckPomodoroSessions');
+                localStorage.removeItem('studyDeckPomodoroSettings');
+                localStorage.removeItem('studyDeckPomodoroStats');
+                localStorage.removeItem('studyDeckEvents');
                 
                 // Redirect to home page which will show the onboarding screen
                 window.location.href = 'index.html';
@@ -1320,6 +1329,8 @@
                 localStorage.removeItem('studyDeckProgress');
                 localStorage.removeItem('studyDeckPomodoro');
                 localStorage.removeItem('studyDeckPomodoroStats');
+                localStorage.removeItem('studyDeckPomodoroSessions');
+                localStorage.removeItem('studyDeckActivityLog');
                 localStorage.removeItem('calculatorHistory');
                 
                 // Restore profile and settings

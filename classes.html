@@ -1341,19 +1341,31 @@
                 const icon = document.getElementById('confirmationIcon');
                 const titleEl = document.getElementById('confirmationTitle');
                 const messageEl = document.getElementById('confirmationMessage');
+                const confirmBtn = document.getElementById('confirmButton');
                 
                 const icons = {
-                    success: 'fa-check',
-                    info: 'fa-info',
                     warning: 'fa-exclamation-triangle',
-                    danger: 'fa-exclamation-triangle',
-                    error: 'fa-times'
+                    danger: 'fa-exclamation-circle',
+                    info: 'fa-question-circle'
                 };
                 
-                icon.className = `notification-icon ${type}`;
+                const iconColors = {
+                    warning: 'warning',
+                    danger: 'error',
+                    info: 'info'
+                };
+                
+                icon.className = `notification-icon ${iconColors[type] || 'warning'}`;
                 icon.innerHTML = `<i class="fas ${icons[type] || icons.warning}"></i>`;
                 titleEl.textContent = title;
                 messageEl.textContent = message;
+                
+                // Set confirm button color based on type
+                if (type === 'danger') {
+                    confirmBtn.style.background = '#ef4444';
+                } else {
+                    confirmBtn.style.background = '#3b82f6';
+                }
                 
                 confirmCallback = resolve;
                 modal.classList.add('show');
@@ -1427,6 +1439,20 @@
         let selectedIcon = icons[0].icon;
         let classes = JSON.parse(localStorage.getItem('studyDeckClasses')) || [];
 
+        // Log activity to localStorage for dashboard
+        function logActivity(icon, color, title) {
+            const activityLog = JSON.parse(localStorage.getItem('studyDeckActivityLog') || '[]');
+            activityLog.unshift({
+                icon: icon,
+                color: color,
+                title: title,
+                time: 'Just now',
+                timestamp: Date.now()
+            });
+            if (activityLog.length > 50) activityLog.pop();
+            localStorage.setItem('studyDeckActivityLog', JSON.stringify(activityLog));
+        }
+
         // Load dark mode on page load
         (function() {
             const darkMode = localStorage.getItem('studyDeckDarkMode') === 'true';
@@ -1477,10 +1503,19 @@
             );
             
             if (confirmed) {
-                // Clear user profile from localStorage
+                // Clear all user data from localStorage
                 localStorage.removeItem('studyDeckUserProfile');
-                // Clear dark mode setting to prevent glitched sign-in screen
                 localStorage.removeItem('studyDeckDarkMode');
+                localStorage.removeItem('studyDeckFlashcards');
+                localStorage.removeItem('studyDeckTodos');
+                localStorage.removeItem('studyDeckNotes');
+                localStorage.removeItem('studyDeckClasses');
+                localStorage.removeItem('studyDeckActivityLog');
+                localStorage.removeItem('studyDeckTasks');
+                localStorage.removeItem('studyDeckPomodoroSessions');
+                localStorage.removeItem('studyDeckPomodoroSettings');
+                localStorage.removeItem('studyDeckPomodoroStats');
+                localStorage.removeItem('studyDeckEvents');
                 
                 // Redirect to home page which will show the onboarding screen
                 window.location.href = 'index.html';
@@ -1563,22 +1598,30 @@
             event.preventDefault();
             
             const id = document.getElementById('editingClassId').value;
+            const isNew = !id;
             const classData = {
                 id: id ? parseInt(id) : Date.now(),
                 name: document.getElementById('className').value,
                 teacher: document.getElementById('classTeacher').value,
                 color: selectedColor,
-                icon: selectedIcon
+                icon: selectedIcon,
+                created: new Date().toISOString()
             };
 
             if (id) {
                 const index = classes.findIndex(c => c.id === parseInt(id));
-                classes[index] = classData;
+                classes[index] = { ...classes[index], ...classData };
             } else {
                 classes.push(classData);
             }
 
             localStorage.setItem('studyDeckClasses', JSON.stringify(classes));
+            
+            // Log activity for new classes
+            if (isNew) {
+                logActivity('fas fa-book', 'orange', `Added class: ${classData.name}`);
+            }
+            
             renderClasses();
             closeClassModal();
         }

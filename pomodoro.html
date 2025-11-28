@@ -1728,10 +1728,19 @@
             );
             
             if (confirmed) {
-                // Clear user profile from localStorage
+                // Clear all user data from localStorage
                 localStorage.removeItem('studyDeckUserProfile');
-                // Clear dark mode setting to prevent glitched sign-in screen
                 localStorage.removeItem('studyDeckDarkMode');
+                localStorage.removeItem('studyDeckFlashcards');
+                localStorage.removeItem('studyDeckTodos');
+                localStorage.removeItem('studyDeckNotes');
+                localStorage.removeItem('studyDeckClasses');
+                localStorage.removeItem('studyDeckActivityLog');
+                localStorage.removeItem('studyDeckTasks');
+                localStorage.removeItem('studyDeckPomodoroSessions');
+                localStorage.removeItem('studyDeckPomodoroSettings');
+                localStorage.removeItem('studyDeckPomodoroStats');
+                localStorage.removeItem('studyDeckEvents');
                 
                 // Redirect to home page which will show the onboarding screen
                 window.location.href = 'index.html';
@@ -1744,6 +1753,20 @@
             classes.forEach(cls => {
                 select.innerHTML += `<option value="${cls.id}">${cls.name}</option>`;
             });
+        }
+
+        // Log activity to localStorage for dashboard
+        function logActivity(icon, color, title) {
+            const activityLog = JSON.parse(localStorage.getItem('studyDeckActivityLog') || '[]');
+            activityLog.unshift({
+                icon: icon,
+                color: color,
+                title: title,
+                time: 'Just now',
+                timestamp: Date.now()
+            });
+            if (activityLog.length > 50) activityLog.pop();
+            localStorage.setItem('studyDeckActivityLog', JSON.stringify(activityLog));
         }
 
         function loadSettings() {
@@ -1856,6 +1879,19 @@
                 
                 sessions.push(session);
                 localStorage.setItem('studyDeckPomodoroSessions', JSON.stringify(sessions));
+                
+                // Update lastSession for activity tracking
+                const pomodoroStats = JSON.parse(localStorage.getItem('studyDeckPomodoroStats') || '{}');
+                pomodoroStats.lastSession = new Date().toISOString();
+                pomodoroStats.totalSessions = (pomodoroStats.totalSessions || 0) + 1;
+                localStorage.setItem('studyDeckPomodoroStats', JSON.stringify(pomodoroStats));
+                
+                // Log activity
+                const selectedClass = classId ? classes.find(c => c.id === parseInt(classId)) : null;
+                const activityTitle = selectedClass 
+                    ? `Completed ${settings.work}min focus session for ${selectedClass.name}`
+                    : `Completed ${settings.work}min focus session`;
+                logActivity('fas fa-clock', 'red', activityTitle);
                 
                 showNotification('Great work! Time to take a well-deserved break.', 'success', 'Work Session Complete! 🎉');
                 renderStats();

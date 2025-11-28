@@ -1655,6 +1655,20 @@
         let currentDeck = null;
         let currentCardIndex = 0;
 
+        // Log activity to localStorage for dashboard
+        function logActivity(icon, color, title) {
+            const activityLog = JSON.parse(localStorage.getItem('studyDeckActivityLog') || '[]');
+            activityLog.unshift({
+                icon: icon,
+                color: color,
+                title: title,
+                time: 'Just now',
+                timestamp: Date.now()
+            });
+            if (activityLog.length > 50) activityLog.pop();
+            localStorage.setItem('studyDeckActivityLog', JSON.stringify(activityLog));
+        }
+
         // Load dark mode immediately to prevent flash
         (function() {
             const darkMode = localStorage.getItem('studyDeckDarkMode') === 'true';
@@ -1705,11 +1719,19 @@
             );
             
             if (confirmed) {
-                // Clear user profile from localStorage
+                // Clear all user data from localStorage
                 localStorage.removeItem('studyDeckUserProfile');
-                
-                // Clear dark mode setting
                 localStorage.removeItem('studyDeckDarkMode');
+                localStorage.removeItem('studyDeckFlashcards');
+                localStorage.removeItem('studyDeckTodos');
+                localStorage.removeItem('studyDeckNotes');
+                localStorage.removeItem('studyDeckClasses');
+                localStorage.removeItem('studyDeckActivityLog');
+                localStorage.removeItem('studyDeckTasks');
+                localStorage.removeItem('studyDeckPomodoroSessions');
+                localStorage.removeItem('studyDeckPomodoroSettings');
+                localStorage.removeItem('studyDeckPomodoroStats');
+                localStorage.removeItem('studyDeckEvents');
                 
                 // Redirect to home page which will show the onboarding screen
                 window.location.href = 'index.html';
@@ -1838,6 +1860,10 @@
 
             decks.push(deck);
             localStorage.setItem('studyDeckFlashcards', JSON.stringify(decks));
+            
+            // Log activity
+            logActivity('fas fa-layer-group', 'purple', `Created flashcard deck: ${name}`);
+            
             renderDecks();
             closeDeckModal();
             showNotification(`Created deck with ${cards.length} card${cards.length > 1 ? 's' : ''}!`, 'success', 'Deck Created');
@@ -1895,6 +1921,10 @@
             currentCardIndex++;
             if (currentCardIndex >= currentDeck.cards.length) {
                 showNotification('Congratulations! You\'ve completed this entire deck!', 'success', 'Deck Complete! 🎉');
+                
+                // Log activity for completing a deck
+                logActivity('fas fa-graduation-cap', 'purple', `Studied flashcard deck: ${currentDeck.name}`);
+                
                 closeStudyMode();
                 return;
             }

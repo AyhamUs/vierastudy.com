@@ -1449,6 +1449,20 @@
         let classes = JSON.parse(localStorage.getItem('studyDeckClasses')) || [];
         let currentFilter = 'all';
 
+        // Log activity to localStorage for dashboard
+        function logActivity(icon, color, title) {
+            const activityLog = JSON.parse(localStorage.getItem('studyDeckActivityLog') || '[]');
+            activityLog.unshift({
+                icon: icon,
+                color: color,
+                title: title,
+                time: 'Just now',
+                timestamp: Date.now()
+            });
+            if (activityLog.length > 50) activityLog.pop();
+            localStorage.setItem('studyDeckActivityLog', JSON.stringify(activityLog));
+        }
+
         // Helper function to parse date strings without timezone issues
         function parseLocalDate(dateString) {
             if (!dateString) return null;
@@ -1506,11 +1520,19 @@
             );
             
             if (confirmed) {
-                // Clear user profile from localStorage
+                // Clear all user data from localStorage
                 localStorage.removeItem('studyDeckUserProfile');
-                
-                // Clear dark mode setting
                 localStorage.removeItem('studyDeckDarkMode');
+                localStorage.removeItem('studyDeckFlashcards');
+                localStorage.removeItem('studyDeckTodos');
+                localStorage.removeItem('studyDeckNotes');
+                localStorage.removeItem('studyDeckClasses');
+                localStorage.removeItem('studyDeckActivityLog');
+                localStorage.removeItem('studyDeckTasks');
+                localStorage.removeItem('studyDeckPomodoroSessions');
+                localStorage.removeItem('studyDeckPomodoroSettings');
+                localStorage.removeItem('studyDeckPomodoroStats');
+                localStorage.removeItem('studyDeckEvents');
                 
                 // Redirect to home page which will show the onboarding screen
                 window.location.href = 'index.html';
@@ -1597,6 +1619,7 @@
             
             const id = document.getElementById('editingTodoId').value;
             const classId = document.getElementById('todoClass').value;
+            const isNew = !id;
             
             const todoData = {
                 id: id ? parseInt(id) : Date.now(),
@@ -1617,6 +1640,11 @@
             }
 
             localStorage.setItem('studyDeckTodos', JSON.stringify(todos));
+            
+            // Log activity for new tasks
+            if (isNew) {
+                logActivity('fas fa-plus-circle', 'green', `Added task: ${todoData.title}`);
+            }
             
             // Sync with study schedule if due date is set
             if (todoData.due) {
@@ -1678,6 +1706,12 @@
                 todo.completed = !todo.completed;
                 todo.updated = new Date().toISOString();
                 localStorage.setItem('studyDeckTodos', JSON.stringify(todos));
+                
+                // Log activity
+                if (todo.completed) {
+                    logActivity('fas fa-check-circle', 'green', `Completed task: ${todo.title}`);
+                }
+                
                 renderTodos();
             }
         }
