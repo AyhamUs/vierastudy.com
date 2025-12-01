@@ -1981,11 +1981,11 @@
         </div>
         <div class="welcome-card">
             <img src="vierastudy.png" alt="VieraStudy" class="welcome-card-logo">
-            <h1 class="welcome-title" id="authTitle">Create Your Account</h1>
-            <p class="welcome-subtitle" id="authSubtitle">Start achieving your academic goals today</p>
+            <h1 class="welcome-title" id="authTitle">Welcome Back</h1>
+            <p class="welcome-subtitle" id="authSubtitle">Sign in to continue your studies</p>
             
             <!-- Register Form -->
-            <form class="welcome-form" id="registerForm" onsubmit="handleRegister(event)">
+            <form class="welcome-form" id="registerForm" style="display: none;" onsubmit="handleRegister(event)">
                 <div class="input-group">
                     <label class="input-label" for="registerFirstName"><i class="fas fa-user"></i> First Name</label>
                     <input 
@@ -2039,7 +2039,7 @@
             </form>
             
             <!-- Login Form -->
-            <form class="welcome-form" id="loginForm" style="display: none;" onsubmit="handleLogin(event)">
+            <form class="welcome-form" id="loginForm" onsubmit="handleLogin(event)">
                 <div class="input-group">
                     <label class="input-label" for="loginEmail"><i class="fas fa-envelope"></i> Email</label>
                     <input 
@@ -2568,10 +2568,15 @@
                     if (cloudData.pomodoroSessions) localStorage.setItem('studyDeckPomodoroSessions', JSON.stringify(cloudData.pomodoroSessions));
                     if (cloudData.pomodoroSettings) localStorage.setItem('studyDeckPomodoroSettings', JSON.stringify(cloudData.pomodoroSettings));
                     if (cloudData.activityLog) localStorage.setItem('studyDeckActivityLog', JSON.stringify(cloudData.activityLog));
-                    if (cloudData.settings) {
+                    
+                    // Handle dark mode setting
+                    if (cloudData.settings && cloudData.settings.darkMode !== undefined) {
                         if (cloudData.settings.darkMode) {
                             document.body.classList.add('dark-mode');
                             localStorage.setItem('studyDeckDarkMode', 'true');
+                        } else {
+                            document.body.classList.remove('dark-mode');
+                            localStorage.setItem('studyDeckDarkMode', 'false');
                         }
                     }
                     console.log('Cloud data synced successfully');

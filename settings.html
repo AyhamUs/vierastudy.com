@@ -1282,6 +1282,11 @@
             const darkMode = document.getElementById('darkModeToggle').checked;
             localStorage.setItem('studyDeckDarkMode', darkMode);
             
+            // Sync to cloud
+            if (typeof vieraAPI !== 'undefined' && vieraAPI.isLoggedIn()) {
+                vieraAPI.scheduleSync();
+            }
+            
             if (darkMode) {
                 document.body.classList.add('dark-mode');
                 showNotification('Dark mode enabled', 'success', 'Theme Changed');
