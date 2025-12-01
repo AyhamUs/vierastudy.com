@@ -4,7 +4,7 @@
 
 ### Your All-in-One Study Companion
 
-![VieraStudy](studydeck.png)
+![VieraStudy](vierastudy.png)
 
 [![Version](https://img.shields.io/badge/version-1.0-84cc16?style=for-the-badge)](https://github.com/vierastudy)
 [![License](https://img.shields.io/badge/license-MIT-3b82f6?style=for-the-badge)](LICENSE)
@@ -136,7 +136,7 @@ vierastudy/
 ├── settings.html           # Preferences
 ├── graphing-calculator.html
 ├── scientific-calculator.html
-├── studydeck.png           # Logo
+├── vierastudy.png          # Logo
 └── README.md
 ```
 
