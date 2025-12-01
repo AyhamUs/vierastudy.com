@@ -1542,7 +1542,7 @@
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Changing...';
             
             try {
-                const token = localStorage.getItem('studyDeckToken');
+                const token = localStorage.getItem('vierastudy_token');
                 const response = await fetch('https://vierastudy-api.ayhamissa416.workers.dev/password', {
                     method: 'PUT',
                     headers: {
