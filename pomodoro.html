@@ -1659,14 +1659,20 @@
         let timeRemaining = 25 * 60; // 25 minutes in seconds
         let isRunning = false;
         let currentMode = 'work';
-        let sessions = JSON.parse(localStorage.getItem('studyDeckPomodoroSessions')) || [];
-        let classes = JSON.parse(localStorage.getItem('studyDeckClasses')) || [];
+        let sessions = [];
+        let classes = [];
         
         const settings = {
             work: 25,
             shortBreak: 5,
             longBreak: 15
         };
+
+        // Initialize data from cache (will be populated after API is ready)
+        function initializeData() {
+            sessions = JSON.parse(localStorage.getItem('studyDeckPomodoroSessions')) || [];
+            classes = JSON.parse(localStorage.getItem('studyDeckClasses')) || [];
+        }
 
         const circumference = 2 * Math.PI * 140;
         const progressCircle = document.getElementById('progressCircle');
@@ -1681,7 +1687,11 @@
             }
         })();
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Wait for API to be ready (data loaded from cloud)
+            await vieraAPI.ready;
+            
+            initializeData();
             loadUserProfile();
             loadSettings();
             populateClassSelect();
