@@ -1966,7 +1966,7 @@
         </div>
     </div>
 
-    <script src="api.js?v=3"></script>
+    <script src="api.js?v=5"></script>
     <script>
         // Notification Modal Functions
         function showNotification(message, type = 'success', title = null) {
@@ -2062,11 +2062,17 @@
             }
         }
 
-        let events = JSON.parse(localStorage.getItem('studyDeckEvents') || '[]');
-        let classes = JSON.parse(localStorage.getItem('studyDeckClasses') || '[]');
+        let events = [];
+        let classes = [];
         let currentDate = new Date();
         let currentView = 'month';
         let selectedColor = '#3b82f6';
+
+        // Initialize data from cache (will be populated after API is ready)
+        function initializeData() {
+            events = JSON.parse(localStorage.getItem('studyDeckEvents') || '[]');
+            classes = JSON.parse(localStorage.getItem('studyDeckClasses') || '[]');
+        }
 
         // Log activity to localStorage for dashboard
         function logActivity(icon, color, title) {
@@ -2732,7 +2738,12 @@
             }
         })();
 
-        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Wait for API to be ready (data loaded from cloud)
+            await vieraAPI.ready;
+            initializeData();
+            init();
+        });
 
         // ============================================
         // KEYBOARD SHORTCUTS

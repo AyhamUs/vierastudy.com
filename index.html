@@ -2393,7 +2393,7 @@
     </div>
 
     <!-- VieraStudy API -->
-    <script src="api.js?v=3"></script>
+    <script src="api.js?v=5"></script>
     
     <script>
         // Ensure vieraAPI is available
@@ -2476,15 +2476,7 @@
                 console.log('Register result:', result);
                 
                 if (result.success) {
-                    // Save user profile locally for quick access
-                    const userProfile = {
-                        firstName: firstName,
-                        lastName: lastName,
-                        email: email,
-                        createdAt: new Date().toISOString()
-                    };
-                    localStorage.setItem('studyDeckUserProfile', JSON.stringify(userProfile));
-                    
+                    // User profile is now managed by the API
                     document.getElementById('welcomeOverlay').classList.remove('show');
                     loadUserProfile();
                     showNotification(`Welcome to VieraStudy, ${firstName}! Let's start studying! 🎉`, 'success', 'Account Created');
@@ -2525,17 +2517,14 @@
                 console.log('Login result:', result);
                 
                 if (result.success) {
-                    // Save user profile locally
-                    const userProfile = {
-                        firstName: result.user.firstName,
-                        lastName: result.user.lastName,
-                        email: result.user.email,
-                        createdAt: new Date().toISOString()
-                    };
-                    localStorage.setItem('studyDeckUserProfile', JSON.stringify(userProfile));
+                    // User profile and data are now managed by the API
+                    // loadData() is called automatically during login
                     
-                    // Load user data from cloud
-                    await loadUserDataFromCloud();
+                    document.getElementById('welcomeOverlay').classList.remove('show');
+                    loadUserProfile();
+                    loadStatistics();
+                    showNotification(`Welcome back, ${result.user.firstName}! 👋`, 'success', 'Signed In');
+                } else {
                     
                     document.getElementById('welcomeOverlay').classList.remove('show');
                     loadUserProfile();
@@ -2554,32 +2543,13 @@
         }
         
         async function loadUserDataFromCloud() {
+            // Data is automatically loaded when logging in via vieraAPI.login()
+            // This function is kept for compatibility but the heavy lifting is done by api.js
             try {
-                const cloudData = await vieraAPI.syncFromCloud();
-                if (cloudData && Object.keys(cloudData).length > 0) {
-                    // Merge cloud data with local storage
-                    if (cloudData.flashcards) localStorage.setItem('studyDeckFlashcards', JSON.stringify(cloudData.flashcards));
-                    if (cloudData.todos) localStorage.setItem('studyDeckTodos', JSON.stringify(cloudData.todos));
-                    if (cloudData.notes) localStorage.setItem('studyDeckNotes', JSON.stringify(cloudData.notes));
-                    if (cloudData.classes) localStorage.setItem('studyDeckClasses', JSON.stringify(cloudData.classes));
-                    if (cloudData.events) localStorage.setItem('studyDeckEvents', JSON.stringify(cloudData.events));
-                    if (cloudData.tasks) localStorage.setItem('studyDeckTasks', JSON.stringify(cloudData.tasks));
-                    if (cloudData.pomodoroStats) localStorage.setItem('studyDeckPomodoroStats', JSON.stringify(cloudData.pomodoroStats));
-                    if (cloudData.pomodoroSessions) localStorage.setItem('studyDeckPomodoroSessions', JSON.stringify(cloudData.pomodoroSessions));
-                    if (cloudData.pomodoroSettings) localStorage.setItem('studyDeckPomodoroSettings', JSON.stringify(cloudData.pomodoroSettings));
-                    if (cloudData.activityLog) localStorage.setItem('studyDeckActivityLog', JSON.stringify(cloudData.activityLog));
-                    
-                    // Handle dark mode setting
-                    if (cloudData.settings && cloudData.settings.darkMode !== undefined) {
-                        if (cloudData.settings.darkMode) {
-                            document.body.classList.add('dark-mode');
-                            localStorage.setItem('studyDeckDarkMode', 'true');
-                        } else {
-                            document.body.classList.remove('dark-mode');
-                            localStorage.setItem('studyDeckDarkMode', 'false');
-                        }
-                    }
-                    console.log('Cloud data synced successfully');
+                if (vieraAPI.isLoggedIn()) {
+                    // loadData is already called during login, but call again to be sure
+                    await vieraAPI.loadData();
+                    console.log('Cloud data loaded successfully');
                 }
             } catch (error) {
                 console.error('Failed to load cloud data:', error);
