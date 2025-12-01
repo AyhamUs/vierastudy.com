@@ -2392,51 +2392,181 @@
         </div>
     </div>
 
+    <!-- VieraStudy API -->
+    <script src="api.js"></script>
+    
     <script>
         // User Profile Management
-        function checkUserProfile() {
-            const userProfile = localStorage.getItem('studyDeckUserProfile');
-            if (!userProfile) {
-                document.getElementById('welcomeOverlay').classList.add('show');
-            } else {
+        async function checkUserProfile() {
+            // Try to verify existing session first
+            const verified = await vieraAPI.verifySession();
+            if (verified) {
+                // Session is valid, load user data
+                await loadUserDataFromCloud();
                 loadUserProfile();
+            } else {
+                // No valid session, show login overlay
+                document.getElementById('welcomeOverlay').classList.add('show');
+            }
+        }
+        
+        function toggleAuthMode(mode) {
+            const registerForm = document.getElementById('registerForm');
+            const loginForm = document.getElementById('loginForm');
+            const authTitle = document.getElementById('authTitle');
+            const authSubtitle = document.getElementById('authSubtitle');
+            
+            if (mode === 'login') {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                authTitle.textContent = 'Welcome Back';
+                authSubtitle.textContent = 'Sign in to continue your studies';
+            } else {
+                registerForm.style.display = 'block';
+                loginForm.style.display = 'none';
+                authTitle.textContent = 'Create Your Account';
+                authSubtitle.textContent = 'Start achieving your academic goals today';
+            }
+        }
+        
+        async function handleRegister(event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById('registerFirstName').value.trim();
+            const lastName = document.getElementById('registerLastName').value.trim();
+            const email = document.getElementById('registerEmail').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const btn = document.getElementById('registerBtn');
+            
+            if (!firstName || !email || !password) {
+                showNotification('Please fill in all required fields.', 'error', 'Missing Information');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showNotification('Password must be at least 6 characters.', 'error', 'Invalid Password');
+                return;
+            }
+            
+            // Show loading state
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+            
+            try {
+                const result = await vieraAPI.register(email, password, firstName, lastName);
+                
+                if (result.success) {
+                    // Save user profile locally for quick access
+                    const userProfile = {
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                        createdAt: new Date().toISOString()
+                    };
+                    localStorage.setItem('studyDeckUserProfile', JSON.stringify(userProfile));
+                    
+                    document.getElementById('welcomeOverlay').classList.remove('show');
+                    loadUserProfile();
+                    showNotification(`Welcome to VieraStudy, ${firstName}! Let's start studying! 🎉`, 'success', 'Account Created');
+                } else {
+                    showNotification(result.error || 'Registration failed. Please try again.', 'error', 'Registration Failed');
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                showNotification('Unable to connect to server. Please try again later.', 'error', 'Connection Error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Create Account →';
+            }
+        }
+        
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const btn = document.getElementById('loginBtn');
+            
+            if (!email || !password) {
+                showNotification('Please enter your email and password.', 'error', 'Missing Information');
+                return;
+            }
+            
+            // Show loading state
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
+            
+            try {
+                const result = await vieraAPI.login(email, password);
+                
+                if (result.success) {
+                    // Save user profile locally
+                    const userProfile = {
+                        firstName: result.user.firstName,
+                        lastName: result.user.lastName,
+                        email: result.user.email,
+                        createdAt: new Date().toISOString()
+                    };
+                    localStorage.setItem('studyDeckUserProfile', JSON.stringify(userProfile));
+                    
+                    // Load user data from cloud
+                    await loadUserDataFromCloud();
+                    
+                    document.getElementById('welcomeOverlay').classList.remove('show');
+                    loadUserProfile();
+                    loadStatistics();
+                    showNotification(`Welcome back, ${result.user.firstName}! 👋`, 'success', 'Signed In');
+                } else {
+                    showNotification(result.error || 'Invalid email or password.', 'error', 'Login Failed');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showNotification('Unable to connect to server. Please try again later.', 'error', 'Connection Error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Sign In →';
+            }
+        }
+        
+        async function loadUserDataFromCloud() {
+            try {
+                const cloudData = await vieraAPI.syncFromCloud();
+                if (cloudData && Object.keys(cloudData).length > 0) {
+                    // Merge cloud data with local storage
+                    if (cloudData.flashcards) localStorage.setItem('studyDeckFlashcards', JSON.stringify(cloudData.flashcards));
+                    if (cloudData.todos) localStorage.setItem('studyDeckTodos', JSON.stringify(cloudData.todos));
+                    if (cloudData.notes) localStorage.setItem('studyDeckNotes', JSON.stringify(cloudData.notes));
+                    if (cloudData.classes) localStorage.setItem('studyDeckClasses', JSON.stringify(cloudData.classes));
+                    if (cloudData.events) localStorage.setItem('studyDeckEvents', JSON.stringify(cloudData.events));
+                    if (cloudData.tasks) localStorage.setItem('studyDeckTasks', JSON.stringify(cloudData.tasks));
+                    if (cloudData.pomodoroStats) localStorage.setItem('studyDeckPomodoroStats', JSON.stringify(cloudData.pomodoroStats));
+                    if (cloudData.pomodoroSessions) localStorage.setItem('studyDeckPomodoroSessions', JSON.stringify(cloudData.pomodoroSessions));
+                    if (cloudData.pomodoroSettings) localStorage.setItem('studyDeckPomodoroSettings', JSON.stringify(cloudData.pomodoroSettings));
+                    if (cloudData.activityLog) localStorage.setItem('studyDeckActivityLog', JSON.stringify(cloudData.activityLog));
+                    if (cloudData.settings) {
+                        if (cloudData.settings.darkMode) {
+                            document.body.classList.add('dark-mode');
+                            localStorage.setItem('studyDeckDarkMode', 'true');
+                        }
+                    }
+                    console.log('Cloud data synced successfully');
+                }
+            } catch (error) {
+                console.error('Failed to load cloud data:', error);
             }
         }
 
         function saveUserProfile(event) {
-            event.preventDefault();
-            
-            const firstName = document.getElementById('firstNameInput').value.trim();
-            const lastName = document.getElementById('lastNameInput').value.trim();
-            const productKey = document.getElementById('productKeyInput').value.trim().toUpperCase();
-            
-            // Validate product key
-            if (productKey !== 'STUDYDECK2025') {
-                showNotification('Invalid product key. Please check your key and try again.', 'error', 'Invalid Key');
-                return;
-            }
-            
-            if (firstName && lastName) {
-                const userProfile = {
-                    firstName: firstName,
-                    lastName: lastName,
-                    productKey: productKey,
-                    createdAt: new Date().toISOString()
-                };
-                
-                localStorage.setItem('studyDeckUserProfile', JSON.stringify(userProfile));
-                document.getElementById('welcomeOverlay').classList.remove('show');
-                loadUserProfile();
-                showNotification(`Welcome to VieraStudy, ${firstName}! Let's start studying! 🎉`, 'success', 'Profile Created');
-            }
+            // Legacy function for backward compatibility
+            if (event) event.preventDefault();
         }
 
         function loadUserProfile() {
             const userProfile = JSON.parse(localStorage.getItem('studyDeckUserProfile'));
             if (userProfile) {
                 const { firstName, lastName } = userProfile;
-                const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
-                const fullName = `${firstName} ${lastName}`;
+                const initials = `${firstName.charAt(0)}${lastName ? lastName.charAt(0) : ''}`.toUpperCase();
+                const fullName = lastName ? `${firstName} ${lastName}` : firstName;
                 
                 // Update avatar
                 document.getElementById('userAvatar').textContent = initials;
@@ -2677,12 +2807,22 @@
 
         async function handleSignout() {
             const confirmed = await showConfirmation(
-                'Are you sure you want to sign out? This will clear your profile data.',
+                'Are you sure you want to sign out? Your data is saved in the cloud.',
                 'Sign Out',
                 'warning'
             );
             
             if (confirmed) {
+                // Sync data before signing out
+                try {
+                    await vieraAPI.syncToCloud();
+                } catch (e) {
+                    console.log('Sync before signout failed:', e);
+                }
+                
+                // Logout from API
+                await vieraAPI.logout();
+                
                 // Clear all user data from localStorage
                 localStorage.removeItem('studyDeckUserProfile');
                 localStorage.removeItem('studyDeckDarkMode');
@@ -2709,8 +2849,15 @@
                 document.getElementById('welcomeMessage').textContent = 'Welcome to VieraStudy! 👋';
                 
                 // Clear form inputs
-                document.getElementById('firstNameInput').value = '';
-                document.getElementById('lastNameInput').value = '';
+                document.getElementById('registerFirstName').value = '';
+                document.getElementById('registerLastName').value = '';
+                document.getElementById('registerEmail').value = '';
+                document.getElementById('registerPassword').value = '';
+                document.getElementById('loginEmail').value = '';
+                document.getElementById('loginPassword').value = '';
+                
+                // Reset to register form
+                toggleAuthMode('register');
                 
                 console.log('User signed out successfully');
             }
@@ -3243,9 +3390,15 @@
             showSaveIndicator('saving');
             
             clearTimeout(saveTimeout);
-            saveTimeout = setTimeout(() => {
+            saveTimeout = setTimeout(async () => {
                 try {
                     localStorage.setItem(key, JSON.stringify(data));
+                    
+                    // Also sync to cloud if logged in
+                    if (vieraAPI.isLoggedIn()) {
+                        vieraAPI.scheduleSync();
+                    }
+                    
                     showSaveIndicator('saved');
                 } catch (error) {
                     console.error('Save error:', error);
