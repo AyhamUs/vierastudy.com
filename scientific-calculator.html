@@ -1449,7 +1449,7 @@
         });
 
         // ============ BUG REPORT FUNCTIONALITY ============
-        const BUG_REPORT_URL = 'https://script.google.com/macros/library/d/1dsPa9ck7XLNNxWoZ4tS7yFHXP59fSASSxjvD1VuIwJE45KHeo9OMsz0P/1';
+        const BUG_REPORT_URL = 'https://script.google.com/macros/s/AKfycbxW5D6i7Td2Em-OqHmCpgy-DVQuzn1oCzn_pBRB2IOb_8MGfwgPqjF8KghYQDZpMNdKUw/exec';
         function openBugReportModal() { document.getElementById('bugReportModal').classList.add('active'); document.getElementById('bugPage').value = window.location.href; document.getElementById('bugPageName').textContent = 'Scientific Calculator'; const user = vieraAPI.getUser(); if (user) { document.getElementById('bugUserEmail').value = user.email || ''; document.getElementById('bugUserName').value = `${user.firstName || ''} ${user.lastName || ''}`.trim(); } }
         function closeBugReportModal() { document.getElementById('bugReportModal').classList.remove('active'); }
         function getBrowserInfo() { const ua = navigator.userAgent; let browser = 'Unknown'; if (ua.includes('Firefox')) browser = 'Firefox'; else if (ua.includes('Chrome') && !ua.includes('Edg')) browser = 'Chrome'; else if (ua.includes('Safari') && !ua.includes('Chrome')) browser = 'Safari'; else if (ua.includes('Edg')) browser = 'Edge'; if (/iPhone|iPad|iPod|Android/i.test(ua)) browser += ' (Mobile)'; return browser; }

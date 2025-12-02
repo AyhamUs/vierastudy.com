@@ -470,6 +470,11 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            visibility: hidden; /* Hidden until user status is determined */
+        }
+
+        .user-profile.loaded {
+            visibility: visible;
         }
 
         .user-avatar {
@@ -2691,9 +2696,12 @@
             if (vieraAPI.isLoggedIn() && vieraAPI.getUser()) {
                 // Session is valid, show dashboard
                 loadUserProfile();
+                document.querySelector('.user-profile')?.classList.add('loaded');
             } else {
                 // No valid session, show login overlay
                 document.getElementById('welcomeOverlay').classList.add('show');
+                // Still show user-profile area (will show Guest after login overlay closes)
+                document.querySelector('.user-profile')?.classList.add('loaded');
             }
         }
         
@@ -3681,7 +3689,7 @@
         window.showSaveIndicator = showSaveIndicator;
 
         // ============ BUG REPORT FUNCTIONALITY ============
-        const BUG_REPORT_URL = 'https://script.google.com/macros/library/d/1dsPa9ck7XLNNxWoZ4tS7yFHXP59fSASSxjvD1VuIwJE45KHeo9OMsz0P/1'; // Replace with your deployed Apps Script URL
+        const BUG_REPORT_URL = 'https://script.google.com/macros/s/AKfycbxW5D6i7Td2Em-OqHmCpgy-DVQuzn1oCzn_pBRB2IOb_8MGfwgPqjF8KghYQDZpMNdKUw/exec'; // Replace with your deployed Apps Script URL
 
         function openBugReportModal() {
             document.getElementById('bugReportModal').classList.add('active');
