@@ -426,6 +426,11 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            visibility: hidden;
+        }
+
+        .user-profile.loaded {
+            visibility: visible;
         }
 
         .user-avatar {
@@ -1202,9 +1207,9 @@
             </nav>
             
             <div class="user-profile">
-                <div class="user-avatar" id="userAvatar">?</div>
+                <div class="user-avatar" id="userAvatar"></div>
                 <div class="user-info">
-                    <div class="user-name" id="userName">Guest</div>
+                    <div class="user-name" id="userName"></div>
                 </div>
                 <button class="bug-report-btn" onclick="openBugReportModal()" title="Report a Bug">
                     <i class="fas fa-bug"></i>
@@ -1644,6 +1649,7 @@
             await vieraAPI.ready;
             
             loadUserProfile();
+            document.querySelector('.user-profile')?.classList.add('loaded');
             loadDarkMode();
         });
 

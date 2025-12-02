@@ -2428,11 +2428,9 @@
             </nav>
             
             <div class="user-profile">
-                <div class="user-avatar" id="userAvatar">
-                    ?
-                </div>
+                <div class="user-avatar" id="userAvatar"></div>
                 <div class="user-info">
-                    <div class="user-name" id="userName">Guest</div>
+                    <div class="user-name" id="userName"></div>
                 </div>
                 <button class="bug-report-btn" onclick="openBugReportModal()" title="Report a Bug">
                     <i class="fas fa-bug"></i>
@@ -2455,7 +2453,7 @@
                     <div class="welcome-banner-content">
                         <div class="welcome-greeting">
                             <h1 id="greeting-text">Good Morning ☀️</h1>
-                            <p>Welcome back, <span id="bannerUserName">Student</span>! Ready to learn?</p>
+                            <p>Welcome back, <span id="bannerUserName"></span>! Ready to learn?</p>
                         </div>
                         <div class="welcome-date">
                             <div class="welcome-date-day" id="current-day">Friday</div>
@@ -3118,8 +3116,8 @@
                 document.getElementById('welcomeOverlay').classList.add('show');
                 
                 // Reset user display
-                document.getElementById('userAvatar').textContent = '?';
-                document.getElementById('userName').textContent = 'Guest';
+                document.getElementById('userAvatar').textContent = '';
+                document.getElementById('userName').textContent = '';
                 document.getElementById('welcomeMessage').textContent = 'Welcome to VieraStudy! 👋';
                 
                 // Clear form inputs
