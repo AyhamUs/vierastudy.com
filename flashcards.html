@@ -1587,7 +1587,7 @@
         </div>
     </div>
 
-    <script src="api.js?v=11"></script>
+    <script src="api.js?v=12"></script>
     <script>
         // Notification Modal Functions
         function showNotification(message, type = 'success', title = null) {
@@ -1685,15 +1685,14 @@
 
         // Load User Profile
         function loadUserProfile() {
-            const userProfile = JSON.parse(localStorage.getItem('studyDeckUserProfile'));
-            if (userProfile) {
-                const { firstName, lastName } = userProfile;
-                const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
-                const fullName = `${firstName} ${lastName}`;
+            const user = vieraAPI.getUser();
+            if (user) {
+                const { firstName, lastName } = user;
+                const initials = `${firstName.charAt(0)}${lastName ? lastName.charAt(0) : ''}`.toUpperCase();
+                const fullName = lastName ? `${firstName} ${lastName}` : firstName;
                 document.getElementById('userAvatar').textContent = initials;
                 document.getElementById('userName').textContent = fullName;
             } else {
-                // Redirect to index if no profile exists
                 window.location.href = '/';
             }
         }
@@ -1703,32 +1702,20 @@
         let currentDeck = null;
         let currentCardIndex = 0;
 
-        // Initialize data from cache (will be populated after API is ready)
+        // Initialize data from API cache
         function initializeData() {
-            decks = JSON.parse(localStorage.getItem('studyDeckFlashcards')) || [];
-            classes = JSON.parse(localStorage.getItem('studyDeckClasses')) || [];
+            decks = vieraAPI.getFlashcards() || [];
+            classes = vieraAPI.getClasses() || [];
         }
 
-        // Log activity to localStorage for dashboard
+        // Log activity via API
         function logActivity(icon, color, title) {
-            const activityLog = JSON.parse(localStorage.getItem('studyDeckActivityLog') || '[]');
-            activityLog.unshift({
-                icon: icon,
-                color: color,
-                title: title,
-                time: 'Just now',
-                timestamp: Date.now()
-            });
-            if (activityLog.length > 50) activityLog.pop();
-            localStorage.setItem('studyDeckActivityLog', JSON.stringify(activityLog));
+            vieraAPI.logActivity(icon, color, title);
         }
 
         // Load dark mode immediately to prevent flash
         (function() {
-            const darkMode = localStorage.getItem('studyDeckDarkMode') === 'true';
-            if (darkMode) {
-                document.body.classList.add('dark-mode');
-            }
+            // Dark mode is now handled by API after login
         })();
 
         document.addEventListener('DOMContentLoaded', async function() {
@@ -1736,7 +1723,7 @@
             await vieraAPI.ready;
             
             // Only redirect if there's truly no token
-            if (!localStorage.getItem('vierastudy_token')) {
+            if (!vieraAPI.isLoggedIn()) {
                 window.location.href = '/';
                 return;
             }
@@ -1912,8 +1899,7 @@
             };
 
             decks.push(deck);
-            localStorage.setItem('studyDeckFlashcards', JSON.stringify(decks));
-            syncData();
+            vieraAPI.setFlashcards(decks);
             
             // Log activity
             logActivity('fas fa-layer-group', 'purple', `Created flashcard deck: ${name}`);
@@ -1932,8 +1918,7 @@
             
             if (confirmed) {
                 decks = decks.filter(d => d.id !== id);
-                localStorage.setItem('studyDeckFlashcards', JSON.stringify(decks));
-                syncData();
+                vieraAPI.setFlashcards(decks);
                 renderDecks();
                 showNotification('Deck deleted successfully', 'success', 'Deck Deleted');
             }

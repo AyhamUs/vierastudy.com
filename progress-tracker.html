@@ -1581,7 +1581,7 @@
         </div>
     </div>
 
-    <script src="api.js?v=11"></script>
+    <script src="api.js?v=12"></script>
     <script>
         // Notification Modal Functions
         function showNotification(message, type = 'success', title = null) {
@@ -1679,15 +1679,14 @@
 
         // Load User Profile
         function loadUserProfile() {
-            const userProfile = JSON.parse(localStorage.getItem('studyDeckUserProfile'));
-            if (userProfile) {
-                const { firstName, lastName } = userProfile;
-                const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
-                const fullName = `${firstName} ${lastName}`;
+            const user = vieraAPI.getUser();
+            if (user) {
+                const { firstName, lastName } = user;
+                const initials = `${firstName.charAt(0)}${lastName ? lastName.charAt(0) : ''}`.toUpperCase();
+                const fullName = lastName ? `${firstName} ${lastName}` : firstName;
                 document.getElementById('userAvatar').textContent = initials;
                 document.getElementById('userName').textContent = fullName;
             } else {
-                // Redirect to index if no profile exists
                 window.location.href = '/';
             }
         }
@@ -1696,24 +1695,15 @@
         let tasks = [];
         let classes = [];
 
-        // Initialize data from cache (will be populated after API is ready)
+        // Initialize data from API cache
         function initializeData() {
-            tasks = JSON.parse(localStorage.getItem('studyDeckTasks')) || [];
-            classes = JSON.parse(localStorage.getItem('studyDeckClasses')) || [];
+            tasks = vieraAPI.getTasks() || [];
+            classes = vieraAPI.getClasses() || [];
         }
 
-        // Log activity to localStorage for dashboard
+        // Log activity via API
         function logActivity(icon, color, title) {
-            const activityLog = JSON.parse(localStorage.getItem('studyDeckActivityLog') || '[]');
-            activityLog.unshift({
-                icon: icon,
-                color: color,
-                title: title,
-                time: 'Just now',
-                timestamp: Date.now()
-            });
-            if (activityLog.length > 50) activityLog.pop();
-            localStorage.setItem('studyDeckActivityLog', JSON.stringify(activityLog));
+            vieraAPI.logActivity(icon, color, title);
         }
 
         // Helper function to parse date strings without timezone issues
@@ -1737,7 +1727,7 @@
             await vieraAPI.ready;
             
             // Only redirect if there's truly no token
-            if (!localStorage.getItem('vierastudy_token')) {
+            if (!vieraAPI.isLoggedIn()) {
                 window.location.href = '/';
                 return;
             }
@@ -1874,15 +1864,15 @@
         }
 
         function syncTaskToSchedule(task) {
-            // Get existing events from schedule
-            let events = JSON.parse(localStorage.getItem('studyDeckEvents')) || [];
+            // Get existing events from API
+            let events = vieraAPI.getEvents() || [];
             
             // Check if event already exists for this task
             const existingEventIndex = events.findIndex(e => e.taskId === task.id);
             
             // Get class info
-            const classes = JSON.parse(localStorage.getItem('studyDeckClasses')) || [];
-            const taskClass = classes.find(c => c.name === task.class);
+            const allClasses = vieraAPI.getClasses() || [];
+            const taskClass = allClasses.find(c => c.name === task.class);
             
             const eventData = {
                 id: existingEventIndex >= 0 ? events[existingEventIndex].id : Date.now(),
@@ -1902,8 +1892,7 @@
                 events.push(eventData);
             }
             
-            localStorage.setItem('studyDeckEvents', JSON.stringify(events));
-            syncData();
+            vieraAPI.setEvents(events);
         }
 
         function editTask(id) {
@@ -2035,10 +2024,9 @@
                 tasks = tasks.filter(task => task.id !== id);
                 
                 // Remove from schedule
-                let events = JSON.parse(localStorage.getItem('studyDeckEvents')) || [];
+                let events = vieraAPI.getEvents() || [];
                 events = events.filter(e => e.taskId !== id);
-                localStorage.setItem('studyDeckEvents', JSON.stringify(events));
-                syncData();
+                vieraAPI.setEvents(events);
                 
                 saveTasks();
                 renderTasks();
@@ -2047,8 +2035,7 @@
         }
 
         function saveTasks() {
-            localStorage.setItem('studyDeckTasks', JSON.stringify(tasks));
-            syncData();
+            vieraAPI.setTasks(tasks);
         }
 
         // Drag and Drop functions

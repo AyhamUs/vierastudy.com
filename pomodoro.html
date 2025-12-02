@@ -1584,7 +1584,7 @@
         </div>
     </div>
 
-    <script src="api.js?v=11"></script>
+    <script src="api.js?v=12"></script>
     <script>
         // Notification Modal Functions
         function showNotification(message, type = 'success', title = null) {
@@ -1682,15 +1682,14 @@
 
         // Load User Profile
         function loadUserProfile() {
-            const userProfile = JSON.parse(localStorage.getItem('studyDeckUserProfile'));
-            if (userProfile) {
-                const { firstName, lastName } = userProfile;
-                const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
-                const fullName = `${firstName} ${lastName}`;
+            const user = vieraAPI.getUser();
+            if (user) {
+                const { firstName, lastName } = user;
+                const initials = `${firstName.charAt(0)}${lastName ? lastName.charAt(0) : ''}`.toUpperCase();
+                const fullName = lastName ? `${firstName} ${lastName}` : firstName;
                 document.getElementById('userAvatar').textContent = initials;
                 document.getElementById('userName').textContent = fullName;
             } else {
-                // Redirect to index if no profile exists
                 window.location.href = '/';
             }
         }
@@ -1708,10 +1707,10 @@
             longBreak: 15
         };
 
-        // Initialize data from cache (will be populated after API is ready)
+        // Initialize data from API cache
         function initializeData() {
-            sessions = JSON.parse(localStorage.getItem('studyDeckPomodoroSessions')) || [];
-            classes = JSON.parse(localStorage.getItem('studyDeckClasses')) || [];
+            sessions = vieraAPI.getPomodoroSessions() || [];
+            classes = vieraAPI.getClasses() || [];
         }
 
         const circumference = 2 * Math.PI * 140;
@@ -1732,7 +1731,7 @@
             await vieraAPI.ready;
             
             // Only redirect if there's truly no token
-            if (!localStorage.getItem('vierastudy_token')) {
+            if (!vieraAPI.isLoggedIn()) {
                 window.location.href = '/';
                 return;
             }
@@ -1796,23 +1795,14 @@
             });
         }
 
-        // Log activity to localStorage for dashboard
+        // Log activity via API
         function logActivity(icon, color, title) {
-            const activityLog = JSON.parse(localStorage.getItem('studyDeckActivityLog') || '[]');
-            activityLog.unshift({
-                icon: icon,
-                color: color,
-                title: title,
-                time: 'Just now',
-                timestamp: Date.now()
-            });
-            if (activityLog.length > 50) activityLog.pop();
-            localStorage.setItem('studyDeckActivityLog', JSON.stringify(activityLog));
+            vieraAPI.logActivity(icon, color, title);
         }
 
         function loadSettings() {
-            const saved = JSON.parse(localStorage.getItem('studyDeckPomodoroSettings'));
-            if (saved) {
+            const saved = vieraAPI.getPomodoroSettings();
+            if (saved && Object.keys(saved).length > 0) {
                 settings.work = saved.work || 25;
                 settings.shortBreak = saved.shortBreak || 5;
                 settings.longBreak = saved.longBreak || 15;
@@ -1829,8 +1819,7 @@
             settings.shortBreak = parseInt(document.getElementById('shortBreakDuration').value);
             settings.longBreak = parseInt(document.getElementById('longBreakDuration').value);
             
-            localStorage.setItem('studyDeckPomodoroSettings', JSON.stringify(settings));
-            syncData();
+            vieraAPI.setPomodoroSettings(settings);
             resetTimer();
             showNotification('Your Pomodoro settings have been saved!', 'success', 'Settings Saved');
         }
@@ -1920,14 +1909,13 @@
                 };
                 
                 sessions.push(session);
-                localStorage.setItem('studyDeckPomodoroSessions', JSON.stringify(sessions));
+                vieraAPI.setPomodoroSessions(sessions);
                 
                 // Update lastSession for activity tracking
-                const pomodoroStats = JSON.parse(localStorage.getItem('studyDeckPomodoroStats') || '{}');
+                const pomodoroStats = vieraAPI.getPomodoroStats() || {};
                 pomodoroStats.lastSession = new Date().toISOString();
                 pomodoroStats.totalSessions = (pomodoroStats.totalSessions || 0) + 1;
-                localStorage.setItem('studyDeckPomodoroStats', JSON.stringify(pomodoroStats));
-                syncData();
+                vieraAPI.setPomodoroStats(pomodoroStats);
                 
                 // Log activity
                 const selectedClass = classId ? classes.find(c => c.id === parseInt(classId)) : null;

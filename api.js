@@ -1,15 +1,10 @@
-// VieraStudy API Client v11 - Fixed mobile localStorage issues
-// All data stored in Cloudflare Workers KV, with aggressive caching
+// VieraStudy API Client v12 - Clean API-only version
+// ALL data comes from Cloudflare Workers - NO localStorage for data
+// Token stored in sessionStorage for persistence across page refreshes
 
 const API_URL = 'https://vierastudy-api.ayhamissa416.workers.dev';
 
-// IMPORTANT: Capture original localStorage methods FIRST, before anything else
-// This prevents issues on mobile where script execution order can vary
-const _originalGetItem = localStorage.getItem.bind(localStorage);
-const _originalSetItem = localStorage.setItem.bind(localStorage);
-const _originalRemoveItem = localStorage.removeItem.bind(localStorage);
-
-// In-memory cache for current session
+// In-memory cache for current session data (loaded from cloud)
 let _cache = {
     flashcards: [],
     todos: [],
@@ -23,35 +18,26 @@ let _cache = {
     activityLog: [],
     settings: { darkMode: false }
 };
+
 let _cacheLoaded = false;
-let _isDirty = false; // Track if there are unsaved changes
+let _isDirty = false;
 let _saveTimeout = null;
-let _maxSaveTimeout = null; // Force save after max delay
+let _maxSaveTimeout = null;
 let _readyResolve;
 let _readyPromise = new Promise(resolve => { _readyResolve = resolve; });
 
-// Session verification cache
-let _lastVerifyTime = 0;
-let _verifyCache = null;
-const VERIFY_CACHE_TTL = 5 * 60 * 1000; // 5 minutes
-
-// Data loading cache  
-let _lastLoadTime = 0;
-const DATA_CACHE_TTL = 30 * 60 * 1000; // 30 minutes
-
 // Sync timing
-const SYNC_DEBOUNCE = 3000; // 3 seconds after last change
-const SYNC_MAX_DELAY = 10000; // Maximum 10 seconds before forced sync
+const SYNC_DEBOUNCE = 2000;
+const SYNC_MAX_DELAY = 8000;
 
 class VieraStudyAPI {
     constructor() {
-        // Use _originalGetItem to ensure we get the real localStorage values
-        this.token = _originalGetItem('vierastudy_token');
-        this.user = JSON.parse(_originalGetItem('vierastudy_user') || 'null');
-        console.log('[Mobile Debug] API Constructor - token exists:', !!this.token, 'user:', this.user?.firstName);
+        // Token and user stored in sessionStorage (survives page refresh, clears on browser close)
+        this.token = sessionStorage.getItem('vierastudy_token');
+        this.user = JSON.parse(sessionStorage.getItem('vierastudy_user') || 'null');
+        console.log('[VieraStudy] Init - logged in:', !!this.token, 'user:', this.user?.firstName);
     }
 
-    // Promise that resolves when data is ready
     get ready() {
         return _readyPromise;
     }
@@ -60,25 +46,20 @@ class VieraStudyAPI {
 
     async register(email, password, firstName, lastName) {
         try {
-            console.log('[Mobile Debug] Starting registration for:', email);
             const response = await fetch(`${API_URL}/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password, firstName, lastName })
             });
             const data = await response.json();
-            console.log('[Mobile Debug] Register response:', data.success, data.user?.firstName);
             
             if (data.success && data.token) {
                 this.token = data.token;
                 this.user = data.user;
-                // Use _originalSetItem to bypass any override issues on mobile
-                _originalSetItem('vierastudy_token', data.token);
-                _originalSetItem('vierastudy_user', JSON.stringify(data.user));
-                console.log('[Mobile Debug] Token stored after register');
+                sessionStorage.setItem('vierastudy_token', data.token);
+                sessionStorage.setItem('vierastudy_user', JSON.stringify(data.user));
                 _cacheLoaded = false;
-                _lastVerifyTime = Date.now();
-                _verifyCache = data.user;
+                console.log('[VieraStudy] Registered:', data.user.firstName);
             }
             return data;
         } catch (error) {
@@ -89,31 +70,23 @@ class VieraStudyAPI {
 
     async login(email, password) {
         try {
-            console.log('[Mobile Debug] Starting login for:', email);
             const response = await fetch(`${API_URL}/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
             });
             const data = await response.json();
-            console.log('[Mobile Debug] Login response:', data.success, data.user?.firstName);
             
             if (data.success && data.token) {
                 this.token = data.token;
                 this.user = data.user;
-                // Use _originalSetItem to bypass any override issues on mobile
-                _originalSetItem('vierastudy_token', data.token);
-                _originalSetItem('vierastudy_user', JSON.stringify(data.user));
-                console.log('[Mobile Debug] Token stored, length:', data.token.length);
-                console.log('[Mobile Debug] User stored:', data.user.firstName, data.user.lastName);
-                // Verify it was stored
-                console.log('[Mobile Debug] Token readback:', _originalGetItem('vierastudy_token')?.substring(0, 20));
-                console.log('[Mobile Debug] User readback:', _originalGetItem('vierastudy_user')?.substring(0, 50));
+                sessionStorage.setItem('vierastudy_token', data.token);
+                sessionStorage.setItem('vierastudy_user', JSON.stringify(data.user));
                 _cacheLoaded = false;
-                _lastVerifyTime = Date.now();
-                _verifyCache = data.user;
+                console.log('[VieraStudy] Logged in:', data.user.firstName);
+                
                 // Load data from cloud
-                await this.loadData(true); // Force load on login
+                await this.loadData();
             }
             return data;
         } catch (error) {
@@ -125,9 +98,7 @@ class VieraStudyAPI {
     async logout() {
         try {
             if (this.token) {
-                // Save any pending changes first (force immediate save)
                 await this._saveDataNow();
-                
                 await fetch(`${API_URL}/logout`, {
                     method: 'POST',
                     headers: { 
@@ -140,11 +111,14 @@ class VieraStudyAPI {
             console.error('Logout error:', error);
         }
         
-        // Clear everything
+        this._clearSession();
+    }
+
+    _clearSession() {
         this.token = null;
         this.user = null;
-        _originalRemoveItem('vierastudy_token');
-        _originalRemoveItem('vierastudy_user');
+        sessionStorage.removeItem('vierastudy_token');
+        sessionStorage.removeItem('vierastudy_user');
         _cache = {
             flashcards: [],
             todos: [],
@@ -160,31 +134,12 @@ class VieraStudyAPI {
         };
         _cacheLoaded = false;
         _isDirty = false;
-        _lastVerifyTime = 0;
-        _verifyCache = null;
-        _lastLoadTime = 0;
     }
 
     async verifySession() {
         if (!this.token) return null;
         
-        // Use cached verification if still valid
-        const now = Date.now();
-        if (_verifyCache && (now - _lastVerifyTime) < VERIFY_CACHE_TTL) {
-            console.log('Using cached session verification');
-            // Still load data if not loaded
-            if (!_cacheLoaded) {
-                await this.loadData();
-            }
-            return _verifyCache;
-        }
-        
-        // If we have a cached user from localStorage, use it as fallback
-        const cachedUserStr = _originalGetItem('vierastudy_user');
-        const cachedUser = cachedUserStr ? JSON.parse(cachedUserStr) : null;
-        
         try {
-            // Add timeout for mobile - 10 second limit
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 10000);
             
@@ -197,27 +152,15 @@ class VieraStudyAPI {
             clearTimeout(timeoutId);
             
             if (!response.ok) {
-                // Only clear credentials on explicit auth failure (401/403)
                 if (response.status === 401 || response.status === 403) {
-                    console.log('Token explicitly rejected by server');
-                    this.token = null;
-                    this.user = null;
-                    _originalRemoveItem('vierastudy_token');
-                    _originalRemoveItem('vierastudy_user');
-                    _verifyCache = null;
-                    _lastVerifyTime = 0;
+                    console.log('[VieraStudy] Token rejected');
+                    this._clearSession();
                     return null;
                 }
-                // For other errors (500, etc), use cached user if available
-                if (cachedUser) {
-                    console.log('Server error, using cached user');
-                    this.user = cachedUser;
-                    _verifyCache = cachedUser;
-                    _lastVerifyTime = Date.now();
-                    if (!_cacheLoaded) {
-                        await this.loadData();
-                    }
-                    return cachedUser;
+                // Server error - use cached user if available
+                if (this.user) {
+                    console.log('[VieraStudy] Server error, using cached user');
+                    return this.user;
                 }
                 return null;
             }
@@ -225,13 +168,8 @@ class VieraStudyAPI {
             const data = await response.json();
             if (data.success && data.user) {
                 this.user = data.user;
-                _originalSetItem('vierastudy_user', JSON.stringify(data.user));
+                sessionStorage.setItem('vierastudy_user', JSON.stringify(data.user));
                 
-                // Cache the verification
-                _verifyCache = data.user;
-                _lastVerifyTime = Date.now();
-                
-                // Load data from cloud if not already loaded
                 if (!_cacheLoaded) {
                     await this.loadData();
                 }
@@ -240,18 +178,10 @@ class VieraStudyAPI {
             return null;
         } catch (error) {
             console.error('Verify error:', error);
-            // On timeout/network error, use cached user data
-            // This helps with spotty mobile connections
-            if (cachedUser) {
-                console.log('Network error, using cached user data');
-                this.user = cachedUser;
-                _verifyCache = cachedUser;
-                _lastVerifyTime = Date.now();
-                // Try to load data anyway
-                if (!_cacheLoaded) {
-                    await this.loadData();
-                }
-                return cachedUser;
+            // Network error - use cached user if available
+            if (this.user) {
+                console.log('[VieraStudy] Network error, using cached user');
+                return this.user;
             }
             return null;
         }
@@ -265,24 +195,12 @@ class VieraStudyAPI {
         return this.user;
     }
 
-    // Backward compatibility aliases
-    async syncToCloud() { return await this._saveDataNow(); }
-    async syncFromCloud() { return await this.loadData(true); }
-
     // ============ DATA OPERATIONS ============
 
-    async loadData(forceReload = false) {
+    async loadData() {
         if (!this.token) return null;
         
-        // Use cached data if still valid and not forcing reload
-        const now = Date.now();
-        if (!forceReload && _cacheLoaded && (now - _lastLoadTime) < DATA_CACHE_TTL) {
-            console.log('Using cached data (loaded ' + Math.round((now - _lastLoadTime) / 1000) + 's ago)');
-            return _cache;
-        }
-        
         try {
-            // Add timeout for mobile - 15 second limit for data load
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 15000);
             
@@ -294,10 +212,13 @@ class VieraStudyAPI {
             
             clearTimeout(timeoutId);
             
-            if (!response.ok) return null;
+            if (!response.ok) {
+                console.error('[VieraStudy] Failed to load data:', response.status);
+                return null;
+            }
+            
             const data = await response.json();
             
-            // Update cache
             _cache = {
                 flashcards: data.flashcards || [],
                 todos: data.todos || [],
@@ -312,39 +233,29 @@ class VieraStudyAPI {
                 settings: data.settings || { darkMode: false }
             };
             _cacheLoaded = true;
-            _lastLoadTime = Date.now();
             _isDirty = false;
             
-            // Sync dark mode from cloud to localStorage (for instant loading on next visit)
-            // and apply it to the page
+            // Apply dark mode
             if (_cache.settings.darkMode) {
                 document.body.classList.add('dark-mode');
-                _originalSetItem('studyDeckDarkMode', 'true');
             } else {
                 document.body.classList.remove('dark-mode');
-                _originalSetItem('studyDeckDarkMode', 'false');
             }
             
-            console.log('Data loaded from cloud');
+            console.log('[VieraStudy] Data loaded from cloud');
             return _cache;
         } catch (error) {
             console.error('Load data error:', error);
-            // On timeout, still mark as loaded to prevent infinite retries
-            // User can refresh to try again
             if (error.name === 'AbortError') {
-                console.log('Data load timed out - using empty cache');
-                _cacheLoaded = true;
-                _lastLoadTime = Date.now();
+                console.log('[VieraStudy] Data load timed out');
             }
             return null;
         }
     }
 
-    // Internal immediate save (used for logout, page unload)
     async _saveDataNow() {
-        if (!this.token || !_isDirty) return { success: true, message: 'No changes to save' };
+        if (!this.token || !_isDirty) return { success: true };
         
-        // Clear any pending timeouts
         if (_saveTimeout) {
             clearTimeout(_saveTimeout);
             _saveTimeout = null;
@@ -365,7 +276,7 @@ class VieraStudyAPI {
             });
             const result = await response.json();
             _isDirty = false;
-            console.log('Data saved to cloud');
+            console.log('[VieraStudy] Data saved to cloud');
             return result;
         } catch (error) {
             console.error('Save data error:', error);
@@ -373,25 +284,20 @@ class VieraStudyAPI {
         }
     }
 
-    // Public save method - schedules a debounced save
     async saveData() {
         this.scheduleSave();
-        return { success: true, message: 'Save scheduled' };
+        return { success: true };
     }
 
-    // Debounced save - saves after SYNC_DEBOUNCE ms of no changes
-    // Also has a maximum delay of SYNC_MAX_DELAY ms
     scheduleSave() {
         if (!this.token) return;
         
         _isDirty = true;
         
-        // Clear existing debounce timer
         if (_saveTimeout) {
             clearTimeout(_saveTimeout);
         }
         
-        // Set up debounced save
         _saveTimeout = setTimeout(() => {
             this._saveDataNow();
             if (_maxSaveTimeout) {
@@ -400,7 +306,6 @@ class VieraStudyAPI {
             }
         }, SYNC_DEBOUNCE);
         
-        // Set up max delay timer if not already set
         if (!_maxSaveTimeout) {
             _maxSaveTimeout = setTimeout(() => {
                 if (_saveTimeout) {
@@ -412,6 +317,10 @@ class VieraStudyAPI {
             }, SYNC_MAX_DELAY);
         }
     }
+
+    // Backward compatibility
+    async syncToCloud() { return await this._saveDataNow(); }
+    async syncFromCloud() { return await this.loadData(); }
 
     // ============ DATA GETTERS ============
 
@@ -427,7 +336,7 @@ class VieraStudyAPI {
     getActivityLog() { return _cache.activityLog; }
     getSettings() { return _cache.settings; }
 
-    // ============ DATA SETTERS (auto-save) ============
+    // ============ DATA SETTERS ============
 
     setFlashcards(data) { _cache.flashcards = data; this.scheduleSave(); }
     setTodos(data) { _cache.todos = data; this.scheduleSave(); }
@@ -551,7 +460,6 @@ class VieraStudyAPI {
             message,
             timestamp: new Date().toISOString()
         });
-        // Keep only last 50 activities
         if (_cache.activityLog.length > 50) {
             _cache.activityLog = _cache.activityLog.slice(0, 50);
         }
@@ -576,271 +484,69 @@ class VieraStudyAPI {
 // Create global instance
 window.vieraAPI = new VieraStudyAPI();
 
-// ============ localStorage COMPATIBILITY LAYER ============
-// Override localStorage for studyDeck keys to use cloud cache instead
-// This allows existing code to work without modification
-// NOTE: _originalGetItem, _originalSetItem, _originalRemoveItem are defined at top of file
-
 // Global sync function for backward compatibility
-// Forces an immediate save for reliability
 window.syncData = function() {
-    console.log('syncData() called, isLoggedIn:', window.vieraAPI?.isLoggedIn());
     if (window.vieraAPI && window.vieraAPI.isLoggedIn()) {
         _isDirty = true;
-        const token = _originalGetItem('vierastudy_token');
-        console.log('Token found:', !!token);
-        console.log('Cache to save:', JSON.stringify(_cache).substring(0, 200) + '...');
-        if (token) {
-            // Use fetch for immediate save (more reliable than sendBeacon)
-            fetch(`${API_URL}/data`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify(_cache)
-            }).then(response => {
-                console.log('syncData response status:', response.status);
-                return response.json();
-            }).then(data => {
-                _isDirty = false;
-                console.log('Data saved via syncData():', data);
-            }).catch(err => {
-                console.error('syncData save failed:', err);
-            });
-        }
+        window.vieraAPI._saveDataNow();
     }
 };
 
-// Map localStorage keys to cache properties
-const _keyMap = {
-    'studyDeckFlashcards': 'flashcards',
-    'studyDeckTodos': 'todos',
-    'studyDeckNotes': 'notes',
-    'studyDeckClasses': 'classes',
-    'studyDeckEvents': 'events',
-    'studyDeckTasks': 'tasks',
-    'studyDeckPomodoroStats': 'pomodoroStats',
-    'studyDeckPomodoroSessions': 'pomodoroSessions',
-    'studyDeckPomodoroSettings': 'pomodoroSettings',
-    'studyDeckActivityLog': 'activityLog',
-    'studyDeckUserProfile': 'userProfile'
-    // Note: studyDeckDarkMode is NOT in this map - it uses real localStorage for instant loading
-};
-
-// Apply dark mode immediately on script load (before API verification)
-// This prevents the white flash
-(function applyDarkModeImmediately() {
-    const darkMode = localStorage.getItem('studyDeckDarkMode') === 'true';
-    if (darkMode) {
-        document.body.classList.add('dark-mode');
-    }
-    // Also set in cache
-    _cache.settings.darkMode = darkMode;
-})();
-
-localStorage.getItem = function(key) {
-    // Dark mode uses real localStorage for instant loading
-    if (key === 'studyDeckDarkMode') {
-        return _originalGetItem(key);
-    }
-    
-    // Handle studyDeck keys from cache
-    if (_keyMap[key]) {
-        const cacheKey = _keyMap[key];
-        
-        if (cacheKey === 'userProfile') {
-            const user = window.vieraAPI?.user;
-            if (user) {
-                return JSON.stringify({
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    email: user.email
-                });
-            }
-            return null;
-        }
-        
-        const value = _cache[cacheKey];
-        if (value === undefined || value === null) {
-            return null;
-        }
-        return JSON.stringify(value);
-    }
-    
-    // Pass through to real localStorage
-    return _originalGetItem(key);
-};
-
-localStorage.setItem = function(key, value) {
-    // Dark mode: save to both real localStorage AND cache, then sync
-    if (key === 'studyDeckDarkMode') {
-        _originalSetItem(key, value);
-        _cache.settings.darkMode = value === 'true';
-        if (_cache.settings.darkMode) {
-            document.body.classList.add('dark-mode');
-        } else {
-            document.body.classList.remove('dark-mode');
-        }
-        if (window.vieraAPI?.isLoggedIn()) {
-            window.vieraAPI.scheduleSave();
-        }
-        return;
-    }
-    
-    // Handle studyDeck keys - save to cache
-    if (_keyMap[key]) {
-        const cacheKey = _keyMap[key];
-        
-        if (cacheKey === 'userProfile') {
-            // User profile is managed by the API, ignore local sets
-            return;
-        }
-        
-        try {
-            _cache[cacheKey] = JSON.parse(value);
-            console.log(`Cache updated: ${cacheKey}`, _cache[cacheKey].length || Object.keys(_cache[cacheKey]).length, 'items');
-        } catch (e) {
-            _cache[cacheKey] = value;
-        }
-        
-        // Schedule cloud save (debounced)
-        if (window.vieraAPI?.isLoggedIn()) {
-            window.vieraAPI.scheduleSave();
-        }
-        return;
-    }
-    
-    // Pass through to real localStorage
-    return _originalSetItem(key, value);
-};
-
-localStorage.removeItem = function(key) {
-    // Dark mode: remove from both
-    if (key === 'studyDeckDarkMode') {
-        _originalRemoveItem(key);
-        _cache.settings.darkMode = false;
-        document.body.classList.remove('dark-mode');
-        if (window.vieraAPI?.isLoggedIn()) {
-            window.vieraAPI.scheduleSave();
-        }
-        return;
-    }
-    
-    // Handle studyDeck keys - reset in cache
-    if (_keyMap[key]) {
-        const cacheKey = _keyMap[key];
-        
-        if (cacheKey !== 'userProfile') {
-            if (Array.isArray(_cache[cacheKey])) {
-                _cache[cacheKey] = [];
-            } else {
-                _cache[cacheKey] = {};
-            }
-        }
-        
-        if (window.vieraAPI?.isLoggedIn()) {
-            window.vieraAPI.scheduleSave();
-        }
-        return;
-    }
-    
-    // Pass through to real localStorage
-    return _originalRemoveItem(key);
-};
-
-// Helper function to save via sendBeacon
+// Save via sendBeacon for page unload
 function saveViaBeacon() {
     if (window.vieraAPI?.isLoggedIn() && _isDirty) {
-        const token = _originalGetItem('vierastudy_token');
+        const token = sessionStorage.getItem('vierastudy_token');
         if (token && navigator.sendBeacon) {
             const blob = new Blob([JSON.stringify(_cache)], { type: 'application/json' });
             navigator.sendBeacon(`${API_URL}/data?token=${token}`, blob);
             _isDirty = false;
-            console.log('Data saved via sendBeacon');
             return true;
         }
     }
     return false;
 }
 
-// Save data before page unload
-window.addEventListener('beforeunload', function() {
-    saveViaBeacon();
-});
+// Save before page unload
+window.addEventListener('beforeunload', saveViaBeacon);
+window.addEventListener('pagehide', saveViaBeacon);
 
-// Also handle pagehide (more reliable on mobile and some browsers)
-window.addEventListener('pagehide', function() {
-    saveViaBeacon();
-});
-
-// Save when clicking any internal navigation link
-document.addEventListener('click', function(e) {
-    const link = e.target.closest('a[href]');
-    if (link && _isDirty) {
-        const href = link.getAttribute('href');
-        // Check if it's an internal link (not external)
-        if (href && !href.startsWith('http') && !href.startsWith('//') && !href.startsWith('mailto:')) {
-            saveViaBeacon();
-        }
-    }
-});
-
-// Also save on visibility change (user switches tabs or minimizes)
+// Save when visibility changes (tab switch, minimize)
 document.addEventListener('visibilitychange', function() {
     if (document.visibilityState === 'hidden') {
         saveViaBeacon();
     }
 });
 
-// Auto-initialize: verify session and load data on page load
-// This runs automatically when api.js loads
+// Save when clicking internal links
+document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href]');
+    if (link && _isDirty) {
+        const href = link.getAttribute('href');
+        if (href && !href.startsWith('http') && !href.startsWith('//') && !href.startsWith('mailto:')) {
+            saveViaBeacon();
+        }
+    }
+});
+
+// Auto-initialize on load
 (async function initializeSession() {
-    const isIndexPage = window.location.pathname.endsWith('index.html') || 
-                        window.location.pathname.endsWith('index') ||
-                        window.location.pathname === '/' ||
-                        window.location.pathname === '';
-    
     if (window.vieraAPI && window.vieraAPI.token) {
         try {
-            // Verify the session is still valid
             const user = await window.vieraAPI.verifySession();
             if (user) {
-                console.log('Session verified, data loaded from cloud');
+                console.log('[VieraStudy] Session verified');
                 _readyResolve(true);
             } else {
-                console.log('Session expired or invalid');
-                // Clear invalid session to prevent stuck state
-                window.vieraAPI.token = null;
-                window.vieraAPI.user = null;
-                _originalRemoveItem('vierastudy_token');
-                _originalRemoveItem('vierastudy_user');
+                console.log('[VieraStudy] Session invalid');
                 _readyResolve(false);
-                // Only redirect from index page - sub-pages will handle their own redirect
-                // This prevents race conditions on mobile
             }
         } catch (error) {
-            console.error('Session verification failed:', error);
-            // On network failure, try to use cached credentials if available
-            const cachedUser = window.vieraAPI.user;
-            if (cachedUser) {
-                console.log('Using cached credentials due to network error');
-                _readyResolve(true);
-            } else {
-                // Clear invalid session on network failure to prevent stuck state
-                window.vieraAPI.token = null;
-                window.vieraAPI.user = null;
-                _originalRemoveItem('vierastudy_token');
-                _originalRemoveItem('vierastudy_user');
-                _readyResolve(false);
-                // Only redirect from index page - sub-pages will handle their own redirect
-            }
+            console.error('[VieraStudy] Session check failed:', error);
+            _readyResolve(false);
         }
     } else {
-        // No token - resolve immediately as not logged in
         _readyResolve(false);
-        // Only redirect from index page - sub-pages will handle their own redirect
     }
 })();
 
-console.log('VieraStudy API v11 loaded (fixed mobile localStorage)');
+console.log('VieraStudy API v12 loaded (API-only, no localStorage)');

@@ -1331,7 +1331,7 @@
         </div>
     </div>
 
-    <script src="api.js?v=11"></script>
+    <script src="api.js?v=12"></script>
     <script>
         // Notification Modal Functions
         function showNotification(message, type = 'success', title = null) {
@@ -1433,15 +1433,14 @@
 
         // Load User Profile
         function loadUserProfile() {
-            const userProfile = JSON.parse(localStorage.getItem('studyDeckUserProfile'));
-            if (userProfile) {
-                const { firstName, lastName } = userProfile;
-                const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
-                const fullName = `${firstName} ${lastName}`;
+            const user = vieraAPI.getUser();
+            if (user) {
+                const { firstName, lastName } = user;
+                const initials = `${firstName.charAt(0)}${lastName ? lastName.charAt(0) : ''}`.toUpperCase();
+                const fullName = lastName ? `${firstName} ${lastName}` : firstName;
                 document.getElementById('userAvatar').textContent = initials;
                 document.getElementById('userName').textContent = fullName;
             } else {
-                // Redirect to index if no profile exists
                 window.location.href = '/';
             }
         }
@@ -1477,23 +1476,14 @@
         let selectedIcon = icons[0].icon;
         let classes = [];
 
-        // Initialize data from cache (will be populated after API is ready)
+        // Initialize data from API cache
         function initializeData() {
-            classes = JSON.parse(localStorage.getItem('studyDeckClasses')) || [];
+            classes = vieraAPI.getClasses() || [];
         }
 
-        // Log activity to localStorage for dashboard
+        // Log activity via API
         function logActivity(icon, color, title) {
-            const activityLog = JSON.parse(localStorage.getItem('studyDeckActivityLog') || '[]');
-            activityLog.unshift({
-                icon: icon,
-                color: color,
-                title: title,
-                time: 'Just now',
-                timestamp: Date.now()
-            });
-            if (activityLog.length > 50) activityLog.pop();
-            localStorage.setItem('studyDeckActivityLog', JSON.stringify(activityLog));
+            vieraAPI.logActivity(icon, color, title);
         }
 
         // Load dark mode on page load
@@ -1509,7 +1499,7 @@
             await vieraAPI.ready;
             
             // Only redirect if there's truly no token
-            if (!localStorage.getItem('vierastudy_token')) {
+            if (!vieraAPI.isLoggedIn()) {
                 window.location.href = '/';
                 return;
             }
@@ -1656,8 +1646,7 @@
                 classes.push(classData);
             }
 
-            localStorage.setItem('studyDeckClasses', JSON.stringify(classes));
-            syncData();
+            vieraAPI.setClasses(classes);
             
             // Log activity for new classes
             if (isNew) {
@@ -1692,8 +1681,7 @@
             
             if (confirmed) {
                 classes = classes.filter(c => c.id !== id);
-                localStorage.setItem('studyDeckClasses', JSON.stringify(classes));
-                syncData();
+                vieraAPI.setClasses(classes);
                 renderClasses();
                 showNotification('Class deleted successfully', 'success', 'Class Deleted');
             }

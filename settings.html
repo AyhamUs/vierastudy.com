@@ -1400,7 +1400,7 @@
         </div>
     </div>
 
-    <script src="api.js?v=11"></script>
+    <script src="api.js?v=12"></script>
     <script>
         // Notification Modal Functions
         function showNotification(message, type = 'success', title = null) {
@@ -1498,9 +1498,9 @@
 
         // Load User Profile
         function loadUserProfile() {
-            const userProfile = JSON.parse(localStorage.getItem('studyDeckUserProfile'));
-            if (userProfile) {
-                const { firstName, lastName, email } = userProfile;
+            const user = vieraAPI.getUser();
+            if (user) {
+                const { firstName, lastName, email } = user;
                 const initials = `${firstName.charAt(0)}${lastName ? lastName.charAt(0) : ''}`.toUpperCase();
                 const fullName = lastName ? `${firstName} ${lastName}` : firstName;
                 document.getElementById('userAvatar').textContent = initials;
@@ -1511,7 +1511,6 @@
                 document.getElementById('lastNameInput').value = lastName || '';
                 document.getElementById('emailDisplay').textContent = email || 'Not available';
             } else {
-                // Redirect to index if no profile exists
                 window.location.href = '/';
             }
         }
@@ -1540,7 +1539,7 @@
             }
             
             try {
-                const token = localStorage.getItem('vierastudy_token');
+                const token = vieraAPI.token;
                 const response = await fetch('https://vierastudy-api.ayhamissa416.workers.dev/profile', {
                     method: 'PUT',
                     headers: {
@@ -1556,7 +1555,7 @@
                     // Update vieraAPI user object
                     if (window.vieraAPI) {
                         vieraAPI.user = data.user;
-                        localStorage.setItem('vierastudy_user', JSON.stringify(data.user));
+                        sessionStorage.setItem('vierastudy_user', JSON.stringify(data.user));
                     }
                     
                     // Update UI
@@ -1603,7 +1602,7 @@
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Changing...';
             
             try {
-                const token = localStorage.getItem('vierastudy_token');
+                const token = vieraAPI.token;
                 const response = await fetch('https://vierastudy-api.ayhamissa416.workers.dev/password', {
                     method: 'PUT',
                     headers: {
@@ -1649,7 +1648,7 @@
             await vieraAPI.ready;
             
             // Only redirect if there's truly no token
-            if (!localStorage.getItem('vierastudy_token')) {
+            if (!vieraAPI.isLoggedIn()) {
                 window.location.href = '/';
                 return;
             }
@@ -1711,11 +1710,10 @@
 
         function toggleDarkMode() {
             const darkMode = document.getElementById('darkModeToggle').checked;
-            localStorage.setItem('studyDeckDarkMode', darkMode);
             
-            // Sync to cloud
+            // Sync to cloud via API
             if (typeof vieraAPI !== 'undefined' && vieraAPI.isLoggedIn()) {
-                syncData();
+                vieraAPI.setDarkMode(darkMode);
             }
             
             if (darkMode) {
@@ -1735,27 +1733,17 @@
             );
             
             if (confirmed) {
-                // Store profile and dark mode preference before clearing
-                const userProfile = localStorage.getItem('studyDeckUserProfile');
-                const darkMode = localStorage.getItem('studyDeckDarkMode');
-                
-                // Clear all study data
-                localStorage.removeItem('studyDeckClasses');
-                localStorage.removeItem('studyDeckNotes');
-                localStorage.removeItem('studyDeckFlashcards');
-                localStorage.removeItem('studyDeckTasks');
-                localStorage.removeItem('studyDeckTodos');
-                localStorage.removeItem('studyDeckEvents');
-                localStorage.removeItem('studyDeckProgress');
-                localStorage.removeItem('studyDeckPomodoro');
-                localStorage.removeItem('studyDeckPomodoroStats');
-                localStorage.removeItem('studyDeckPomodoroSessions');
-                localStorage.removeItem('studyDeckActivityLog');
-                localStorage.removeItem('calculatorHistory');
-                
-                // Restore profile and settings
-                if (userProfile) localStorage.setItem('studyDeckUserProfile', userProfile);
-                if (darkMode) localStorage.setItem('studyDeckDarkMode', darkMode);
+                // Reset all study data via API
+                vieraAPI.setClasses([]);
+                vieraAPI.setNotes([]);
+                vieraAPI.setFlashcards([]);
+                vieraAPI.setTasks([]);
+                vieraAPI.setTodos([]);
+                vieraAPI.setEvents([]);
+                vieraAPI.setPomodoroStats({});
+                vieraAPI.setPomodoroSessions([]);
+                vieraAPI.setPomodoroSettings({});
+                vieraAPI.setActivityLog([]);
                 
                 showNotification('All study data has been reset. Your account profile was preserved.', 'success', 'Data Reset Complete');
             }

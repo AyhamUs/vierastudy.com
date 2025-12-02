@@ -1547,7 +1547,7 @@
         </div>
     </div>
 
-    <script src="api.js?v=11"></script>
+    <script src="api.js?v=12"></script>
     <script>
         // Notification Modal Functions
         function showNotification(message, type = 'success', title = null) {
@@ -1645,15 +1645,14 @@
 
         // Load User Profile
         function loadUserProfile() {
-            const userProfile = JSON.parse(localStorage.getItem('studyDeckUserProfile'));
-            if (userProfile) {
-                const { firstName, lastName } = userProfile;
-                const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
-                const fullName = `${firstName} ${lastName}`;
+            const user = vieraAPI.getUser();
+            if (user) {
+                const { firstName, lastName } = user;
+                const initials = `${firstName.charAt(0)}${lastName ? lastName.charAt(0) : ''}`.toUpperCase();
+                const fullName = lastName ? `${firstName} ${lastName}` : firstName;
                 document.getElementById('userAvatar').textContent = initials;
                 document.getElementById('userName').textContent = fullName;
             } else {
-                // Redirect to index if no profile exists
                 window.location.href = '/';
             }
         }
@@ -1662,24 +1661,15 @@
         let classes = [];
         let currentFilter = 'all';
 
-        // Initialize data from cache (will be populated after API is ready)
+        // Initialize data from API cache
         function initializeData() {
-            todos = JSON.parse(localStorage.getItem('studyDeckTodos')) || [];
-            classes = JSON.parse(localStorage.getItem('studyDeckClasses')) || [];
+            todos = vieraAPI.getTodos() || [];
+            classes = vieraAPI.getClasses() || [];
         }
 
-        // Log activity to localStorage for dashboard
+        // Log activity via API
         function logActivity(icon, color, title) {
-            const activityLog = JSON.parse(localStorage.getItem('studyDeckActivityLog') || '[]');
-            activityLog.unshift({
-                icon: icon,
-                color: color,
-                title: title,
-                time: 'Just now',
-                timestamp: Date.now()
-            });
-            if (activityLog.length > 50) activityLog.pop();
-            localStorage.setItem('studyDeckActivityLog', JSON.stringify(activityLog));
+            vieraAPI.logActivity(icon, color, title);
         }
 
         // Helper function to parse date strings without timezone issues
@@ -1702,7 +1692,7 @@
             await vieraAPI.ready;
             
             // Only redirect if there's truly no token
-            if (!localStorage.getItem('vierastudy_token')) {
+            if (!vieraAPI.isLoggedIn()) {
                 window.location.href = '/';
                 return;
             }
@@ -1856,8 +1846,7 @@
                 todos.push(todoData);
             }
 
-            localStorage.setItem('studyDeckTodos', JSON.stringify(todos));
-            syncData();
+            vieraAPI.setTodos(todos);
             
             // Log activity for new tasks
             if (isNew) {
@@ -1874,8 +1863,8 @@
         }
 
         function syncToSchedule(todo) {
-            // Get existing events from schedule
-            let events = JSON.parse(localStorage.getItem('studyDeckEvents')) || [];
+            // Get existing events from API
+            let events = vieraAPI.getEvents() || [];
             
             // Check if event already exists for this todo
             const existingEventIndex = events.findIndex(e => e.todoId === todo.id);
@@ -1901,7 +1890,7 @@
                 events.push(eventData);
             }
             
-            localStorage.setItem('studyDeckEvents', JSON.stringify(events));
+            vieraAPI.setEvents(events);
         }
 
         function editTodo(id) {
@@ -1923,14 +1912,12 @@
             if (todo) {
                 todo.completed = !todo.completed;
                 todo.updated = new Date().toISOString();
-                localStorage.setItem('studyDeckTodos', JSON.stringify(todos));
                 
                 // Log activity
                 if (todo.completed) {
                     logActivity('fas fa-check-circle', 'green', `Completed task: ${todo.title}`);
                 }
-                localStorage.setItem('studyDeckTodos', JSON.stringify(todos));
-                syncData();
+                vieraAPI.setTodos(todos);
                 renderTodos();
             }
         }
@@ -1944,14 +1931,12 @@
             
             if (confirmed) {
                 todos = todos.filter(t => t.id !== id);
-                localStorage.setItem('studyDeckTodos', JSON.stringify(todos));
-                syncData();
+                vieraAPI.setTodos(todos);
                 
                 // Remove from schedule
-                let events = JSON.parse(localStorage.getItem('studyDeckEvents')) || [];
+                let events = vieraAPI.getEvents() || [];
                 events = events.filter(e => e.todoId !== id);
-                localStorage.setItem('studyDeckEvents', JSON.stringify(events));
-                syncData();
+                vieraAPI.setEvents(events);
                 
                 renderTodos();
                 showNotification('Task deleted successfully', 'success', 'Task Deleted');

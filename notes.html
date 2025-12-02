@@ -1904,7 +1904,7 @@
         </div>
     </div>
 
-    <script src="api.js?v=11"></script>
+    <script src="api.js?v=12"></script>
     <script>
         // Notification Modal Functions
         function showNotification(message, type = 'success', title = null) {
@@ -2002,15 +2002,14 @@
 
         // Load User Profile
         function loadUserProfile() {
-            const userProfile = JSON.parse(localStorage.getItem('studyDeckUserProfile'));
-            if (userProfile) {
-                const { firstName, lastName } = userProfile;
-                const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
-                const fullName = `${firstName} ${lastName}`;
+            const user = vieraAPI.getUser();
+            if (user) {
+                const { firstName, lastName } = user;
+                const initials = `${firstName.charAt(0)}${lastName ? lastName.charAt(0) : ''}`.toUpperCase();
+                const fullName = lastName ? `${firstName} ${lastName}` : firstName;
                 document.getElementById('userAvatar').textContent = initials;
                 document.getElementById('userName').textContent = fullName;
             } else {
-                // Redirect to index if no profile exists
                 window.location.href = '/';
             }
         }
@@ -2021,24 +2020,15 @@
         let currentFilter = null;
         let autoSaveTimeout;
 
-        // Initialize data from cache (will be populated after API is ready)
+        // Initialize data from API cache
         function initializeData() {
-            notes = JSON.parse(localStorage.getItem('studyDeckNotes')) || [];
-            classes = JSON.parse(localStorage.getItem('studyDeckClasses')) || [];
+            notes = vieraAPI.getNotes() || [];
+            classes = vieraAPI.getClasses() || [];
         }
 
-        // Log activity to localStorage for dashboard
+        // Log activity via API
         function logActivity(icon, color, title) {
-            const activityLog = JSON.parse(localStorage.getItem('studyDeckActivityLog') || '[]');
-            activityLog.unshift({
-                icon: icon,
-                color: color,
-                title: title,
-                time: 'Just now',
-                timestamp: Date.now()
-            });
-            if (activityLog.length > 50) activityLog.pop();
-            localStorage.setItem('studyDeckActivityLog', JSON.stringify(activityLog));
+            vieraAPI.logActivity(icon, color, title);
         }
 
         // Load dark mode immediately to prevent flash
@@ -2054,7 +2044,7 @@
             await vieraAPI.ready;
             
             // Only redirect if there's truly no token
-            if (!localStorage.getItem('vierastudy_token')) {
+            if (!vieraAPI.isLoggedIn()) {
                 window.location.href = '/';
                 return;
             }
@@ -2193,8 +2183,7 @@
             };
             
             notes.unshift(newNote);
-            localStorage.setItem('studyDeckNotes', JSON.stringify(notes));
-            syncData();
+            vieraAPI.setNotes(notes);
             
             // Log activity
             logActivity('fas fa-file-alt', 'cyan', 'Started new note');
@@ -2323,8 +2312,7 @@
             const index = notes.findIndex(n => n.id === currentNote.id);
             notes[index] = currentNote;
             
-            localStorage.setItem('studyDeckNotes', JSON.stringify(notes));
-            syncData();
+            vieraAPI.setNotes(notes);
             renderNotesList();
             
             if (showAlert) {
@@ -2344,8 +2332,7 @@
             if (!confirmed) return;
             
             notes = notes.filter(n => n.id !== currentNote.id);
-            localStorage.setItem('studyDeckNotes', JSON.stringify(notes));
-            syncData();
+            vieraAPI.setNotes(notes);
             
             renderNotesList();
             if (notes.length > 0) {

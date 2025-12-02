@@ -1168,7 +1168,7 @@
         }
     </style>
 
-    <script src="api.js?v=11"></script>
+    <script src="api.js?v=12"></script>
     <script>
         let expression = '';
         let currentMode = 'deg';
@@ -1189,12 +1189,12 @@
         }
         
         function loadUserProfile() {
-            const profile = JSON.parse(localStorage.getItem('studyDeckUserProfile'));
-            if (profile) {
-                const firstInitial = profile.firstName ? profile.firstName.charAt(0).toUpperCase() : '';
-                const lastInitial = profile.lastName ? profile.lastName.charAt(0).toUpperCase() : '';
+            const user = vieraAPI.getUser();
+            if (user) {
+                const firstInitial = user.firstName ? user.firstName.charAt(0).toUpperCase() : '';
+                const lastInitial = user.lastName ? user.lastName.charAt(0).toUpperCase() : '';
                 document.getElementById('userAvatar').textContent = firstInitial + lastInitial || '?';
-                document.getElementById('userName').textContent = profile.firstName || 'Guest';
+                document.getElementById('userName').textContent = user.firstName || 'Guest';
             }
         }
         
@@ -1453,7 +1453,7 @@
             await vieraAPI.ready;
             
             // Only redirect if there's truly no token
-            if (!localStorage.getItem('vierastudy_token')) {
+            if (!vieraAPI.isLoggedIn()) {
                 window.location.href = '/';
                 return;
             }

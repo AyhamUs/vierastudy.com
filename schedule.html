@@ -2004,7 +2004,7 @@
         </div>
     </div>
 
-    <script src="api.js?v=11"></script>
+    <script src="api.js?v=12"></script>
     <script>
         // Notification Modal Functions
         function showNotification(message, type = 'success', title = null) {
@@ -2106,37 +2106,27 @@
         let currentView = 'month';
         let selectedColor = '#3b82f6';
 
-        // Initialize data from cache (will be populated after API is ready)
+        // Initialize data from API cache
         function initializeData() {
-            events = JSON.parse(localStorage.getItem('studyDeckEvents') || '[]');
-            classes = JSON.parse(localStorage.getItem('studyDeckClasses') || '[]');
+            events = vieraAPI.getEvents() || [];
+            classes = vieraAPI.getClasses() || [];
         }
 
-        // Log activity to localStorage for dashboard
+        // Log activity via API
         function logActivity(icon, color, title) {
-            const activityLog = JSON.parse(localStorage.getItem('studyDeckActivityLog') || '[]');
-            activityLog.unshift({
-                icon: icon,
-                color: color,
-                title: title,
-                time: 'Just now',
-                timestamp: Date.now()
-            });
-            if (activityLog.length > 50) activityLog.pop();
-            localStorage.setItem('studyDeckActivityLog', JSON.stringify(activityLog));
+            vieraAPI.logActivity(icon, color, title);
         }
 
         // Load User Profile
         function loadUserProfile() {
-            const userProfile = JSON.parse(localStorage.getItem('studyDeckUserProfile'));
-            if (userProfile) {
-                const { firstName, lastName } = userProfile;
-                const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
-                const fullName = `${firstName} ${lastName}`;
+            const user = vieraAPI.getUser();
+            if (user) {
+                const { firstName, lastName } = user;
+                const initials = `${firstName.charAt(0)}${lastName ? lastName.charAt(0) : ''}`.toUpperCase();
+                const fullName = lastName ? `${firstName} ${lastName}` : firstName;
                 document.getElementById('userAvatar').textContent = initials;
                 document.getElementById('userName').textContent = fullName;
             } else {
-                // Redirect to index if no profile exists
                 window.location.href = '/';
             }
         }
@@ -2668,8 +2658,7 @@
                 events.push(event);
             }
             
-            localStorage.setItem('studyDeckEvents', JSON.stringify(events));
-            syncData();
+            vieraAPI.setEvents(events);
             
             // Log activity for new events
             if (isNew) {
@@ -2694,22 +2683,20 @@
         }
         
         function syncDateToProgressTracker(taskId, newDate) {
-            let tasks = JSON.parse(localStorage.getItem('studyDeckTasks')) || [];
+            let tasks = vieraAPI.getTasks() || [];
             const taskIndex = tasks.findIndex(t => t.id === taskId);
             if (taskIndex >= 0) {
                 tasks[taskIndex].due = newDate;
-                localStorage.setItem('studyDeckTasks', JSON.stringify(tasks));
-                syncData();
+                vieraAPI.setTasks(tasks);
             }
         }
         
         function syncDateToTodo(todoId, newDate) {
-            let todos = JSON.parse(localStorage.getItem('studyDeckTodos')) || [];
+            let todos = vieraAPI.getTodos() || [];
             const todoIndex = todos.findIndex(t => t.id === todoId);
             if (todoIndex >= 0) {
                 todos[todoIndex].due = newDate;
-                localStorage.setItem('studyDeckTodos', JSON.stringify(todos));
-                syncData();
+                vieraAPI.setTodos(todos);
             }
         }
 
@@ -2740,8 +2727,7 @@
             
             if (confirmed) {
                 events = events.filter(e => e.id !== id);
-                localStorage.setItem('studyDeckEvents', JSON.stringify(events));
-                syncData();
+                vieraAPI.setEvents(events);
                 
                 if (currentView === 'month') renderMonthView();
                 else if (currentView === 'week') renderWeekView();
@@ -2782,7 +2768,7 @@
             await vieraAPI.ready;
             
             // Only redirect if there's truly no token
-            if (!localStorage.getItem('vierastudy_token')) {
+            if (!vieraAPI.isLoggedIn()) {
                 window.location.href = '/';
                 return;
             }

@@ -2669,7 +2669,7 @@
     </div>
 
     <!-- VieraStudy API -->
-    <script src="api.js?v=11"></script>
+    <script src="api.js?v=12"></script>
     
     <script>
         // Ensure vieraAPI is available
@@ -2834,9 +2834,9 @@
         }
 
         function loadUserProfile() {
-            const userProfile = JSON.parse(localStorage.getItem('studyDeckUserProfile'));
-            if (userProfile) {
-                const { firstName, lastName } = userProfile;
+            const user = vieraAPI.getUser();
+            if (user) {
+                const { firstName, lastName } = user;
                 const initials = `${firstName.charAt(0)}${lastName ? lastName.charAt(0) : ''}`.toUpperCase();
                 const fullName = lastName ? `${firstName} ${lastName}` : firstName;
                 
@@ -2938,7 +2938,7 @@
         }
 
         function getUserProfile() {
-            return JSON.parse(localStorage.getItem('studyDeckUserProfile'));
+            return vieraAPI.getUser();
         }
 
         // Notification Modal Functions
@@ -3138,20 +3138,20 @@
         // Load and display statistics
         function loadStatistics() {
             // Load flashcard decks
-            const flashcards = JSON.parse(localStorage.getItem('studyDeckFlashcards') || '[]');
+            const flashcards = vieraAPI.getFlashcards() || [];
             document.getElementById('deckCount').textContent = flashcards.length;
 
             // Load todos
-            const todos = JSON.parse(localStorage.getItem('studyDeckTodos') || '[]');
+            const todos = vieraAPI.getTodos() || [];
             const activeTodos = todos.filter(t => !t.completed);
             document.getElementById('taskCount').textContent = activeTodos.length;
 
             // Load notes
-            const notes = JSON.parse(localStorage.getItem('studyDeckNotes') || '[]');
+            const notes = vieraAPI.getNotes() || [];
             document.getElementById('noteCount').textContent = notes.length;
 
             // Load classes
-            const classes = JSON.parse(localStorage.getItem('studyDeckClasses') || '[]');
+            const classes = vieraAPI.getClasses() || [];
             document.getElementById('classCount').textContent = classes.length;
 
             // Display classes
@@ -3196,7 +3196,7 @@
             const activities = [];
 
             // Get explicit activity log - this is the primary source
-            const activityLog = JSON.parse(localStorage.getItem('studyDeckActivityLog') || '[]');
+            const activityLog = vieraAPI.getActivityLog() || [];
             activityLog.forEach(activity => {
                 activities.push({
                     ...activity,
@@ -3207,7 +3207,7 @@
             // Only pull from data sources if activity log is empty (for backwards compatibility)
             if (activities.length === 0) {
                 // Get recent completed todos
-                const todos = JSON.parse(localStorage.getItem('studyDeckTodos') || '[]');
+                const todos = vieraAPI.getTodos() || [];
                 const recentCompletedTodos = todos
                     .filter(t => t.completed && t.updated)
                     .sort((a, b) => new Date(b.updated) - new Date(a.updated))
@@ -3224,7 +3224,7 @@
                 });
 
                 // Get recent flashcard decks
-                const flashcards = JSON.parse(localStorage.getItem('studyDeckFlashcards') || '[]');
+                const flashcards = vieraAPI.getFlashcards() || [];
                 const recentDecks = flashcards
                     .filter(d => d.created)
                     .sort((a, b) => new Date(b.created) - new Date(a.created))
@@ -3241,7 +3241,7 @@
                 });
 
                 // Get recent notes
-                const notes = JSON.parse(localStorage.getItem('studyDeckNotes') || '[]');
+                const notes = vieraAPI.getNotes() || [];
                 const recentNotes = notes
                     .filter(n => n.created)
                     .sort((a, b) => new Date(b.created) - new Date(a.created))
@@ -3315,17 +3315,7 @@
 
         // Log activity helper function - can be called from other pages
         function logActivity(icon, color, title) {
-            const activityLog = JSON.parse(localStorage.getItem('studyDeckActivityLog') || '[]');
-            activityLog.unshift({
-                icon: icon,
-                color: color,
-                title: title,
-                time: 'Just now',
-                timestamp: Date.now()
-            });
-            // Keep only last 50 activities
-            if (activityLog.length > 50) activityLog.pop();
-            localStorage.setItem('studyDeckActivityLog', JSON.stringify(activityLog));
+            vieraAPI.logActivity(icon, color, title);
         }
         
         // Make logActivity available globally
@@ -3662,24 +3652,9 @@
         }
 
         function autoSave(key, data) {
-            showSaveIndicator('saving');
-            
-            clearTimeout(saveTimeout);
-            saveTimeout = setTimeout(async () => {
-                try {
-                    localStorage.setItem(key, JSON.stringify(data));
-                    
-                    // Also sync to cloud if logged in
-                    if (vieraAPI.isLoggedIn()) {
-                        syncData();
-                    }
-                    
-                    showSaveIndicator('saved');
-                } catch (error) {
-                    console.error('Save error:', error);
-                    showSaveIndicator('error');
-                }
-            }, 500);
+            // This function is deprecated - data is now saved directly via vieraAPI
+            // Kept for backward compatibility but does nothing
+            showSaveIndicator('saved');
         }
 
         // Make autoSave available globally for other pages to use
