@@ -1701,10 +1701,13 @@
         }
 
         function loadDarkMode() {
-            const darkMode = localStorage.getItem('studyDeckDarkMode') === 'true';
+            // Get dark mode from API (already loaded with user data)
+            const darkMode = vieraAPI.isDarkMode();
             document.getElementById('darkModeToggle').checked = darkMode;
             if (darkMode) {
                 document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
             }
         }
 

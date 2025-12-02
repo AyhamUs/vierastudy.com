@@ -2018,7 +2018,6 @@
         let classes = [];
         let currentNote = null;
         let currentFilter = null;
-        let autoSaveTimeout;
 
         // Initialize data from API cache
         function initializeData() {
@@ -2216,9 +2215,8 @@
             container.innerHTML = `
                 <div class="editor-header">
                     <input type="text" class="editor-title-input" id="noteTitle" 
-                           placeholder="Note Title" value="${currentNote.title}" 
-                           oninput="autoSaveNote()">
-                    <select class="editor-class-select" id="noteClass" onchange="autoSaveNote()">
+                           placeholder="Note Title" value="${currentNote.title}">
+                    <select class="editor-class-select" id="noteClass">
                         <option value="">No class</option>
                         ${classes.map(cls => `
                             <option value="${cls.id}" ${currentNote.classId === cls.id ? 'selected' : ''}>
@@ -2258,7 +2256,6 @@
                     <div class="editor-textarea" id="noteContent" 
                          contenteditable="true"
                          data-placeholder="Start writing your notes..."
-                         oninput="autoSaveNote()"
                          onkeyup="updateToolbarStates()"
                          onmouseup="updateToolbarStates()">${currentNote.content}</div>
                 </div>
@@ -2289,15 +2286,6 @@
                     </div>
                 </div>
             `;
-        }
-
-        function autoSaveNote() {
-            if (!currentNote) return;
-            
-            clearTimeout(autoSaveTimeout);
-            autoSaveTimeout = setTimeout(() => {
-                saveNote(false);
-            }, 1000);
         }
 
         function saveNote(showAlert = true) {

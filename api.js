@@ -235,11 +235,13 @@ class VieraStudyAPI {
             _cacheLoaded = true;
             _isDirty = false;
             
-            // Apply dark mode
+            // Apply dark mode and sync to localStorage for instant loading on next visit
             if (_cache.settings.darkMode) {
                 document.body.classList.add('dark-mode');
+                localStorage.setItem('studyDeckDarkMode', 'true');
             } else {
                 document.body.classList.remove('dark-mode');
+                localStorage.setItem('studyDeckDarkMode', 'false');
             }
             
             console.log('[VieraStudy] Data loaded from cloud');
@@ -468,6 +470,8 @@ class VieraStudyAPI {
 
     setDarkMode(enabled) {
         _cache.settings.darkMode = enabled;
+        // Sync to localStorage for instant loading on next visit
+        localStorage.setItem('studyDeckDarkMode', enabled ? 'true' : 'false');
         if (enabled) {
             document.body.classList.add('dark-mode');
         } else {
