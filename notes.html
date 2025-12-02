@@ -1517,6 +1517,216 @@
                 transform: translateY(0);
             }
         }
+
+        /* Bug Report Button */
+        .bug-report-btn {
+            background: rgba(251, 191, 36, 0.1);
+            border: none;
+            color: #f59e0b;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 8px;
+        }
+
+        .bug-report-btn:hover {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .bug-report-btn i {
+            font-size: 14px;
+        }
+
+        /* Bug Report Modal */
+        .bug-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .bug-modal.active {
+            display: flex;
+        }
+
+        .bug-modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .bug-modal-content {
+            background: #1e293b;
+        }
+
+        .bug-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .bug-modal-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bug-modal-title i {
+            color: #f59e0b;
+        }
+
+        body.dark-mode .bug-modal-title {
+            color: #e2e8f0;
+        }
+
+        .bug-close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .bug-close-btn:hover {
+            color: #ef4444;
+        }
+
+        .bug-form-group {
+            margin-bottom: 20px;
+        }
+
+        .bug-form-label {
+            display: block;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        body.dark-mode .bug-form-label {
+            color: #e2e8f0;
+        }
+
+        .bug-form-input,
+        .bug-form-select,
+        .bug-form-textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: white;
+            color: #1e293b;
+        }
+
+        body.dark-mode .bug-form-input,
+        body.dark-mode .bug-form-select,
+        body.dark-mode .bug-form-textarea {
+            background: #334155;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+
+        .bug-form-input:focus,
+        .bug-form-select:focus,
+        .bug-form-textarea:focus {
+            outline: none;
+            border-color: #f59e0b;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        .bug-form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .bug-page-info {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.dark-mode .bug-page-info {
+            background: #334155;
+        }
+
+        .bug-page-info i {
+            color: #3b82f6;
+        }
+
+        .bug-page-info span {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        body.dark-mode .bug-page-info span {
+            color: #94a3b8;
+        }
+
+        .bug-page-info strong {
+            color: #1e293b;
+        }
+
+        body.dark-mode .bug-page-info strong {
+            color: #e2e8f0;
+        }
+
+        .bug-submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .bug-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+        }
+
+        .bug-submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
     </style>
 </head>
 <body>
@@ -1618,6 +1828,9 @@
                 <div class="user-info">
                     <div class="user-name" id="userName">Guest</div>
                 </div>
+                <button class="bug-report-btn" onclick="openBugReportModal()" title="Report a Bug">
+                    <i class="fas fa-bug"></i>
+                </button>
                 <button class="signout-btn" onclick="handleSignout()" title="Sign Out">
                     <i class="fas fa-right-from-bracket"></i>
                 </button>
@@ -2460,6 +2673,122 @@
                 showSaveIndicator('error');
             }
         };
+
+        // ============ BUG REPORT FUNCTIONALITY ============
+        const BUG_REPORT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+        function openBugReportModal() {
+            document.getElementById('bugReportModal').classList.add('active');
+            document.getElementById('bugPage').value = window.location.href;
+            document.getElementById('bugPageName').textContent = 'Notes';
+            
+            const user = vieraAPI.getUser();
+            if (user) {
+                document.getElementById('bugUserEmail').value = user.email || '';
+                document.getElementById('bugUserName').value = `${user.firstName || ''} ${user.lastName || ''}`.trim();
+            }
+        }
+
+        function closeBugReportModal() {
+            document.getElementById('bugReportModal').classList.remove('active');
+        }
+
+        function getBrowserInfo() {
+            const ua = navigator.userAgent;
+            let browser = 'Unknown';
+            if (ua.includes('Firefox')) browser = 'Firefox';
+            else if (ua.includes('Chrome') && !ua.includes('Edg')) browser = 'Chrome';
+            else if (ua.includes('Safari') && !ua.includes('Chrome')) browser = 'Safari';
+            else if (ua.includes('Edg')) browser = 'Edge';
+            else if (ua.includes('Opera') || ua.includes('OPR')) browser = 'Opera';
+            if (/iPhone|iPad|iPod|Android/i.test(ua)) browser += ' (Mobile)';
+            return browser;
+        }
+
+        async function submitBugReport(event) {
+            event.preventDefault();
+            const btn = event.target.querySelector('button[type="submit"]');
+            const originalContent = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            
+            const bugData = {
+                page: document.getElementById('bugPage').value,
+                pageName: 'Notes',
+                category: document.getElementById('bugCategory').value,
+                description: document.getElementById('bugDescription').value,
+                userEmail: document.getElementById('bugUserEmail').value || 'Anonymous',
+                userName: document.getElementById('bugUserName').value || 'Anonymous',
+                browser: getBrowserInfo(),
+                screenSize: `${window.innerWidth}x${window.innerHeight}`,
+                userAgent: navigator.userAgent
+            };
+            
+            try {
+                await fetch(BUG_REPORT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(bugData)
+                });
+                showNotification('Bug report submitted successfully! Thank you for your feedback.', 'success', 'Report Sent');
+                closeBugReportModal();
+                document.getElementById('bugDescription').value = '';
+                document.getElementById('bugCategory').value = 'General';
+            } catch (error) {
+                console.error('Bug report error:', error);
+                showNotification('Failed to submit bug report. Please try again later.', 'error', 'Error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalContent;
+            }
+        }
+
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeBugReportModal(); });
+        document.getElementById('bugReportModal')?.addEventListener('click', function(e) { if (e.target === this) closeBugReportModal(); });
     </script>
+
+    <!-- Bug Report Modal -->
+    <div id="bugReportModal" class="bug-modal">
+        <div class="bug-modal-content">
+            <div class="bug-modal-header">
+                <div class="bug-modal-title"><i class="fas fa-bug"></i> Report a Bug</div>
+                <button class="bug-close-btn" onclick="closeBugReportModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="bug-page-info">
+                <i class="fas fa-link"></i>
+                <span>Reporting from: <strong id="bugPageName">Notes</strong></span>
+                <input type="hidden" id="bugPage" value="">
+            </div>
+            <form onsubmit="submitBugReport(event)">
+                <div class="bug-form-group">
+                    <label class="bug-form-label">Category</label>
+                    <select class="bug-form-select" id="bugCategory" required>
+                        <option value="General">General Issue</option>
+                        <option value="UI/Design">UI/Design Problem</option>
+                        <option value="Functionality">Feature Not Working</option>
+                        <option value="Performance">Performance Issue</option>
+                        <option value="Login/Account">Login/Account Problem</option>
+                        <option value="Data Loss">Data Loss</option>
+                        <option value="Mobile">Mobile-Specific Issue</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="bug-form-group">
+                    <label class="bug-form-label">Describe the bug *</label>
+                    <textarea class="bug-form-textarea" id="bugDescription" placeholder="Please describe what happened..." required></textarea>
+                </div>
+                <div class="bug-form-group">
+                    <label class="bug-form-label">Your Email (optional)</label>
+                    <input type="email" class="bug-form-input" id="bugUserEmail" placeholder="your@email.com">
+                </div>
+                <div class="bug-form-group">
+                    <label class="bug-form-label">Your Name (optional)</label>
+                    <input type="text" class="bug-form-input" id="bugUserName" placeholder="Your name">
+                </div>
+                <button type="submit" class="bug-submit-btn"><i class="fas fa-paper-plane"></i> Submit Bug Report</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

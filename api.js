@@ -734,6 +734,11 @@ document.addEventListener('visibilitychange', function() {
                 _readyResolve(true);
             } else {
                 console.log('Session expired or invalid');
+                // Clear invalid session to prevent stuck state
+                window.vieraAPI.token = null;
+                window.vieraAPI.user = null;
+                localStorage.removeItem('vierastudy_token');
+                localStorage.removeItem('vierastudy_user');
                 _readyResolve(false);
                 // Redirect to home if not on index page
                 if (!window.location.pathname.endsWith('index.html') && 
@@ -744,7 +749,18 @@ document.addEventListener('visibilitychange', function() {
             }
         } catch (error) {
             console.error('Session verification failed:', error);
+            // Clear invalid session on network failure to prevent stuck state
+            window.vieraAPI.token = null;
+            window.vieraAPI.user = null;
+            localStorage.removeItem('vierastudy_token');
+            localStorage.removeItem('vierastudy_user');
             _readyResolve(false);
+            // Redirect to home if not on index page
+            if (!window.location.pathname.endsWith('index.html') && 
+                !window.location.pathname.endsWith('index') &&
+                window.location.pathname !== '/') {
+                window.location.href = '/';
+            }
         }
     } else {
         // No token - resolve immediately as not logged in
