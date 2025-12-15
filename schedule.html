@@ -1074,6 +1074,17 @@
             overflow: hidden;
         }
 
+        /* Ensure visible vertical separators between day columns in week view */
+        .week-grid > .day-header,
+        .week-grid > .time-slot {
+            border-left: 1px solid #e2e8f0;
+        }
+
+        /* Remove left border for the time labels column */
+        .week-grid > .time-label {
+            border-left: none;
+        }
+
         .time-slot {
             background: white;
             padding: 15px;
