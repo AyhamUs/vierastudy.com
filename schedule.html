@@ -943,17 +943,21 @@
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 10px;
+            grid-auto-rows: auto; /* allow rows to grow with content so wrapped events are visible */
         }
 
         .calendar-day {
-            aspect-ratio: 1;
+            /* avoid forcing perfect squares which can cause layout issues on small screens */
             border: 2px solid #f1f5f9;
             border-radius: 10px;
             padding: 10px;
             cursor: pointer;
             transition: all 0.3s;
             position: relative;
-            min-height: 100px;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
         }
 
         .calendar-day:hover {
@@ -989,18 +993,53 @@
             gap: 4px;
         }
 
+        .day-events {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            /* allow events to expand the cell so wrapped text is readable */
+        }
+
         .event-dot {
             width: 100%;
             min-height: 20px;
             border-radius: 4px;
             font-size: 11px;
             padding: 4px 6px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
             color: white;
             font-weight: 500;
             transition: all 0.2s;
+            display: block;
+            box-sizing: border-box;
+            max-width: 100%;
+            white-space: normal; /* allow wrapping */
+            overflow-wrap: anywhere; /* break long words */
+            word-break: break-word;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .event-dot .delete-btn {
+            position: absolute;
+            top: 2px;
+            right: 4px;
+            width: 18px;
+            height: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.18);
+            color: white;
+            border-radius: 50%;
+            font-size: 11px;
+            cursor: pointer;
+            border: none;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .event-dot .delete-btn:hover {
+            background: rgba(255,255,255,0.3);
         }
 
         .event-dot:hover {
@@ -1477,6 +1516,7 @@
                 min-height: 60px;
                 padding: 4px;
                 aspect-ratio: auto;
+                border-radius: 8px;
             }
 
             .day-number {
@@ -2342,16 +2382,26 @@
                     dot.style.background = event.color;
                     dot.style.color = 'white';
                     dot.style.cursor = 'pointer';
-                    dot.style.height = '20px';
                     dot.style.display = 'flex';
                     dot.style.alignItems = 'center';
-                    dot.style.paddingLeft = '6px';
+                    dot.style.padding = '6px 28px 6px 6px';
                     dot.style.borderRadius = '4px';
-                    dot.textContent = event.title;
-                    dot.onclick = (e) => {
-                        e.stopPropagation();
-                        editEvent(event.id);
-                    };
+
+                    const titleSpan = document.createElement('div');
+                    titleSpan.style.flex = '1';
+                    titleSpan.style.fontSize = '11px';
+                    titleSpan.style.lineHeight = '1.1';
+                    titleSpan.textContent = event.title;
+                    titleSpan.onclick = (e) => { e.stopPropagation(); editEvent(event.id); };
+
+                    const delBtn = document.createElement('button');
+                    delBtn.className = 'delete-btn';
+                    delBtn.title = 'Delete';
+                    delBtn.innerHTML = '&times;';
+                    delBtn.onclick = (e) => { e.stopPropagation(); deleteEvent(event.id); };
+
+                    dot.appendChild(titleSpan);
+                    dot.appendChild(delBtn);
                     eventsContainer.appendChild(dot);
                 });
                 
