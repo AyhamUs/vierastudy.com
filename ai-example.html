@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Writing Analysis</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+  <!-- Favicon -->
+  <link rel="icon" href="vierastudy.png" />
+
+  <!-- Markdown renderer and sanitizer -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.0/dist/purify.min.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-6">
+
+  <!-- Watermark -->
+  <div class="watermark" aria-hidden="true">
+    <div class="watermark-center">VieraStudy Prototype</div>
+    <div class="watermark-corner">VieraStudy Prototype — Prototype</div>
+  </div>
+
+  <!-- Prototype modal (shown on first visit) -->
+  <div id="prototype-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <h2 id="modal-title">VieraStudy Prototype</h2>
+      <p>This site is a prototype demonstration of our AI-powered writing analysis tool. Outputs are experimental and intended for testing only.</p>
+      <label style="display:flex;align-items:center;gap:.5rem;margin-top:.5rem"><input id="dont-show" type="checkbox"/> Don't show this again</label>
+      <div style="margin-top:1rem;text-align:right"><button id="modal-close" class="btn-primary">Got it</button></div>
+    </div>
+  </div>
+
+  <div class="w-full max-w-5xl bg-white rounded-xl shadow-lg p-6 space-y-6 app-container">
+
+    <div class="flex items-center gap-3">
+      <img src="vierastudy.png" alt="VieraStudy" class="logo-img" />
+      <div>
+        <h1 class="text-2xl font-semibold brand-text">Writing Analysis Tool</h1>
+        <div id="writing-type" class="writing-type">Detected: —</div>
+      </div>
+    </div>
+
+    <p class="text-gray-600">
+      Paste any piece of writing (essay, email, report, story) below. You will receive feedback only — no rewriting or sentence-level edits.
+    </p>
+
+    <textarea
+      id="essay"
+      class="w-full h-64 p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+      placeholder="Paste your text here (essay, email, report, etc.)..."
+    ></textarea>
+
+    <button
+      onclick="getFeedback()"
+      class="btn-primary flex items-center gap-2"
+    >
+      <i class="fa-solid fa-magnifying-glass brand-accent"></i>
+      Analyze Writing
+    </button>
+
+    <div id="loading" class="hidden flex items-center gap-2 text-gray-600">
+      <i class="fa-solid fa-spinner fa-spin"></i>
+      Analyzing essay...
+    </div>
+
+    <!-- Scores -->
+    <div id="scores" class="hidden grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div id="score-clarity" class="score-card"><i class="fa-solid fa-eye"></i>
+        <div class="score-body"><div class="score-title">Clarity</div><div class="score-value">—</div><div class="score-note"></div></div>
+      </div>
+      <div id="score-organization" class="score-card"><i class="fa-solid fa-layer-group"></i>
+        <div class="score-body"><div class="score-title">Organization</div><div class="score-value">—</div><div class="score-note"></div></div>
+      </div>
+      <div id="score-argument" class="score-card"><i class="fa-solid fa-bullseye"></i>
+        <div class="score-body"><div class="score-title">Argument</div><div class="score-value">—</div><div class="score-note"></div></div>
+      </div>
+      <div id="score-evidence" class="score-card"><i class="fa-solid fa-book"></i>
+        <div class="score-body"><div class="score-title">Evidence</div><div class="score-value">—</div><div class="score-note"></div></div>
+      </div>
+      <div id="score-mechanics" class="score-card"><i class="fa-solid fa-spell-check"></i>
+        <div class="score-body"><div class="score-title">Mechanics</div><div class="score-value">—</div><div class="score-note"></div></div>
+      </div>
+      <div id="score-overall" class="score-card"><i class="fa-solid fa-star"></i>
+        <div class="score-body"><div class="score-title">Overall</div><div class="score-value">—</div><div class="score-note"></div></div>
+      </div>
+    </div>
+
+    <!-- Feedback -->
+    <div id="output" class="hidden bg-gray-50 border rounded-lg p-4 whitespace-pre-wrap text-sm"></div>
+
+  </div>
+
+<script>
+// Show prototype modal on first visit (uses localStorage)
+function showPrototypeModalIfNeeded(){
+  try{
+    const seen = localStorage.getItem('vs_seen_modal');
+    if (seen === '1') return;
+  }catch(e){}
+  const modal = document.getElementById('prototype-modal');
+  const close = document.getElementById('modal-close');
+  const dont = document.getElementById('dont-show');
+  if (!modal || !close) return;
+  modal.setAttribute('aria-hidden','false');
+  modal.classList.remove('hidden');
+  // click handler
+  close.addEventListener('click', ()=>{
+    if (dont && dont.checked) {
+      try{ localStorage.setItem('vs_seen_modal','1'); }catch(e){}
+    }
+    modal.setAttribute('aria-hidden','true');
+    modal.classList.add('hidden');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', ()=> showPrototypeModalIfNeeded());
+
+async function getFeedback() {
+  const essay = document.getElementById("essay").value.trim();
+  const output = document.getElementById("output");
+  const loading = document.getElementById("loading");
+  const scores = document.getElementById("scores");
+
+  if (!essay) {
+    output.classList.remove("hidden");
+    output.textContent = "Paste an essay first.";
+    return;
+  }
+
+  output.classList.add("hidden");
+  scores.classList.add("hidden");
+  loading.classList.remove("hidden");
+
+  const prompt = `
+You are a school-safe writing analysis assistant.
+
+Strict rules:
+- Do NOT rewrite or edit sentences
+- Do NOT provide example sentences
+- Do NOT paraphrase
+- Do NOT generate new content
+Provide structured JSON only.
+
+Requirements (MANDATORY):
+- Return ONLY a single JSON object (no other text) with this shape:
+  {
+    "writing_type": "short label like 'essay', 'email', 'report', 'story' (optional)",
+    "scores": {
+      "clarity": number,             // 1-10
+      "organization": number,
+      "argument": number,
+      "evidence": number,
+      "mechanics": number,
+      "overall": number
+    },
+    "notes": {
+      "clarity": "short note (1-2 sentences)",
+      "organization": "short note",
+      "argument": "short note",
+      "evidence": "short note",
+      "mechanics": "short note",
+      "overall": "short note"
+    },
+    "feedback": "longer markdown-formatted feedback string (single constructive paragraph recommended)"
+  }
+
+Only produce JSON; do not include explanations outside the JSON.
+
+Text to analyze:
+"""${essay}"""
+`;
+
+  try {
+    const res = await fetch("http://localhost:11434/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "gpt-oss:20b",
+        prompt,
+        stream: false
+      })
+    });
+
+    if (!res.ok) throw new Error(`Server returned ${res.status}`);
+
+    const ct = (res.headers.get("content-type") || "").toLowerCase();
+    let data;
+    if (ct.includes("application/json")) {
+      data = await res.json();
+    } else {
+      const text = await res.text();
+      data = { response: text };
+    }
+
+    loading.classList.add("hidden");
+    scores.classList.remove("hidden");
+    output.classList.remove("hidden");
+
+    const raw = data.response || data.output || JSON.stringify(data) || "";
+    // helper: try to parse JSON robustly
+    const tryParseJson = (s) => {
+      if (!s) return null;
+      if (typeof s === 'object') return s;
+      try { return JSON.parse(s); } catch (e) {}
+      try {
+        const start = s.indexOf('{');
+        const end = s.lastIndexOf('}');
+        if (start !== -1 && end !== -1 && end > start) {
+          return JSON.parse(s.slice(start, end + 1));
+        }
+      } catch (e) {}
+      return null;
+    };
+
+    let payload = tryParseJson(raw);
+
+    // ensure the output area is cleared before we render anything
+    output.innerHTML = '';
+
+    if (payload && payload.scores) {
+      const setScore = (id, value, note) => {
+        const el = document.getElementById('score-' + id);
+        if (!el) return;
+        const val = el.querySelector('.score-value');
+        const noteEl = el.querySelector('.score-note');
+        if (val) val.textContent = (typeof value === 'number') ? value.toString() : value || '—';
+        if (noteEl) noteEl.textContent = note || '';
+      };
+
+      setScore('clarity', payload.scores.clarity, payload.notes && payload.notes.clarity);
+      setScore('organization', payload.scores.organization, payload.notes && payload.notes.organization);
+      setScore('argument', payload.scores.argument, payload.notes && payload.notes.argument);
+      setScore('evidence', payload.scores.evidence, payload.notes && payload.notes.evidence);
+      setScore('mechanics', payload.scores.mechanics, payload.notes && payload.notes.mechanics);
+      setScore('overall', payload.scores.overall, payload.notes && payload.notes.overall);
+
+      // show detected writing type if provided
+      const wtEl = document.getElementById('writing-type');
+      if (wtEl) {
+        if (payload.writing_type) wtEl.textContent = 'Detected: ' + payload.writing_type;
+        else wtEl.textContent = 'Detected: —';
+      }
+
+      // Render a single constructive-criticism paragraph (collapse markdown/newlines)
+      const feedbackMd = payload.feedback || '';
+      let tmpHtml = feedbackMd;
+      if (typeof marked !== 'undefined') {
+        try { tmpHtml = marked.parse(feedbackMd); } catch (e) { tmpHtml = feedbackMd.replace(/\n/g, '<br>'); }
+      }
+      const safeHtml = (typeof DOMPurify !== 'undefined') ? DOMPurify.sanitize(tmpHtml) : tmpHtml;
+      const tmp = document.createElement('div');
+      tmp.innerHTML = safeHtml;
+      const plain = (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
+      const constructive = plain || 'No detailed feedback provided.';
+      output.innerHTML = '<p class="constructive">' + constructive + '</p>';
+    } else if (payload && payload.feedback) {
+      // If we got JSON with feedback but no structured scores, still show constructive paragraph
+      const feedbackMd = payload.feedback || '';
+      let tmpHtml = feedbackMd;
+      if (typeof marked !== 'undefined') {
+        try { tmpHtml = marked.parse(feedbackMd); } catch (e) { tmpHtml = feedbackMd.replace(/\n/g, '<br>'); }
+      }
+      const safeHtml = (typeof DOMPurify !== 'undefined') ? DOMPurify.sanitize(tmpHtml) : tmpHtml;
+      const tmp = document.createElement('div');
+      tmp.innerHTML = safeHtml;
+      const plain = (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
+      const constructive = plain || 'No detailed feedback provided.';
+      output.innerHTML = '<p class="constructive">' + constructive + '</p>';
+    } else {
+      // Fallback: avoid dumping raw JSON into the UI. If raw looks like JSON, attempt to extract feedback.
+      const md = raw || 'No feedback returned.';
+      if (md.trim().startsWith('{')) {
+        const alt = tryParseJson(md);
+        if (alt && alt.feedback) {
+          const feedbackMd = alt.feedback || '';
+          let tmpHtml = feedbackMd;
+          if (typeof marked !== 'undefined') {
+            try { tmpHtml = marked.parse(feedbackMd); } catch (e) { tmpHtml = feedbackMd.replace(/\n/g, '<br>'); }
+          }
+          const safeHtml = (typeof DOMPurify !== 'undefined') ? DOMPurify.sanitize(tmpHtml) : tmpHtml;
+          const tmp = document.createElement('div');
+          tmp.innerHTML = safeHtml;
+          const plain = (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
+          output.innerHTML = '<p class="constructive">' + (plain || 'No detailed feedback provided.') + '</p>';
+        } else {
+          console.warn('Model returned JSON but no feedback field; raw response hidden. Check console.');
+          output.innerHTML = '<p class="constructive">Model returned an unexpected format. Check console for details.</p>';
+          console.debug('Raw model response:', md);
+        }
+      } else {
+        // Regular markdown/text fallback
+        let html;
+        if (typeof marked !== 'undefined') {
+          try { html = marked.parse(md); } catch (e) { console.warn('marked parse failed, falling back to plaintext', e); html = md.replace(/\n/g, '<br>'); }
+        } else {
+          html = md.replace(/\n/g, '<br>');
+        }
+        const safe = (typeof DOMPurify !== 'undefined') ? DOMPurify.sanitize(html) : html;
+        output.innerHTML = safe;
+      }
+    }
+
+  } catch (err) {
+    console.error(err);
+    loading.classList.add("hidden");
+    output.classList.remove("hidden");
+    output.textContent = "Error connecting to local AI: " + (err.message || err);
+  }
+}
+</script>
+
+<style>
+.score-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 500;
+  box-shadow: 0 6px 18px rgba(11,37,64,0.06);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.score-card i {
+  color: #2563eb;
+  font-size: 1.4rem;
+}
+
+.score-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(11,37,64,0.08); }
+.score-body { display:flex; flex-direction:column; flex:1; }
+.score-title { font-size:0.95rem; color:var(--vs-navy); }
+.score-value { font-size:1.5rem; font-weight:700; color:var(--vs-navy); margin-top:0.25rem; }
+.score-note { margin-top:0.35rem; font-size:0.85rem; color:#6b7280; }
+
+/* Branding and dark-theme variables */
+:root {
+  --vs-navy: #072030;    /* deep navy */
+  --vs-orange: #ff7a00;  /* accent orange */
+
+  --bg: #071022;         /* page background */
+  --surface: #081422;    /* main panel */
+  --card-bg: rgba(255,255,255,0.02);
+  --muted: #9aa6b8;
+  --text: #e6eefb;
+  --input-bg: #071423;
+  --border: rgba(255,255,255,0.06);
+  --glass: rgba(255,255,255,0.03);
+}
+
+.brand-text { color: var(--text); }
+.brand-accent { color: var(--vs-orange); }
+.logo-img { width: 40px; height: 40px; object-fit: contain; border-radius: 8px; }
+
+.writing-type { font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+
+/* Primary button matching brand */
+.btn-primary {
+  background-color: var(--vs-navy);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(255,255,255,0.04);
+  cursor: pointer;
+}
+.btn-primary:hover { background-color: var(--vs-orange); color: #fff; }
+
+/* Score card visuals */
+.score-card { background-color: var(--card-bg); border: 1px solid var(--border); }
+.score-card i { color: var(--vs-orange); font-size:1.4rem; }
+.score-title { color: var(--muted); }
+.score-value { color: var(--text); }
+.score-note { color: var(--muted); }
+
+/* Watermark styles (non-interactive) */
+.watermark { position: fixed; inset: 0; pointer-events: none; user-select: none; z-index: 9999; }
+.watermark-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 4rem; color: #fff; opacity: 0.04; font-weight: 700; letter-spacing: 0.08em; white-space: nowrap; }
+.watermark-corner { position: absolute; right: 1rem; bottom: 1rem; font-size: 0.9rem; color: #fff; opacity: 0.22; }
+
+/* Modal styles */
+.modal { display:none; }
+.modal[aria-hidden="false"] { display:block; position:fixed; inset:0; z-index:10000; }
+.modal-overlay { position:fixed; inset:0; background:rgba(2,6,23,0.72); }
+.modal-content { position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); background:var(--surface); color:var(--text); padding:1.25rem; border-radius:0.75rem; width:min(640px,92%); box-shadow:0 18px 60px rgba(2,6,23,0.5); border:1px solid var(--border); }
+.modal-content h2 { margin:0 0 .5rem 0; color:var(--text); }
+.modal-content p { margin:0; color:var(--muted); }
+.constructive { font-size:0.98rem; color:var(--text); line-height:1.6; }
+
+/* page & panel */
+body { background-color: var(--bg); color: var(--text); }
+.app-container { background-color: var(--surface); box-shadow: 0 20px 60px rgba(2,6,23,0.6); border:1px solid rgba(255,255,255,0.02); }
+
+textarea#essay { background: var(--input-bg); color: var(--text); border: 1px solid var(--border); }
+textarea#essay::placeholder { color: var(--muted); }
+
+#output { background: var(--glass); border: 1px solid var(--border); color: var(--text); }
+
+/* button subtle shadow */
+.btn-primary { box-shadow: 0 6px 18px rgba(2,6,23,0.5); }
+</style>
+
+</body>
+</html>
