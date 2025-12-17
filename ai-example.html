@@ -70,6 +70,14 @@
       Analyze Writing
     </button>
 
+    <!-- API host configuration (use an HTTPS tunnel URL when serving on GitHub Pages) -->
+    <div class="mt-2 flex items-center gap-2">
+      <input id="api-base-input" class="border rounded px-2 py-1 w-full" placeholder="https://abcd-1234.ngrok.io or https://your.domain" />
+      <button id="api-save" class="btn-primary">Save</button>
+      <button id="api-test" class="btn-primary">Test</button>
+    </div>
+    <div id="api-status" class="text-sm text-gray-600 mt-1"></div>
+
     <div id="loading" class="hidden flex items-center gap-2 text-gray-600">
       <i class="fa-solid fa-spinner fa-spin"></i>
       Analyzing essay...
@@ -103,6 +111,19 @@
   </div>
 
 <script>
+// API base — configurable. Saved to localStorage as 'vs_api_base'.
+const DEFAULT_API = "http://65.30.0.168:11434";
+let API_BASE = (() => {
+  try { return localStorage.getItem('vs_api_base') || DEFAULT_API; } catch (e) { return DEFAULT_API; }
+})();
+
+function setApiBase(v) {
+  API_BASE = v || DEFAULT_API;
+  try { localStorage.setItem('vs_api_base', API_BASE); } catch (e) {}
+}
+
+function getApiBase() { return API_BASE; }
+
 // Show prototype modal on first visit (uses localStorage)
 function showPrototypeModalIfNeeded(){
   try{
@@ -126,6 +147,62 @@ function showPrototypeModalIfNeeded(){
 }
 
 document.addEventListener('DOMContentLoaded', ()=> showPrototypeModalIfNeeded());
+
+// populate API input and wire save/test buttons
+document.addEventListener('DOMContentLoaded', ()=>{
+  const input = document.getElementById('api-base-input');
+  const save = document.getElementById('api-save');
+  const test = document.getElementById('api-test');
+  const status = document.getElementById('api-status');
+  if (input) input.value = getApiBase();
+  if (save) save.addEventListener('click', ()=>{
+    const v = (input && input.value.trim()) || '';
+    setApiBase(v);
+    status.textContent = 'Saved API host: ' + getApiBase();
+    checkMixedContentWarning();
+  });
+  if (test) test.addEventListener('click', async ()=>{
+    status.textContent = 'Testing...';
+    try {
+      const ok = await testApiBase(getApiBase());
+      status.textContent = ok ? 'Connection OK' : 'Connection failed (no response)';
+    } catch (e) {
+      status.textContent = 'Test error: ' + (e && e.message ? e.message : e);
+    }
+    checkMixedContentWarning();
+  });
+  checkMixedContentWarning();
+});
+
+function checkMixedContentWarning(){
+  const status = document.getElementById('api-status');
+  try{
+    if (location.protocol === 'https:' && getApiBase().startsWith('http://')){
+      status.textContent = 'Warning: page is HTTPS — browser will block HTTP requests. Use an HTTPS tunnel (ngrok/Cloudflare) or set API to an https:// URL.';
+      return;
+    }
+  }catch(e){}
+}
+
+// test API base by POSTing a tiny request with timeout
+async function testApiBase(url){
+  if (!url) return false;
+  const controller = new AbortController();
+  const id = setTimeout(()=>controller.abort(), 6000);
+  try{
+    const res = await fetch(url.replace(/\/+$/, '') + '/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'gpt-oss:20b', prompt: 'ping', stream: false }),
+      signal: controller.signal
+    });
+    clearTimeout(id);
+    return res.ok;
+  }catch(e){
+    clearTimeout(id);
+    throw e;
+  }
+}
 
 async function getFeedback() {
   const essay = document.getElementById("essay").value.trim();
@@ -183,7 +260,7 @@ Text to analyze:
 `;
 
   try {
-    const res = await fetch("http://65.30.0.168:11434/api/generate", {
+    const res = await fetch(`${API_BASE}/api/generate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
