@@ -112,7 +112,7 @@
 
 <script>
 // API base — configurable. Saved to localStorage as 'vs_api_base'.
-const DEFAULT_API = "http://65.30.0.168:11434";
+const DEFAULT_API = "https://ai.vierastudy.com:11434";
 let API_BASE = (() => {
   try { return localStorage.getItem('vs_api_base') || DEFAULT_API; } catch (e) { return DEFAULT_API; }
 })();
