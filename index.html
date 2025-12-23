@@ -1571,10 +1571,11 @@
             position: relative;
             background: white;
             height: 100vh;
+            max-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             padding: 30px 50px;
             text-align: center;
             z-index: 1;
@@ -2248,6 +2249,40 @@
                         autocomplete="new-password"
                     >
                 </div>
+                <div class="input-group">
+                    <label class="input-label" for="registerConfirmPassword"><i class="fas fa-lock"></i> Confirm Password</label>
+                    <input 
+                        type="password" 
+                        id="registerConfirmPassword" 
+                        class="welcome-input" 
+                        placeholder="Re-enter your password" 
+                        required
+                        minlength="6"
+                        autocomplete="new-password"
+                    >
+                </div>
+                <div class="input-group" style="margin-top: 10px;">
+                    <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer; font-size: 14px;">
+                        <input 
+                            type="checkbox" 
+                            id="agreeTerms" 
+                            required
+                            style="margin-top: 3px; cursor: pointer;"
+                        >
+                        <span>I agree to the <a href="terms.html" target="_blank" style="color: #667eea; text-decoration: underline;">Terms of Service</a> and <a href="privacy.html" target="_blank" style="color: #667eea; text-decoration: underline;">Privacy Policy</a></span>
+                    </label>
+                </div>
+                <div class="input-group" style="margin-top: 10px;">
+                    <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer; font-size: 14px;">
+                        <input 
+                            type="checkbox" 
+                            id="agreeAge" 
+                            required
+                            style="margin-top: 3px; cursor: pointer;"
+                        >
+                        <span>I certify that I am 18 years or older, or 13+ with parental consent</span>
+                    </label>
+                </div>
                 <button type="submit" class="welcome-btn" id="registerBtn">
                     Create Account →
                 </button>
@@ -2730,6 +2765,9 @@
             const lastName = document.getElementById('registerLastName').value.trim();
             const email = document.getElementById('registerEmail').value.trim();
             const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            const agreeTerms = document.getElementById('agreeTerms').checked;
+            const agreeAge = document.getElementById('agreeAge').checked;
             const btn = document.getElementById('registerBtn');
             
             console.log('Form data:', { firstName, lastName, email, hasPassword: !!password });
@@ -2741,6 +2779,21 @@
             
             if (password.length < 6) {
                 showNotification('Password must be at least 6 characters.', 'error', 'Invalid Password');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showNotification('Passwords do not match. Please try again.', 'error', 'Password Mismatch');
+                return;
+            }
+            
+            if (!agreeTerms) {
+                showNotification('You must agree to the Terms of Service and Privacy Policy.', 'error', 'Agreement Required');
+                return;
+            }
+            
+            if (!agreeAge) {
+                showNotification('You must certify that you meet the age requirement.', 'error', 'Age Certification Required');
                 return;
             }
             
