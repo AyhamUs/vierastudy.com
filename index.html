@@ -172,7 +172,7 @@
 
         .container {
             display: flex;
-            height: 100vh;
+            min-height: 100vh;
         }
 
         /* Sidebar */
@@ -537,7 +537,6 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
         }
 
         .header {
@@ -549,7 +548,6 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            overflow-y: auto;
         }
 
         /* Welcome Banner */
@@ -596,6 +594,11 @@
             z-index: 1;
         }
 
+        .welcome-greeting {
+            max-width: 100%;
+            min-width: 0;
+        }
+
         .welcome-greeting h1 {
             font-size: 28px;
             font-weight: 700;
@@ -603,6 +606,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .welcome-greeting p {
@@ -1011,17 +1015,36 @@
                 padding: 20px;
             }
             .welcome-banner {
-                padding: 24px;
+                padding: 20px;
             }
             .welcome-banner-content {
                 flex-direction: column;
                 gap: 16px;
+                align-items: stretch;
+            }
+            .welcome-greeting {
+                max-width: 100%;
+                width: 100%;
             }
             .welcome-date {
                 text-align: left;
+                width: 100%;
             }
             .welcome-greeting h1 {
-                font-size: 22px;
+                font-size: 20px;
+                flex-wrap: wrap;
+                line-height: 1.3;
+                word-break: break-word;
+                max-width: 100%;
+            }
+            .welcome-greeting p {
+                font-size: 14px;
+                line-height: 1.4;
+                max-width: 100%;
+            }
+            .welcome-quote {
+                font-size: 13px;
+                line-height: 1.5;
             }
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
@@ -1040,6 +1063,27 @@
         }
 
         @media (max-width: 480px) {
+            .welcome-banner {
+                padding: 16px;
+            }
+            .welcome-banner-content {
+                gap: 12px;
+            }
+            .welcome-greeting h1 {
+                font-size: 18px;
+                gap: 6px;
+                max-width: 100%;
+                overflow-wrap: break-word;
+            }
+            .welcome-greeting p {
+                font-size: 13px;
+            }
+            .welcome-date-day {
+                font-size: 16px;
+            }
+            .welcome-date-full {
+                font-size: 12px;
+            }
             .stats-grid {
                 grid-template-columns: 1fr;
             }
