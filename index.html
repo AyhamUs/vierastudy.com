@@ -172,7 +172,7 @@
 
         .container {
             display: flex;
-            min-height: 100vh;
+            height: 100vh;
         }
 
         /* Sidebar */
@@ -537,6 +537,7 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            overflow-y: auto;
         }
 
         .header {
@@ -592,11 +593,14 @@
             align-items: flex-start;
             position: relative;
             z-index: 1;
+            flex-wrap: wrap;
+            gap: 16px;
         }
 
         .welcome-greeting {
             max-width: 100%;
             min-width: 0;
+            flex: 1;
         }
 
         .welcome-greeting h1 {
@@ -607,16 +611,20 @@
             align-items: center;
             gap: 10px;
             flex-wrap: wrap;
+            word-break: break-word;
         }
 
         .welcome-greeting p {
             font-size: 16px;
             opacity: 0.9;
             margin-bottom: 0;
+            word-break: break-word;
         }
 
         .welcome-date {
             text-align: right;
+            flex-shrink: 0;
+            margin-left: 20px;
         }
 
         .welcome-date-day {
@@ -1097,8 +1105,9 @@
             background: white;
             padding: 30px 40px;
             border-top: 1px solid #e2e8f0;
-            margin-top: auto;
+            margin-top: 30px;
             border-radius: 12px;
+            flex-shrink: 0;
         }
 
         .footer-content {
@@ -1310,7 +1319,14 @@
 
             /* Close sidebar when clicking nav links */
             .nav-menu a {
-                -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+                -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Button touch targets */
+            .btn,
+            button {
+                min-height: 44px;
+                touch-action: manipulation;
             }
         }
 
@@ -1541,13 +1557,14 @@
         }
 
         @keyframes gradient-shift {
-            0%, 100% { 
-                opacity: 1;
-                transform: scale(1);
+            0% { 
+                background-position: 0% 50%;
             }
             50% { 
-                opacity: 0.8;
-                transform: scale(1.05);
+                background-position: 100% 50%;
+            }
+            100% { 
+                background-position: 0% 50%;
             }
         }
 
@@ -1559,8 +1576,7 @@
             overflow: hidden;
             gap: 0;
             min-height: 100vh;
-            background: linear-gradient(rgba(6, 12, 34, 0.45), rgba(6, 12, 34, 0.45)), url('https://images.unsplash.com/photo-1517433456452-f9633a875f6f?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-            background-attachment: fixed;
+            background: #f5f7fa;
         }
         /* Minimal centered login */
         .welcome-overlay.show .welcome-hero,
@@ -2595,10 +2611,6 @@
             </div>
             
             <div class="content">
-                <div id="updateNotice" style="background:#fff3cd;border:1px solid #ffeeba;color:#664d03;padding:12px 16px;border-radius:12px;margin-bottom:18px;position:relative;">
-                    <span>Updated to VieraStudy 1.2 — we've optimized parts of the website for better performance and usability.</span>
-                    <button id="dismissUpdateNotice" aria-label="Dismiss update notice" style="position:absolute;right:8px;top:6px;background:transparent;border:none;font-size:18px;line-height:1;color:#664d03;cursor:pointer;padding:4px 8px;border-radius:6px;">×</button>
-                </div>
                 <!-- Welcome Banner -->
                 <div class="welcome-banner">
                     <div class="welcome-banner-content">
@@ -3539,25 +3551,6 @@
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', async function() {
-             // Dismissible update notice: version-aware dismissal stored in localStorage
-             try {
-                 const updateNotice = document.getElementById('updateNotice');
-                 if (updateNotice) {
-                     const ver = updateNotice.dataset.version || '1.2';
-                     const key = `viera_update_dismissed_${ver}`;
-                     const dismissed = localStorage.getItem(key) === '1';
-                     if (dismissed) updateNotice.style.display = 'none';
-                     const dismissBtn = document.getElementById('dismissUpdateNotice');
-                     if (dismissBtn) {
-                         dismissBtn.addEventListener('click', function() {
-                             updateNotice.style.display = 'none';
-                             try { localStorage.setItem(key, '1'); } catch (e) { /* ignore */ }
-                         });
-                     }
-                 }
-             } catch (e) {
-                 console.error('Update notice init error', e);
-             }
             // Wait for API to be ready (data loaded from cloud)
             await vieraAPI.ready;
             
