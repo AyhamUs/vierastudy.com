@@ -227,8 +227,8 @@
             border-left: 3px solid #3b82f6;
         }
 
-        a[href="/"].nav-item.active,
-        a[href="/"].nav-item:hover {
+        a[href="dashboard.html"].nav-item.active,
+        a[href="dashboard.html"].nav-item:hover {
             color: #3b82f6;
         }
 
@@ -901,7 +901,7 @@
             </div>
             
             <nav class="nav-menu">
-                <a href="/" class="nav-item">
+                <a href="dashboard.html" class="nav-item">
                     <i class="fas fa-home"></i>
                     <span>Home</span>
                 </a>
@@ -1174,6 +1174,16 @@
     </style>
 
     <script src="api.js?v=12"></script>
+    <script>
+        // Session check - redirect to login if not authenticated
+        (async function() {
+            await vieraAPI.ready;
+            if (!vieraAPI.isLoggedIn() || !vieraAPI.getUser()) {
+                window.location.href = 'login.html';
+                return;
+            }
+        })();
+    </script>
     <script>
         let equations = [];
         const colors = ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16'];

@@ -1,0 +1,3739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Dashboard - VieraStudy</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="VieraStudy is your ultimate study companion. Organize classes, create flashcards, track progress, manage tasks, and achieve your academic goals with powerful study tools.">
+    <meta name="keywords" content="study, flashcards, todo list, pomodoro timer, notes, progress tracker, schedule, academic tools, learning, education, VieraStudy">
+    <link rel="canonical" href="https://vierastudy.com/">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="VieraStudy - Your Ultimate Study Companion">
+    <meta property="og:description" content="Organize classes, create flashcards, track progress, and achieve your academic goals with VieraStudy's powerful suite of study tools.">
+    <meta property="og:url" content="https://vierastudy.com/">
+    <meta property="og:image" content="https://vierastudy.com/vierastudy.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="VieraStudy">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VieraStudy - Your Ultimate Study Companion">
+    <meta name="twitter:description" content="Organize classes, create flashcards, track progress, and achieve your academic goals with VieraStudy's powerful suite of study tools.">
+    <meta name="twitter:image" content="https://vierastudy.com/vierastudy.png">
+    
+    <link rel="icon" href="vierastudy.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            transition: background 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        body.dark-mode {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .main-content {
+            background: #0f172a;
+        }
+
+        body.dark-mode .header {
+            background: #1e293b;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .header h1 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+        }
+
+        body.dark-mode .card h3 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .card p {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .card-number {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .section {
+            background: #1e293b;
+            border: 1px solid #334155;
+        }
+
+        body.dark-mode .section h2 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .activity-item {
+            border-color: #334155;
+        }
+
+        body.dark-mode .activity-title {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .activity-time {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .footer {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        body.dark-mode .activity-item {
+            border-color: #334155;
+        }
+
+        body.dark-mode hr,
+        body.dark-mode [style*="border"] {
+            border-color: #334155 !important;
+        }
+
+        body.dark-mode .footer-left,
+        body.dark-mode .footer-left span,
+        body.dark-mode .footer-left strong,
+        body.dark-mode .footer-left p,
+        body.dark-mode .footer-links a {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .modal-content {
+            background: #1e293b;
+        }
+
+        body.dark-mode .modal h2 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .form-group label {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .form-group input {
+            background: #334155;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+
+        /* Login screen stays light regardless of dark mode */
+
+        body.dark-mode .notification-content {
+            background: #1e293b;
+        }
+
+        body.dark-mode .notification-title {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .notification-message {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .quick-action-card {
+            background: #1e293b;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-mode .quick-action-text {
+            color: #cbd5e1;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: #1e293b;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .logo {
+            padding: 30px 25px;
+            font-size: 24px;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo img {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            color: white;
+        }
+
+        .pro-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #1e293b;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-menu {
+            flex: 1;
+            padding: 20px 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .nav-item {
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .nav-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .nav-item.active {
+            background: rgba(59, 130, 246, 0.15);
+            border-left: 3px solid #3b82f6;
+        }
+
+        .nav-item.active span {
+            color: inherit;
+        }
+
+        a[href="dashboard.html"].nav-item.active,
+        a[href="dashboard.html"].nav-item:hover {
+            color: #3b82f6;
+        }
+
+        a[href="flashcards"].nav-item.active,
+        a[href="flashcards"].nav-item:hover {
+            color: #8b5cf6;
+        }
+
+        a[href="todo"].nav-item.active,
+        a[href="todo"].nav-item:hover {
+            color: #10b981;
+        }
+
+        a[href="schedule"].nav-item.active,
+        a[href="schedule"].nav-item:hover {
+            color: #f59e0b;
+        }
+
+        a[href="pomodoro"].nav-item.active,
+        a[href="pomodoro"].nav-item:hover {
+            color: #ef4444;
+        }
+
+        a[href="notes"].nav-item.active,
+        a[href="notes"].nav-item:hover {
+            color: #06b6d4;
+        }
+
+        a[href="progress-tracker"].nav-item.active,
+        a[href="progress-tracker"].nav-item:hover {
+            color: #ec4899;
+        }
+
+        a[href="classes"].nav-item.active,
+        a[href="classes"].nav-item:hover {
+            color: #f97316;
+        }
+
+        a[href="settings"].nav-item.active,
+        a[href="settings"].nav-item:hover {
+            color: #64748b;
+        }
+
+        .nav-item i {
+            width: 25px;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        .nav-item .fa-home {
+            color: #3b82f6;
+        }
+
+        .nav-item .fa-layer-group {
+            color: #8b5cf6;
+        }
+
+        .nav-item .fa-list-check {
+            color: #10b981;
+        }
+
+        .nav-item .fa-calendar-days {
+            color: #f59e0b;
+        }
+
+        .nav-item .fa-clock {
+            color: #ef4444;
+        }
+
+        .nav-item .fa-book-open {
+            color: #06b6d4;
+        }
+
+        .nav-item .fa-chart-line {
+            color: #ec4899;
+        }
+
+        .nav-item .fa-brain {
+            color: #6366f1;
+        }
+
+        .nav-item .fa-calculator {
+            color: #84cc16;
+        }
+
+        .nav-item .fa-book {
+            color: #f97316;
+        }
+
+        .nav-item .fa-gear,
+        .nav-item .fa-cog {
+            color: #64748b;
+        }
+
+        /* AI Dropdown */
+        .ai-dropdown {
+            position: relative;
+        }
+
+        .ai-dropdown .nav-item {
+            padding: 15px 25px;
+        }
+
+        /* Math Dropdown - same styling */
+        .math-dropdown {
+            position: relative;
+        }
+
+        .math-dropdown .nav-item {
+            padding: 15px 25px;
+        }
+
+        .dropdown-header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .dropdown-header .icon-text {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .dropdown-header i.fa-brain,
+        .dropdown-header i.fa-calculator {
+            width: 25px;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        .dropdown-header .fa-chevron-down {
+            font-size: 12px;
+            transition: transform 0.3s;
+            margin-left: auto;
+        }
+
+        .ai-dropdown.open .fa-chevron-down,
+        .math-dropdown.open .fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .ai-dropdown.open .dropdown-content,
+        .math-dropdown.open .dropdown-content {
+            max-height: 350px;
+            opacity: 1;
+            overflow: visible;
+        }
+
+        .dropdown-item {
+            padding: 12px 25px 12px 55px;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            border-left: 3px solid transparent;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(59, 130, 246, 0.08);
+            color: #3b82f6;
+            padding-left: 60px;
+            border-left-color: #3b82f6;
+        }
+
+        .dropdown-item i {
+            width: 18px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* AI Tools dropdown icon colors */
+        .ai-dropdown .dropdown-item:nth-child(1) i {
+            color: #6366f1;
+        }
+
+        .ai-dropdown .dropdown-item:nth-child(2) i {
+            color: #6366f1;
+        }
+
+        .ai-dropdown .dropdown-item:nth-child(3) i {
+            color: #6366f1;
+        }
+
+        .ai-dropdown .dropdown-item:nth-child(4) i {
+            color: #6366f1;
+        }
+
+        /* Math Tools dropdown icon colors */
+        .math-dropdown .dropdown-item:nth-child(1) i {
+            color: #84cc16;
+        }
+
+        .math-dropdown .dropdown-item:nth-child(2) i {
+            color: #84cc16;
+        }
+
+        /* User Profile */
+        .user-profile {
+            padding: 20px 25px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            visibility: hidden; /* Hidden until user status is determined */
+        }
+
+        .user-profile.loaded {
+            visibility: visible;
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .user-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #1e293b;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .signout-btn {
+            background: rgba(239, 68, 68, 0.1);
+            border: none;
+            color: #ef4444;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .signout-btn:hover {
+            background: #ef4444;
+            color: white;
+        }
+
+        .signout-btn i {
+            font-size: 16px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .header {
+            display: none;
+        }
+
+        .content {
+            padding: 30px 40px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+            border-radius: 20px;
+            padding: 32px 36px;
+            margin-bottom: 28px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(59, 130, 246, 0.3);
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: -80%;
+            right: -15%;
+            width: 450px;
+            height: 450px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .welcome-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -60%;
+            left: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .welcome-banner-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .welcome-greeting {
+            max-width: 100%;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .welcome-greeting h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            word-break: break-word;
+        }
+
+        .welcome-greeting p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 0;
+            word-break: break-word;
+        }
+
+        .welcome-date {
+            text-align: right;
+            flex-shrink: 0;
+            margin-left: 20px;
+        }
+
+        .welcome-date-day {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .welcome-date-full {
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        .welcome-quote {
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-style: italic;
+            opacity: 0.9;
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Stats Cards - New Design */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 16px 0 0 16px;
+        }
+
+        .stat-card:nth-child(1)::before { background: linear-gradient(180deg, #3b82f6, #2563eb); }
+        .stat-card:nth-child(2)::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
+        .stat-card:nth-child(3)::before { background: linear-gradient(180deg, #10b981, #059669); }
+        .stat-card:nth-child(4)::before { background: linear-gradient(180deg, #f59e0b, #d97706); }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .stat-card:nth-child(1) .stat-icon { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+        .stat-card:nth-child(2) .stat-icon { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+        .stat-card:nth-child(3) .stat-icon { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .stat-card:nth-child(4) .stat-icon { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+
+        .stat-info {
+            flex: 1;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.2;
+        }
+
+        .stat-subtitle {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
+        body.dark-mode .stat-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+        }
+
+        body.dark-mode .stat-value {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .stat-label {
+            color: #94a3b8;
+        }
+
+        /* Quick Actions - New Design */
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .quick-action-card {
+            background: white;
+            border-radius: 14px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .quick-action-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .quick-action-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            transition: all 0.3s ease;
+        }
+
+        .quick-action-card:nth-child(1) .quick-action-icon { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+        .quick-action-card:nth-child(2) .quick-action-icon { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .quick-action-card:nth-child(3) .quick-action-icon { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+        .quick-action-card:nth-child(4) .quick-action-icon { background: rgba(6, 182, 212, 0.1); color: #06b6d4; }
+
+        .quick-action-card:nth-child(1):hover { border-color: #8b5cf6; background: rgba(139, 92, 246, 0.05); }
+        .quick-action-card:nth-child(2):hover { border-color: #10b981; background: rgba(16, 185, 129, 0.05); }
+        .quick-action-card:nth-child(3):hover { border-color: #ef4444; background: rgba(239, 68, 68, 0.05); }
+        .quick-action-card:nth-child(4):hover { border-color: #06b6d4; background: rgba(6, 182, 212, 0.05); }
+
+        .quick-action-card:nth-child(1):hover .quick-action-icon { background: #8b5cf6; color: white; }
+        .quick-action-card:nth-child(2):hover .quick-action-icon { background: #10b981; color: white; }
+        .quick-action-card:nth-child(3):hover .quick-action-icon { background: #ef4444; color: white; }
+        .quick-action-card:nth-child(4):hover .quick-action-icon { background: #06b6d4; color: white; }
+
+        .quick-action-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            text-align: center;
+        }
+
+        body.dark-mode .quick-action-card {
+            background: #1e293b;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-mode .quick-action-text {
+            color: #cbd5e1;
+        }
+
+        /* Dashboard Grid Layout */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 28px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .card-icon.blue {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .card-icon.purple {
+            background: rgba(139, 92, 246, 0.1);
+            color: #8b5cf6;
+        }
+
+        .card-icon.green {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+
+        .card-icon.orange {
+            background: rgba(249, 115, 22, 0.1);
+            color: #f97316;
+        }
+
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+
+        .card p {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .card-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-top: 15px;
+        }
+
+        .section {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            border: 1px solid #e2e8f0;
+        }
+
+        .section h2 {
+            font-size: 17px;
+            margin-bottom: 18px;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h2 i {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .activity-item {
+            padding: 14px 0;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .activity-item:first-child {
+            padding-top: 0;
+        }
+
+        .activity-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .activity-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 2px;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .activity-time {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        /* Classes Preview */
+        .classes-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+
+        .class-preview-card {
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .class-preview-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .class-preview-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 20px;
+            color: white;
+        }
+
+        .class-preview-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .quick-actions-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            .welcome-banner {
+                padding: 20px;
+            }
+            .welcome-banner-content {
+                flex-direction: column;
+                gap: 16px;
+                align-items: stretch;
+            }
+            .welcome-greeting {
+                max-width: 100%;
+                width: 100%;
+            }
+            .welcome-date {
+                text-align: left;
+                width: 100%;
+            }
+            .welcome-greeting h1 {
+                font-size: 20px;
+                flex-wrap: wrap;
+                line-height: 1.3;
+                word-break: break-word;
+                max-width: 100%;
+            }
+            .welcome-greeting p {
+                font-size: 14px;
+                line-height: 1.4;
+                max-width: 100%;
+            }
+            .welcome-quote {
+                font-size: 13px;
+                line-height: 1.5;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .stat-card {
+                padding: 18px;
+            }
+            .stat-value {
+                font-size: 24px;
+            }
+            .quick-actions-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-banner {
+                padding: 16px;
+            }
+            .welcome-banner-content {
+                gap: 12px;
+            }
+            .welcome-greeting h1 {
+                font-size: 18px;
+                gap: 6px;
+                max-width: 100%;
+                overflow-wrap: break-word;
+            }
+            .welcome-greeting p {
+                font-size: 13px;
+            }
+            .welcome-date-day {
+                font-size: 16px;
+            }
+            .welcome-date-full {
+                font-size: 12px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-actions-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            padding: 30px 40px;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 30px;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .footer-left img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        .footer-left i {
+            color: #3b82f6;
+            font-size: 18px;
+        }
+
+        .footer-left strong {
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: #3b82f6;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .social-icon:hover {
+            background: #3b82f6;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            transition: all 0.3s;
+        }
+
+        .mobile-menu-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-menu-toggle i {
+            font-size: 20px;
+        }
+
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -280px;
+                top: 0;
+                bottom: 0;
+                z-index: 999;
+                transition: left 0.3s ease;
+                width: 280px;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .mobile-overlay {
+                display: block;
+            }
+
+            .main-content {
+                width: 100%;
+            }
+
+            .header {
+                padding: 20px 20px 20px 75px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .quick-action-card {
+                padding: 15px;
+                min-height: 44px;
+                touch-action: manipulation;
+            }
+
+            .quick-action-icon {
+                width: 44px;
+                height: 44px;
+            }
+
+            /* Fix dropdown overflow on mobile */
+            .ai-dropdown.open .dropdown-content,
+            .math-dropdown.open .dropdown-content {
+                max-height: 500px;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .dropdown-item {
+                padding: 14px 25px 14px 55px;
+                min-height: 44px;
+                touch-action: manipulation;
+            }
+
+            .dropdown-item:hover {
+                padding-left: 55px;
+            }
+
+            /* Better touch targets for nav items */
+            .nav-item {
+                padding: 16px 25px;
+                min-height: 48px;
+                touch-action: manipulation;
+            }
+
+            /* Close sidebar when clicking nav links */
+            .nav-menu a {
+                -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Button touch targets */
+            .btn,
+            button {
+                min-height: 44px;
+                touch-action: manipulation;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 18px;
+            }
+
+            .header {
+                padding: 15px 15px 15px 65px;
+            }
+
+            .mobile-menu-toggle {
+                top: 15px;
+                left: 15px;
+                width: 44px;
+                height: 44px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .card-number {
+                font-size: 28px;
+            }
+
+            .user-avatar {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .user-name {
+                font-size: 13px;
+            }
+
+            .activity-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .footer {
+                padding: 20px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                justify-content: center;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .section {
+                padding: 15px;
+            }
+        }
+
+        /* Notification Modal */
+        .notification-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 25000;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .notification-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notification-content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.3s ease;
+            text-align: center;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @media (max-width: 480px) {
+            .notification-content {
+                padding: 25px 20px;
+                width: 92%;
+            }
+
+            .notification-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+
+            .notification-title {
+                font-size: 18px;
+            }
+
+            .notification-message {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+
+            .notification-btn {
+                width: 100%;
+                padding: 14px 20px;
+            }
+        }
+
+        .notification-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+        }
+
+        .notification-icon.success {
+            background: #10b981;
+            color: white;
+        }
+
+        .notification-icon.info {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .notification-icon.warning {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .notification-icon.error {
+            background: #ef4444;
+            color: white;
+        }
+
+        .notification-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .notification-message {
+            font-size: 15px;
+            color: #64748b;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .notification-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .notification-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Welcome Overlay */
+        .welcome-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+            z-index: 20000;
+            overflow: hidden;
+            -webkit-font-smoothing:antialiased;
+        }
+
+        .welcome-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: none;
+        }
+
+        @keyframes gradient-shift {
+            0% { 
+                background-position: 0% 50%;
+            }
+            50% { 
+                background-position: 100% 50%;
+            }
+            100% { 
+                background-position: 0% 50%;
+            }
+        }
+
+        .welcome-overlay.show {
+            display: grid;
+            grid-template-columns: 1fr;
+            place-items: center;
+            padding: 20px;
+            overflow: hidden;
+            gap: 0;
+            min-height: 100vh;
+            background: #f5f7fa;
+        }
+        /* Minimal centered login */
+        .welcome-overlay.show .welcome-hero,
+        .welcome-overlay.show .welcome-features,
+        .welcome-overlay.show .welcome-divider,
+        .welcome-overlay.show .welcome-stats {
+            display: none;
+        }
+        .welcome-card {
+            max-width: 420px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 28px;
+            border-radius: 14px;
+            box-shadow: 0 8px 30px rgba(15,23,42,0.08);
+        }
+        .welcome-title {
+            font-size: 22px;
+            margin-bottom: 6px;
+            color: #0f172a;
+        }
+        .welcome-subtitle {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 18px;
+        }
+        .welcome-input {
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid #e6edf8;
+            background: #ffffff;
+            box-shadow: none;
+        }
+        .welcome-btn {
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        .welcome-hero {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            color: #0f172a;
+            z-index: 1;
+            overflow: visible;
+            text-align: center;
+        }
+
+        .welcome-hero-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+        }
+
+        .welcome-hero h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            line-height: 1.15;
+            color: #0f172a;
+        }
+
+        .welcome-hero p {
+            font-size: 16px;
+            opacity: 0.9;
+            max-width: 480px;
+            line-height: 1.5;
+            color: #334155;
+        }
+
+        .welcome-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+            max-width: 500px;
+        }
+
+        .welcome-stat {
+            text-align: center;
+        }
+
+        .welcome-stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .welcome-stat-label {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .welcome-card {
+            position: relative;
+            background: white;
+            height: auto;
+            max-height: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 32px 36px;
+            text-align: center;
+            z-index: 1;
+            overflow-y: auto;
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(15, 23, 42, 0.06);
+            margin: 24px auto;
+            max-width: 420px;
+            width: 100%;
+        }
+
+        @keyframes welcomeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-card-logo {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #1e293b;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(30, 41, 59, 0.3);
+        }
+
+        .welcome-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .welcome-subtitle {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .welcome-form {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .input-group {
+            position: relative;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .input-label i {
+            font-size: 14px;
+            width: 16px;
+            text-align: center;
+        }
+
+        .input-label .fa-user {
+            color: #3b82f6;
+        }
+
+        .input-label .fa-user-tag {
+            color: #8b5cf6;
+        }
+
+        .input-label .fa-envelope {
+            color: #10b981;
+        }
+
+        .input-label .fa-lock {
+            color: #f59e0b;
+        }
+
+        .input-label .fa-key {
+            color: #f59e0b;
+        }
+
+        .welcome-input {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.2s ease;
+            background: #f8fafc;
+            color: #1e293b;
+            box-sizing: border-box;
+        }
+
+        .welcome-input::placeholder {
+            color: #94a3b8;
+        }
+
+        .welcome-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .welcome-input:hover:not(:focus) {
+            border-color: #cbd5e1;
+            background: white;
+        }
+
+        .welcome-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 6px;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+            width: 100%;
+        }
+
+        .welcome-btn:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+        }
+
+        .welcome-btn:active {
+            transform: translateY(0);
+        }
+
+        .welcome-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Google sign-in button */
+        .google-btn {
+            background: #ef4444;
+            color: white;
+            border: 1px solid #ef4444;
+            box-shadow: none;
+        }
+
+        .google-btn i {
+            color: white;
+            font-size: 18px;
+        }
+
+        .google-btn:hover {
+            background: #dc2626;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+        }
+
+        .auth-switch {
+            text-align: center;
+            margin-top: 14px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .auth-switch a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .auth-switch a:hover {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+
+        .welcome-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+            margin: 24px 0;
+            max-width: 400px;
+        }
+
+        .welcome-footer {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .welcome-footer a {
+            color: #1e293b;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .welcome-footer a:hover {
+            color: #334155;
+        }
+
+        .welcome-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 0;
+        }
+
+        .welcome-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            background: #f8fafc;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            text-align: left;
+            border: 1px solid #f1f5f9;
+        }
+
+        .welcome-feature:hover {
+            background: #f1f5f9;
+            border-color: #e2e8f0;
+            transform: translateY(-1px);
+        }
+
+        .welcome-feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .welcome-feature:nth-child(1) .welcome-feature-icon {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+        }
+
+        .welcome-feature:nth-child(2) .welcome-feature-icon {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+            color: white;
+        }
+
+        .welcome-feature:nth-child(3) .welcome-feature-icon {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+        }
+
+        .welcome-feature:nth-child(4) .welcome-feature-icon {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+        }
+
+        .welcome-feature-content {
+            flex: 1;
+        }
+
+        .welcome-feature-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 3px;
+        }
+
+        .welcome-feature-text {
+            font-size: 12px;
+            color: #64748b;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 1024px) {
+            .welcome-overlay.show {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-hero {
+                display: none;
+            }
+
+            .welcome-card {
+                border-radius: 0;
+                height: 100vh;
+                height: 100dvh; /* Dynamic viewport height for mobile */
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                justify-content: flex-start;
+                padding-top: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .welcome-card {
+                padding: 40px 30px 30px;
+            }
+
+            .welcome-title {
+                font-size: 26px;
+            }
+
+            .welcome-hero h1 {
+                font-size: 36px;
+            }
+
+            .welcome-stats {
+                gap: 20px;
+            }
+
+            .welcome-stat-number {
+                font-size: 28px;
+            }
+
+            .welcome-input,
+            .welcome-btn {
+                min-height: 48px;
+                touch-action: manipulation;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-card {
+                padding: 30px 20px 20px;
+                justify-content: flex-start;
+            }
+
+            .welcome-card-logo {
+                width: 50px;
+                height: 50px;
+                margin-bottom: 15px;
+            }
+
+            .welcome-title {
+                font-size: 22px;
+                margin-bottom: 6px;
+            }
+
+            .welcome-subtitle {
+                font-size: 13px;
+                margin-bottom: 20px;
+            }
+
+            .welcome-input {
+                padding: 13px 14px;
+                font-size: 16px;
+                min-height: 48px;
+            }
+
+            .welcome-btn {
+                padding: 14px 28px;
+                font-size: 16px;
+                width: 100%;
+                min-height: 48px;
+            }
+
+            .welcome-divider {
+                margin: 20px 0;
+            }
+
+            .welcome-features {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .welcome-feature {
+                padding: 14px;
+                min-height: 44px;
+            }
+
+            .welcome-feature-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 16px;
+            }
+
+            .welcome-feature-title {
+                font-size: 12px;
+            }
+
+            .welcome-feature-text {
+                font-size: 11px;
+            }
+        }
+
+        /* Bug Report Button */
+        .bug-report-btn {
+            background: rgba(251, 191, 36, 0.1);
+            border: none;
+            color: #f59e0b;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 8px;
+        }
+
+        .bug-report-btn:hover {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .bug-report-btn i {
+            font-size: 14px;
+        }
+
+        /* Bug Report Modal */
+        .bug-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .bug-modal.active {
+            display: flex;
+        }
+
+        .bug-modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .bug-modal-content {
+            background: #1e293b;
+        }
+
+        .bug-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .bug-modal-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bug-modal-title i {
+            color: #f59e0b;
+        }
+
+        body.dark-mode .bug-modal-title {
+            color: #e2e8f0;
+        }
+
+        .bug-close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .bug-close-btn:hover {
+            color: #ef4444;
+        }
+
+        .bug-form-group {
+            margin-bottom: 20px;
+        }
+
+        .bug-form-label {
+            display: block;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        body.dark-mode .bug-form-label {
+            color: #e2e8f0;
+        }
+
+        .bug-form-input,
+        .bug-form-select,
+        .bug-form-textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: white;
+            color: #1e293b;
+        }
+
+        body.dark-mode .bug-form-input,
+        body.dark-mode .bug-form-select,
+        body.dark-mode .bug-form-textarea {
+            background: #334155;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+
+        .bug-form-input:focus,
+        .bug-form-select:focus,
+        .bug-form-textarea:focus {
+            outline: none;
+            border-color: #f59e0b;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        .bug-form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .bug-page-info {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.dark-mode .bug-page-info {
+            background: #334155;
+        }
+
+        .bug-page-info i {
+            color: #3b82f6;
+        }
+
+        .bug-page-info span {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        body.dark-mode .bug-page-info span {
+            color: #94a3b8;
+        }
+
+        .bug-page-info strong {
+            color: #1e293b;
+        }
+
+        body.dark-mode .bug-page-info strong {
+            color: #e2e8f0;
+        }
+
+        .bug-submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .bug-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+        }
+
+        .bug-submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .bug-submit-btn i {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="vierastudy.png" alt="VieraStudy">
+                <span class="logo-text">VieraStudy</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                
+                <a href="flashcards" class="nav-item">
+                    <i class="fas fa-layer-group"></i>
+                    <span>Flashcards</span>
+                </a>
+                
+                <a href="todo" class="nav-item">
+                    <i class="fas fa-list-check"></i>
+                    <span>To-Do List</span>
+                </a>
+                
+                <a href="schedule" class="nav-item">
+                    <i class="fas fa-calendar-days"></i>
+                    <span>Study Schedule</span>
+                </a>
+                
+                <a href="pomodoro" class="nav-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Pomodoro Timer</span>
+                </a>
+                
+                <a href="notes" class="nav-item">
+                    <i class="fas fa-book-open"></i>
+                    <span>Take Notes</span>
+                </a>
+                
+                <a href="progress-tracker" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Progress Tracker</span>
+                </a>
+                
+                
+                <div class="math-dropdown">
+                    <div class="nav-item" onclick="toggleMathDropdown()">
+                        <div class="dropdown-header">
+                            <div class="icon-text">
+                                <i class="fas fa-calculator"></i>
+                                <span>Math Tools</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="dropdown-content">
+                        <a href="graphing-calculator" class="dropdown-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Graphing Calculator</span>
+                        </a>
+                        <a href="scientific-calculator" class="dropdown-item">
+                            <i class="fas fa-calculator"></i>
+                            <span>Scientific Calculator</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <a href="classes" class="nav-item">
+                    <i class="fas fa-book"></i>
+                    <span>My Classes</span>
+                </a>
+                
+                <a href="settings" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            
+            <div class="user-profile">
+                <div class="user-avatar" id="userAvatar"></div>
+                <div class="user-info">
+                    <div class="user-name" id="userName"></div>
+                </div>
+                <button class="bug-report-btn" onclick="openBugReportModal()" title="Report a Bug">
+                    <i class="fas fa-bug"></i>
+                </button>
+                <button class="signout-btn" onclick="handleSignout()" title="Sign Out">
+                    <i class="fas fa-right-from-bracket"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1 id="welcomeMessage">Welcome to VieraStudy! 👋</h1>
+            </div>
+            
+            <div class="content">
+                <!-- Welcome Banner -->
+                <div class="welcome-banner">
+                    <div class="welcome-banner-content">
+                        <div class="welcome-greeting">
+                            <h1 id="greeting-text">Good Morning ☀️</h1>
+                            <p>Welcome back, <span id="bannerUserName"></span>! Ready to learn?</p>
+                        </div>
+                        <div class="welcome-date">
+                            <div class="welcome-date-day" id="current-day">Friday</div>
+                            <div class="welcome-date-full" id="current-date">November 28, 2025</div>
+                        </div>
+                    </div>
+                    <div class="welcome-quote" id="daily-quote">
+                        "The secret of getting ahead is getting started." — Mark Twain
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Flashcard Decks</div>
+                            <div class="stat-value" id="deckCount">0</div>
+                            <div class="stat-subtitle">Total created</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-list-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Active Tasks</div>
+                            <div class="stat-value" id="taskCount">0</div>
+                            <div class="stat-subtitle">To-do items</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Notes</div>
+                            <div class="stat-value" id="noteCount">0</div>
+                            <div class="stat-subtitle">Total saved</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Classes</div>
+                            <div class="stat-value" id="classCount">0</div>
+                            <div class="stat-subtitle">Enrolled</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions-grid">
+                    <a href="flashcards" class="quick-action-card">
+                        <div class="quick-action-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <span class="quick-action-text">Create Flashcards</span>
+                    </a>
+                    <a href="todo" class="quick-action-card">
+                        <div class="quick-action-icon">
+                            <i class="fas fa-check-square"></i>
+                        </div>
+                        <span class="quick-action-text">Add Task</span>
+                    </a>
+                    <a href="pomodoro" class="quick-action-card">
+                        <div class="quick-action-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <span class="quick-action-text">Start Focus</span>
+                    </a>
+                    <a href="notes" class="quick-action-card">
+                        <div class="quick-action-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <span class="quick-action-text">Take Notes</span>
+                    </a>
+                </div>
+
+                <!-- Dashboard Grid: Classes + Activity -->
+                <div class="dashboard-grid">
+                    <!-- Your Classes -->
+                    <div class="section" id="classesSection">
+                        <h2><i class="fas fa-graduation-cap"></i> Your Classes</h2>
+                        <div id="classesList" class="classes-preview">
+                        </div>
+                        <div id="emptyClasses" style="display: none; text-align: center; color: #94a3b8; padding: 20px;">
+                            <i class="fas fa-graduation-cap" style="font-size: 36px; margin-bottom: 12px; opacity: 0.3;"></i>
+                            <p style="font-size: 14px;">No classes yet. <a href="classes" style="color: #3b82f6;">Add one</a></p>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="section">
+                        <h2><i class="fas fa-clock"></i> Recent Activity</h2>
+                        <div id="activityList">
+                            <div style="text-align: center; color: #94a3b8; padding: 20px;">
+                                <i class="fas fa-clock" style="font-size: 36px; margin-bottom: 12px; opacity: 0.3;"></i>
+                                <p style="font-size: 14px;">Your activity will appear here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="footer">
+                    <div class="footer-content">
+                        <div class="footer-left">
+                            <img src="vierastudy.png" alt="VieraStudy Logo">
+                            <span>A product of <strong>Viera Educational Solutions</strong></span>
+                        </div>
+                        <div class="footer-links">
+                            <a href="privacy.html" target="_blank" class="footer-link">Privacy Policy</a>
+                            <a href="terms.html" target="_blank" class="footer-link">Terms of Service</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Modal -->
+    <div id="notificationModal" class="notification-modal">
+        <div class="notification-content">
+            <div id="notificationIcon" class="notification-icon success">
+                <i class="fas fa-check"></i>
+            </div>
+            <div id="notificationTitle" class="notification-title">Success</div>
+            <div id="notificationMessage" class="notification-message">Operation completed successfully!</div>
+            <button class="notification-btn" onclick="closeNotification()">OK</button>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="notification-modal">
+        <div class="notification-content">
+            <div id="confirmationIcon" class="notification-icon warning">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div id="confirmationTitle" class="notification-title">Confirm Action</div>
+            <div id="confirmationMessage" class="notification-message">Are you sure you want to proceed?</div>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="notification-btn" style="background: #64748b;" onclick="cancelConfirmation()">Cancel</button>
+                <button class="notification-btn" id="confirmButton" onclick="confirmAction()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bug Report Modal -->
+    <div id="bugReportModal" class="bug-modal">
+        <div class="bug-modal-content">
+            <div class="bug-modal-header">
+                <div class="bug-modal-title">
+                    <i class="fas fa-bug"></i>
+                    Report a Bug
+                </div>
+                <button class="bug-close-btn" onclick="closeBugReportModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="bug-page-info">
+                <i class="fas fa-link"></i>
+                <span>Reporting from: <strong id="bugPageName">Dashboard</strong></span>
+                <input type="hidden" id="bugPage" value="">
+            </div>
+            
+            <form onsubmit="submitBugReport(event)">
+                <div class="bug-form-group">
+                    <label class="bug-form-label">Category</label>
+                    <select class="bug-form-select" id="bugCategory" required>
+                        <option value="General">General Issue</option>
+                        <option value="UI/Design">UI/Design Problem</option>
+                        <option value="Functionality">Feature Not Working</option>
+                        <option value="Performance">Performance Issue</option>
+                        <option value="Login/Account">Login/Account Problem</option>
+                        <option value="Data Loss">Data Loss</option>
+                        <option value="Mobile">Mobile-Specific Issue</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="bug-form-group">
+                    <label class="bug-form-label">Describe the bug *</label>
+                    <textarea class="bug-form-textarea" id="bugDescription" placeholder="Please describe what happened and what you expected to happen..." required></textarea>
+                </div>
+                
+                <div class="bug-form-group">
+                    <label class="bug-form-label">Your Email (optional)</label>
+                    <input type="email" class="bug-form-input" id="bugUserEmail" placeholder="your@email.com">
+                </div>
+                
+                <div class="bug-form-group">
+                    <label class="bug-form-label">Your Name (optional)</label>
+                    <input type="text" class="bug-form-input" id="bugUserName" placeholder="Your name">
+                </div>
+                
+                <button type="submit" class="bug-submit-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    Submit Bug Report
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- VieraStudy API -->
+    <script src="api.js?v=12"></script>
+    
+    <script>
+        // Session check - redirect to login if not authenticated
+        (async function() {
+            await vieraAPI.ready;
+            if (!vieraAPI.isLoggedIn() || !vieraAPI.getUser()) {
+                window.location.href = 'login.html';
+                return;
+            }
+        })();
+        
+        // Ensure vieraAPI is available
+        if (typeof vieraAPI === 'undefined') {
+            console.error('VieraStudy API not loaded!');
+            window.vieraAPI = {
+                verifySession: async () => null,
+                register: async () => ({ error: 'API not loaded' }),
+                login: async () => ({ error: 'API not loaded' }),
+                logout: async () => {},
+                isLoggedIn: () => false,
+                syncToCloud: async () => {},
+                syncFromCloud: async () => null,
+                scheduleSync: () => {}
+            };
+        }
+        
+        // User Profile Management
+        async function checkUserProfile() {
+            // Session check already done at top - if we're here, user is authenticated
+            if (vieraAPI.isLoggedIn() && vieraAPI.getUser()) {
+                // Session is valid, show dashboard
+                loadUserProfile();
+                document.querySelector('.user-profile')?.classList.add('loaded');
+            } else {
+                // Failsafe: redirect if somehow got here without auth
+                window.location.href = 'login.html';
+            }
+        }
+        
+
+        
+        async function handleRegister(event) {
+            event.preventDefault();
+            console.log('handleRegister called');
+            
+            const firstName = document.getElementById('registerFirstName').value.trim();
+            const lastName = document.getElementById('registerLastName').value.trim();
+            const email = document.getElementById('registerEmail').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            const agreeTerms = document.getElementById('agreeTerms').checked;
+            const agreeAge = document.getElementById('agreeAge').checked;
+            const btn = document.getElementById('registerBtn');
+            
+            console.log('Form data:', { firstName, lastName, email, hasPassword: !!password });
+            
+            if (!firstName || !email || !password) {
+                showNotification('Please fill in all required fields.', 'error', 'Missing Information');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showNotification('Password must be at least 6 characters.', 'error', 'Invalid Password');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showNotification('Passwords do not match. Please try again.', 'error', 'Password Mismatch');
+                return;
+            }
+            
+            if (!agreeTerms) {
+                showNotification('You must agree to the Terms of Service and Privacy Policy.', 'error', 'Agreement Required');
+                return;
+            }
+            
+            if (!agreeAge) {
+                showNotification('You must certify that you meet the age requirement.', 'error', 'Age Certification Required');
+                return;
+            }
+            
+            // Show loading state
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+            
+            try {
+                console.log('Calling vieraAPI.register...');
+                const result = await vieraAPI.register(email, password, firstName, lastName);
+                console.log('Register result:', result);
+                
+                if (result.success) {
+                    // User profile is now managed by the API
+                    document.getElementById('welcomeOverlay').classList.remove('show');
+                    loadUserProfile();
+                    showNotification(`Welcome to VieraStudy, ${firstName}! Let's start studying! 🎉`, 'success', 'Account Created');
+                } else {
+                    showNotification(result.error || 'Registration failed. Please try again.', 'error', 'Registration Failed');
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                showNotification('Unable to connect to server. Please try again later.', 'error', 'Connection Error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Create Account →';
+            }
+        }
+        
+        async function handleLogin(event) {
+            event.preventDefault();
+            console.log('handleLogin called');
+            
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const btn = document.getElementById('loginBtn');
+            
+            console.log('Login attempt for:', email);
+            
+            if (!email || !password) {
+                showNotification('Please enter your email and password.', 'error', 'Missing Information');
+                return;
+            }
+            
+            // Show loading state
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
+            
+            try {
+                console.log('Calling vieraAPI.login...');
+                const result = await vieraAPI.login(email, password);
+                console.log('Login result:', result);
+                
+                if (result.success) {
+                    // User profile and data are now managed by the API
+                    // loadData() is called automatically during login
+                    
+                    document.getElementById('welcomeOverlay').classList.remove('show');
+                    loadUserProfile();
+                    loadStatistics();
+                    showNotification(`Welcome back, ${result.user.firstName}! 👋`, 'success', 'Signed In');
+                } else {
+                    showNotification(result.error || 'Invalid email or password.', 'error', 'Login Failed');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showNotification('Unable to connect to server. Please try again later.', 'error', 'Connection Error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Sign In →';
+            }
+        }
+        
+        async function loadUserDataFromCloud() {
+            // Data is automatically loaded when logging in via vieraAPI.login()
+            // This function is kept for compatibility but the heavy lifting is done by api.js
+            try {
+                if (vieraAPI.isLoggedIn()) {
+                    // loadData is already called during login, but call again to be sure
+                    await vieraAPI.loadData();
+                    console.log('Cloud data loaded successfully');
+                }
+            } catch (error) {
+                console.error('Failed to load cloud data:', error);
+            }
+        }
+
+        function saveUserProfile(event) {
+            // Legacy function for backward compatibility
+            if (event) event.preventDefault();
+        }
+
+        function loadUserProfile() {
+            const user = vieraAPI.getUser();
+            if (user) {
+                const { firstName, lastName } = user;
+                const initials = `${firstName.charAt(0)}${lastName ? lastName.charAt(0) : ''}`.toUpperCase();
+                const fullName = lastName ? `${firstName} ${lastName}` : firstName;
+                
+                // Update avatar
+                document.getElementById('userAvatar').textContent = initials;
+                
+                // Update name
+                document.getElementById('userName').textContent = fullName;
+                
+                // Update welcome message with time-based greeting
+                document.getElementById('welcomeMessage').innerHTML = getWelcomeMessage(firstName);
+                
+                // Update welcome banner
+                updateWelcomeBanner(firstName);
+            }
+        }
+
+        function updateWelcomeBanner(firstName) {
+            const hour = new Date().getHours();
+            const greetingEl = document.getElementById('greeting-text');
+            const bannerNameEl = document.getElementById('bannerUserName');
+            const dayEl = document.getElementById('current-day');
+            const dateEl = document.getElementById('current-date');
+            const quoteEl = document.getElementById('daily-quote');
+            
+            // Set greeting based on time
+            if (hour >= 5 && hour < 12) {
+                greetingEl.textContent = 'Good Morning ☀️';
+            } else if (hour >= 12 && hour < 17) {
+                greetingEl.textContent = 'Good Afternoon 🌤️';
+            } else if (hour >= 17 && hour < 21) {
+                greetingEl.textContent = 'Good Evening 🌅';
+            } else {
+                greetingEl.textContent = 'Good Night 🌙';
+            }
+            
+            // Set user name
+            bannerNameEl.textContent = firstName;
+            
+            // Set date
+            const now = new Date();
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            
+            dayEl.textContent = days[now.getDay()];
+            dateEl.textContent = `${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+            
+            // Set motivational quote
+            const quotes = [
+                '"The secret of getting ahead is getting started." — Mark Twain',
+                '"Success is the sum of small efforts repeated day in and day out." — Robert Collier',
+                '"Don\'t watch the clock; do what it does. Keep going." — Sam Levenson',
+                '"The only way to do great work is to love what you do." — Steve Jobs',
+                '"Believe you can and you\'re halfway there." — Theodore Roosevelt',
+                '"Education is the most powerful weapon you can use to change the world." — Nelson Mandela',
+                '"The beautiful thing about learning is that no one can take it away from you." — B.B. King',
+                '"Study hard what interests you the most in the most undisciplined way." — Richard Feynman'
+            ];
+            quoteEl.textContent = quotes[Math.floor(Math.random() * quotes.length)];
+        }
+
+        function getWelcomeMessage(firstName) {
+            const hour = new Date().getHours();
+            const day = new Date().getDay();
+            const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            
+            let greeting = '';
+            let emoji = '';
+            
+            if (hour >= 5 && hour < 12) {
+                greeting = 'Good morning';
+                emoji = '☀️';
+            } else if (hour >= 12 && hour < 17) {
+                greeting = 'Good afternoon';
+                emoji = '🌤️';
+            } else if (hour >= 17 && hour < 21) {
+                greeting = 'Good evening';
+                emoji = '🌅';
+            } else {
+                greeting = 'Burning the midnight oil';
+                emoji = '🌙';
+            }
+            
+            // Random motivational messages
+            const motivationalMessages = [
+                "Ready to crush your goals?",
+                "Let's make today productive!",
+                "Time to learn something new!",
+                "Your future self will thank you!",
+                "Small steps lead to big wins!",
+                "Keep up the great work!",
+                "You've got this!",
+                "Let's get studying!"
+            ];
+            
+            const randomMessage = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
+            
+            return `${greeting}, ${firstName}! ${emoji} <span style="font-size: 0.65em; font-weight: 400; opacity: 0.8; display: block; margin-top: 4px;">${randomMessage}</span>`;
+        }
+
+        function getUserProfile() {
+            return vieraAPI.getUser();
+        }
+
+        // Notification Modal Functions
+        function showNotification(message, type = 'success', title = null) {
+            const modal = document.getElementById('notificationModal');
+            const icon = document.getElementById('notificationIcon');
+            const titleEl = document.getElementById('notificationTitle');
+            const messageEl = document.getElementById('notificationMessage');
+            
+            // Set default titles based on type
+            const defaultTitles = {
+                success: 'Success!',
+                info: 'Information',
+                warning: 'Warning',
+                error: 'Error'
+            };
+            
+            // Update icon
+            const icons = {
+                success: 'fa-check',
+                info: 'fa-info',
+                warning: 'fa-exclamation',
+                error: 'fa-times'
+            };
+            
+            icon.className = `notification-icon ${type}`;
+            icon.innerHTML = `<i class="fas ${icons[type]}"></i>`;
+            
+            // Update title and message
+            titleEl.textContent = title || defaultTitles[type] || 'Notification';
+            messageEl.textContent = message;
+            
+            // Show modal
+            modal.classList.add('show');
+        }
+
+        function closeNotification() {
+            const modal = document.getElementById('notificationModal');
+            modal.classList.remove('show');
+        }
+
+        // Close modal on background click
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('notificationModal');
+            if (e.target === modal) {
+                closeNotification();
+            }
+        });
+
+        // Confirmation Modal Functions
+        let confirmCallback = null;
+
+        function showConfirmation(message, title = 'Confirm Action', type = 'warning') {
+            return new Promise((resolve) => {
+                const modal = document.getElementById('confirmationModal');
+                const icon = document.getElementById('confirmationIcon');
+                const titleEl = document.getElementById('confirmationTitle');
+                const messageEl = document.getElementById('confirmationMessage');
+                const confirmBtn = document.getElementById('confirmButton');
+                
+                const icons = {
+                    warning: 'fa-exclamation-triangle',
+                    danger: 'fa-exclamation-circle',
+                    info: 'fa-question-circle'
+                };
+                
+                const iconColors = {
+                    warning: 'warning',
+                    danger: 'error',
+                    info: 'info'
+                };
+                
+                icon.className = `notification-icon ${iconColors[type] || 'warning'}`;
+                icon.innerHTML = `<i class="fas ${icons[type] || 'fa-exclamation-triangle'}"></i>`;
+                titleEl.textContent = title;
+                messageEl.textContent = message;
+                
+                if (type === 'danger') {
+                    confirmBtn.style.background = '#ef4444';
+                } else {
+                    confirmBtn.style.background = '#3b82f6';
+                }
+                
+                confirmCallback = resolve;
+                modal.classList.add('show');
+            });
+        }
+
+        function confirmAction() {
+            const modal = document.getElementById('confirmationModal');
+            modal.classList.remove('show');
+            if (confirmCallback) {
+                confirmCallback(true);
+                confirmCallback = null;
+            }
+        }
+
+        function cancelConfirmation() {
+            const modal = document.getElementById('confirmationModal');
+            modal.classList.remove('show');
+            if (confirmCallback) {
+                confirmCallback(false);
+                confirmCallback = null;
+            }
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.querySelector('.ai-dropdown');
+            dropdown.classList.toggle('open');
+        }
+
+        function toggleMathDropdown() {
+            const dropdown = document.querySelector('.math-dropdown');
+            dropdown.classList.toggle('open');
+        }
+
+        function toggleMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking nav links (except dropdowns)
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-menu a[href]:not(.dropdown-header)');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        const sidebar = document.querySelector('.sidebar');
+                        const overlay = document.querySelector('.mobile-overlay');
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        async function handleSignout() {
+            const confirmed = await showConfirmation(
+                'Are you sure you want to sign out? Your data is saved in the cloud.',
+                'Sign Out',
+                'warning'
+            );
+            
+            if (confirmed) {
+                // Sync data before signing out
+                try {
+                    await vieraAPI.syncToCloud();
+                } catch (e) {
+                    console.log('Sync before signout failed:', e);
+                }
+                
+                // Logout from API
+                await vieraAPI.logout();
+                
+                // Redirect to homepage
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Load and display statistics
+        function loadStatistics() {
+            // Load flashcard decks
+            const flashcards = vieraAPI.getFlashcards() || [];
+            document.getElementById('deckCount').textContent = flashcards.length;
+
+            // Load todos
+            const todos = vieraAPI.getTodos() || [];
+            const activeTodos = todos.filter(t => !t.completed);
+            document.getElementById('taskCount').textContent = activeTodos.length;
+
+            // Load notes
+            const notes = vieraAPI.getNotes() || [];
+            document.getElementById('noteCount').textContent = notes.length;
+
+            // Load classes
+            const classes = vieraAPI.getClasses() || [];
+            document.getElementById('classCount').textContent = classes.length;
+
+            // Display classes
+            displayClasses(classes);
+        }
+
+        // Display classes section
+        function displayClasses(classes) {
+            const classesSection = document.getElementById('classesSection');
+            const classesList = document.getElementById('classesList');
+            const emptyClasses = document.getElementById('emptyClasses');
+
+            if (classes.length === 0) {
+                classesList.style.display = 'none';
+                emptyClasses.style.display = 'block';
+                return;
+            }
+
+            classesList.style.display = 'grid';
+            emptyClasses.style.display = 'none';
+
+            classesList.innerHTML = classes.slice(0, 6).map(cls => `
+                <a href="classes" class="class-preview-card" style="background: ${cls.color};">
+                    <div class="class-preview-icon">
+                        <i class="fas ${cls.icon || 'fa-book'}"></i>
+                    </div>
+                    <div class="class-preview-name">${cls.name}</div>
+                </a>
+            `).join('') + (classes.length > 6 ? `
+                <a href="classes" class="class-preview-card" style="background: linear-gradient(135deg, #64748b, #475569);">
+                    <div class="class-preview-icon">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                    <div class="class-preview-name">+${classes.length - 6} more</div>
+                </a>
+            ` : '');
+        }
+
+        // Load recent activity
+        function loadRecentActivity() {
+            const activityList = document.getElementById('activityList');
+            const activities = [];
+
+            // Get explicit activity log - this is the primary source
+            const activityLog = vieraAPI.getActivityLog() || [];
+            activityLog.forEach(activity => {
+                activities.push({
+                    ...activity,
+                    time: activity.timestamp ? getRelativeTime(new Date(activity.timestamp).toISOString()) : activity.time
+                });
+            });
+
+            // Only pull from data sources if activity log is empty (for backwards compatibility)
+            if (activities.length === 0) {
+                // Get recent completed todos
+                const todos = vieraAPI.getTodos() || [];
+                const recentCompletedTodos = todos
+                    .filter(t => t.completed && t.updated)
+                    .sort((a, b) => new Date(b.updated) - new Date(a.updated))
+                    .slice(0, 3);
+
+                recentCompletedTodos.forEach(todo => {
+                    activities.push({
+                        icon: 'fas fa-check-circle',
+                        color: 'green',
+                        title: `Completed task: ${todo.title}`,
+                        time: getRelativeTime(todo.updated),
+                        timestamp: new Date(todo.updated).getTime()
+                    });
+                });
+
+                // Get recent flashcard decks
+                const flashcards = vieraAPI.getFlashcards() || [];
+                const recentDecks = flashcards
+                    .filter(d => d.created)
+                    .sort((a, b) => new Date(b.created) - new Date(a.created))
+                    .slice(0, 2);
+
+                recentDecks.forEach(deck => {
+                    activities.push({
+                        icon: 'fas fa-layer-group',
+                        color: 'purple',
+                        title: `Created flashcard deck: ${deck.name}`,
+                        time: getRelativeTime(deck.created),
+                        timestamp: new Date(deck.created).getTime()
+                    });
+                });
+
+                // Get recent notes
+                const notes = vieraAPI.getNotes() || [];
+                const recentNotes = notes
+                    .filter(n => n.created)
+                    .sort((a, b) => new Date(b.created) - new Date(a.created))
+                    .slice(0, 2);
+
+                recentNotes.forEach(note => {
+                    activities.push({
+                        icon: 'fas fa-book-open',
+                        color: 'cyan',
+                        title: `Created note: ${note.title || 'Untitled'}`,
+                        time: getRelativeTime(note.created),
+                        timestamp: new Date(note.created).getTime()
+                    });
+                });
+            }
+
+            // Sort activities by timestamp (most recent first)
+            activities.sort((a, b) => {
+                const timeA = a.timestamp || 0;
+                const timeB = b.timestamp || 0;
+                return timeB - timeA;
+            });
+
+            if (activities.length === 0) {
+                activityList.innerHTML = `
+                    <div style="text-align: center; color: #94a3b8; padding: 20px;">
+                        <i class="fas fa-clock" style="font-size: 36px; margin-bottom: 12px; opacity: 0.3;"></i>
+                        <p style="font-size: 14px;">Your activity will appear here</p>
+                    </div>
+                `;
+            } else {
+                activityList.innerHTML = activities.slice(0, 5).map(activity => `
+                    <div class="activity-item">
+                        <div class="activity-icon ${activity.color}" style="background: ${getActivityBg(activity.color)}; color: ${getActivityColor(activity.color)};">
+                            <i class="${activity.icon}"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">${activity.title}</div>
+                            <div class="activity-time">${activity.time}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function getActivityColor(color) {
+            const colors = {
+                'green': '#10b981',
+                'blue': '#3b82f6',
+                'purple': '#8b5cf6',
+                'orange': '#f59e0b',
+                'red': '#ef4444',
+                'cyan': '#06b6d4',
+                'pink': '#ec4899'
+            };
+            return colors[color] || '#64748b';
+        }
+
+        function getActivityBg(color) {
+            const bgs = {
+                'green': 'rgba(16, 185, 129, 0.1)',
+                'blue': 'rgba(59, 130, 246, 0.1)',
+                'purple': 'rgba(139, 92, 246, 0.1)',
+                'orange': 'rgba(245, 158, 11, 0.1)',
+                'red': 'rgba(239, 68, 68, 0.1)',
+                'cyan': 'rgba(6, 182, 212, 0.1)',
+                'pink': 'rgba(236, 72, 153, 0.1)'
+            };
+            return bgs[color] || 'rgba(100, 116, 139, 0.1)';
+        }
+
+        // Log activity helper function - can be called from other pages
+        function logActivity(icon, color, title) {
+            vieraAPI.logActivity(icon, color, title);
+        }
+        
+        // Make logActivity available globally
+        window.logActivity = logActivity;
+
+        // Helper function to get relative time
+        function getRelativeTime(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+
+            if (diffMins < 1) return 'Just now';
+            if (diffMins < 60) return `${diffMins} minute${diffMins > 1 ? 's' : ''} ago`;
+            if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+            if (diffDays === 1) return 'Yesterday';
+            if (diffDays < 7) return `${diffDays} days ago`;
+            return date.toLocaleDateString();
+        }
+
+        // Helper function to parse relative time for sorting
+        function parseRelativeTime(timeString) {
+            if (timeString === 'Just now') return 0;
+            if (timeString === 'Yesterday') return 1440;
+            
+            const match = timeString.match(/(\d+)\s+(minute|hour|day)s?\s+ago/);
+            if (match) {
+                const value = parseInt(match[1]);
+                const unit = match[2];
+                if (unit === 'minute') return value;
+                if (unit === 'hour') return value * 60;
+                if (unit === 'day') return value * 1440;
+            }
+            return 10000; // Old dates
+        }
+
+        // Load dark mode immediately to prevent flash
+        (function() {
+            const darkMode = localStorage.getItem('studyDeckDarkMode') === 'true';
+            if (darkMode) {
+                document.body.classList.add('dark-mode');
+            }
+        })();
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Wait for API to be ready (data loaded from cloud)
+            await vieraAPI.ready;
+            
+            checkUserProfile();
+            loadStatistics();
+            loadRecentActivity();
+        });
+
+        // Add click handlers for navigation items
+        document.querySelectorAll('.nav-item:not(.ai-dropdown):not(.math-dropdown)').forEach(item => {
+            item.addEventListener('click', function(e) {
+                // Skip if it's a link (has href)
+                if (this.tagName === 'A') return;
+                
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Close mobile menu on navigation (mobile only)
+                if (window.innerWidth <= 768) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        // Add click handlers for dropdown items
+        document.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.stopPropagation();
+                console.log('Clicked:', this.textContent.trim());
+                
+                // Close mobile menu on navigation (mobile only)
+                if (window.innerWidth <= 768) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        // ============================================
+        // KEYBOARD SHORTCUTS
+        // ============================================
+        document.addEventListener('keydown', function(e) {
+            // Check if user is typing in an input field
+            const isTyping = e.target.tagName === 'INPUT' || 
+                           e.target.tagName === 'TEXTAREA' || 
+                           e.target.isContentEditable;
+            
+            // Escape - Close any open modals
+            if (e.key === 'Escape') {
+                const welcomeOverlay = document.querySelector('.welcome-overlay');
+                if (welcomeOverlay && welcomeOverlay.classList.contains('show')) {
+                    // Don't close welcome screen with Escape
+                    return;
+                }
+                // Close any modal
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    if (modal.style.display === 'flex' || modal.style.display === 'block') {
+                        modal.style.display = 'none';
+                    }
+                });
+                // Close keyboard shortcuts modal
+                const shortcutsModal = document.querySelector('.keyboard-shortcuts-modal');
+                if (shortcutsModal) {
+                    shortcutsModal.remove();
+                }
+            }
+            
+            // Don't trigger shortcuts when typing (except Escape)
+            if (isTyping && e.key !== 'Escape') return;
+            
+            // Cmd/Ctrl + H - Go to home
+            if ((e.metaKey || e.ctrlKey) && e.key === 'h') {
+                e.preventDefault();
+                window.location.href = '/';
+            }
+            
+            // Cmd/Ctrl + F - Go to flashcards
+            if ((e.metaKey || e.ctrlKey) && e.key === 'f') {
+                e.preventDefault();
+                window.location.href = 'flashcards';
+            }
+            
+            // Cmd/Ctrl + T - Go to todos
+            if ((e.metaKey || e.ctrlKey) && e.key === 't') {
+                e.preventDefault();
+                window.location.href = 'todo';
+            }
+            
+            // Cmd/Ctrl + Shift + N - Go to notes
+            if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === 'N') {
+                e.preventDefault();
+                window.location.href = 'notes';
+            }
+            
+            // Cmd/Ctrl + P - Go to pomodoro
+            if ((e.metaKey || e.ctrlKey) && e.key === 'p') {
+                e.preventDefault();
+                window.location.href = 'pomodoro';
+            }
+            
+            // Cmd/Ctrl + S - Go to schedule
+            if ((e.metaKey || e.ctrlKey) && e.key === 's') {
+                e.preventDefault();
+                window.location.href = 'schedule';
+            }
+            
+            // Cmd/Ctrl + Shift + P - Go to progress tracker
+            if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === 'P') {
+                e.preventDefault();
+                window.location.href = 'progress-tracker';
+            }
+            
+            // Cmd/Ctrl + , - Go to settings
+            if ((e.metaKey || e.ctrlKey) && e.key === ',') {
+                e.preventDefault();
+                window.location.href = 'settings';
+            }
+            
+            // Cmd/Ctrl + / - Show keyboard shortcuts help
+            if ((e.metaKey || e.ctrlKey) && e.key === '/') {
+                e.preventDefault();
+                showKeyboardShortcuts();
+            }
+        });
+
+        // Show keyboard shortcuts modal
+        function showKeyboardShortcuts() {
+            // Detect OS
+            const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+            const isWindows = navigator.platform.toUpperCase().indexOf('WIN') >= 0;
+            const isLinux = navigator.platform.toUpperCase().indexOf('LINUX') >= 0;
+            const isChromeOS = navigator.userAgent.indexOf('CrOS') >= 0;
+            
+            // Symbol for modifier key
+            const modKey = isMac ? '⌘' : 'Ctrl';
+            const shiftKey = isMac ? '⇧' : 'Shift';
+            const optKey = isMac ? '⌥' : 'Alt';
+            
+            // OS Badge
+            let osBadge = 'Windows';
+            let osIcon = '<i class="fab fa-windows"></i>';
+            if (isMac) { osBadge = 'macOS'; osIcon = '<i class="fab fa-apple"></i>'; }
+            else if (isLinux) { osBadge = 'Linux'; osIcon = '<i class="fab fa-linux"></i>'; }
+            else if (isChromeOS) { osBadge = 'Chrome OS'; osIcon = '<i class="fab fa-chrome"></i>'; }
+            
+            const shortcuts = [
+                { keys: ['H'], action: 'Go to Home', icon: '<i class="fas fa-home" style="color: #3b82f6;"></i>' },
+                { keys: ['F'], action: 'Go to Flashcards', icon: '<i class="fas fa-layer-group" style="color: #8b5cf6;"></i>' },
+                { keys: ['T'], action: 'Go to Todos', icon: '<i class="fas fa-list-check" style="color: #10b981;"></i>' },
+                { keys: [shiftKey, 'N'], action: 'Go to Notes', icon: '<i class="fas fa-book-open" style="color: #f59e0b;"></i>' },
+                { keys: ['P'], action: 'Go to Pomodoro', icon: '<i class="fas fa-clock" style="color: #ef4444;"></i>' },
+                { keys: ['S'], action: 'Go to Schedule', icon: '<i class="fas fa-calendar-days" style="color: #06b6d4;"></i>' },
+                { keys: [shiftKey, 'P'], action: 'Go to Progress', icon: '<i class="fas fa-chart-line" style="color: #ec4899;"></i>' },
+                { keys: [','], action: 'Go to Settings', icon: '<i class="fas fa-cog" style="color: #64748b;"></i>' },
+                { keys: ['/'], action: 'Show this help', icon: '<i class="fas fa-question-circle" style="color: #a855f7;"></i>' },
+                { keys: ['Esc'], action: 'Close modals', icon: '<i class="fas fa-times" style="color: #6b7280;"></i>', noMod: true }
+            ];
+
+            const isDark = document.body.classList.contains('dark-mode');
+            
+            const shortcutList = shortcuts.map(s => {
+                const keyElements = s.noMod 
+                    ? s.keys.map(k => `<kbd style="background: ${isDark ? '#334155' : '#e2e8f0'}; color: ${isDark ? '#e2e8f0' : '#1e293b'}; padding: 6px 10px; border-radius: 6px; font-size: 13px; font-weight: 600; border: 1px solid ${isDark ? '#475569' : '#cbd5e1'}; min-width: 32px; text-align: center; display: inline-block;">${k}</kbd>`).join('')
+                    : `<kbd style="background: ${isDark ? '#334155' : '#e2e8f0'}; color: ${isDark ? '#e2e8f0' : '#1e293b'}; padding: 6px 10px; border-radius: 6px; font-size: 13px; font-weight: 600; border: 1px solid ${isDark ? '#475569' : '#cbd5e1'}; min-width: 32px; text-align: center; display: inline-block;">${modKey}</kbd>` + s.keys.map(k => ` <span style="color: ${isDark ? '#64748b' : '#94a3b8'}; margin: 0 4px;">+</span> <kbd style="background: ${isDark ? '#334155' : '#e2e8f0'}; color: ${isDark ? '#e2e8f0' : '#1e293b'}; padding: 6px 10px; border-radius: 6px; font-size: 13px; font-weight: 600; border: 1px solid ${isDark ? '#475569' : '#cbd5e1'}; min-width: 32px; text-align: center; display: inline-block;">${k}</kbd>`).join('');
+                
+                return `<div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: ${isDark ? 'rgba(59, 130, 246, 0.08)' : 'rgba(59, 130, 246, 0.05)'}; border-radius: 10px; margin-bottom: 10px; border: 1px solid ${isDark ? 'rgba(59, 130, 246, 0.15)' : 'rgba(59, 130, 246, 0.1)'}; transition: all 0.2s;" onmouseover="this.style.background='${isDark ? 'rgba(59, 130, 246, 0.12)' : 'rgba(59, 130, 246, 0.08)'}'; this.style.transform='translateX(2px)';" onmouseout="this.style.background='${isDark ? 'rgba(59, 130, 246, 0.08)' : 'rgba(59, 130, 246, 0.05)'}'; this.style.transform='translateX(0)';">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 16px; width: 24px; text-align: center; color: ${isDark ? '#e2e8f0' : '#1e293b'};">${s.icon}</span>
+                        <span style="font-weight: 600; color: ${isDark ? '#e2e8f0' : '#1e293b'};">${s.action}</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 4px;">
+                        ${keyElements}
+                    </div>
+                </div>`;
+            }).join('');
+
+            const modal = document.createElement('div');
+            modal.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 30000; backdrop-filter: blur(8px); animation: fadeIn 0.2s ease;';
+            
+            modal.innerHTML = `
+                <style>
+                    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+                    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+                </style>
+                <div style="background: ${isDark ? '#1e293b' : 'white'}; border-radius: 20px; padding: 0; max-width: 550px; width: 92%; max-height: 85vh; overflow: hidden; box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4); border: 1px solid ${isDark ? '#334155' : '#e2e8f0'}; animation: slideUp 0.3s ease;">
+                    <div style="background: #1e293b; padding: 24px 30px; border-bottom: 1px solid ${isDark ? '#334155' : '#e2e8f0'};">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div>
+                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
+                                    <i class="fas fa-keyboard" style="font-size: 24px; color: white;"></i>
+                                    <h2 style="margin: 0; color: white; font-size: 24px; font-weight: 700;">Keyboard Shortcuts</h2>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
+                                    <span style="background: rgba(255, 255, 255, 0.2); padding: 4px 10px; border-radius: 6px; font-size: 12px; color: white; font-weight: 600; display: flex; align-items: center; gap: 6px;">${osIcon} <span>${osBadge}</span></span>
+                                </div>
+                            </div>
+                            <button onclick="this.closest('.keyboard-shortcuts-modal').remove()" style="background: rgba(255, 255, 255, 0.2); border: none; width: 36px; height: 36px; border-radius: 8px; font-size: 20px; cursor: pointer; color: white; transition: all 0.2s; display: flex; align-items: center; justify-content: center;" onmouseover="this.style.background='rgba(255, 255, 255, 0.3)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.2)'">×</button>
+                        </div>
+                    </div>
+                    <div style="padding: 24px 30px; max-height: calc(85vh - 120px); overflow-y: auto;">
+                        ${shortcutList}
+                        <div style="margin-top: 20px; padding: 16px; background: ${isDark ? 'rgba(139, 92, 246, 0.1)' : 'rgba(139, 92, 246, 0.05)'}; border-radius: 10px; border: 1px solid ${isDark ? 'rgba(139, 92, 246, 0.2)' : 'rgba(139, 92, 246, 0.15)'};">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                                <i class="fas fa-lightbulb" style="font-size: 16px; color: ${isDark ? '#fbbf24' : '#f59e0b'};"></i>
+                                <span style="font-weight: 600; color: ${isDark ? '#e2e8f0' : '#1e293b'}; font-size: 14px;">Pro Tip</span>
+                            </div>
+                            <p style="margin: 0; color: ${isDark ? '#94a3b8' : '#64748b'}; font-size: 13px; line-height: 1.6;">Use ${modKey} + / to show this dialog anytime!</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            modal.className = 'keyboard-shortcuts-modal';
+            modal.addEventListener('click', function(e) { if (e.target === modal) modal.remove(); });
+            document.body.appendChild(modal);
+        }
+
+        // ============================================
+        // AUTO-SAVE INDICATOR
+        // ============================================
+        let saveTimeout;
+        let saveIndicator;
+
+        function showSaveIndicator(status = 'saving') {
+            if (!saveIndicator) {
+                saveIndicator = document.createElement('div');
+                saveIndicator.style.cssText = `
+                    position: fixed;
+                    bottom: 30px;
+                    right: 30px;
+                    background: ${document.body.classList.contains('dark-mode') ? '#1e293b' : 'white'};
+                    color: ${document.body.classList.contains('dark-mode') ? '#e2e8f0' : '#1e293b'};
+                    padding: 12px 20px;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    z-index: 10000;
+                    transition: all 0.3s ease;
+                    opacity: 0;
+                    transform: translateY(10px);
+                    border: 1px solid ${document.body.classList.contains('dark-mode') ? '#334155' : '#e2e8f0'};
+                `;
+                document.body.appendChild(saveIndicator);
+            }
+
+            if (status === 'saving') {
+                saveIndicator.innerHTML = `
+                    <div style="width: 16px; height: 16px; border: 2px solid #3b82f6; border-top-color: transparent; border-radius: 50%; animation: spin 0.6s linear infinite;"></div>
+                    <span>Saving...</span>
+                    <style>
+                        @keyframes spin {
+                            to { transform: rotate(360deg); }
+                        }
+                    </style>
+                `;
+                saveIndicator.style.opacity = '1';
+                saveIndicator.style.transform = 'translateY(0)';
+            } else if (status === 'saved') {
+                saveIndicator.innerHTML = `
+                    <i class="fas fa-check" style="color: #10b981;"></i>
+                    <span>Saved</span>
+                `;
+                saveIndicator.style.opacity = '1';
+                saveIndicator.style.transform = 'translateY(0)';
+                
+                setTimeout(() => {
+                    saveIndicator.style.opacity = '0';
+                    saveIndicator.style.transform = 'translateY(10px)';
+                }, 2000);
+            } else if (status === 'error') {
+                saveIndicator.innerHTML = `
+                    <i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i>
+                    <span>Save failed</span>
+                `;
+                saveIndicator.style.opacity = '1';
+                saveIndicator.style.transform = 'translateY(0)';
+                
+                setTimeout(() => {
+                    saveIndicator.style.opacity = '0';
+                    saveIndicator.style.transform = 'translateY(10px)';
+                }, 3000);
+            }
+        }
+
+        function autoSave(key, data) {
+            // This function is deprecated - data is now saved directly via vieraAPI
+            // Kept for backward compatibility but does nothing
+            showSaveIndicator('saved');
+        }
+
+        // Make autoSave available globally for other pages to use
+        window.autoSave = autoSave;
+        window.showSaveIndicator = showSaveIndicator;
+
+        // ============ BUG REPORT FUNCTIONALITY ============
+        const BUG_REPORT_URL = 'https://script.google.com/macros/s/AKfycbxW5D6i7Td2Em-OqHmCpgy-DVQuzn1oCzn_pBRB2IOb_8MGfwgPqjF8KghYQDZpMNdKUw/exec'; // Replace with your deployed Apps Script URL
+
+        function openBugReportModal() {
+            document.getElementById('bugReportModal').classList.add('active');
+            document.getElementById('bugPage').value = window.location.href;
+            document.getElementById('bugPageName').textContent = getPageName();
+            
+            // Pre-fill user info if logged in
+            const user = vieraAPI.getUser();
+            if (user) {
+                document.getElementById('bugUserEmail').value = user.email || '';
+                document.getElementById('bugUserName').value = `${user.firstName || ''} ${user.lastName || ''}`.trim();
+            }
+        }
+
+        function closeBugReportModal() {
+            document.getElementById('bugReportModal').classList.remove('active');
+        }
+
+        function getPageName() {
+            const path = window.location.pathname;
+            const pageNames = {
+                '/': 'Dashboard',
+                '/index.html': 'Dashboard',
+                '/index': 'Dashboard',
+                '/flashcards.html': 'Flashcards',
+                '/flashcards': 'Flashcards',
+                '/todo.html': 'To-Do List',
+                '/todo': 'To-Do List',
+                '/notes.html': 'Notes',
+                '/notes': 'Notes',
+                '/pomodoro.html': 'Pomodoro Timer',
+                '/pomodoro': 'Pomodoro Timer',
+                '/schedule.html': 'Schedule',
+                '/schedule': 'Schedule',
+                '/classes.html': 'My Classes',
+                '/classes': 'My Classes',
+                '/settings.html': 'Settings',
+                '/settings': 'Settings',
+                '/progress-tracker.html': 'Progress Tracker',
+                '/progress-tracker': 'Progress Tracker',
+                '/scientific-calculator.html': 'Scientific Calculator',
+                '/scientific-calculator': 'Scientific Calculator',
+                '/graphing-calculator.html': 'Graphing Calculator',
+                '/graphing-calculator': 'Graphing Calculator'
+            };
+            return pageNames[path] || 'Unknown Page';
+        }
+
+        function getBrowserInfo() {
+            const ua = navigator.userAgent;
+            let browser = 'Unknown';
+            
+            if (ua.includes('Firefox')) {
+                browser = 'Firefox';
+            } else if (ua.includes('Chrome') && !ua.includes('Edg')) {
+                browser = 'Chrome';
+            } else if (ua.includes('Safari') && !ua.includes('Chrome')) {
+                browser = 'Safari';
+            } else if (ua.includes('Edg')) {
+                browser = 'Edge';
+            } else if (ua.includes('Opera') || ua.includes('OPR')) {
+                browser = 'Opera';
+            }
+            
+            // Check if mobile
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(ua);
+            if (isMobile) {
+                browser += ' (Mobile)';
+            }
+            
+            return browser;
+        }
+
+        async function submitBugReport(event) {
+            event.preventDefault();
+            
+            const btn = event.target.querySelector('button[type="submit"]');
+            const originalContent = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            
+            const bugData = {
+                page: document.getElementById('bugPage').value,
+                pageName: getPageName(),
+                category: document.getElementById('bugCategory').value,
+                description: document.getElementById('bugDescription').value,
+                userEmail: document.getElementById('bugUserEmail').value || 'Anonymous',
+                userName: document.getElementById('bugUserName').value || 'Anonymous',
+                browser: getBrowserInfo(),
+                screenSize: `${window.innerWidth}x${window.innerHeight}`,
+                userAgent: navigator.userAgent
+            };
+            
+            try {
+                const response = await fetch(BUG_REPORT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Required for Apps Script
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(bugData)
+                });
+                
+                // With no-cors mode, we can't read the response, so assume success
+                showNotification('Bug report submitted successfully! Thank you for your feedback.', 'success', 'Report Sent');
+                closeBugReportModal();
+                
+                // Clear the form
+                document.getElementById('bugDescription').value = '';
+                document.getElementById('bugCategory').value = 'General';
+                
+            } catch (error) {
+                console.error('Bug report error:', error);
+                showNotification('Failed to submit bug report. Please try again later.', 'error', 'Error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalContent;
+            }
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeBugReportModal();
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('bugReportModal')?.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeBugReportModal();
+            }
+        });
+    </script>
+</body>
+</html>

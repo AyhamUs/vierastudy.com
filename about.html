@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About VieraStudy - Our Mission & Story</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Learn about VieraStudy's mission to empower students with free, powerful study tools. Discover our story and commitment to improving student success.">
+    <meta name="keywords" content="about VieraStudy, student productivity platform, study tools, educational technology, Viera Educational Solutions">
+    <link rel="canonical" href="https://vierastudy.com/about">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="About VieraStudy - Our Mission & Story">
+    <meta property="og:description" content="Learn about VieraStudy's mission to empower students with free study tools for academic success.">
+    <meta property="og:url" content="https://vierastudy.com/about">
+    <meta property="og:image" content="https://vierastudy.com/vierastudy.png">
+    <meta property="og:type" content="website">
+    
+    <link rel="icon" href="vierastudy.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #ffffff;
+            color: #1e293b;
+            line-height: 1.7;
+        }
+
+        /* Header Navigation */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #1e293b;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #3b82f6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #3b82f6;
+            border: 2px solid #3b82f6;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f9ff;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+            padding: 80px 2rem 60px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #64748b;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Content Section */
+        .content-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 2rem;
+        }
+
+        .content-section h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 24px;
+            margin-top: 48px;
+        }
+
+        .content-section h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .content-section p {
+            font-size: 17px;
+            color: #475569;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .content-section ul {
+            list-style: none;
+            margin: 24px 0;
+            padding: 0;
+        }
+
+        .content-section li {
+            font-size: 17px;
+            color: #475569;
+            margin-bottom: 12px;
+            padding-left: 32px;
+            position: relative;
+        }
+
+        .content-section li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-left: 4px solid #3b82f6;
+            padding: 24px;
+            border-radius: 8px;
+            margin: 32px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: #0f172a;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 60px 2rem 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: #e2e8f0;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: #3b82f6;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid #334155;
+            text-align: center;
+            color: #64748b;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .footer-logo img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .footer-logo span {
+            font-size: 20px;
+            font-weight: 700;
+            color: #e2e8f0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .content-section {
+                padding: 40px 1.5rem;
+            }
+
+            .content-section h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo-link">
+                <img src="vierastudy.png" alt="VieraStudy Logo" class="logo-img">
+                <span class="logo-text">VieraStudy</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="about.html" class="nav-link active">About</a>
+                <a href="how-it-works.html" class="nav-link">How It Works</a>
+                <a href="pricing.html" class="nav-link">Pricing</a>
+                <a href="faq.html" class="nav-link">FAQ</a>
+            </div>
+            <div class="cta-buttons">
+                <a href="login.html" class="btn btn-secondary">Sign In</a>
+                <a href="login.html" class="btn btn-primary">Get Started Free</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>About VieraStudy</h1>
+        <p>Empowering students worldwide with free, powerful study tools for academic success</p>
+    </section>
+
+    <!-- Content -->
+    <article class="content-section">
+        <h2>Our Mission</h2>
+        <p>At VieraStudy, we believe that every student deserves access to high-quality study tools regardless of their financial situation. Our mission is to level the playing field in education by providing a comprehensive, completely free suite of productivity tools that help students organize their academic lives, study more effectively, and achieve their educational goals.</p>
+        
+        <p>We understand the challenges that students face in today's fast-paced educational environment. Between juggling multiple classes, managing deadlines, preparing for exams, and trying to maintain a healthy work-life balance, students need tools that simplify their academic workflow rather than complicate it. That's why we've built VieraStudy as an all-in-one platform that brings together everything a student needs in one convenient, easy-to-use interface.</p>
+
+        <h2>Our Story</h2>
+        <p>VieraStudy was born from a simple observation: students were constantly switching between multiple apps and services to manage different aspects of their academic lives. One app for flashcards, another for to-do lists, a third for note-taking, and so on. This fragmented approach led to decreased productivity, forgotten tasks, and unnecessary stress.</p>
+
+        <p>We set out to create a unified platform that would consolidate all essential study tools into one cohesive ecosystem. After months of research, development, and testing with real students, VieraStudy was launched as a comprehensive solution that combines flashcard creation, task management, note-taking, time management, progress tracking, and more – all in one place.</p>
+
+        <div class="highlight-box">
+            <p><i class="fas fa-quote-left" style="color: #3b82f6; margin-right: 8px;"></i>We're not just building software; we're building a community of learners who support each other in achieving academic excellence.</p>
+        </div>
+
+        <h2>What Makes Us Different</h2>
+        <ul>
+            <li><strong>100% Free Forever:</strong> No hidden costs, no premium tiers, no paywalls. Every feature is available to every student at no cost.</li>
+            <li><strong>Privacy-Focused:</strong> Your data belongs to you. We never sell your information to third parties or use it for advertising.</li>
+            <li><strong>Student-Centric Design:</strong> Built by people who understand the unique challenges students face, with features designed specifically for academic success.</li>
+            <li><strong>All-in-One Platform:</strong> Everything you need in one place, eliminating the need to juggle multiple apps and subscriptions.</li>
+            <li><strong>Cloud Sync:</strong> Access your data from any device, anywhere, ensuring you can study whenever inspiration strikes.</li>
+            <li><strong>Continuous Improvement:</strong> We regularly add new features and improvements based on student feedback and emerging educational research.</li>
+        </ul>
+
+        <h2>Our Commitment to Students</h2>
+        <p>We're committed to maintaining VieraStudy as a free resource for students worldwide. We believe that financial barriers should never prevent anyone from accessing the tools they need to succeed academically. As we grow, we'll continue to add new features, improve existing ones, and listen to our user community to ensure VieraStudy remains the best study companion available.</p>
+
+        <p>Our team is dedicated to creating an inclusive, accessible platform that works for students of all backgrounds, learning styles, and academic levels. Whether you're in high school, college, graduate school, or pursuing continuing education, VieraStudy adapts to your needs and helps you study smarter, not harder.</p>
+
+        <h2>Join Our Community</h2>
+        <p>VieraStudy is more than just a tool – it's a community of motivated learners striving for excellence. We invite you to join thousands of students who are already using VieraStudy to organize their studies, improve their grades, and achieve their academic dreams. Together, we're proving that with the right tools and determination, any educational goal is within reach.</p>
+
+        <p>Start your journey to academic success today. Create your free account and discover how VieraStudy can transform the way you learn.</p>
+
+        <div style="text-align: center; margin-top: 48px;">
+            <a href="login.html" class="btn btn-primary" style="padding: 14px 32px; font-size: 16px;">Get Started Free <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <h2 style="margin-top: 64px;">Contact Us</h2>
+        <p>Have questions, suggestions, or feedback? We'd love to hear from you! Reach out to our team at <a href="mailto:issaayh26@pewaukeeschools.org" style="color: #3b82f6; text-decoration: underline;">issaayh26@pewaukeeschools.org</a>. We read every message and use your input to make VieraStudy better for everyone.</p>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <img src="vierastudy.png" alt="VieraStudy">
+                    <span>VieraStudy</span>
+                </div>
+                <p>A product of Viera Educational Solutions</p>
+            </div>
+            <div class="footer-section">
+                <h3>Product</h3>
+                <div class="footer-links">
+                    <a href="features.html" class="footer-link">Features</a>
+                    <a href="pricing.html" class="footer-link">Pricing</a>
+                    <a href="how-it-works.html" class="footer-link">How It Works</a>
+                    <a href="faq.html" class="footer-link">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <div class="footer-links">
+                    <a href="about.html" class="footer-link">About</a>
+                    <a href="privacy.html" class="footer-link">Privacy Policy</a>
+                    <a href="terms.html" class="footer-link">Terms of Service</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <div class="footer-links">
+                    <a href="resources/" class="footer-link">Study Tips</a>
+                    <a href="resources/" class="footer-link">Blog</a>
+                    <a href="mailto:issaayh26@pewaukeeschools.org" class="footer-link">Contact Support</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Viera Educational Solutions. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

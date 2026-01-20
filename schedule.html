@@ -515,8 +515,8 @@
             border-left: 3px solid #3b82f6;
         }
 
-        a[href="/"].nav-item.active,
-        a[href="/"].nav-item:hover {
+        a[href="dashboard.html"].nav-item.active,
+        a[href="dashboard.html"].nav-item:hover {
             color: #3b82f6;
         }
 
@@ -1771,7 +1771,7 @@
             </div>
             
             <nav class="nav-menu">
-                <a href="/" class="nav-item">
+                <a href="dashboard.html" class="nav-item">
                     <i class="fas fa-home" style="color: #3b82f6;"></i>
                     <span>Home</span>
                 </a>
@@ -2045,6 +2045,16 @@
     </div>
 
     <script src="api.js?v=12"></script>
+    <script>
+        // Session check - redirect to login if not authenticated
+        (async function() {
+            await vieraAPI.ready;
+            if (!vieraAPI.isLoggedIn() || !vieraAPI.getUser()) {
+                window.location.href = 'login.html';
+                return;
+            }
+        })();
+    </script>
     <script>
         // Notification Modal Functions
         function showNotification(message, type = 'success', title = null) {
