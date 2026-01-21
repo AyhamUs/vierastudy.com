@@ -597,6 +597,17 @@
             margin-bottom: 3px;
         }
 
+        .user-plan {
+            font-size: 11px;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .user-plan.premium {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+
         .user-badge {
             display: inline-block;
             background: linear-gradient(135deg, #fbbf24, #f59e0b);
@@ -1454,6 +1465,7 @@
                 <div class="user-avatar" id="userAvatar"></div>
                 <div class="user-info">
                     <div class="user-name" id="userName"></div>
+                    <div class="user-plan" id="userPlan"></div>
                 </div>
                 <button class="bug-report-btn" onclick="openBugReportModal()" title="Report a Bug">
                     <i class="fas fa-bug"></i>
@@ -1686,11 +1698,19 @@
         function loadUserProfile() {
             const user = vieraAPI.getUser();
             if (user) {
-                const { firstName, lastName } = user;
+                const { firstName, lastName, isPremium } = user;
                 const initials = `${firstName.charAt(0)}${lastName ? lastName.charAt(0) : ''}`.toUpperCase();
-                const fullName = lastName ? `${firstName} ${lastName}` : firstName;
                 document.getElementById('userAvatar').textContent = initials;
-                document.getElementById('userName').textContent = fullName;
+                document.getElementById('userName').textContent = firstName;
+                
+                const planElement = document.getElementById('userPlan');
+                if (isPremium) {
+                    planElement.textContent = 'Premium';
+                    planElement.className = 'user-plan premium';
+                } else {
+                    planElement.textContent = 'Free';
+                    planElement.className = 'user-plan';
+                }
             } else {
                 window.location.href = '/';
             }

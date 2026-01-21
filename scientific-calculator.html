@@ -948,6 +948,7 @@
                 <div class="user-avatar" id="userAvatar"></div>
                 <div class="user-info">
                     <div class="user-name" id="userName"></div>
+                    <div class="user-plan" id="userPlan"></div>
                 </div>
                 <button class="bug-report-btn" onclick="openBugReportModal()" title="Report a Bug">
                     <i class="fas fa-bug"></i>
@@ -1194,6 +1195,15 @@
                 const lastInitial = user.lastName ? user.lastName.charAt(0).toUpperCase() : '';
                 document.getElementById('userAvatar').textContent = firstInitial + lastInitial || '?';
                 document.getElementById('userName').textContent = user.firstName || 'Guest';
+                
+                const planElement = document.getElementById('userPlan');
+                if (user.isPremium) {
+                    planElement.textContent = 'Premium';
+                    planElement.className = 'user-plan premium';
+                } else {
+                    planElement.textContent = 'Free';
+                    planElement.className = 'user-plan';
+                }
             }
         }
         

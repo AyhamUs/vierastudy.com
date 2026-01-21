@@ -499,6 +499,17 @@
             margin-bottom: 3px;
         }
 
+        .user-plan {
+            font-size: 11px;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .user-plan.premium {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+
         .user-badge {
             display: inline-block;
             background: linear-gradient(135deg, #fbbf24, #f59e0b);
@@ -2310,6 +2321,782 @@
         .bug-submit-btn i {
             font-size: 14px;
         }
+
+        /* Admin Panel Styles */
+        .admin-modal-content {
+            background: white;
+            border-radius: 16px;
+            width: 95%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        body.dark-mode .admin-modal-content {
+            background: #1e293b;
+            border: 1px solid #334155;
+        }
+
+        .admin-modal-header {
+            padding: 24px 30px;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body.dark-mode .admin-modal-header {
+            border-bottom-color: #334155;
+        }
+
+        .admin-modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .admin-close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 18px;
+        }
+
+        .admin-close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .admin-modal-body {
+            padding: 30px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 4px;
+            overflow-x: auto;
+        }
+
+        body.dark-mode .admin-tabs {
+            border-bottom-color: #334155;
+        }
+
+        .admin-tab-btn {
+            padding: 12px 24px;
+            border: none;
+            background: transparent;
+            color: #64748b;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 10px 10px 0 0;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        body.dark-mode .admin-tab-btn {
+            color: #94a3b8;
+        }
+
+        .admin-tab-btn:hover {
+            background: #f1f5f9;
+            color: #667eea;
+        }
+
+        body.dark-mode .admin-tab-btn:hover {
+            background: #334155;
+            color: #818cf8;
+        }
+
+        .admin-tab-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .admin-tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px 2px 0 0;
+        }
+
+        .admin-tab-content {
+            display: none;
+            animation: adminFadeIn 0.3s ease-in-out;
+        }
+
+        .admin-tab-content.active {
+            display: block;
+        }
+
+        @keyframes adminFadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(-10px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .admin-section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            color: #1e293b;
+        }
+
+        body.dark-mode .admin-section-title {
+            color: #f1f5f9;
+        }
+
+        .admin-section-desc {
+            color: #64748b;
+            margin: 0 0 24px 0;
+            font-size: 14px;
+        }
+
+        body.dark-mode .admin-section-desc {
+            color: #94a3b8;
+        }
+
+        .admin-subsection-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 20px 0 12px 0;
+            color: #1e293b;
+        }
+
+        body.dark-mode .admin-subsection-title {
+            color: #f1f5f9;
+        }
+
+        .admin-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .admin-stat-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s;
+        }
+
+        body.dark-mode .admin-stat-card {
+            background: #0f172a;
+            border-color: #334155;
+        }
+
+        .admin-stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+
+        .admin-stat-info {
+            flex: 1;
+        }
+
+        .admin-stat-label {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+
+        body.dark-mode .admin-stat-label {
+            color: #94a3b8;
+        }
+
+        .admin-stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        body.dark-mode .admin-stat-value {
+            color: #f1f5f9;
+        }
+
+        .admin-quick-actions {
+            margin-top: 30px;
+        }
+
+        .admin-action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .admin-action-btn {
+            padding: 16px 20px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            color: #1e293b;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        body.dark-mode .admin-action-btn {
+            background: #0f172a;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+
+        .admin-action-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px -3px rgba(102, 126, 234, 0.2);
+        }
+
+        .admin-tab-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            gap: 20px;
+        }
+
+        .admin-search-bar {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        body.dark-mode .admin-search-bar {
+            background: #0f172a;
+            border-color: #334155;
+        }
+
+        .admin-search-bar i {
+            color: #94a3b8;
+            font-size: 16px;
+        }
+
+        .admin-search-bar input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            color: #1e293b;
+        }
+
+        body.dark-mode .admin-search-bar input {
+            color: #f1f5f9;
+        }
+
+        .admin-search-bar input::placeholder {
+            color: #94a3b8;
+        }
+
+        .admin-filter-pills {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .admin-filter-pill {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            color: #64748b;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        body.dark-mode .admin-filter-pill {
+            background: #0f172a;
+            border-color: #334155;
+            color: #94a3b8;
+        }
+
+        .admin-filter-pill:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .admin-filter-pill.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: transparent;
+        }
+
+        .admin-users-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .admin-loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+        }
+
+        body.dark-mode .admin-loading {
+            color: #94a3b8;
+        }
+
+        .admin-loading i {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .admin-user-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 12px;
+            transition: all 0.3s;
+        }
+
+        body.dark-mode .admin-user-card {
+            background: #0f172a;
+            border-color: #334155;
+        }
+
+        .admin-user-card:hover {
+            border-color: #667eea;
+            transform: translateX(4px);
+        }
+
+        .admin-user-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .admin-user-card-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 0;
+        }
+
+        body.dark-mode .admin-user-card-name {
+            color: #f1f5f9;
+        }
+
+        .admin-user-card-badges {
+            display: flex;
+            gap: 6px;
+        }
+
+        .admin-user-card-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 8px;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        body.dark-mode .admin-user-card-info {
+            color: #94a3b8;
+        }
+
+        .admin-user-card-info i {
+            margin-right: 6px;
+            width: 16px;
+            text-align: center;
+        }
+
+        .admin-form {
+            max-width: 700px;
+        }
+
+        .admin-form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .admin-form-group {
+            margin-bottom: 20px;
+        }
+
+        .admin-form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #1e293b;
+        }
+
+        body.dark-mode .admin-form-label {
+            color: #f1f5f9;
+        }
+
+        .admin-form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background: white;
+            color: #1e293b;
+        }
+
+        body.dark-mode .admin-form-input {
+            background: #0f172a;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+
+        .admin-form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        .admin-checkbox-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .admin-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        body.dark-mode .admin-checkbox-label {
+            background: #0f172a;
+            border-color: #334155;
+        }
+
+        .admin-checkbox-label:hover {
+            border-color: #667eea;
+        }
+
+        .admin-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .admin-checkbox-text {
+            font-weight: 600;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        body.dark-mode .admin-checkbox-text {
+            color: #f1f5f9;
+        }
+
+        .admin-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .admin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        .admin-btn i {
+            font-size: 14px;
+        }
+
+        .admin-btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .admin-btn-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .admin-btn-warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+        }
+
+        .admin-btn-danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        .admin-btn-danger-outline {
+            background: white;
+            color: #ef4444;
+            border: 2px solid #ef4444;
+        }
+
+        body.dark-mode .admin-btn-danger-outline {
+            background: #0f172a;
+        }
+
+        .admin-btn-secondary {
+            background: #64748b;
+            color: white;
+        }
+
+        .admin-search-section {
+            margin-bottom: 30px;
+        }
+
+        .admin-user-details {
+            animation: adminFadeIn 0.3s ease-in-out;
+        }
+
+        .admin-user-info-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        body.dark-mode .admin-user-info-card {
+            background: #0f172a;
+            border-color: #334155;
+        }
+
+        .admin-user-info-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        body.dark-mode .admin-user-info-header {
+            border-bottom-color: #334155;
+        }
+
+        .admin-user-avatar-large {
+            width: 70px;
+            height: 70px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .admin-user-info-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 0 4px 0;
+            color: #1e293b;
+        }
+
+        body.dark-mode .admin-user-info-name {
+            color: #f1f5f9;
+        }
+
+        .admin-user-info-email {
+            color: #64748b;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        body.dark-mode .admin-user-info-email {
+            color: #94a3b8;
+        }
+
+        .admin-user-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .admin-info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .admin-info-item i {
+            font-size: 20px;
+            color: #667eea;
+            width: 30px;
+            text-align: center;
+        }
+
+        .admin-info-label {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 2px;
+        }
+
+        body.dark-mode .admin-info-label {
+            color: #94a3b8;
+        }
+
+        .admin-info-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        body.dark-mode .admin-info-value {
+            color: #f1f5f9;
+        }
+
+        .admin-permissions-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        body.dark-mode .admin-permissions-section {
+            border-top-color: #334155;
+        }
+
+        .admin-actions-section {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        body.dark-mode .admin-actions-section {
+            background: #0f172a;
+            border-color: #334155;
+        }
+
+        .admin-action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .admin-password-form {
+            margin-top: 20px;
+            padding: 20px;
+            background: #fef3c7;
+            border-radius: 10px;
+            border: 2px solid #fbbf24;
+        }
+
+        body.dark-mode .admin-password-form {
+            background: rgba(251, 191, 36, 0.1);
+            border-color: #fbbf24;
+        }
+
+        .user-badge-inline {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .user-badge-inline.premium {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #78350f;
+        }
+
+        .user-badge-inline.admin {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        .user-badge-inline.free {
+            background: #e2e8f0;
+            color: #475569;
+        }
+
+        body.dark-mode .user-badge-inline.free {
+            background: #334155;
+            color: #cbd5e1;
+        }
     </style>
 </head>
 <body>
@@ -2393,12 +3180,18 @@
                     <i class="fas fa-cog"></i>
                     <span>Settings</span>
                 </a>
+                
+                <a href="#" class="nav-item" id="adminPanelLink" style="display: none;" onclick="event.preventDefault(); showAdminPanel();">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Admin Panel</span>
+                </a>
             </nav>
             
             <div class="user-profile">
                 <div class="user-avatar" id="userAvatar"></div>
                 <div class="user-info">
                     <div class="user-name" id="userName"></div>
+                    <div class="user-plan" id="userPlan"></div>
                 </div>
                 <button class="bug-report-btn" onclick="openBugReportModal()" title="Report a Bug">
                     <i class="fas fa-bug"></i>
@@ -2634,6 +3427,292 @@
         </div>
     </div>
 
+    <!-- Admin Panel Modal -->
+    <div id="adminPanelModal" class="bug-modal">
+        <div class="admin-modal-content">
+            <div class="admin-modal-header">
+                <div class="admin-modal-title">
+                    <i class="fas fa-shield-alt"></i>
+                    Admin Control Panel
+                </div>
+                <button class="admin-close-btn" onclick="closeAdminPanel()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="admin-modal-body">
+                <!-- Tab Navigation -->
+                <div class="admin-tabs">
+                    <button class="admin-tab-btn active" onclick="showAdminTab('overview')">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>Overview</span>
+                    </button>
+                    <button class="admin-tab-btn" onclick="showAdminTab('users')">
+                        <i class="fas fa-users"></i>
+                        <span>Users</span>
+                    </button>
+                    <button class="admin-tab-btn" onclick="showAdminTab('create')">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Create</span>
+                    </button>
+                    <button class="admin-tab-btn" onclick="showAdminTab('manage')">
+                        <i class="fas fa-cogs"></i>
+                        <span>Manage</span>
+                    </button>
+                </div>
+                
+                <!-- Overview Tab -->
+                <div id="adminTabOverview" class="admin-tab-content active">
+                    <h2 class="admin-section-title">System Overview</h2>
+                    <div class="admin-stats-grid">
+                        <div class="admin-stat-card">
+                            <div class="admin-stat-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="admin-stat-info">
+                                <div class="admin-stat-label">Total Users</div>
+                                <div class="admin-stat-value" id="totalUsers">0</div>
+                            </div>
+                        </div>
+                        <div class="admin-stat-card">
+                            <div class="admin-stat-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <div class="admin-stat-info">
+                                <div class="admin-stat-label">Premium Users</div>
+                                <div class="admin-stat-value" id="premiumUsers">0</div>
+                            </div>
+                        </div>
+                        <div class="admin-stat-card">
+                            <div class="admin-stat-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="admin-stat-info">
+                                <div class="admin-stat-label">Free Users</div>
+                                <div class="admin-stat-value" id="freeUsers">0</div>
+                            </div>
+                        </div>
+                        <div class="admin-stat-card">
+                            <div class="admin-stat-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="admin-stat-info">
+                                <div class="admin-stat-label">Admins</div>
+                                <div class="admin-stat-value" id="adminUsers">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="admin-quick-actions">
+                        <h3 class="admin-subsection-title">Quick Actions</h3>
+                        <div class="admin-action-grid">
+                            <button class="admin-action-btn" onclick="showAdminTab('users')">
+                                <i class="fas fa-list"></i>
+                                <span>View All Users</span>
+                            </button>
+                            <button class="admin-action-btn" onclick="showAdminTab('create')">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Create New User</span>
+                            </button>
+                            <button class="admin-action-btn" onclick="loadAllUsers()">
+                                <i class="fas fa-sync"></i>
+                                <span>Refresh Data</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Users List Tab -->
+                <div id="adminTabUsers" class="admin-tab-content">
+                    <div class="admin-tab-header">
+                        <div>
+                            <h2 class="admin-section-title">User Management</h2>
+                            <p class="admin-section-desc">View and manage all registered users</p>
+                        </div>
+                        <button class="admin-btn admin-btn-primary" onclick="loadAllUsers()">
+                            <i class="fas fa-sync"></i> Refresh
+                        </button>
+                    </div>
+                    
+                    <div class="admin-search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="userSearchInput" placeholder="Search by name or email..." onkeyup="filterUsers()">
+                    </div>
+                    
+                    <div class="admin-filter-pills">
+                        <button class="admin-filter-pill active" onclick="filterUsersByType('all')">
+                            All Users
+                        </button>
+                        <button class="admin-filter-pill" onclick="filterUsersByType('premium')">
+                            <i class="fas fa-crown"></i> Premium
+                        </button>
+                        <button class="admin-filter-pill" onclick="filterUsersByType('free')">
+                            <i class="fas fa-user"></i> Free
+                        </button>
+                        <button class="admin-filter-pill" onclick="filterUsersByType('admin')">
+                            <i class="fas fa-shield-alt"></i> Admins
+                        </button>
+                    </div>
+                    
+                    <div id="usersList" class="admin-users-list">
+                        <div class="admin-loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Loading users...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Create User Tab -->
+                <div id="adminTabCreate" class="admin-tab-content">
+                    <h2 class="admin-section-title">Create New User</h2>
+                    <p class="admin-section-desc">Add a new user account to the system</p>
+                    
+                    <form onsubmit="handleCreateUser(event)" class="admin-form">
+                        <div class="admin-form-row">
+                            <div class="admin-form-group">
+                                <label class="admin-form-label">Email Address *</label>
+                                <input type="email" id="createEmail" required class="admin-form-input" placeholder="user@example.com">
+                            </div>
+                            <div class="admin-form-group">
+                                <label class="admin-form-label">Password *</label>
+                                <input type="password" id="createPassword" required class="admin-form-input" placeholder="Minimum 6 characters" minlength="6">
+                            </div>
+                        </div>
+                        
+                        <div class="admin-form-row">
+                            <div class="admin-form-group">
+                                <label class="admin-form-label">First Name *</label>
+                                <input type="text" id="createFirstName" required class="admin-form-input" placeholder="John">
+                            </div>
+                            <div class="admin-form-group">
+                                <label class="admin-form-label">Last Name</label>
+                                <input type="text" id="createLastName" class="admin-form-input" placeholder="Doe">
+                            </div>
+                        </div>
+                        
+                        <div class="admin-form-group">
+                            <label class="admin-form-label">Account Permissions</label>
+                            <div class="admin-checkbox-group">
+                                <label class="admin-checkbox-label">
+                                    <input type="checkbox" id="createIsPremium" class="admin-checkbox">
+                                    <span class="admin-checkbox-text">
+                                        <i class="fas fa-crown"></i> Premium Account
+                                    </span>
+                                </label>
+                                <label class="admin-checkbox-label">
+                                    <input type="checkbox" id="createIsAdmin" class="admin-checkbox">
+                                    <span class="admin-checkbox-text">
+                                        <i class="fas fa-shield-alt"></i> Admin Access
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="admin-btn admin-btn-success">
+                            <i class="fas fa-user-plus"></i> Create User Account
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Manage User Tab -->
+                <div id="adminTabManage" class="admin-tab-content">
+                    <h2 class="admin-section-title">Manage User Account</h2>
+                    <p class="admin-section-desc">Search for a user and perform administrative actions</p>
+                    
+                    <div class="admin-search-section">
+                        <div class="admin-form-group">
+                            <label class="admin-form-label">Search User by Email</label>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="email" id="manageEmail" class="admin-form-input" placeholder="user@example.com" style="flex: 1;">
+                                <button class="admin-btn admin-btn-primary" onclick="loadUserDetails()">
+                                    <i class="fas fa-search"></i> Search
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="manageUserDetails" class="admin-user-details" style="display: none;">
+                        <div class="admin-user-info-card">
+                            <div class="admin-user-info-header">
+                                <div class="admin-user-avatar-large" id="manageUserAvatar">UN</div>
+                                <div>
+                                    <h3 class="admin-user-info-name" id="manageUserName"></h3>
+                                    <p class="admin-user-info-email" id="manageUserEmail"></p>
+                                </div>
+                            </div>
+                            <div class="admin-user-info-grid">
+                                <div class="admin-info-item">
+                                    <i class="fas fa-fingerprint"></i>
+                                    <div>
+                                        <div class="admin-info-label">User ID</div>
+                                        <div class="admin-info-value" id="manageUserId"></div>
+                                    </div>
+                                </div>
+                                <div class="admin-info-item">
+                                    <i class="fas fa-calendar"></i>
+                                    <div>
+                                        <div class="admin-info-label">Created</div>
+                                        <div class="admin-info-value" id="manageUserCreated"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="admin-permissions-section">
+                                <h4 class="admin-subsection-title">Account Permissions</h4>
+                                <div class="admin-checkbox-group">
+                                    <label class="admin-checkbox-label">
+                                        <input type="checkbox" id="manageIsPremium" class="admin-checkbox">
+                                        <span class="admin-checkbox-text">
+                                            <i class="fas fa-crown"></i> Premium Account
+                                        </span>
+                                    </label>
+                                    <label class="admin-checkbox-label">
+                                        <input type="checkbox" id="manageIsAdmin" class="admin-checkbox">
+                                        <span class="admin-checkbox-text">
+                                            <i class="fas fa-shield-alt"></i> Admin Access
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="admin-actions-section">
+                            <h4 class="admin-subsection-title">Administrative Actions</h4>
+                            <div class="admin-action-buttons">
+                                <button class="admin-btn admin-btn-primary" onclick="updateUserPerms()">
+                                    <i class="fas fa-save"></i> Save Permissions
+                                </button>
+                                <button class="admin-btn admin-btn-warning" onclick="showResetPassword()">
+                                    <i class="fas fa-key"></i> Reset Password
+                                </button>
+                                <button class="admin-btn admin-btn-danger-outline" onclick="deleteUserData()">
+                                    <i class="fas fa-trash"></i> Clear User Data
+                                </button>
+                                <button class="admin-btn admin-btn-danger" onclick="deleteUserAccount()">
+                                    <i class="fas fa-user-times"></i> Delete Account
+                                </button>
+                            </div>
+                            
+                            <div id="resetPasswordForm" class="admin-password-form" style="display: none;">
+                                <div class="admin-form-group">
+                                    <label class="admin-form-label">New Password</label>
+                                    <input type="password" id="newPassword" class="admin-form-input" placeholder="Minimum 6 characters" minlength="6">
+                                </div>
+                                <div style="display: flex; gap: 10px;">
+                                    <button class="admin-btn admin-btn-success" onclick="confirmResetPassword()">
+                                        <i class="fas fa-check"></i> Confirm Reset
+                                    </button>
+                                    <button class="admin-btn admin-btn-secondary" onclick="cancelResetPassword()">
+                                        <i class="fas fa-times"></i> Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- VieraStudy API -->
     <script src="api.js?v=12"></script>
     
@@ -2809,15 +3888,29 @@
         function loadUserProfile() {
             const user = vieraAPI.getUser();
             if (user) {
-                const { firstName, lastName } = user;
+                const { firstName, lastName, isPremium, isAdmin } = user;
                 const initials = `${firstName.charAt(0)}${lastName ? lastName.charAt(0) : ''}`.toUpperCase();
-                const fullName = lastName ? `${firstName} ${lastName}` : firstName;
                 
                 // Update avatar
                 document.getElementById('userAvatar').textContent = initials;
                 
-                // Update name
-                document.getElementById('userName').textContent = fullName;
+                // Update name - just show first name for cleaner look
+                document.getElementById('userName').textContent = firstName;
+                
+                // Update plan
+                const planElement = document.getElementById('userPlan');
+                if (isPremium) {
+                    planElement.textContent = 'Premium';
+                    planElement.className = 'user-plan premium';
+                } else {
+                    planElement.textContent = 'Free';
+                    planElement.className = 'user-plan';
+                }
+                
+                // Show admin panel link if user is admin
+                if (isAdmin) {
+                    document.getElementById('adminPanelLink').style.display = 'flex';
+                }
                 
                 // Update welcome message with time-based greeting
                 document.getElementById('welcomeMessage').innerHTML = getWelcomeMessage(firstName);
@@ -3137,8 +4230,11 @@
             const activityLog = vieraAPI.getActivityLog() || [];
             activityLog.forEach(activity => {
                 activities.push({
-                    ...activity,
-                    time: activity.timestamp ? getRelativeTime(new Date(activity.timestamp).toISOString()) : activity.time
+                    icon: activity.icon,
+                    color: activity.color,
+                    title: activity.message || activity.title || 'Activity',
+                    time: activity.timestamp ? getRelativeTime(activity.timestamp) : 'Just now',
+                    timestamp: activity.timestamp ? new Date(activity.timestamp).getTime() : Date.now()
                 });
             });
 
@@ -3732,6 +4828,398 @@
         document.getElementById('bugReportModal')?.addEventListener('click', function(e) {
             if (e.target === this) {
                 closeBugReportModal();
+            }
+        });
+
+        // ========== ADMIN PANEL FUNCTIONS ==========
+        
+        function showAdminPanel() {
+            document.getElementById('adminPanelModal').classList.add('active');
+            loadAllUsers();
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('adminPanelModal').classList.remove('active');
+        }
+
+        let allUsersData = [];
+        let currentFilter = 'all';
+
+        function showAdminTab(tab) {
+            // Hide all tabs
+            document.querySelectorAll('.admin-tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+            
+            // Show selected tab
+            const tabElement = document.getElementById('adminTab' + tab.charAt(0).toUpperCase() + tab.slice(1));
+            if (tabElement) {
+                tabElement.classList.add('active');
+            }
+            
+            // Find and activate the button
+            const buttons = document.querySelectorAll('.admin-tab-btn');
+            buttons.forEach(btn => {
+                const btnText = btn.textContent.toLowerCase().trim();
+                if (btnText.includes(tab.toLowerCase())) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Load data for specific tabs
+            if (tab === 'overview' || tab === 'users') {
+                loadAllUsers();
+            }
+        }
+
+        async function loadAllUsers() {
+            const usersList = document.getElementById('usersList');
+            usersList.innerHTML = '<div class="admin-loading"><i class="fas fa-spinner fa-spin"></i><p>Loading users...</p></div>';
+            
+            try {
+                const response = await fetch('https://vierastudy-api.ayhamissa416.workers.dev/admin/users', {
+                    headers: { 'Authorization': `Bearer ${vieraAPI.token}` }
+                });
+                const data = await response.json();
+                
+                if (data.success && data.users) {
+                    allUsersData = data.users;
+                    
+                    // Update overview stats
+                    updateOverviewStats(data.users);
+                    
+                    if (data.users.length === 0) {
+                        usersList.innerHTML = '<div class="admin-loading"><p>No users found.</p></div>';
+                        return;
+                    }
+                    
+                    displayUsers(data.users);
+                } else {
+                    usersList.innerHTML = '<div class="admin-loading"><p style="color: #ef4444;">Error: ' + (data.error || 'Failed to load users') + '</p></div>';
+                }
+            } catch (error) {
+                console.error('Load users error:', error);
+                usersList.innerHTML = '<div class="admin-loading"><p style="color: #ef4444;">Network error. Please try again.</p></div>';
+            }
+        }
+
+        function updateOverviewStats(users) {
+            const totalUsers = users.length;
+            const premiumUsers = users.filter(u => u.isPremium).length;
+            const freeUsers = totalUsers - premiumUsers;
+            const adminUsers = users.filter(u => u.isAdmin).length;
+            
+            document.getElementById('totalUsers').textContent = totalUsers;
+            document.getElementById('premiumUsers').textContent = premiumUsers;
+            document.getElementById('freeUsers').textContent = freeUsers;
+            document.getElementById('adminUsers').textContent = adminUsers;
+        }
+
+        function displayUsers(users) {
+            const usersList = document.getElementById('usersList');
+            
+            if (users.length === 0) {
+                usersList.innerHTML = '<div class="admin-loading"><p>No users match your search.</p></div>';
+                return;
+            }
+            
+            usersList.innerHTML = users.map(user => {
+                const initials = `${user.firstName.charAt(0)}${user.lastName ? user.lastName.charAt(0) : ''}`.toUpperCase();
+                return `
+                    <div class="admin-user-card" data-user-type="${user.isPremium ? 'premium' : 'free'} ${user.isAdmin ? 'admin' : ''}" data-user-search="${user.firstName} ${user.lastName} ${user.email}">
+                        <div class="admin-user-card-header">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div class="admin-user-avatar-large" style="width: 50px; height: 50px; font-size: 16px;">${initials}</div>
+                                <div>
+                                    <h4 class="admin-user-card-name">${user.firstName} ${user.lastName || ''}</h4>
+                                    <div class="admin-user-card-badges">
+                                        ${user.isPremium ? '<span class="user-badge-inline premium">Premium</span>' : '<span class="user-badge-inline free">Free</span>'}
+                                        ${user.isAdmin ? '<span class="user-badge-inline admin">Admin</span>' : ''}
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="admin-btn admin-btn-primary" onclick="quickManageUser('${user.email}')" style="padding: 8px 16px; font-size: 13px;">
+                                <i class="fas fa-edit"></i> Manage
+                            </button>
+                        </div>
+                        <div class="admin-user-card-info">
+                            <div><i class="fas fa-envelope"></i> ${user.email}</div>
+                            <div><i class="fas fa-calendar"></i> ${new Date(user.createdAt).toLocaleDateString()}</div>
+                            <div><i class="fas fa-fingerprint"></i> ${user.id.substring(0, 8)}...</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterUsers() {
+            const searchTerm = document.getElementById('userSearchInput').value.toLowerCase();
+            const filteredUsers = allUsersData.filter(user => {
+                const matchesSearch = searchTerm === '' || 
+                    user.firstName.toLowerCase().includes(searchTerm) ||
+                    user.lastName.toLowerCase().includes(searchTerm) ||
+                    user.email.toLowerCase().includes(searchTerm);
+                
+                const matchesFilter = currentFilter === 'all' ||
+                    (currentFilter === 'premium' && user.isPremium) ||
+                    (currentFilter === 'free' && !user.isPremium) ||
+                    (currentFilter === 'admin' && user.isAdmin);
+                
+                return matchesSearch && matchesFilter;
+            });
+            
+            displayUsers(filteredUsers);
+        }
+
+        function filterUsersByType(type) {
+            currentFilter = type;
+            
+            // Update active pill
+            document.querySelectorAll('.admin-filter-pill').forEach(pill => pill.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            filterUsers();
+        }
+
+        function quickManageUser(email) {
+            document.getElementById('manageEmail').value = email;
+            showAdminTab('manage');
+            setTimeout(() => loadUserDetails(), 100);
+        }
+
+        async function handleCreateUser(event) {
+            event.preventDefault();
+            
+            const btn = event.target.querySelector('button[type="submit"]');
+            const originalContent = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
+            
+            const email = document.getElementById('createEmail').value;
+            const password = document.getElementById('createPassword').value;
+            const firstName = document.getElementById('createFirstName').value;
+            const lastName = document.getElementById('createLastName').value;
+            const isPremium = document.getElementById('createIsPremium').checked;
+            const isAdmin = document.getElementById('createIsAdmin').checked;
+            
+            try {
+                const response = await fetch('https://vierastudy-api.ayhamissa416.workers.dev/admin/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${vieraAPI.token}`
+                    },
+                    body: JSON.stringify({ email, password, firstName, lastName, isPremium, isAdmin })
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('User created successfully!', 'success', 'Success');
+                    event.target.reset();
+                    loadAllUsers();
+                    showAdminTab('users');
+                } else {
+                    showNotification(data.error || 'Failed to create user', 'error', 'Error');
+                }
+            } catch (error) {
+                console.error('Create user error:', error);
+                showNotification('Network error. Please try again.', 'error', 'Error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalContent;
+            }
+        }
+
+        let currentManageEmail = null;
+
+        async function loadUserDetails() {
+            const email = document.getElementById('manageEmail').value.trim();
+            if (!email) {
+                showNotification('Please enter an email address', 'error', 'Error');
+                return;
+            }
+            
+            currentManageEmail = email;
+            
+            try {
+                const response = await fetch('https://vierastudy-api.ayhamissa416.workers.dev/admin/users', {
+                    headers: { 'Authorization': `Bearer ${vieraAPI.token}` }
+                });
+                const data = await response.json();
+                
+                if (data.success && data.users) {
+                    const user = data.users.find(u => u.email.toLowerCase() === email.toLowerCase());
+                    
+                    if (user) {
+                        const initials = `${user.firstName.charAt(0)}${user.lastName ? user.lastName.charAt(0) : ''}`.toUpperCase();
+                        document.getElementById('manageUserAvatar').textContent = initials;
+                        document.getElementById('manageUserId').textContent = user.id;
+                        document.getElementById('manageUserName').textContent = `${user.firstName} ${user.lastName || ''}`;
+                        document.getElementById('manageUserEmail').textContent = user.email;
+                        document.getElementById('manageUserCreated').textContent = new Date(user.createdAt).toLocaleString();
+                        document.getElementById('manageIsPremium').checked = user.isPremium;
+                        document.getElementById('manageIsAdmin').checked = user.isAdmin;
+                        document.getElementById('manageUserDetails').style.display = 'block';
+                        document.getElementById('resetPasswordForm').style.display = 'none';
+                    } else {
+                        showNotification('User not found', 'error', 'Error');
+                        document.getElementById('manageUserDetails').style.display = 'none';
+                    }
+                } else {
+                    showNotification(data.error || 'Failed to load user', 'error', 'Error');
+                }
+            } catch (error) {
+                console.error('Load user error:', error);
+                showNotification('Network error. Please try again.', 'error', 'Error');
+            }
+        }
+
+        async function updateUserPerms() {
+            if (!currentManageEmail) return;
+            
+            const isPremium = document.getElementById('manageIsPremium').checked;
+            const isAdmin = document.getElementById('manageIsAdmin').checked;
+            
+            try {
+                const response = await fetch('https://vierastudy-api.ayhamissa416.workers.dev/admin/users/update', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${vieraAPI.token}`
+                    },
+                    body: JSON.stringify({ email: currentManageEmail, isPremium, isAdmin })
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('User permissions updated!', 'success', 'Success');
+                    loadAllUsers();
+                } else {
+                    showNotification(data.error || 'Failed to update user', 'error', 'Error');
+                }
+            } catch (error) {
+                console.error('Update user error:', error);
+                showNotification('Network error. Please try again.', 'error', 'Error');
+            }
+        }
+
+        function showResetPassword() {
+            document.getElementById('resetPasswordForm').style.display = 'block';
+            document.getElementById('newPassword').value = '';
+        }
+
+        function cancelResetPassword() {
+            document.getElementById('resetPasswordForm').style.display = 'none';
+        }
+
+        async function confirmResetPassword() {
+            if (!currentManageEmail) return;
+            
+            const newPassword = document.getElementById('newPassword').value;
+            if (!newPassword || newPassword.length < 6) {
+                showNotification('Password must be at least 6 characters', 'error', 'Error');
+                return;
+            }
+            
+            try {
+                const response = await fetch('https://vierastudy-api.ayhamissa416.workers.dev/admin/users/reset-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${vieraAPI.token}`
+                    },
+                    body: JSON.stringify({ email: currentManageEmail, newPassword })
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('Password reset successfully! User must login again.', 'success', 'Success');
+                    cancelResetPassword();
+                } else {
+                    showNotification(data.error || 'Failed to reset password', 'error', 'Error');
+                }
+            } catch (error) {
+                console.error('Reset password error:', error);
+                showNotification('Network error. Please try again.', 'error', 'Error');
+            }
+        }
+
+        async function deleteUserData() {
+            if (!currentManageEmail) return;
+            
+            if (!confirm(`Are you sure you want to delete ALL data for ${currentManageEmail}? This cannot be undone!`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch('https://vierastudy-api.ayhamissa416.workers.dev/admin/users/delete-data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${vieraAPI.token}`
+                    },
+                    body: JSON.stringify({ email: currentManageEmail })
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('User data deleted successfully!', 'success', 'Success');
+                } else {
+                    showNotification(data.error || 'Failed to delete data', 'error', 'Error');
+                }
+            } catch (error) {
+                console.error('Delete data error:', error);
+                showNotification('Network error. Please try again.', 'error', 'Error');
+            }
+        }
+
+        async function deleteUserAccount() {
+            if (!currentManageEmail) return;
+            
+            if (!confirm(`Are you sure you want to PERMANENTLY DELETE the account for ${currentManageEmail}? This will delete the account, all data, and sessions. This cannot be undone!`)) {
+                return;
+            }
+            
+            if (!confirm('This is your last warning. The account will be permanently deleted. Are you absolutely sure?')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch('https://vierastudy-api.ayhamissa416.workers.dev/admin/users/delete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${vieraAPI.token}`
+                    },
+                    body: JSON.stringify({ email: currentManageEmail })
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('User account deleted successfully!', 'success', 'Success');
+                    document.getElementById('manageUserDetails').style.display = 'none';
+                    document.getElementById('manageEmail').value = '';
+                    currentManageEmail = null;
+                    loadAllUsers();
+                } else {
+                    showNotification(data.error || 'Failed to delete account', 'error', 'Error');
+                }
+            } catch (error) {
+                console.error('Delete account error:', error);
+                showNotification('Network error. Please try again.', 'error', 'Error');
+            }
+        }
+
+        // Close admin panel on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeAdminPanel();
+            }
+        });
+
+        // Close admin panel when clicking outside
+        document.getElementById('adminPanelModal')?.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAdminPanel();
             }
         });
     </script>
