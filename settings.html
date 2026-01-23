@@ -318,11 +318,11 @@
             color: #64748b;
         }
 
-        .ai-dropdown, .math-dropdown {
+        .ai-dropdown {
             position: relative;
         }
 
-        .ai-dropdown .nav-item, .math-dropdown .nav-item {
+        .ai-dropdown .nav-item {
             padding: 15px 25px;
         }
 
@@ -351,8 +351,7 @@
             margin-left: auto;
         }
 
-        .ai-dropdown.open .fa-chevron-down,
-        .math-dropdown.open .fa-chevron-down {
+        .ai-dropdown.open .fa-chevron-down {
             transform: rotate(180deg);
         }
 
@@ -363,8 +362,7 @@
             opacity: 0;
         }
 
-        .ai-dropdown.open .dropdown-content,
-        .math-dropdown.open .dropdown-content {
+        .ai-dropdown.open .dropdown-content {
             max-height: 350px;
             opacity: 1;
         }
@@ -392,15 +390,6 @@
             width: 18px;
             font-size: 14px;
             text-align: center;
-        }
-
-        /* Math Tools dropdown icon colors */
-        .math-dropdown .dropdown-item:nth-child(1) i {
-            color: #84cc16;
-        }
-
-        .math-dropdown .dropdown-item:nth-child(2) i {
-            color: #84cc16;
         }
 
         .user-profile {
@@ -1144,29 +1133,6 @@
                     <span>Progress Tracker</span>
                 </a>
                 
-                
-                <div class="math-dropdown">
-                    <div class="nav-item" onclick="toggleMathDropdown()">
-                        <div class="dropdown-header">
-                            <div class="icon-text">
-                                <i class="fas fa-calculator"></i>
-                                <span>Math Tools</span>
-                            </div>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                    </div>
-                    <div class="dropdown-content">
-                        <a href="graphing-calculator" class="dropdown-item">
-                            <i class="fas fa-chart-line"></i>
-                            <span>Graphing Calculator</span>
-                        </a>
-                        <a href="scientific-calculator" class="dropdown-item">
-                            <i class="fas fa-calculator"></i>
-                            <span>Scientific Calculator</span>
-                        </a>
-                    </div>
-                </div>
-                
                 <a href="classes" class="nav-item">
                     <i class="fas fa-book" style="color: #f59e0b;"></i>
                     <span>My Classes</span>
@@ -1650,10 +1616,6 @@
 
         function toggleDropdown() {
             document.querySelector('.ai-dropdown').classList.toggle('open');
-        }
-
-        function toggleMathDropdown() {
-            document.querySelector('.math-dropdown').classList.toggle('open');
         }
 
         function toggleMobileMenu() {

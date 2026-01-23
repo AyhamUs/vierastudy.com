@@ -350,90 +350,7 @@
             color: #64748b;
         }
 
-        /* Math Dropdown */
-        .math-dropdown {
-            position: relative;
-        }
 
-        .math-dropdown .nav-item {
-            padding: 15px 25px;
-        }
-
-        .dropdown-header {
-            display: flex;
-            align-items: center;
-            width: 100%;
-        }
-
-        .dropdown-header .icon-text {
-            display: flex;
-            align-items: center;
-            flex: 1;
-        }
-
-        .dropdown-header i.fa-brain,
-        .dropdown-header i.fa-calculator {
-            width: 25px;
-            margin-right: 15px;
-            font-size: 18px;
-        }
-
-        .dropdown-header .fa-chevron-down {
-            font-size: 12px;
-            transition: transform 0.3s;
-            margin-left: auto;
-        }
-
-        .math-dropdown.open .fa-chevron-down {
-            transform: rotate(180deg);
-        }
-
-        .dropdown-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, opacity 0.3s ease;
-            opacity: 0;
-        }
-
-        .math-dropdown.open .dropdown-content {
-            max-height: 350px;
-            opacity: 1;
-            overflow: visible;
-        }
-
-        .dropdown-item {
-            padding: 12px 25px 12px 55px;
-            color: #94a3b8;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 14px;
-            border-left: 3px solid transparent;
-        }
-
-        .dropdown-item:hover {
-            background: rgba(59, 130, 246, 0.08);
-            color: #3b82f6;
-            padding-left: 60px;
-            border-left-color: #3b82f6;
-        }
-
-        .dropdown-item i {
-            width: 18px;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        /* Math Tools dropdown icon colors */
-        .math-dropdown .dropdown-item:nth-child(1) i {
-            color: #84cc16;
-        }
-
-        .math-dropdown .dropdown-item:nth-child(2) i {
-            color: #84cc16;
-        }
 
         /* User Profile */
         .user-profile {
@@ -1276,8 +1193,7 @@
             }
 
             /* Fix dropdown overflow on mobile */
-            .ai-dropdown.open .dropdown-content,
-            .math-dropdown.open .dropdown-content {
+            .ai-dropdown.open .dropdown-content {
                 max-height: 500px;
                 overflow-y: auto;
                 -webkit-overflow-scrolling: touch;
@@ -2294,7 +2210,7 @@
             font-size: 14px;
         }
 
-        /* Admin Panel Styles */
+        /* Management Styles */
         .admin-modal-content {
             background: white;
             border-radius: 16px;
@@ -3125,29 +3041,6 @@
                     <span>Progress Tracker</span>
                 </a>
                 
-                
-                <div class="math-dropdown">
-                    <div class="nav-item" onclick="toggleMathDropdown()">
-                        <div class="dropdown-header">
-                            <div class="icon-text">
-                                <i class="fas fa-calculator"></i>
-                                <span>Math Tools</span>
-                            </div>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                    </div>
-                    <div class="dropdown-content">
-                        <a href="graphing-calculator" class="dropdown-item">
-                            <i class="fas fa-chart-line"></i>
-                            <span>Graphing Calculator</span>
-                        </a>
-                        <a href="scientific-calculator" class="dropdown-item">
-                            <i class="fas fa-calculator"></i>
-                            <span>Scientific Calculator</span>
-                        </a>
-                    </div>
-                </div>
-                
                 <a href="classes" class="nav-item">
                     <i class="fas fa-book"></i>
                     <span>My Classes</span>
@@ -3159,8 +3052,8 @@
                 </a>
                 
                 <a href="#" class="nav-item" id="adminPanelLink" style="display: none;" onclick="event.preventDefault(); showAdminPanel();">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>Admin Panel</span>
+                    <i class="fas fa-user-shield" style="color: #6366f1;"></i>
+                    <span>Management</span>
                 </a>
             </nav>
             
@@ -3404,13 +3297,13 @@
         </div>
     </div>
 
-    <!-- Admin Panel Modal -->
+    <!-- Management Modal -->
     <div id="adminPanelModal" class="bug-modal">
         <div class="admin-modal-content">
             <div class="admin-modal-header">
                 <div class="admin-modal-title">
-                    <i class="fas fa-shield-alt"></i>
-                    Admin Control Panel
+                    <i class="fas fa-user-shield"></i>
+                    Management Panel
                 </div>
                 <button class="admin-close-btn" onclick="closeAdminPanel()">
                     <i class="fas fa-times"></i>
@@ -3884,7 +3777,7 @@
                     planElement.className = 'user-plan';
                 }
                 
-                // Show admin panel link if user is admin
+                // Show management link if user is admin
                 if (isAdmin) {
                     document.getElementById('adminPanelLink').style.display = 'flex';
                 }
@@ -4090,11 +3983,6 @@
 
         function toggleDropdown() {
             const dropdown = document.querySelector('.ai-dropdown');
-            dropdown.classList.toggle('open');
-        }
-
-        function toggleMathDropdown() {
-            const dropdown = document.querySelector('.math-dropdown');
             dropdown.classList.toggle('open');
         }
 
@@ -4384,7 +4272,7 @@
         });
 
         // Add click handlers for navigation items
-        document.querySelectorAll('.nav-item:not(.math-dropdown)').forEach(item => {
+        document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function(e) {
                 // Skip if it's a link (has href)
                 if (this.tagName === 'A') return;
@@ -4713,11 +4601,7 @@
                 '/settings.html': 'Settings',
                 '/settings': 'Settings',
                 '/progress-tracker.html': 'Progress Tracker',
-                '/progress-tracker': 'Progress Tracker',
-                '/scientific-calculator.html': 'Scientific Calculator',
-                '/scientific-calculator': 'Scientific Calculator',
-                '/graphing-calculator.html': 'Graphing Calculator',
-                '/graphing-calculator': 'Graphing Calculator'
+                '/progress-tracker': 'Progress Tracker'
             };
             return pageNames[path] || 'Unknown Page';
         }
@@ -4808,7 +4692,7 @@
             }
         });
 
-        // ========== ADMIN PANEL FUNCTIONS ==========
+        // ========== MANAGEMENT FUNCTIONS ==========
         
         function showAdminPanel() {
             document.getElementById('adminPanelModal').classList.add('active');
@@ -5186,14 +5070,14 @@
             }
         }
 
-        // Close admin panel on escape key
+        // Close management on escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeAdminPanel();
             }
         });
 
-        // Close admin panel when clicking outside
+        // Close management when clicking outside
         document.getElementById('adminPanelModal')?.addEventListener('click', function(e) {
             if (e.target === this) {
                 closeAdminPanel();
