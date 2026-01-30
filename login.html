@@ -684,7 +684,7 @@
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
             
             try {
-                const result = await vieraAPI.register(firstName, lastName, email, password);
+                const result = await vieraAPI.register(email, password, firstName, lastName);
                 
                 if (result.error) {
                     showNotification(result.error, 'error', 'Registration Failed');
