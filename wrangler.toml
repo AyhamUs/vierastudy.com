@@ -1,0 +1,11 @@
+name = "vierastudy-api"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+[[kv_namespaces]]
+binding = "VIERASTUDY_USERS"
+id = "PASTE_VIERASTUDY_USERS_ID_HERE"
+
+[[kv_namespaces]]
+binding = "VIERASTUDY_DATA"
+id = "PASTE_VIERASTUDY_DATA_ID_HERE"
