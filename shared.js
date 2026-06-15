@@ -119,31 +119,31 @@ function injectSidebar() {
     </div>
     <nav class="nav-menu">
       <a href="/dashboard.html" class="nav-item${active('dashboard')}">
-        <i class="fas fa-home" style="color:#3b82f6"></i><span>Home</span>
+        <i class="fas fa-house"></i><span>Home</span>
       </a>
       <a href="/flashcards" class="nav-item${active('flashcards')}">
-        <i class="fas fa-layer-group" style="color:#8b5cf6"></i><span>Flashcards</span>
+        <i class="fas fa-layer-group"></i><span>Flashcards</span>
       </a>
       <a href="/todo" class="nav-item${active('todo')}">
-        <i class="fas fa-list-check" style="color:#10b981"></i><span>To-Do List</span>
+        <i class="fas fa-list-check"></i><span>To-Do List</span>
       </a>
       <a href="/schedule" class="nav-item${active('schedule')}">
-        <i class="fas fa-calendar-days" style="color:#f59e0b"></i><span>Study Schedule</span>
+        <i class="fas fa-calendar-days"></i><span>Study Schedule</span>
       </a>
       <a href="/pomodoro" class="nav-item${active('pomodoro')}">
-        <i class="fas fa-clock" style="color:#ef4444"></i><span>Pomodoro Timer</span>
+        <i class="fas fa-clock"></i><span>Pomodoro Timer</span>
       </a>
       <a href="/notes" class="nav-item${active('notes')}">
-        <i class="fas fa-book-open" style="color:#06b6d4"></i><span>Take Notes</span>
+        <i class="fas fa-book-open"></i><span>Take Notes</span>
       </a>
       <a href="/progress-tracker" class="nav-item${active('progress')}">
-        <i class="fas fa-chart-line" style="color:#ec4899"></i><span>Progress Tracker</span>
+        <i class="fas fa-chart-line"></i><span>Progress Tracker</span>
       </a>
       <a href="/classes" class="nav-item${active('classes')}">
-        <i class="fas fa-book" style="color:#f97316"></i><span>My Classes</span>
+        <i class="fas fa-book"></i><span>My Classes</span>
       </a>
       <a href="/settings" class="nav-item${active('settings')}">
-        <i class="fas fa-cog" style="color:#64748b"></i><span>Settings</span>
+        <i class="fas fa-gear"></i><span>Settings</span>
       </a>
     </nav>
     <div class="user-profile" id="userProfileSection">

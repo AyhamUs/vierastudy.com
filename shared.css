@@ -5,41 +5,41 @@
 
 /* ── 1. Design Tokens ──────────────────────────────────────── */
 :root {
-    /* Accent (overridable per-user) */
-    --accent: #3b82f6;
-    --accent-hover: #2563eb;
-    --accent-soft: rgba(59, 130, 246, 0.12);
+    /* Accent (overridable per-user) — restrained by default */
+    --accent: #2f80ed;
+    --accent-hover: #1f6fe0;
+    --accent-soft: rgba(47, 128, 237, 0.10);
     --accent-contrast: #ffffff;
 
     /* Typography */
     --font-size-base: 16px;
-    --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 
-    /* Surfaces & text — light theme */
-    --bg: #f4f6fb;
-    --bg-grad: radial-gradient(1200px 600px at 100% -10%, rgba(59,130,246,0.06), transparent 60%), #f4f6fb;
+    /* Surfaces & text — light (Notion-like warm neutrals) */
+    --bg: #f7f7f5;
+    --bg-grad: #f7f7f5;
     --surface: #ffffff;
-    --surface-2: #f8fafc;
-    --surface-hover: #f1f5f9;
-    --sidebar-bg: #ffffff;
-    --sidebar-text: #475569;
-    --sidebar-active-bg: var(--accent-soft);
-    --text: #0f172a;
-    --text-muted: #64748b;
-    --text-faint: #94a3b8;
-    --border: #e7ebf1;
-    --border-strong: #d8dee8;
+    --surface-2: #f6f6f4;
+    --surface-hover: #efefec;
+    --sidebar-bg: #fbfbfa;
+    --sidebar-text: #5f5e5b;
+    --sidebar-active-bg: rgba(0, 0, 0, 0.045);
+    --text: #2e2e2c;
+    --text-muted: #73726e;
+    --text-faint: #9b9a96;
+    --border: #ecebe8;
+    --border-strong: #e0dfdb;
 
-    /* Elevation */
-    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.06);
-    --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.06), 0 2px 4px rgba(15, 23, 42, 0.04);
-    --shadow-lg: 0 18px 40px rgba(15, 23, 42, 0.12);
-    --shadow-accent: 0 8px 22px var(--accent-soft);
+    /* Elevation — nearly flat; rely on borders */
+    --shadow-sm: 0 1px 2px rgba(15, 15, 15, 0.04);
+    --shadow-md: 0 4px 14px rgba(15, 15, 15, 0.08);
+    --shadow-lg: 0 12px 40px rgba(15, 15, 15, 0.14);
+    --shadow-accent: var(--shadow-md);
 
-    /* Radius (overridable per-user) */
-    --radius-xs: 8px;
-    --radius: 14px;
-    --radius-lg: 20px;
+    /* Radius (overridable per-user) — tighter */
+    --radius-xs: 6px;
+    --radius: 8px;
+    --radius-lg: 12px;
     --radius-pill: 999px;
 
     /* Spacing / density scale (overridable per-user) */
@@ -50,10 +50,10 @@
     --space-4: calc(16px * var(--density));
     --space-5: calc(22px * var(--density));
     --space-6: calc(32px * var(--density));
-    --gap: calc(22px * var(--density));
-    --content-pad: calc(40px * var(--density));
+    --gap: calc(20px * var(--density));
+    --content-pad: calc(44px * var(--density));
 
-    --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: 0.15s ease;
 }
 
 /* Density presets */
@@ -63,22 +63,24 @@ body[data-density="spacious"]   { --density: 1.22; }
 
 /* ── 2. Dark theme ─────────────────────────────────────────── */
 body.dark-mode {
-    --bg: #0b1120;
-    --bg-grad: radial-gradient(1200px 600px at 100% -10%, rgba(59,130,246,0.10), transparent 60%), #0b1120;
-    --surface: #131c2e;
-    --surface-2: #0f1726;
-    --surface-hover: #1c2841;
-    --sidebar-bg: #0e1626;
-    --sidebar-text: #94a3b8;
-    --sidebar-active-bg: var(--accent-soft);
-    --text: #e8eef7;
-    --text-muted: #94a3b8;
-    --text-faint: #64748b;
-    --border: #243049;
-    --border-strong: #2f3d5a;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.35);
-    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.5);
+    /* Obsidian-like flat dark neutrals */
+    --bg: #1a1a1a;
+    --bg-grad: #1a1a1a;
+    --surface: #1e1e1e;
+    --surface-2: #242422;
+    --surface-hover: #2c2c2a;
+    --sidebar-bg: #161615;
+    --sidebar-text: #a3a29d;
+    --sidebar-active-bg: rgba(255, 255, 255, 0.06);
+    --text: #dadad6;
+    --text-muted: #9a9994;
+    --text-faint: #6d6c68;
+    --border: #2c2c2a;
+    --border-strong: #393937;
+    --accent-soft: rgba(47, 128, 237, 0.16);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 18px 48px rgba(0, 0, 0, 0.6);
 }
 
 /* ── 3. Reset ──────────────────────────────────────────────── */
@@ -127,8 +129,8 @@ body {
 }
 
 .header h1 {
-    font-size: 26px;
-    font-weight: 700;
+    font-size: 22px;
+    font-weight: 600;
     letter-spacing: -0.02em;
     color: var(--text);
 }
@@ -152,82 +154,74 @@ body {
 }
 
 .logo {
-    padding: 26px 24px;
-    font-size: 21px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    padding: 20px 18px;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 9px;
 }
 
 .logo img {
-    width: 34px;
-    height: 34px;
+    width: 26px;
+    height: 26px;
     object-fit: contain;
 }
 
 .logo-text {
     color: var(--text);
-    background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 55%, #a855f7));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+    letter-spacing: -0.01em;
 }
 
 .nav-menu {
     flex: 1;
-    padding: 14px 12px;
+    padding: 10px 8px;
     overflow-y: auto;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 1px;
 }
 
 .nav-item {
-    padding: 11px 14px;
+    padding: 7px 10px;
     border-radius: var(--radius-xs);
     display: flex;
     align-items: center;
     color: var(--sidebar-text);
     cursor: pointer;
     font-weight: 500;
-    font-size: 14.5px;
-    transition: all var(--transition);
+    font-size: 14px;
+    transition: background var(--transition), color var(--transition);
     text-decoration: none;
     position: relative;
 }
 
 .nav-item:hover {
-    background: var(--surface-hover);
+    background: var(--sidebar-active-bg);
     color: var(--text);
 }
 
 .nav-item.active {
     background: var(--sidebar-active-bg);
-    color: var(--accent);
+    color: var(--text);
     font-weight: 600;
 }
 
-.nav-item.active::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 22%;
-    bottom: 22%;
-    width: 3px;
-    border-radius: 3px;
-    background: var(--accent);
+.nav-item i {
+    width: 20px;
+    margin-right: 11px;
+    font-size: 15px;
+    text-align: center;
+    color: var(--text-faint);
+    transition: color var(--transition);
 }
 
-.nav-item i {
-    width: 24px;
-    margin-right: 12px;
-    font-size: 17px;
-    text-align: center;
-}
+.nav-item:hover i,
+.nav-item.active i { color: var(--text-muted); }
 
 .user-profile {
     padding: 16px 18px;

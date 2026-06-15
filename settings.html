@@ -25,7 +25,7 @@
     <link rel="icon" href="vierastudy.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="shared.css">
     <style>
@@ -40,50 +40,11 @@
         }
 
         body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f7fa;
-            color: #333;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             transition: background 0.3s, color 0.3s;
             overflow-x: hidden;
-        }
-
-        body.dark-mode {
-            background: #0f172a;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .main-content {
-            background: #0f172a;
-        }
-
-        body.dark-mode .header {
-            background: #1e293b;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .header h1 {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .setting-section {
-            background: #1e293b;
-            border: 1px solid #334155;
-        }
-
-        body.dark-mode .section-title {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .setting-label {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .setting-description {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .section-header {
-            border-color: #334155;
         }
 
         body.dark-mode .danger-zone {
@@ -103,25 +64,6 @@
             background: #b91c1c;
         }
 
-        body.dark-mode .account-input {
-            background: #334155;
-            border-color: #475569;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .account-input:focus {
-            background: #334155;
-            border-color: #3b82f6;
-        }
-
-        body.dark-mode .account-input::placeholder {
-            color: #64748b;
-        }
-
-        body.dark-mode .account-info-value {
-            color: #94a3b8;
-        }
-
         .container {
             display: flex;
             height: 100vh;
@@ -134,18 +76,18 @@
         }
 
         .header {
-            background: white;
+            background: var(--surface);
             padding: 25px 40px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-sm);
         }
 
         .header h1 {
             font-size: 28px;
-            color: #1e293b;
+            color: var(--text);
         }
 
         .header h1 i {
-            color: #64748b;
+            color: var(--text-muted);
         }
 
         .content {
@@ -158,10 +100,11 @@
         }
 
         .setting-section {
-            background: white;
-            border-radius: 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
             padding: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-sm);
         }
 
         .section-header {
@@ -170,20 +113,20 @@
             align-items: center;
             margin-bottom: 20px;
             padding-bottom: 15px;
-            border-bottom: 2px solid #f1f5f9;
+            border-bottom: 2px solid var(--border);
         }
 
         .section-title {
             font-size: 20px;
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text);
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
         .section-title i {
-            color: #3b82f6;
+            color: var(--accent);
         }
 
         .setting-item {
@@ -199,7 +142,7 @@
 
         .setting-label {
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text);
             font-size: 16px;
             display: flex;
             align-items: center;
@@ -208,12 +151,12 @@
         }
 
         .setting-label i {
-            color: #3b82f6;
+            color: var(--accent);
         }
 
         .setting-description {
             font-size: 14px;
-            color: #64748b;
+            color: var(--text-muted);
         }
 
         .danger-zone {
@@ -234,7 +177,7 @@
             color: white;
             border: none;
             padding: 12px 24px;
-            border-radius: 10px;
+            border-radius: var(--radius-xs);
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
@@ -257,7 +200,7 @@
         .data-warning {
             background: rgba(239, 68, 68, 0.1);
             border: 1px solid rgba(239, 68, 68, 0.2);
-            border-radius: 8px;
+            border-radius: var(--radius-xs);
             padding: 12px 16px;
             margin-top: 15px;
             display: flex;
@@ -273,7 +216,7 @@
         .data-warning p {
             margin: 0;
             font-size: 13px;
-            color: #64748b;
+            color: var(--text-muted);
             line-height: 1.5;
         }
 
@@ -293,14 +236,10 @@
         .account-field label {
             font-size: 13px;
             font-weight: 600;
-            color: #374151;
+            color: var(--text);
             display: flex;
             align-items: center;
             gap: 8px;
-        }
-
-        body.dark-mode .account-field label {
-            color: #e2e8f0;
         }
 
         .account-field label i {
@@ -312,32 +251,32 @@
         .account-input {
             width: 100%;
             padding: 12px 14px;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 8px;
+            border: 1.5px solid var(--border-strong);
+            border-radius: var(--radius-xs);
             font-size: 14px;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
             transition: all 0.2s ease;
-            background: #f8fafc;
-            color: #1e293b;
+            background: var(--surface-2);
+            color: var(--text);
         }
 
         .account-input::placeholder {
-            color: #94a3b8;
+            color: var(--text-faint);
         }
 
         .account-input:focus {
             outline: none;
-            border-color: #3b82f6;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            border-color: var(--accent);
+            background: var(--surface);
+            box-shadow: 0 0 0 3px var(--accent-soft);
         }
 
         .account-btn {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            color: white;
+            background: var(--accent);
+            color: var(--accent-contrast);
             border: none;
             padding: 12px 24px;
-            border-radius: 8px;
+            border-radius: var(--radius-xs);
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
@@ -349,7 +288,7 @@
         }
 
         .account-btn:hover {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            background: var(--accent-hover);
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
@@ -361,11 +300,11 @@
         }
 
         .account-btn.secondary {
-            background: #64748b;
+            background: var(--text-muted);
         }
 
         .account-btn.secondary:hover {
-            background: #475569;
+            background: var(--text);
         }
 
         .account-btn.danger {
@@ -386,7 +325,7 @@
 
         .account-info-label {
             font-size: 12px;
-            color: #64748b;
+            color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             font-weight: 600;
@@ -394,7 +333,7 @@
 
         .account-info-value {
             font-size: 15px;
-            color: #1e293b;
+            color: var(--text);
             font-weight: 500;
         }
 
@@ -409,14 +348,14 @@
             transform: translateY(-50%);
             background: none;
             border: none;
-            color: #64748b;
+            color: var(--text-muted);
             cursor: pointer;
             padding: 4px;
             font-size: 16px;
         }
 
         .password-toggle .toggle-visibility:hover {
-            color: #3b82f6;
+            color: var(--accent);
         }
 
         .password-toggle .account-input {
@@ -425,21 +364,13 @@
 
         .account-divider {
             height: 1px;
-            background: #e2e8f0;
+            background: var(--border);
             margin: 10px 0;
-        }
-
-        body.dark-mode .account-divider {
-            background: #334155;
         }
 
         body.dark-mode .data-warning {
             background: rgba(239, 68, 68, 0.15);
             border-color: rgba(239, 68, 68, 0.3);
-        }
-
-        body.dark-mode .data-warning p {
-            color: #94a3b8;
         }
 
         @media (max-width: 768px) {
@@ -485,12 +416,8 @@
         }
 
         .color-swatch.active {
-            border-color: #fff;
+            border-color: var(--surface);
             box-shadow: 0 0 0 3px currentColor, 0 2px 8px rgba(0,0,0,0.2);
-        }
-
-        body.dark-mode .color-swatch.active {
-            border-color: #1e293b;
         }
 
         /* Font size control */
@@ -507,7 +434,7 @@
             appearance: none;
             height: 6px;
             border-radius: 3px;
-            background: #e2e8f0;
+            background: var(--border);
             outline: none;
             cursor: pointer;
         }
@@ -518,7 +445,7 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: #3b82f6;
+            background: var(--accent);
             cursor: pointer;
             box-shadow: 0 2px 6px rgba(59, 130, 246, 0.4);
             transition: transform 0.15s;
@@ -528,25 +455,21 @@
             transform: scale(1.15);
         }
 
-        body.dark-mode .font-size-slider {
-            background: #334155;
-        }
-
         .font-size-label {
             min-width: 42px;
             text-align: center;
             font-size: 14px;
             font-weight: 600;
-            color: #3b82f6;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 6px;
+            color: var(--accent);
+            background: var(--accent-soft);
+            border-radius: var(--radius-xs);
             padding: 4px 8px;
         }
 
         /* Sync time */
         .sync-time-display {
             font-size: 13px;
-            color: #64748b;
+            color: var(--text-muted);
             display: flex;
             align-items: center;
             gap: 6px;
@@ -555,10 +478,6 @@
 
         .sync-time-display i {
             color: #10b981;
-        }
-
-        body.dark-mode .sync-time-display {
-            color: #94a3b8;
         }
 
         /* Account actions row */
@@ -806,25 +725,22 @@
 
         function toggleDarkMode() {
             const darkMode = document.getElementById('darkModeToggle').checked;
-            vieraAPI.setDarkMode(darkMode);
-            if (darkMode) {
-                document.body.classList.add('dark-mode');
-                showNotification('Dark mode enabled', 'success', 'Theme Changed');
-            } else {
-                document.body.classList.remove('dark-mode');
-                showNotification('Light mode enabled', 'success', 'Theme Changed');
-            }
+            if (window.VieraTheme) VieraTheme.set('mode', darkMode ? 'dark' : 'light');
+            else { vieraAPI.setDarkMode(darkMode); document.body.classList.toggle('dark-mode', darkMode); }
+            showNotification(darkMode ? 'Dark mode enabled' : 'Light mode enabled', 'success', 'Theme Changed');
         }
 
         function selectAccentColor(color, el) {
             document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
             el.classList.add('active');
-            vieraAPI.setAccentColor(color);
+            if (window.VieraTheme) VieraTheme.set('accent', color);
+            else vieraAPI.setAccentColor(color);
         }
 
         function onFontSizeInput(value) {
             document.getElementById('fontSizeLabel').textContent = value + 'px';
-            vieraAPI.setFontSize(Number(value));
+            if (window.VieraTheme) VieraTheme.set('font', String(value));
+            else vieraAPI.setFontSize(Number(value));
         }
 
         // ─── Profile helpers ──────────────────────────────────────────────────
