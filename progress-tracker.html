@@ -22,6 +22,7 @@
     <meta name="twitter:title" content="VieraStudy - Progress Tracker">
     <meta name="twitter:description" content="Track your study progress with VieraStudy. Monitor learning goals, visualize achievements, and stay motivated.">
     <meta name="twitter:image" content="https://vierastudy.com/vierastudy.png">
+    <link rel="stylesheet" href="/shared.css">
     <link rel="icon" href="vierastudy.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -277,321 +278,6 @@
         .container {
             display: flex;
             height: 100vh;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: 280px;
-            background: #1e293b;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        .logo {
-            padding: 30px 25px;
-            font-size: 24px;
-            font-weight: bold;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo img {
-            width: 35px;
-            height: 35px;
-            object-fit: contain;
-        }
-
-        .logo-text {
-            color: white;
-        }
-
-        .pro-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-            color: #1e293b;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .nav-menu {
-            flex: 1;
-            padding: 20px 0;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        .nav-item {
-            padding: 15px 25px;
-            display: flex;
-            align-items: center;
-            color: #cbd5e1;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-
-        .nav-item:hover {
-            background: rgba(59, 130, 246, 0.1);
-            color: #3b82f6;
-        }
-
-        .nav-item.active {
-            background: rgba(59, 130, 246, 0.15);
-            border-left: 3px solid #3b82f6;
-        }
-
-        a[href="dashboard.html"].nav-item.active,
-        a[href="dashboard.html"].nav-item:hover {
-            color: #3b82f6;
-        }
-
-        a[href="flashcards"].nav-item.active,
-        a[href="flashcards"].nav-item:hover {
-            color: #8b5cf6;
-        }
-
-        a[href="todo"].nav-item.active,
-        a[href="todo"].nav-item:hover {
-            color: #10b981;
-        }
-
-        a[href="schedule"].nav-item.active,
-        a[href="schedule"].nav-item:hover {
-            color: #f59e0b;
-        }
-
-        a[href="pomodoro"].nav-item.active,
-        a[href="pomodoro"].nav-item:hover {
-            color: #ef4444;
-        }
-
-        a[href="notes"].nav-item.active,
-        a[href="notes"].nav-item:hover {
-            color: #06b6d4;
-        }
-
-        a[href="progress-tracker"].nav-item.active,
-        a[href="progress-tracker"].nav-item:hover {
-            color: #ec4899;
-        }
-
-        a[href="classes"].nav-item.active,
-        a[href="classes"].nav-item:hover {
-            color: #f97316;
-        }
-
-        a[href="settings"].nav-item.active,
-        a[href="settings"].nav-item:hover {
-            color: #64748b;
-        }
-
-        .nav-item i {
-            width: 25px;
-            margin-right: 15px;
-            font-size: 18px;
-        }
-
-        .nav-item .fa-home {
-            color: #3b82f6;
-        }
-
-        .nav-item .fa-layer-group {
-            color: #8b5cf6;
-        }
-
-        .nav-item .fa-list-check {
-            color: #10b981;
-        }
-
-        .nav-item .fa-calendar-days {
-            color: #f59e0b;
-        }
-
-        .nav-item .fa-clock {
-            color: #ef4444;
-        }
-
-        .nav-item .fa-book-open {
-            color: #06b6d4;
-        }
-
-        .nav-item .fa-chart-line {
-            color: #ec4899;
-        }
-
-        .nav-item .fa-brain {
-            color: #6366f1;
-        }
-
-        .nav-item .fa-calculator {
-            color: #84cc16;
-        }
-
-        .nav-item .fa-book {
-            color: #f97316;
-        }
-
-        .nav-item .fa-gear,
-        .nav-item .fa-cog {
-            color: #64748b;
-        }
-
-        /* AI Dropdown */
-        .ai-dropdown {
-            position: relative;
-        }
-
-        .ai-dropdown .nav-item {
-            padding: 15px 25px;
-        }
-
-        .dropdown-header {
-            display: flex;
-            align-items: center;
-            width: 100%;
-        }
-
-        .dropdown-header .icon-text {
-            display: flex;
-            align-items: center;
-            flex: 1;
-        }
-
-        .dropdown-header i.fa-brain,
-        .dropdown-header i.fa-calculator {
-            width: 25px;
-            margin-right: 15px;
-            font-size: 18px;
-        }
-
-        .dropdown-header .fa-chevron-down {
-            font-size: 12px;
-            transition: transform 0.3s;
-            margin-left: auto;
-        }
-
-        .ai-dropdown.open .fa-chevron-down {
-            transform: rotate(180deg);
-        }
-
-        .dropdown-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, opacity 0.3s ease;
-            opacity: 0;
-        }
-
-        .ai-dropdown.open .dropdown-content,
-            max-height: 350px;
-            opacity: 1;
-        }
-
-        .dropdown-item {
-            padding: 12px 25px 12px 55px;
-            color: #94a3b8;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 14px;
-            border-left: 3px solid transparent;
-        }
-
-        .dropdown-item:hover {
-            background: rgba(59, 130, 246, 0.08);
-            color: #3b82f6;
-            padding-left: 60px;
-            border-left-color: #3b82f6;
-        }
-
-        .dropdown-item i {
-            width: 18px;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        /* User Profile */
-        .user-profile {
-            padding: 20px 25px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            visibility: hidden;
-        }
-
-        .user-profile.loaded {
-            visibility: visible;
-        }
-
-        .user-avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .user-info {
-            flex: 1;
-        }
-
-        .user-name {
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 3px;
-        }
-
-        .user-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            color: #1e293b;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 11px;
-            font-weight: 600;
-        }
-
-        .signout-btn {
-            background: rgba(239, 68, 68, 0.1);
-            border: none;
-            color: #ef4444;
-            width: 35px;
-            height: 35px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .signout-btn:hover {
-            background: #ef4444;
-            color: white;
-        }
-
-        .signout-btn i {
-            font-size: 16px;
         }
 
         /* Main Content */
@@ -989,79 +675,8 @@
             transform: translateY(-2px);
         }
 
-        /* Mobile Menu Toggle */
-        .mobile-menu-toggle {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            background: #3b82f6;
-            color: white;
-            border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-            transition: all 0.3s;
-        }
-
-        .mobile-menu-toggle:active {
-            transform: scale(0.95);
-        }
-
-        .mobile-menu-toggle i {
-            font-size: 20px;
-        }
-
-        .mobile-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 998;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-
-        .mobile-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
-            .sidebar {
-                position: fixed;
-                left: -280px;
-                top: 0;
-                bottom: 0;
-                z-index: 999;
-                transition: left 0.3s ease;
-                width: 280px;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .sidebar.active {
-                left: 0;
-            }
-
-            .mobile-menu-toggle {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .mobile-overlay {
-                display: block;
-            }
-
             .main-content {
                 width: 100%;
             }
@@ -1097,38 +712,6 @@
             .form-row {
                 grid-template-columns: 1fr;
             }
-
-            .ai-dropdown.open .dropdown-content,
-            .math-dropdown.open .dropdown-content {
-                max-height: 500px;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .dropdown-item {
-                min-height: 44px;
-                touch-action: manipulation;
-            }
-
-            .dropdown-item:hover {
-                padding-left: 35px;
-            }
-
-            .nav-item {
-                padding: 16px 25px;
-                min-height: 48px;
-                touch-action: manipulation;
-            }
-
-            .nav-menu a {
-                -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
-            }
-
-            .btn,
-            button {
-                min-height: 44px;
-                touch-action: manipulation;
-            }
         }
 
         @media (max-width: 480px) {
@@ -1139,118 +722,6 @@
             .add-task-btn {
                 width: 100%;
                 justify-content: center;
-            }
-        }
-
-        /* Notification Modal */
-        .notification-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 10000;
-            animation: fadeIn 0.2s ease;
-        }
-
-        .notification-modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .notification-content {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            max-width: 400px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            animation: slideIn 0.3s ease;
-            text-align: center;
-        }
-
-        .notification-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 28px;
-        }
-
-        .notification-icon.success {
-            background: #10b981;
-            color: white;
-        }
-
-        .notification-icon.info {
-            background: #3b82f6;
-            color: white;
-        }
-
-        .notification-icon.warning {
-            background: #f59e0b;
-            color: white;
-        }
-
-        .notification-icon.error {
-            background: #ef4444;
-            color: white;
-        }
-
-        .notification-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #1e293b;
-        }
-
-        .notification-message {
-            font-size: 15px;
-            color: #64748b;
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
-
-        .notification-btn {
-            background: #3b82f6;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .notification-btn:hover {
-            background: #2563eb;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
             }
         }
 
@@ -1285,86 +756,30 @@
         .bug-submit-btn { width: 100%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; border: none; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .bug-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); }
         .bug-submit-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+        /* Section card */
+        .section-card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 30px; }
+        body.dark-mode .section-card { background: #1e293b; }
+        .section-title { font-size: 20px; font-weight: 700; color: #1e293b; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        body.dark-mode .section-title { color: #e2e8f0; }
+        .section-title i { color: var(--accent, #3b82f6); }
+
+        /* Class breakdown */
+        .class-stat-card { background: #f8fafc; border-radius: 12px; padding: 16px 20px; margin-bottom: 12px; }
+        body.dark-mode .class-stat-card { background: #334155; }
+        .class-stat-name { font-weight: 700; font-size: 15px; margin-bottom: 10px; }
+        .class-stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        .class-stat-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #64748b; }
+        .class-stat-item i { width: 16px; color: var(--accent, #3b82f6); }
+        body.dark-mode .class-stat-item { color: #94a3b8; }
     </style>
 </head>
 <body>
-    <!-- Mobile Menu Toggle -->
-    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-        <i class="fas fa-bars"></i>
-    </button>
-
-    <!-- Mobile Overlay -->
-    <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button><div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
 
     <div class="container">
         <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="logo">
-                <img src="vierastudy.png" alt="VieraStudy">
-                <span class="logo-text">VieraStudy</span>
-            </div>
-            
-            <nav class="nav-menu">
-                <a href="dashboard.html" class="nav-item">
-                    <i class="fas fa-home" style="color: #3b82f6;"></i>
-                    <span>Home</span>
-                </a>
-                
-                <a href="flashcards" class="nav-item">
-                    <i class="fas fa-layer-group" style="color: #8b5cf6;"></i>
-                    <span>Flashcards</span>
-                </a>
-                
-                <a href="todo" class="nav-item">
-                    <i class="fas fa-list-check"></i>
-                    <span>To-Do List</span>
-                </a>
-                
-                <a href="schedule" class="nav-item">
-                    <i class="fas fa-calendar-days"></i>
-                    <span>Study Schedule</span>
-                </a>
-                
-                <a href="pomodoro" class="nav-item">
-                    <i class="fas fa-clock" style="color: #ef4444;"></i>
-                    <span>Pomodoro Timer</span>
-                </a>
-                
-                <a href="notes" class="nav-item">
-                    <i class="fas fa-book-open"></i>
-                    <span>Take Notes</span>
-                </a>
-                
-                <a href="progress-tracker" class="nav-item active">
-                    <i class="fas fa-chart-line" style="color: #ec4899;"></i>
-                    <span>Progress Tracker</span>
-                </a>
-                
-                <a href="classes" class="nav-item">
-                    <i class="fas fa-book" style="color: #f59e0b;"></i>
-                    <span>My Classes</span>
-                </a>
-                
-                <a href="settings" class="nav-item">
-                    <i class="fas fa-cog" style="color: #64748b;"></i>
-                    <span>Settings</span>
-                </a>
-            </nav>
-            
-            <div class="user-profile">
-                <div class="user-avatar" id="userAvatar"></div>
-                <div class="user-info">
-                    <div class="user-name" id="userName"></div>
-                    <div class="user-plan" id="userPlan"></div>
-                </div>
-                <button class="bug-report-btn" onclick="openBugReportModal()" title="Report a Bug">
-                    <i class="fas fa-bug"></i>
-                </button>
-                <button class="signout-btn" onclick="handleSignout()" title="Sign Out">
-                    <i class="fas fa-right-from-bracket"></i>
-                </button>
-            </div>
-        </div>
+        <div class="sidebar"></div>
 
         <!-- Main Content -->
         <div class="main-content">
@@ -1375,7 +790,7 @@
                     Add New Task
                 </button>
             </div>
-            
+
             <div class="content">
                 <!-- Kanban Board -->
                 <div class="kanban-board">
@@ -1427,6 +842,12 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- By Class Section -->
+                <div class="section-card" id="classBreakdownSection">
+                    <h2 class="section-title"><i class="fas fa-book"></i> By Class</h2>
+                    <div id="classBreakdown"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -1443,12 +864,12 @@
                     <label class="form-label">Task Title <span style="color: #ef4444;">*</span></label>
                     <input type="text" class="form-input" id="taskTitle" required placeholder="Enter task title">
                 </div>
-                
+
                 <div class="form-group">
                     <label class="form-label">Description</label>
                     <textarea class="form-textarea" id="taskDescription" placeholder="Add task description"></textarea>
                 </div>
-                
+
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Class/Subject</label>
@@ -1456,7 +877,7 @@
                             <option value="">Select class (optional)</option>
                         </select>
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="form-label">Priority <span style="color: #ef4444;">*</span></label>
                         <select class="form-select" id="taskPriority" required>
@@ -1467,7 +888,7 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Status <span style="color: #ef4444;">*</span></label>
@@ -1477,15 +898,15 @@
                             <option value="completed">Completed</option>
                         </select>
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="form-label">Due Date</label>
                         <input type="date" class="form-input" id="taskDue">
                     </div>
                 </div>
-                
+
                 <input type="hidden" id="editingTaskId" value="">
-                
+
                 <button type="submit" class="submit-btn">
                     <i class="fas fa-plus"></i> <span id="submitBtnText">Add Task</span>
                 </button>
@@ -1493,34 +914,10 @@
         </div>
     </div>
 
-    <!-- Notification Modal -->
-    <div id="notificationModal" class="notification-modal">
-        <div class="notification-content">
-            <div id="notificationIcon" class="notification-icon success">
-                <i class="fas fa-check" style="color: #10b981;"></i>
-            </div>
-            <div id="notificationTitle" class="notification-title">Success</div>
-            <div id="notificationMessage" class="notification-message">Operation completed successfully!</div>
-            <button class="notification-btn" onclick="closeNotification()">OK</button>
-        </div>
-    </div>
+    <div id="bugReportModal" class="bug-modal"><div class="bug-modal-content"><div class="bug-modal-header"><div class="bug-modal-title"><i class="fas fa-bug"></i> Report a Bug</div><button class="bug-close-btn" onclick="closeBugReportModal()"><i class="fas fa-times"></i></button></div><div class="bug-page-info"><i class="fas fa-link"></i><span>Reporting from: <strong id="bugPageName">Progress Tracker</strong></span><input type="hidden" id="bugPage" value=""></div><form onsubmit="submitBugReport(event)"><div class="bug-form-group"><label class="bug-form-label">Category</label><select class="bug-form-select" id="bugCategory" required><option value="General">General Issue</option><option value="UI/Design">UI/Design Problem</option><option value="Functionality">Feature Not Working</option><option value="Performance">Performance Issue</option><option value="Login/Account">Login/Account Problem</option><option value="Data Loss">Data Loss</option><option value="Mobile">Mobile-Specific Issue</option><option value="Other">Other</option></select></div><div class="bug-form-group"><label class="bug-form-label">Describe the bug *</label><textarea class="bug-form-textarea" id="bugDescription" placeholder="Please describe what happened..." required></textarea></div><div class="bug-form-group"><label class="bug-form-label">Your Email (optional)</label><input type="email" class="bug-form-input" id="bugUserEmail" placeholder="your@email.com"></div><div class="bug-form-group"><label class="bug-form-label">Your Name (optional)</label><input type="text" class="bug-form-input" id="bugUserName" placeholder="Your name"></div><button type="submit" class="bug-submit-btn"><i class="fas fa-paper-plane"></i> Submit Bug Report</button></form></div></div>
 
-    <!-- Confirmation Modal -->
-    <div id="confirmationModal" class="notification-modal">
-        <div class="notification-content">
-            <div id="confirmationIcon" class="notification-icon warning">
-                <i class="fas fa-exclamation-triangle"></i>
-            </div>
-            <div id="confirmationTitle" class="notification-title">Confirm Action</div>
-            <div id="confirmationMessage" class="notification-message">Are you sure you want to proceed?</div>
-            <div style="display: flex; gap: 10px; justify-content: center;">
-                <button class="notification-btn" style="background: #64748b;" onclick="cancelConfirmation()">Cancel</button>
-                <button class="notification-btn" id="confirmButton" onclick="confirmAction()">Confirm</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="api.js?v=12"></script>
+    <script src="/api.js"></script>
+    <script src="/shared.js"></script>
     <script>
         // Session check - redirect to login if not authenticated
         (async function() {
@@ -1532,122 +929,6 @@
         })();
     </script>
     <script>
-        // Notification Modal Functions
-        function showNotification(message, type = 'success', title = null) {
-            const modal = document.getElementById('notificationModal');
-            const icon = document.getElementById('notificationIcon');
-            const titleEl = document.getElementById('notificationTitle');
-            const messageEl = document.getElementById('notificationMessage');
-            
-            const defaultTitles = {
-                success: 'Success!',
-                info: 'Information',
-                warning: 'Warning',
-                error: 'Error'
-            };
-            
-            const icons = {
-                success: 'fa-check',
-                info: 'fa-info',
-                warning: 'fa-exclamation',
-                error: 'fa-times'
-            };
-            
-            icon.className = `notification-icon ${type}`;
-            icon.innerHTML = `<i class="fas ${icons[type]}"></i>`;
-            titleEl.textContent = title || defaultTitles[type] || 'Notification';
-            messageEl.textContent = message;
-            modal.classList.add('show');
-        }
-
-        function closeNotification() {
-            document.getElementById('notificationModal').classList.remove('show');
-        }
-
-        document.addEventListener('click', function(e) {
-            const modal = document.getElementById('notificationModal');
-            if (e.target === modal) closeNotification();
-        });
-
-        // Confirmation Modal Functions
-        let confirmCallback = null;
-
-        function showConfirmation(message, title = 'Confirm Action', type = 'warning') {
-            return new Promise((resolve) => {
-                const modal = document.getElementById('confirmationModal');
-                const icon = document.getElementById('confirmationIcon');
-                const titleEl = document.getElementById('confirmationTitle');
-                const messageEl = document.getElementById('confirmationMessage');
-                const confirmBtn = document.getElementById('confirmButton');
-                
-                const icons = {
-                    warning: 'fa-exclamation-triangle',
-                    danger: 'fa-exclamation-circle',
-                    info: 'fa-question-circle'
-                };
-                
-                const iconColors = {
-                    warning: 'warning',
-                    danger: 'error',
-                    info: 'info'
-                };
-                
-                icon.className = `notification-icon ${iconColors[type] || 'warning'}`;
-                icon.innerHTML = `<i class="fas ${icons[type] || 'fa-exclamation-triangle'}"></i>`;
-                titleEl.textContent = title;
-                messageEl.textContent = message;
-                
-                if (type === 'danger') {
-                    confirmBtn.style.background = '#ef4444';
-                } else {
-                    confirmBtn.style.background = '#3b82f6';
-                }
-                
-                confirmCallback = resolve;
-                modal.classList.add('show');
-            });
-        }
-
-        function confirmAction() {
-            const modal = document.getElementById('confirmationModal');
-            modal.classList.remove('show');
-            if (confirmCallback) {
-                confirmCallback(true);
-                confirmCallback = null;
-            }
-        }
-
-        function cancelConfirmation() {
-            const modal = document.getElementById('confirmationModal');
-            modal.classList.remove('show');
-            if (confirmCallback) {
-                confirmCallback(false);
-                confirmCallback = null;
-            }
-        }
-
-        // Load User Profile
-        function loadUserProfile() {
-            const user = vieraAPI.getUser();
-            if (user) {
-                const { firstName, lastName, isPremium } = user;
-                const initials = `${firstName.charAt(0)}${lastName ? lastName.charAt(0) : ''}`.toUpperCase();
-                document.getElementById('userAvatar').textContent = initials;
-                document.getElementById('userName').textContent = firstName;
-                
-                const planElement = document.getElementById('userPlan');
-                if (isPremium) {
-                    planElement.textContent = 'Premium';
-                    planElement.className = 'user-plan premium';
-                } else {
-                    planElement.textContent = 'Free';
-                    planElement.className = 'user-plan';
-                }
-            } else {
-                window.location.href = '/';
-            }
-        }
-
         // Task storage
         let tasks = [];
         let classes = [];
@@ -1670,7 +951,6 @@
             return new Date(year, month - 1, day);
         }
 
-        // Initialize
         // Load dark mode immediately to prevent flash
         (function() {
             const darkMode = localStorage.getItem('studyDeckDarkMode') === 'true';
@@ -1682,18 +962,17 @@
         document.addEventListener('DOMContentLoaded', async function() {
             // Wait for API to be ready (data loaded from cloud)
             await vieraAPI.ready;
-            
+
             // Only redirect if there's truly no token
             if (!vieraAPI.isLoggedIn()) {
                 window.location.href = '/';
                 return;
             }
-            
+
             initializeData();
-            loadUserProfile();
-            document.querySelector('.user-profile')?.classList.add('loaded');
             populateClassSelect();
             renderTasks();
+            renderClassBreakdown();
         });
 
         function populateClassSelect() {
@@ -1702,47 +981,6 @@
             classes.forEach(cls => {
                 select.innerHTML += `<option value="${cls.id}">${cls.name}</option>`;
             });
-        }
-
-        function toggleDropdown() {
-            const dropdown = document.querySelector('.ai-dropdown');
-            dropdown.classList.toggle('open');
-        }
-
-        function toggleMobileMenu() {
-            const sidebar = document.querySelector('.sidebar');
-            const overlay = document.querySelector('.mobile-overlay');
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-        }
-
-        // Close mobile menu when clicking nav links (except dropdowns)
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-menu a[href]:not(.dropdown-header)');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    if (window.innerWidth <= 768) {
-                        const sidebar = document.querySelector('.sidebar');
-                        const overlay = document.querySelector('.mobile-overlay');
-                        sidebar.classList.remove('active');
-                        overlay.classList.remove('active');
-                    }
-                });
-            });
-        });
-
-        async function handleSignout() {
-            const confirmed = await showConfirmation(
-                'Are you sure you want to sign out?',
-                'Sign Out',
-                'warning'
-            );
-            
-            if (confirmed) {
-                await vieraAPI.syncToCloud();
-                await vieraAPI.logout();
-                window.location.href = '/';
-            }
         }
 
         function openModal() {
@@ -1760,9 +998,9 @@
 
         function addTask(event) {
             event.preventDefault();
-            
+
             const editingId = document.getElementById('editingTaskId').value;
-            
+
             if (editingId) {
                 // Edit existing task
                 const task = tasks.find(t => t.id == editingId);
@@ -1773,7 +1011,7 @@
                     task.priority = document.getElementById('taskPriority').value;
                     task.status = document.getElementById('taskStatus').value;
                     task.due = document.getElementById('taskDue').value;
-                    
+
                     // Log activity if task is completed
                     if (task.status === 'Completed') {
                         logActivity('fas fa-trophy', 'green', `Completed: ${task.title}`);
@@ -1791,13 +1029,13 @@
                     due: document.getElementById('taskDue').value
                 };
                 tasks.push(task);
-                
+
                 // Log activity for new task
                 logActivity('fas fa-tasks', 'blue', `Added study task: ${task.title}`);
             }
-            
+
             saveTasks();
-            
+
             // Sync with study schedule if due date is set
             if (editingId) {
                 const task = tasks.find(t => t.id == editingId);
@@ -1810,22 +1048,23 @@
                     syncTaskToSchedule(newTask);
                 }
             }
-            
+
             renderTasks();
+            renderClassBreakdown();
             closeModal();
         }
 
         function syncTaskToSchedule(task) {
             // Get existing events from API
             let events = vieraAPI.getEvents() || [];
-            
+
             // Check if event already exists for this task
             const existingEventIndex = events.findIndex(e => e.taskId === task.id);
-            
+
             // Get class info
             const allClasses = vieraAPI.getClasses() || [];
             const taskClass = allClasses.find(c => c.name === task.class);
-            
+
             const eventData = {
                 id: existingEventIndex >= 0 ? events[existingEventIndex].id : Date.now(),
                 taskId: task.id,
@@ -1837,20 +1076,20 @@
                 color: taskClass?.color || '#ec4899',
                 type: 'task'
             };
-            
+
             if (existingEventIndex >= 0) {
                 events[existingEventIndex] = eventData;
             } else {
                 events.push(eventData);
             }
-            
+
             vieraAPI.setEvents(events);
         }
 
         function editTask(id) {
             const task = tasks.find(t => t.id === id);
             if (!task) return;
-            
+
             document.getElementById('modalTitle').textContent = 'Edit Task';
             document.getElementById('submitBtnText').textContent = 'Save Changes';
             document.getElementById('editingTaskId').value = task.id;
@@ -1860,7 +1099,7 @@
             document.getElementById('taskPriority').value = task.priority;
             document.getElementById('taskStatus').value = task.status;
             document.getElementById('taskDue').value = task.due || '';
-            
+
             document.getElementById('taskModal').classList.add('active');
         }
 
@@ -1869,21 +1108,21 @@
             document.getElementById('todo-tasks').innerHTML = '';
             document.getElementById('progress-tasks').innerHTML = '';
             document.getElementById('completed-tasks').innerHTML = '';
-            
+
             // Count tasks
             let todoCnt = 0, progressCnt = 0, completedCnt = 0;
-            
+
             // Render each task
             tasks.forEach(task => {
                 const taskCard = createTaskCard(task);
                 const container = document.getElementById(task.status + '-tasks');
                 container.appendChild(taskCard);
-                
+
                 if (task.status === 'todo') todoCnt++;
                 else if (task.status === 'progress') progressCnt++;
                 else completedCnt++;
             });
-            
+
             // Update counts
             document.getElementById('todo-count').textContent = todoCnt;
             document.getElementById('progress-count').textContent = progressCnt;
@@ -1896,19 +1135,19 @@
             card.draggable = true;
             card.dataset.taskId = task.id;
             card.ondragstart = drag;
-            
+
             const priorityIcon = {
                 high: 'fa-exclamation-circle',
                 medium: 'fa-minus-circle',
                 low: 'fa-info-circle'
             };
-            
+
             // Find class from settings
             const taskClass = classes.find(c => c.id == task.class);
             const className = taskClass ? taskClass.name : 'No Class';
             const classColor = taskClass ? taskClass.color : '#64748b';
             const classIcon = taskClass ? (taskClass.icon || 'fa-book') : 'fa-book';
-            
+
             card.innerHTML = `
                 <div class="task-header">
                     <div class="task-title">${task.title}</div>
@@ -1939,12 +1178,12 @@
                     ` : ''}
                 </div>
             `;
-            
+
             // Add event listeners for edit and delete buttons
             setTimeout(() => {
                 const editBtn = card.querySelector('.edit-btn');
                 const deleteBtn = card.querySelector('.delete-btn');
-                
+
                 if (editBtn) {
                     editBtn.addEventListener('click', (e) => {
                         e.stopPropagation();
@@ -1952,7 +1191,7 @@
                         editTask(task.id);
                     });
                 }
-                
+
                 if (deleteBtn) {
                     deleteBtn.addEventListener('click', (e) => {
                         e.stopPropagation();
@@ -1961,7 +1200,7 @@
                     });
                 }
             }, 0);
-            
+
             return card;
         }
 
@@ -1971,17 +1210,18 @@
                 'Delete Task?',
                 'danger'
             );
-            
+
             if (confirmed) {
                 tasks = tasks.filter(task => task.id !== id);
-                
+
                 // Remove from schedule
                 let events = vieraAPI.getEvents() || [];
                 events = events.filter(e => e.taskId !== id);
                 vieraAPI.setEvents(events);
-                
+
                 saveTasks();
                 renderTasks();
+                renderClassBreakdown();
                 showNotification('Task deleted successfully', 'success', 'Task Deleted');
             }
         }
@@ -2004,12 +1244,12 @@
             event.preventDefault();
             const taskId = parseInt(event.dataTransfer.getData('taskId'));
             const newStatus = event.currentTarget.dataset.status;
-            
+
             // Remove dragging class
             document.querySelectorAll('.task-card').forEach(card => {
                 card.classList.remove('dragging');
             });
-            
+
             // Update task status
             const task = tasks.find(t => t.id === taskId);
             if (task) {
@@ -2019,12 +1259,48 @@
             }
         }
 
+        // By Class breakdown
+        function renderClassBreakdown() {
+            const classes = vieraAPI.getClasses() || [];
+            const todos = vieraAPI.getTodos() || [];
+            const notes = vieraAPI.getNotes() || [];
+            const events = vieraAPI.getEvents() || [];
+            const flashcards = vieraAPI.getFlashcards() || [];
+
+            const container = document.getElementById('classBreakdown');
+            if (!container) return;
+
+            if (classes.length === 0) {
+                container.innerHTML = '<p style="color:#94a3b8;text-align:center">No classes added yet. <a href="/classes">Add a class</a> to see breakdown.</p>';
+                return;
+            }
+
+            container.innerHTML = classes.map(cls => {
+                const classTodos = todos.filter(t => t.classId === cls.id);
+                const classNotes = notes.filter(n => n.classId === cls.id);
+                const classEvents = events.filter(e => e.classId === cls.id);
+                const classDecks = flashcards.filter(d => d.classId === cls.id);
+                const totalCards = classDecks.reduce((sum, d) => sum + (d.cards?.length || 0), 0);
+                const doneTodos = classTodos.filter(t => t.completed).length;
+
+                return `<div class="class-stat-card" style="border-left: 4px solid ${cls.color || 'var(--accent)'}">
+          <div class="class-stat-name">${cls.name}</div>
+          <div class="class-stat-grid">
+            <div class="class-stat-item"><i class="fas fa-list-check"></i> ${doneTodos}/${classTodos.length} tasks</div>
+            <div class="class-stat-item"><i class="fas fa-book-open"></i> ${classNotes.length} notes</div>
+            <div class="class-stat-item"><i class="fas fa-calendar"></i> ${classEvents.length} events</div>
+            <div class="class-stat-item"><i class="fas fa-layer-group"></i> ${totalCards} cards</div>
+          </div>
+        </div>`;
+            }).join('');
+        }
+
         // ============================================
         // KEYBOARD SHORTCUTS
         // ============================================
         document.addEventListener('keydown', function(e) {
             const isTyping = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable;
-            
+
             // Escape - Close modals
             if (e.key === 'Escape') {
                 const taskModal = document.getElementById('taskModal');
@@ -2032,9 +1308,9 @@
                     closeModal();
                 }
             }
-            
+
             if (isTyping && e.key !== 'Escape') return;
-            
+
             if ((e.metaKey || e.ctrlKey) && e.key === 'h') { e.preventDefault(); window.location.href = '/'; }
             if ((e.metaKey || e.ctrlKey) && e.key === 'f') { e.preventDefault(); window.location.href = 'flashcards'; }
             if ((e.metaKey || e.ctrlKey) && e.key === 't') { e.preventDefault(); window.location.href = 'todo'; }
@@ -2042,98 +1318,7 @@
             if ((e.metaKey || e.ctrlKey) && e.key === 'p') { e.preventDefault(); window.location.href = 'pomodoro'; }
             if ((e.metaKey || e.ctrlKey) && e.key === 's') { e.preventDefault(); window.location.href = 'schedule'; }
             if ((e.metaKey || e.ctrlKey) && e.key === ',') { e.preventDefault(); window.location.href = 'settings'; }
-            if ((e.metaKey || e.ctrlKey) && e.key === '/') { e.preventDefault(); showKeyboardShortcuts(); }
         });
-
-        function showKeyboardShortcuts() {
-            // Detect OS
-            const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-            const isWindows = navigator.platform.toUpperCase().indexOf('WIN') >= 0;
-            const isLinux = navigator.platform.toUpperCase().indexOf('LINUX') >= 0;
-            const isChromeOS = navigator.userAgent.indexOf('CrOS') >= 0;
-            
-            // Symbol for modifier key
-            const modKey = isMac ? '⌘' : 'Ctrl';
-            const shiftKey = isMac ? '⇧' : 'Shift';
-            const optKey = isMac ? '⌥' : 'Alt';
-            
-            // OS Badge
-            let osBadge = 'Windows';
-            let osIcon = '<i class="fab fa-windows"></i>';
-            if (isMac) { osBadge = 'macOS'; osIcon = '<i class="fab fa-apple"></i>'; }
-            else if (isLinux) { osBadge = 'Linux'; osIcon = '<i class="fab fa-linux"></i>'; }
-            else if (isChromeOS) { osBadge = 'Chrome OS'; osIcon = '<i class="fab fa-chrome"></i>'; }
-            
-            const shortcuts = [
-                { keys: ['H'], action: 'Go to Home', icon: '<i class="fas fa-home" style="color: #3b82f6;"></i>' },
-                { keys: ['F'], action: 'Go to Flashcards', icon: '<i class="fas fa-layer-group" style="color: #8b5cf6;"></i>' },
-                { keys: ['T'], action: 'Go to Todos', icon: '<i class="fas fa-list-check" style="color: #10b981;"></i>' },
-                { keys: [shiftKey, 'N'], action: 'Go to Notes', icon: '<i class="fas fa-book-open" style="color: #f59e0b;"></i>' },
-                { keys: ['P'], action: 'Go to Pomodoro', icon: '<i class="fas fa-clock" style="color: #ef4444;"></i>' },
-                { keys: ['S'], action: 'Go to Schedule', icon: '<i class="fas fa-calendar-days" style="color: #06b6d4;"></i>' },
-                { keys: [shiftKey, 'P'], action: 'Go to Progress', icon: '<i class="fas fa-chart-line" style="color: #ec4899;"></i>' },
-                { keys: [','], action: 'Go to Settings', icon: '<i class="fas fa-cog" style="color: #64748b;"></i>' },
-                { keys: ['/'], action: 'Show this help', icon: '<i class="fas fa-question-circle" style="color: #a855f7;"></i>' },
-                { keys: ['Esc'], action: 'Close modals', icon: '<i class="fas fa-times" style="color: #6b7280;"></i>', noMod: true }
-            ];
-
-            const isDark = document.body.classList.contains('dark-mode');
-            
-            const shortcutList = shortcuts.map(s => {
-                const keyElements = s.noMod 
-                    ? s.keys.map(k => `<kbd style="background: ${isDark ? '#334155' : '#e2e8f0'}; color: ${isDark ? '#e2e8f0' : '#1e293b'}; padding: 6px 10px; border-radius: 6px; font-size: 13px; font-weight: 600; border: 1px solid ${isDark ? '#475569' : '#cbd5e1'}; min-width: 32px; text-align: center; display: inline-block;">${k}</kbd>`).join('')
-                    : `<kbd style="background: ${isDark ? '#334155' : '#e2e8f0'}; color: ${isDark ? '#e2e8f0' : '#1e293b'}; padding: 6px 10px; border-radius: 6px; font-size: 13px; font-weight: 600; border: 1px solid ${isDark ? '#475569' : '#cbd5e1'}; min-width: 32px; text-align: center; display: inline-block;">${modKey}</kbd>` + s.keys.map(k => ` <span style="color: ${isDark ? '#64748b' : '#94a3b8'}; margin: 0 4px;">+</span> <kbd style="background: ${isDark ? '#334155' : '#e2e8f0'}; color: ${isDark ? '#e2e8f0' : '#1e293b'}; padding: 6px 10px; border-radius: 6px; font-size: 13px; font-weight: 600; border: 1px solid ${isDark ? '#475569' : '#cbd5e1'}; min-width: 32px; text-align: center; display: inline-block;">${k}</kbd>`).join('');
-                
-                return `<div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: ${isDark ? 'rgba(59, 130, 246, 0.08)' : 'rgba(59, 130, 246, 0.05)'}; border-radius: 10px; margin-bottom: 10px; border: 1px solid ${isDark ? 'rgba(59, 130, 246, 0.15)' : 'rgba(59, 130, 246, 0.1)'}; transition: all 0.2s;" onmouseover="this.style.background='${isDark ? 'rgba(59, 130, 246, 0.12)' : 'rgba(59, 130, 246, 0.08)'}'; this.style.transform='translateX(2px)';" onmouseout="this.style.background='${isDark ? 'rgba(59, 130, 246, 0.08)' : 'rgba(59, 130, 246, 0.05)'}'; this.style.transform='translateX(0)';">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 16px; width: 24px; text-align: center; color: ${isDark ? '#e2e8f0' : '#1e293b'};">${s.icon}</span>
-                        <span style="font-weight: 600; color: ${isDark ? '#e2e8f0' : '#1e293b'};">${s.action}</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 4px;">
-                        ${keyElements}
-                    </div>
-                </div>`;
-            }).join('');
-
-            const modal = document.createElement('div');
-            modal.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 30000; backdrop-filter: blur(8px); animation: fadeIn 0.2s ease;';
-            
-            modal.innerHTML = `
-                <style>
-                    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-                    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-                </style>
-                <div style="background: ${isDark ? '#1e293b' : 'white'}; border-radius: 20px; padding: 0; max-width: 550px; width: 92%; max-height: 85vh; overflow: hidden; box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4); border: 1px solid ${isDark ? '#334155' : '#e2e8f0'}; animation: slideUp 0.3s ease;">
-                    <div style="background: #1e293b; padding: 24px 30px; border-bottom: 1px solid ${isDark ? '#334155' : '#e2e8f0'};">
-                        <div style="display: flex; align-items: center; justify-content: space-between;">
-                            <div>
-                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
-                                    <i class="fas fa-keyboard" style="font-size: 24px; color: white;"></i>
-                                    <h2 style="margin: 0; color: white; font-size: 24px; font-weight: 700;">Keyboard Shortcuts</h2>
-                                </div>
-                                <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
-                                    <span style="background: rgba(255, 255, 255, 0.2); padding: 4px 10px; border-radius: 6px; font-size: 12px; color: white; font-weight: 600; display: flex; align-items: center; gap: 6px;">${osIcon} <span>${osBadge}</span></span>
-                                </div>
-                            </div>
-                            <button onclick="this.closest('.keyboard-shortcuts-modal').remove()" style="background: rgba(255, 255, 255, 0.2); border: none; width: 36px; height: 36px; border-radius: 8px; font-size: 20px; cursor: pointer; color: white; transition: all 0.2s; display: flex; align-items: center; justify-content: center;" onmouseover="this.style.background='rgba(255, 255, 255, 0.3)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.2)'">×</button>
-                        </div>
-                    </div>
-                    <div style="padding: 24px 30px; max-height: calc(85vh - 120px); overflow-y: auto;">
-                        ${shortcutList}
-                        <div style="margin-top: 20px; padding: 16px; background: ${isDark ? 'rgba(139, 92, 246, 0.1)' : 'rgba(139, 92, 246, 0.05)'}; border-radius: 10px; border: 1px solid ${isDark ? 'rgba(139, 92, 246, 0.2)' : 'rgba(139, 92, 246, 0.15)'};">
-                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                                <span style="font-size: 16px;">💡</span>
-                                <span style="font-weight: 600; color: ${isDark ? '#e2e8f0' : '#1e293b'}; font-size: 14px;">Pro Tip</span>
-                            </div>
-                            <p style="margin: 0; color: ${isDark ? '#94a3b8' : '#64748b'}; font-size: 13px; line-height: 1.6;">Use ${modKey} + / to show this dialog anytime!</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-            modal.className = 'keyboard-shortcuts-modal';
-            modal.addEventListener('click', function(e) { if (e.target === modal) modal.remove(); });
-            document.body.appendChild(modal);
-        }
 
         // ============ BUG REPORT FUNCTIONALITY ============
         const BUG_REPORT_URL = 'https://script.google.com/macros/s/AKfycbxW5D6i7Td2Em-OqHmCpgy-DVQuzn1oCzn_pBRB2IOb_8MGfwgPqjF8KghYQDZpMNdKUw/exec';
@@ -2142,8 +1327,6 @@
         function getBrowserInfo() { const ua = navigator.userAgent; let browser = 'Unknown'; if (ua.includes('Firefox')) browser = 'Firefox'; else if (ua.includes('Chrome') && !ua.includes('Edg')) browser = 'Chrome'; else if (ua.includes('Safari') && !ua.includes('Chrome')) browser = 'Safari'; else if (ua.includes('Edg')) browser = 'Edge'; if (/iPhone|iPad|iPod|Android/i.test(ua)) browser += ' (Mobile)'; return browser; }
         async function submitBugReport(event) { event.preventDefault(); const btn = event.target.querySelector('button[type="submit"]'); const originalContent = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...'; const bugData = { page: document.getElementById('bugPage').value, pageName: 'Progress Tracker', category: document.getElementById('bugCategory').value, description: document.getElementById('bugDescription').value, userEmail: document.getElementById('bugUserEmail').value || 'Anonymous', userName: document.getElementById('bugUserName').value || 'Anonymous', browser: getBrowserInfo(), screenSize: `${window.innerWidth}x${window.innerHeight}`, userAgent: navigator.userAgent }; try { await fetch(BUG_REPORT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(bugData) }); showNotification('Bug report submitted successfully!', 'success', 'Report Sent'); closeBugReportModal(); document.getElementById('bugDescription').value = ''; } catch (error) { showNotification('Failed to submit bug report.', 'error', 'Error'); } finally { btn.disabled = false; btn.innerHTML = originalContent; } }
         document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeBugReportModal(); });
-
     </script>
-    <div id="bugReportModal" class="bug-modal"><div class="bug-modal-content"><div class="bug-modal-header"><div class="bug-modal-title"><i class="fas fa-bug"></i> Report a Bug</div><button class="bug-close-btn" onclick="closeBugReportModal()"><i class="fas fa-times"></i></button></div><div class="bug-page-info"><i class="fas fa-link"></i><span>Reporting from: <strong id="bugPageName">Progress Tracker</strong></span><input type="hidden" id="bugPage" value=""></div><form onsubmit="submitBugReport(event)"><div class="bug-form-group"><label class="bug-form-label">Category</label><select class="bug-form-select" id="bugCategory" required><option value="General">General Issue</option><option value="UI/Design">UI/Design Problem</option><option value="Functionality">Feature Not Working</option><option value="Performance">Performance Issue</option><option value="Login/Account">Login/Account Problem</option><option value="Data Loss">Data Loss</option><option value="Mobile">Mobile-Specific Issue</option><option value="Other">Other</option></select></div><div class="bug-form-group"><label class="bug-form-label">Describe the bug *</label><textarea class="bug-form-textarea" id="bugDescription" placeholder="Please describe what happened..." required></textarea></div><div class="bug-form-group"><label class="bug-form-label">Your Email (optional)</label><input type="email" class="bug-form-input" id="bugUserEmail" placeholder="your@email.com"></div><div class="bug-form-group"><label class="bug-form-label">Your Name (optional)</label><input type="text" class="bug-form-input" id="bugUserName" placeholder="Your name"></div><button type="submit" class="bug-submit-btn"><i class="fas fa-paper-plane"></i> Submit Bug Report</button></form></div></div>
 </body>
 </html>

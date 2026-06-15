@@ -23,6 +23,7 @@
     <meta name="twitter:description" content="Stay focused with VieraStudy's Pomodoro Timer. Boost productivity with customizable work sessions and break intervals.">
     <meta name="twitter:image" content="https://vierastudy.com/vierastudy.png">
     <link rel="icon" href="vierastudy.png" type="image/png">
+    <link rel="stylesheet" href="/shared.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -310,327 +311,15 @@
             color: #64748b;
         }
 
+        body.dark-mode .preset-btn {
+            background: #334155;
+            border-color: #475569;
+            color: #94a3b8;
+        }
+
         .container {
             display: flex;
             height: 100vh;
-        }
-
-        .sidebar {
-            width: 280px;
-            background: #1e293b;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        .logo {
-            padding: 30px 25px;
-            font-size: 24px;
-            font-weight: bold;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo img {
-            width: 35px;
-            height: 35px;
-            object-fit: contain;
-        }
-
-        .logo-text {
-            color: white;
-        }
-
-        .pro-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-            color: #1e293b;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .nav-menu {
-            flex: 1;
-            padding: 20px 0;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        .nav-item {
-            padding: 15px 25px;
-            display: flex;
-            align-items: center;
-            color: #cbd5e1;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-
-        .nav-item:hover {
-            background: rgba(59, 130, 246, 0.1);
-            color: #3b82f6;
-        }
-
-        .nav-item.active {
-            background: rgba(59, 130, 246, 0.15);
-            border-left: 3px solid #3b82f6;
-        }
-
-        a[href="dashboard.html"].nav-item.active,
-        a[href="dashboard.html"].nav-item:hover {
-            color: #3b82f6;
-        }
-
-        a[href="flashcards"].nav-item.active,
-        a[href="flashcards"].nav-item:hover {
-            color: #8b5cf6;
-        }
-
-        a[href="todo"].nav-item.active,
-        a[href="todo"].nav-item:hover {
-            color: #10b981;
-        }
-
-        a[href="schedule"].nav-item.active,
-        a[href="schedule"].nav-item:hover {
-            color: #f59e0b;
-        }
-
-        a[href="pomodoro"].nav-item.active,
-        a[href="pomodoro"].nav-item:hover {
-            color: #ef4444;
-        }
-
-        a[href="notes"].nav-item.active,
-        a[href="notes"].nav-item:hover {
-            color: #06b6d4;
-        }
-
-        a[href="progress-tracker"].nav-item.active,
-        a[href="progress-tracker"].nav-item:hover {
-            color: #ec4899;
-        }
-
-        a[href="classes"].nav-item.active,
-        a[href="classes"].nav-item:hover {
-            color: #f97316;
-        }
-
-        a[href="settings"].nav-item.active,
-        a[href="settings"].nav-item:hover {
-            color: #64748b;
-        }
-
-        .nav-item i {
-            width: 25px;
-            margin-right: 15px;
-            font-size: 18px;
-        }
-
-        .nav-item .fa-home {
-            color: #3b82f6;
-        }
-
-        .nav-item .fa-layer-group {
-            color: #8b5cf6;
-        }
-
-        .nav-item .fa-list-check {
-            color: #10b981;
-        }
-
-        .nav-item .fa-calendar-days {
-            color: #f59e0b;
-        }
-
-        .nav-item .fa-clock {
-            color: #ef4444;
-        }
-
-        .nav-item .fa-book-open {
-            color: #06b6d4;
-        }
-
-        .nav-item .fa-chart-line {
-            color: #ec4899;
-        }
-
-        .nav-item .fa-brain {
-            color: #6366f1;
-        }
-
-        .nav-item .fa-calculator {
-            color: #84cc16;
-        }
-
-        .nav-item .fa-book {
-            color: #f97316;
-        }
-
-        .nav-item .fa-gear,
-        .nav-item .fa-cog {
-            color: #64748b;
-        }
-
-        .ai-dropdown {
-            position: relative;
-        }
-
-        .ai-dropdown .nav-item {
-            padding: 15px 25px;
-        }
-
-        .dropdown-header {
-            display: flex;
-            align-items: center;
-            width: 100%;
-        }
-
-        .dropdown-header .icon-text {
-            display: flex;
-            align-items: center;
-            flex: 1;
-        }
-
-        .dropdown-header i.fa-brain, .dropdown-header i.fa-calculator {
-            width: 25px;
-            margin-right: 15px;
-            font-size: 18px;
-        }
-
-        .dropdown-header .fa-chevron-down {
-            font-size: 12px;
-            transition: transform 0.3s;
-            margin-left: auto;
-        }
-
-        .ai-dropdown.open .fa-chevron-down {
-            transform: rotate(180deg);
-        }
-
-        .dropdown-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, opacity 0.3s ease;
-            opacity: 0;
-        }
-
-        .ai-dropdown.open .dropdown-content {
-            max-height: 350px;
-            opacity: 1;
-        }
-
-        .dropdown-item {
-            padding: 12px 25px 12px 55px;
-            color: #94a3b8;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 14px;
-            border-left: 3px solid transparent;
-        }
-
-        .dropdown-item:hover {
-            background: rgba(59, 130, 246, 0.08);
-            color: #3b82f6;
-            padding-left: 60px;
-            border-left-color: #3b82f6;
-        }
-
-        .dropdown-item i {
-            width: 18px;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        .user-profile {
-            padding: 20px 25px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            visibility: hidden;
-        }
-
-        .user-profile.loaded {
-            visibility: visible;
-        }
-
-        .user-avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .user-info {
-            flex: 1;
-        }
-
-        .user-name {
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 3px;
-        }
-
-        .user-plan {
-            font-size: 11px;
-            color: #94a3b8;
-            font-weight: 500;
-        }
-
-        .user-plan.premium {
-            color: #fbbf24;
-            font-weight: 600;
-        }
-
-        .user-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            color: #1e293b;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 11px;
-            font-weight: 600;
-        }
-
-        .signout-btn {
-            background: rgba(239, 68, 68, 0.1);
-            border: none;
-            color: #ef4444;
-            width: 35px;
-            height: 35px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .signout-btn:hover {
-            background: #ef4444;
-            color: white;
         }
 
         .main-content {
@@ -942,77 +631,56 @@
             color: #22c55e;
         }
 
-        .mobile-menu-toggle {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            background: #3b82f6;
-            color: white;
-            border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
-            cursor: pointer;
-        }
+        /* Preset Bar */
+        .preset-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .preset-label { font-weight: 600; color: #64748b; font-size: 14px; }
+        .preset-btn { padding: 8px 16px; border: 2px solid #e2e8f0; border-radius: 100px; background: white; cursor: pointer; font-size: 13px; font-weight: 600; color: #64748b; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+        .preset-btn:hover { border-color: var(--accent, #3b82f6); color: var(--accent, #3b82f6); }
+        .preset-btn.active { background: var(--accent, #3b82f6); color: white; border-color: var(--accent, #3b82f6); }
 
-        .mobile-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 998;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-
-        .mobile-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        /* Bug Report Button */
+        .bug-report-btn { background: rgba(251, 191, 36, 0.1); border: none; color: #f59e0b; width: 35px; height: 35px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; margin-right: 8px; }
+        .bug-report-btn:hover { background: #f59e0b; color: white; }
+        .bug-report-btn i { font-size: 14px; }
+        .bug-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); z-index: 10000; align-items: center; justify-content: center; padding: 20px; }
+        .bug-modal.active { display: flex; }
+        .bug-modal-content { background: white; border-radius: 16px; padding: 30px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); }
+        body.dark-mode .bug-modal-content { background: #1e293b; }
+        .bug-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .bug-modal-title { font-size: 22px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 10px; }
+        .bug-modal-title i { color: #f59e0b; }
+        body.dark-mode .bug-modal-title { color: #e2e8f0; }
+        .bug-close-btn { background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer; transition: color 0.3s; }
+        .bug-close-btn:hover { color: #ef4444; }
+        .bug-form-group { margin-bottom: 20px; }
+        .bug-form-label { display: block; font-weight: 600; color: #1e293b; margin-bottom: 8px; font-size: 14px; }
+        body.dark-mode .bug-form-label { color: #e2e8f0; }
+        .bug-form-input, .bug-form-select, .bug-form-textarea { width: 100%; padding: 12px 14px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 14px; font-family: inherit; transition: border-color 0.3s; background: white; color: #1e293b; }
+        body.dark-mode .bug-form-input, body.dark-mode .bug-form-select, body.dark-mode .bug-form-textarea { background: #334155; border-color: #475569; color: #e2e8f0; }
+        .bug-form-input:focus, .bug-form-select:focus, .bug-form-textarea:focus { outline: none; border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1); }
+        .bug-form-textarea { resize: vertical; min-height: 120px; }
+        .bug-page-info { background: #f8fafc; border-radius: 10px; padding: 12px 14px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        body.dark-mode .bug-page-info { background: #334155; }
+        .bug-page-info i { color: #3b82f6; }
+        .bug-page-info span { font-size: 13px; color: #64748b; }
+        body.dark-mode .bug-page-info span { color: #94a3b8; }
+        .bug-page-info strong { color: #1e293b; }
+        body.dark-mode .bug-page-info strong { color: #e2e8f0; }
+        .bug-submit-btn { width: 100%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; border: none; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .bug-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); }
+        .bug-submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
 
         @media (max-width: 968px) {
             .timer-section {
                 grid-template-columns: 1fr;
             }
-            
+
             .settings-panel {
                 order: 2;
             }
         }
 
         @media (max-width: 768px) {
-            .sidebar {
-                position: fixed;
-                left: -280px;
-                top: 0;
-                bottom: 0;
-                z-index: 999;
-                transition: left 0.3s ease;
-                width: 280px;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .sidebar.active {
-                left: 0;
-            }
-
-            .mobile-menu-toggle {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .mobile-overlay {
-                display: block;
-            }
-
             .header {
                 padding: 20px 20px 20px 75px;
             }
@@ -1053,42 +721,26 @@
             .timer-controls {
                 gap: 10px;
             }
-            
+
             .settings-panel {
                 padding: 20px;
             }
-            
+
             .stats-section {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
             }
-            
+
             .stat-card {
                 padding: 15px;
             }
-            
+
             .stat-value {
                 font-size: 24px;
             }
-            
+
             .stat-header {
                 font-size: 12px;
-            }
-
-            .ai-dropdown.open .dropdown-content,
-            .math-dropdown.open .dropdown-content {
-                max-height: 500px;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .dropdown-item {
-                min-height: 44px;
-                touch-action: manipulation;
-            }
-
-            .dropdown-item:hover {
-                padding-left: 35px;
             }
 
             .nav-item {
@@ -1113,15 +765,10 @@
                 padding: 15px 15px 15px 65px;
             }
 
-            .mobile-menu-toggle {
-                width: 44px;
-                height: 44px;
-            }
-
             .content {
                 padding: 15px;
             }
-            
+
             .timer-container {
                 padding: 20px 10px;
             }
@@ -1135,272 +782,59 @@
             .timer-display {
                 font-size: 36px;
             }
-            
+
             .mode-btn {
                 padding: 8px 12px;
                 font-size: 12px;
             }
-            
+
             .control-btn {
                 padding: 10px 16px;
                 font-size: 13px;
             }
-            
+
             .stats-section {
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
             }
-            
+
             .stat-card {
                 padding: 12px;
             }
-            
+
             .stat-value {
                 font-size: 20px;
             }
-            
+
             .stat-header {
                 font-size: 11px;
             }
-            
+
             .settings-panel {
                 padding: 15px;
             }
-            
+
             .setting-group h3 {
                 font-size: 13px;
             }
-            
+
             .setting-input {
                 padding: 10px;
             }
         }
-
-        /* Notification Modal */
-        .notification-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 10000;
-            animation: fadeIn 0.2s ease;
-        }
-
-        .notification-modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .notification-content {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            max-width: 400px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            animation: slideIn 0.3s ease;
-            text-align: center;
-        }
-
-        .notification-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 28px;
-        }
-
-        .notification-icon.success {
-            background: #10b981;
-            color: white;
-        }
-
-        .notification-icon.info {
-            background: #3b82f6;
-            color: white;
-        }
-
-        .notification-icon.warning {
-            background: #f59e0b;
-            color: white;
-        }
-
-        .notification-icon.error {
-            background: #ef4444;
-            color: white;
-        }
-
-        .notification-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #1e293b;
-        }
-
-        .notification-message {
-            font-size: 15px;
-            color: #64748b;
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
-
-        .notification-btn {
-            background: #3b82f6;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .notification-btn:hover {
-            background: #2563eb;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Bug Report Button */
-        .bug-report-btn { background: rgba(251, 191, 36, 0.1); border: none; color: #f59e0b; width: 35px; height: 35px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; margin-right: 8px; }
-        .bug-report-btn:hover { background: #f59e0b; color: white; }
-        .bug-report-btn i { font-size: 14px; }
-        .bug-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); z-index: 10000; align-items: center; justify-content: center; padding: 20px; }
-        .bug-modal.active { display: flex; }
-        .bug-modal-content { background: white; border-radius: 16px; padding: 30px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); }
-        body.dark-mode .bug-modal-content { background: #1e293b; }
-        .bug-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .bug-modal-title { font-size: 22px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 10px; }
-        .bug-modal-title i { color: #f59e0b; }
-        body.dark-mode .bug-modal-title { color: #e2e8f0; }
-        .bug-close-btn { background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer; transition: color 0.3s; }
-        .bug-close-btn:hover { color: #ef4444; }
-        .bug-form-group { margin-bottom: 20px; }
-        .bug-form-label { display: block; font-weight: 600; color: #1e293b; margin-bottom: 8px; font-size: 14px; }
-        body.dark-mode .bug-form-label { color: #e2e8f0; }
-        .bug-form-input, .bug-form-select, .bug-form-textarea { width: 100%; padding: 12px 14px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 14px; font-family: inherit; transition: border-color 0.3s; background: white; color: #1e293b; }
-        body.dark-mode .bug-form-input, body.dark-mode .bug-form-select, body.dark-mode .bug-form-textarea { background: #334155; border-color: #475569; color: #e2e8f0; }
-        .bug-form-input:focus, .bug-form-select:focus, .bug-form-textarea:focus { outline: none; border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1); }
-        .bug-form-textarea { resize: vertical; min-height: 120px; }
-        .bug-page-info { background: #f8fafc; border-radius: 10px; padding: 12px 14px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-        body.dark-mode .bug-page-info { background: #334155; }
-        .bug-page-info i { color: #3b82f6; }
-        .bug-page-info span { font-size: 13px; color: #64748b; }
-        body.dark-mode .bug-page-info span { color: #94a3b8; }
-        .bug-page-info strong { color: #1e293b; }
-        body.dark-mode .bug-page-info strong { color: #e2e8f0; }
-        .bug-submit-btn { width: 100%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; border: none; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .bug-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); }
-        .bug-submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
     </style>
 </head>
 <body>
-    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-        <i class="fas fa-bars"></i>
-    </button>
-    <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button><div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
 
     <div class="container">
-        <div class="sidebar">
-            <div class="logo">
-                <img src="vierastudy.png" alt="VieraStudy">
-                <span class="logo-text">VieraStudy</span>
-            </div>
-            
-            <nav class="nav-menu">
-                <a href="dashboard.html" class="nav-item">
-                    <i class="fas fa-home" style="color: #3b82f6;"></i>
-                    <span>Home</span>
-                </a>
-                
-                <a href="flashcards" class="nav-item">
-                    <i class="fas fa-layer-group" style="color: #8b5cf6;"></i>
-                    <span>Flashcards</span>
-                </a>
-                
-                <a href="todo" class="nav-item">
-                    <i class="fas fa-list-check"></i>
-                    <span>To-Do List</span>
-                </a>
-                
-                <a href="schedule" class="nav-item">
-                    <i class="fas fa-calendar-days"></i>
-                    <span>Study Schedule</span>
-                </a>
-                
-                <a href="pomodoro" class="nav-item active">
-                    <i class="fas fa-clock" style="color: #ef4444;"></i>
-                    <span>Pomodoro Timer</span>
-                </a>
-                
-                <a href="notes" class="nav-item">
-                    <i class="fas fa-book-open"></i>
-                    <span>Take Notes</span>
-                </a>
-                
-                <a href="progress-tracker" class="nav-item">
-                    <i class="fas fa-chart-line" style="color: #ec4899;"></i>
-                    <span>Progress Tracker</span>
-                </a>
-                
-                <a href="classes" class="nav-item">
-                    <i class="fas fa-book" style="color: #f59e0b;"></i>
-                    <span>My Classes</span>
-                </a>
-                
-                <a href="settings" class="nav-item">
-                    <i class="fas fa-cog" style="color: #64748b;"></i>
-                    <span>Settings</span>
-                </a>
-            </nav>
-            
-            <div class="user-profile">
-                <div class="user-avatar" id="userAvatar"></div>
-                <div class="user-info">
-                    <div class="user-name" id="userName"></div>
-                    <div class="user-plan" id="userPlan"></div>
-                </div>
-                <button class="bug-report-btn" onclick="openBugReportModal()" title="Report a Bug">
-                    <i class="fas fa-bug"></i>
-                </button>
-                <button class="signout-btn" onclick="handleSignout()" title="Sign Out">
-                    <i class="fas fa-right-from-bracket"></i>
-                </button>
-            </div>
-        </div>
+        <div class="sidebar"></div>
 
         <div class="main-content">
             <div class="header">
                 <h1><i class="fas fa-clock" style="color: #ef4444;"></i> Pomodoro Timer</h1>
             </div>
-            
+
             <div class="content">
                 <div class="timer-section">
                     <div class="timer-container">
@@ -1433,6 +867,20 @@
 
                     <div class="settings-panel">
                         <h2 class="settings-title">Settings</h2>
+
+                        <div class="preset-bar">
+                            <span class="preset-label">Preset:</span>
+                            <button class="preset-btn active" onclick="applyPreset(POMODORO_PRESETS[0], this)">
+                                <i class="fas fa-clock"></i> Classic 25/5
+                            </button>
+                            <button class="preset-btn" onclick="applyPreset(POMODORO_PRESETS[1], this)">
+                                <i class="fas fa-brain"></i> Deep Work 50/10
+                            </button>
+                            <button class="preset-btn" onclick="applyPreset(POMODORO_PRESETS[2], this)">
+                                <i class="fas fa-bolt"></i> Ultradian 90/20
+                            </button>
+                        </div>
+
                         <div class="setting-group">
                             <label class="setting-label">Work Duration (minutes)</label>
                             <input type="number" class="setting-input" id="workDuration" value="25" min="1" max="60">
@@ -1534,7 +982,10 @@
         </div>
     </div>
 
-    <script src="api.js?v=12"></script>
+    <div id="bugReportModal" class="bug-modal"><div class="bug-modal-content"><div class="bug-modal-header"><div class="bug-modal-title"><i class="fas fa-bug"></i> Report a Bug</div><button class="bug-close-btn" onclick="closeBugReportModal()"><i class="fas fa-times"></i></button></div><div class="bug-page-info"><i class="fas fa-link"></i><span>Reporting from: <strong id="bugPageName">Pomodoro Timer</strong></span><input type="hidden" id="bugPage" value=""></div><form onsubmit="submitBugReport(event)"><div class="bug-form-group"><label class="bug-form-label">Category</label><select class="bug-form-select" id="bugCategory" required><option value="General">General Issue</option><option value="UI/Design">UI/Design Problem</option><option value="Functionality">Feature Not Working</option><option value="Performance">Performance Issue</option><option value="Login/Account">Login/Account Problem</option><option value="Data Loss">Data Loss</option><option value="Mobile">Mobile-Specific Issue</option><option value="Other">Other</option></select></div><div class="bug-form-group"><label class="bug-form-label">Describe the bug *</label><textarea class="bug-form-textarea" id="bugDescription" placeholder="Please describe what happened..." required></textarea></div><div class="bug-form-group"><label class="bug-form-label">Your Email (optional)</label><input type="email" class="bug-form-input" id="bugUserEmail" placeholder="your@email.com"></div><div class="bug-form-group"><label class="bug-form-label">Your Name (optional)</label><input type="text" class="bug-form-input" id="bugUserName" placeholder="Your name"></div><button type="submit" class="bug-submit-btn"><i class="fas fa-paper-plane"></i> Submit Bug Report</button></form></div></div>
+
+    <script src="/api.js"></script>
+    <script src="/shared.js"></script>
     <script>
         // Session check - redirect to login if not authenticated
         (async function() {
@@ -1546,120 +997,35 @@
         })();
     </script>
     <script>
-        // Notification Modal Functions
-        function showNotification(message, type = 'success', title = null) {
-            const modal = document.getElementById('notificationModal');
-            const icon = document.getElementById('notificationIcon');
-            const titleEl = document.getElementById('notificationTitle');
-            const messageEl = document.getElementById('notificationMessage');
-            
-            const defaultTitles = {
-                success: 'Success!',
-                info: 'Information',
-                warning: 'Warning',
-                error: 'Error'
-            };
-            
-            const icons = {
-                success: 'fa-check',
-                info: 'fa-info',
-                warning: 'fa-exclamation',
-                error: 'fa-times'
-            };
-            
-            icon.className = `notification-icon ${type}`;
-            icon.innerHTML = `<i class="fas ${icons[type]}"></i>`;
-            titleEl.textContent = title || defaultTitles[type] || 'Notification';
-            messageEl.textContent = message;
-            modal.classList.add('show');
-        }
+        // ============================================
+        // POMODORO PRESETS
+        // ============================================
+        const POMODORO_PRESETS = [
+            { name: 'Classic', icon: 'fa-clock', work: 25, shortBreak: 5, longBreak: 15, sessionsBeforeLong: 4 },
+            { name: 'Deep Work', icon: 'fa-brain', work: 50, shortBreak: 10, longBreak: 30, sessionsBeforeLong: 3 },
+            { name: 'Ultradian', icon: 'fa-bolt', work: 90, shortBreak: 20, longBreak: 30, sessionsBeforeLong: 2 }
+        ];
 
-        function closeNotification() {
-            document.getElementById('notificationModal').classList.remove('show');
-        }
+        function applyPreset(preset, clickedBtn) {
+            // Update settings object
+            settings.work = preset.work;
+            settings.shortBreak = preset.shortBreak;
+            settings.longBreak = preset.longBreak;
 
-        document.addEventListener('click', function(e) {
-            const modal = document.getElementById('notificationModal');
-            if (e.target === modal) closeNotification();
-        });
+            // Update input fields
+            document.getElementById('workDuration').value = preset.work;
+            document.getElementById('shortBreakDuration').value = preset.shortBreak;
+            document.getElementById('longBreakDuration').value = preset.longBreak;
 
-        // Confirmation Modal Functions
-        let confirmCallback = null;
+            // Reset and update timer display
+            resetTimer();
 
-        function showConfirmation(message, title = 'Confirm Action', type = 'warning') {
-            return new Promise((resolve) => {
-                const modal = document.getElementById('confirmationModal');
-                const icon = document.getElementById('confirmationIcon');
-                const titleEl = document.getElementById('confirmationTitle');
-                const messageEl = document.getElementById('confirmationMessage');
-                const confirmBtn = document.getElementById('confirmButton');
-                
-                const icons = {
-                    warning: 'fa-exclamation-triangle',
-                    danger: 'fa-exclamation-circle',
-                    info: 'fa-question-circle'
-                };
-                
-                const iconColors = {
-                    warning: 'warning',
-                    danger: 'error',
-                    info: 'info'
-                };
-                
-                icon.className = `notification-icon ${iconColors[type] || 'warning'}`;
-                icon.innerHTML = `<i class="fas ${icons[type] || 'fa-exclamation-triangle'}"></i>`;
-                titleEl.textContent = title;
-                messageEl.textContent = message;
-                
-                if (type === 'danger') {
-                    confirmBtn.style.background = '#ef4444';
-                } else {
-                    confirmBtn.style.background = '#3b82f6';
-                }
-                
-                confirmCallback = resolve;
-                modal.classList.add('show');
-            });
-        }
+            // Save to API
+            vieraAPI.setPomodoroSettings(settings);
 
-        function confirmAction() {
-            const modal = document.getElementById('confirmationModal');
-            modal.classList.remove('show');
-            if (confirmCallback) {
-                confirmCallback(true);
-                confirmCallback = null;
-            }
-        }
-
-        function cancelConfirmation() {
-            const modal = document.getElementById('confirmationModal');
-            modal.classList.remove('show');
-            if (confirmCallback) {
-                confirmCallback(false);
-                confirmCallback = null;
-            }
-        }
-
-        // Load User Profile
-        function loadUserProfile() {
-            const user = vieraAPI.getUser();
-            if (user) {
-                const { firstName, lastName, isPremium } = user;
-                const initials = `${firstName.charAt(0)}${lastName ? lastName.charAt(0) : ''}`.toUpperCase();
-                document.getElementById('userAvatar').textContent = initials;
-                document.getElementById('userName').textContent = firstName;
-                
-                const planElement = document.getElementById('userPlan');
-                if (isPremium) {
-                    planElement.textContent = 'Premium';
-                    planElement.className = 'user-plan premium';
-                } else {
-                    planElement.textContent = 'Free';
-                    planElement.className = 'user-plan';
-                }
-            } else {
-                window.location.href = '/';
-            }
+            // Update active preset button
+            document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('active'));
+            if (clickedBtn) clickedBtn.classList.add('active');
         }
 
         let timerInterval;
@@ -1668,7 +1034,7 @@
         let currentMode = 'work';
         let sessions = [];
         let classes = [];
-        
+
         const settings = {
             work: 25,
             shortBreak: 5,
@@ -1686,70 +1052,22 @@
         progressCircle.style.strokeDasharray = circumference;
         progressCircle.style.strokeDashoffset = 0;
 
-        // Load dark mode immediately to prevent flash
-        (function() {
-            const darkMode = localStorage.getItem('studyDeckDarkMode') === 'true';
-            if (darkMode) {
-                document.body.classList.add('dark-mode');
-            }
-        })();
-
         document.addEventListener('DOMContentLoaded', async function() {
             // Wait for API to be ready (data loaded from cloud)
             await vieraAPI.ready;
-            
+
             // Only redirect if there's truly no token
             if (!vieraAPI.isLoggedIn()) {
                 window.location.href = '/';
                 return;
             }
-            
+
             initializeData();
-            loadUserProfile();
-            document.querySelector('.user-profile')?.classList.add('loaded');
             loadSettings();
             populateClassSelect();
             renderStats();
             renderHistory();
         });
-
-        function toggleDropdown() {
-            document.querySelector('.ai-dropdown').classList.toggle('open');
-        }
-
-        function toggleMobileMenu() {
-            document.querySelector('.sidebar').classList.toggle('active');
-            document.querySelector('.mobile-overlay').classList.toggle('active');
-        }
-
-        // Close mobile menu when clicking nav links (except dropdowns)
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-menu a[href]:not(.dropdown-header)');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    if (window.innerWidth <= 768) {
-                        const sidebar = document.querySelector('.sidebar');
-                        const overlay = document.querySelector('.mobile-overlay');
-                        sidebar.classList.remove('active');
-                        overlay.classList.remove('active');
-                    }
-                });
-            });
-        });
-
-        async function handleSignout() {
-            const confirmed = await showConfirmation(
-                'Are you sure you want to sign out?',
-                'Sign Out',
-                'warning'
-            );
-            
-            if (confirmed) {
-                await vieraAPI.syncToCloud();
-                await vieraAPI.logout();
-                window.location.href = '/';
-            }
-        }
 
         function populateClassSelect() {
             const select = document.getElementById('currentClass');
@@ -1770,7 +1088,7 @@
                 settings.work = saved.work || 25;
                 settings.shortBreak = saved.shortBreak || 5;
                 settings.longBreak = saved.longBreak || 15;
-                
+
                 document.getElementById('workDuration').value = settings.work;
                 document.getElementById('shortBreakDuration').value = settings.shortBreak;
                 document.getElementById('longBreakDuration').value = settings.longBreak;
@@ -1782,7 +1100,7 @@
             settings.work = parseInt(document.getElementById('workDuration').value);
             settings.shortBreak = parseInt(document.getElementById('shortBreakDuration').value);
             settings.longBreak = parseInt(document.getElementById('longBreakDuration').value);
-            
+
             vieraAPI.setPomodoroSettings(settings);
             resetTimer();
             showNotification('Your Pomodoro settings have been saved!', 'success', 'Settings Saved');
@@ -1795,11 +1113,11 @@
                     'Stop Current Session?',
                     'warning'
                 );
-                
+
                 if (!confirmed) return;
                 pauseTimer();
             }
-            
+
             currentMode = mode;
             document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
@@ -1809,12 +1127,12 @@
         function updateDisplay() {
             const minutes = Math.floor(timeRemaining / 60);
             const seconds = timeRemaining % 60;
-            document.getElementById('timerDisplay').textContent = 
+            document.getElementById('timerDisplay').textContent =
                 `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
+
             // Update circle progress
-            const totalTime = currentMode === 'work' ? settings.work * 60 : 
-                             currentMode === 'shortBreak' ? settings.shortBreak * 60 : 
+            const totalTime = currentMode === 'work' ? settings.work * 60 :
+                             currentMode === 'shortBreak' ? settings.shortBreak * 60 :
                              settings.longBreak * 60;
             const progress = (timeRemaining / totalTime);
             const offset = circumference * (1 - progress);
@@ -1823,11 +1141,11 @@
 
         function startTimer() {
             if (isRunning) return;
-            
+
             isRunning = true;
             document.getElementById('startBtn').style.display = 'none';
             document.getElementById('pauseBtn').style.display = 'flex';
-            
+
             timerInterval = setInterval(() => {
                 if (timeRemaining > 0) {
                     timeRemaining--;
@@ -1847,7 +1165,7 @@
 
         function resetTimer() {
             pauseTimer();
-            
+
             if (currentMode === 'work') {
                 timeRemaining = settings.work * 60;
             } else if (currentMode === 'shortBreak') {
@@ -1855,13 +1173,13 @@
             } else {
                 timeRemaining = settings.longBreak * 60;
             }
-            
+
             updateDisplay();
         }
 
         function completeSession() {
             pauseTimer();
-            
+
             if (currentMode === 'work') {
                 const classId = document.getElementById('currentClass').value;
                 const session = {
@@ -1871,49 +1189,49 @@
                     classId: classId ? parseInt(classId) : null,
                     type: 'work'
                 };
-                
+
                 sessions.push(session);
                 vieraAPI.setPomodoroSessions(sessions);
-                
+
                 // Update lastSession for activity tracking
                 const pomodoroStats = vieraAPI.getPomodoroStats() || {};
                 pomodoroStats.lastSession = new Date().toISOString();
                 pomodoroStats.totalSessions = (pomodoroStats.totalSessions || 0) + 1;
                 vieraAPI.setPomodoroStats(pomodoroStats);
-                
+
                 // Log activity
                 const selectedClass = classId ? classes.find(c => c.id === parseInt(classId)) : null;
-                const activityTitle = selectedClass 
+                const activityTitle = selectedClass
                     ? `Completed ${settings.work}min focus session for ${selectedClass.name}`
                     : `Completed ${settings.work}min focus session`;
                 logActivity('fas fa-clock', 'red', activityTitle);
-                
+
                 showNotification('Great work! Time to take a well-deserved break.', 'success', 'Work Session Complete! 🎉');
                 renderStats();
                 renderHistory();
             } else {
                 showNotification('Break time is over! Ready for another productive session?', 'info', 'Break Complete!');
             }
-            
+
             resetTimer();
         }
 
         function renderStats() {
             const today = new Date().toDateString();
             const todaySessions = sessions.filter(s => new Date(s.date).toDateString() === today);
-            
+
             document.getElementById('todaySessions').textContent = todaySessions.length;
-            
+
             const totalMinutes = todaySessions.reduce((sum, s) => sum + s.duration, 0);
             const hours = Math.floor(totalMinutes / 60);
             const mins = totalMinutes % 60;
             document.getElementById('totalTime').textContent = hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
-            
+
             const weekAgo = new Date();
             weekAgo.setDate(weekAgo.getDate() - 7);
             const weekSessions = sessions.filter(s => new Date(s.date) >= weekAgo);
             document.getElementById('weekSessions').textContent = weekSessions.length;
-            
+
             // Calculate streak
             let streak = 0;
             let checkDate = new Date();
@@ -1933,16 +1251,16 @@
         function renderHistory() {
             const container = document.getElementById('historyList');
             const recentSessions = sessions.slice(-10).reverse();
-            
+
             if (recentSessions.length === 0) {
                 container.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 20px;">No sessions yet. Start your first Pomodoro!</p>';
                 return;
             }
-            
+
             container.innerHTML = recentSessions.map(session => {
                 const sessionClass = classes.find(c => c.id === session.classId);
                 const date = new Date(session.date);
-                
+
                 return `
                     <div class="history-item">
                         <div class="history-icon" ${sessionClass ? `style="background: ${sessionClass.color};"` : ''}>
@@ -1962,116 +1280,6 @@
             }).join('');
         }
 
-        // ============================================
-        // KEYBOARD SHORTCUTS
-        // ============================================
-        document.addEventListener('keydown', function(e) {
-            const isTyping = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable;
-            
-            // Escape key - no modals on this page
-            
-            if (isTyping && e.key !== 'Escape') return;
-            
-            if ((e.metaKey || e.ctrlKey) && e.key === 'h') { e.preventDefault(); window.location.href = '/'; }
-            if ((e.metaKey || e.ctrlKey) && e.key === 'f') { e.preventDefault(); window.location.href = 'flashcards'; }
-            if ((e.metaKey || e.ctrlKey) && e.key === 't') { e.preventDefault(); window.location.href = 'todo'; }
-            if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === 'N') { e.preventDefault(); window.location.href = 'notes'; }
-            if ((e.metaKey || e.ctrlKey) && e.key === 's') { e.preventDefault(); window.location.href = 'schedule'; }
-            if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === 'P') { e.preventDefault(); window.location.href = 'progress-tracker'; }
-            if ((e.metaKey || e.ctrlKey) && e.key === ',') { e.preventDefault(); window.location.href = 'settings'; }
-            if ((e.metaKey || e.ctrlKey) && e.key === '/') { e.preventDefault(); showKeyboardShortcuts(); }
-        });
-
-        function showKeyboardShortcuts() {
-            // Detect OS
-            const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-            const isWindows = navigator.platform.toUpperCase().indexOf('WIN') >= 0;
-            const isLinux = navigator.platform.toUpperCase().indexOf('LINUX') >= 0;
-            const isChromeOS = navigator.userAgent.indexOf('CrOS') >= 0;
-            
-            // Symbol for modifier key
-            const modKey = isMac ? '⌘' : 'Ctrl';
-            const shiftKey = isMac ? '⇧' : 'Shift';
-            const optKey = isMac ? '⌥' : 'Alt';
-            
-            // OS Badge
-            let osBadge = 'Windows';
-            let osIcon = '<i class="fab fa-windows"></i>';
-            if (isMac) { osBadge = 'macOS'; osIcon = '<i class="fab fa-apple"></i>'; }
-            else if (isLinux) { osBadge = 'Linux'; osIcon = '<i class="fab fa-linux"></i>'; }
-            else if (isChromeOS) { osBadge = 'Chrome OS'; osIcon = '<i class="fab fa-chrome"></i>'; }
-            
-            const shortcuts = [
-                { keys: ['H'], action: 'Go to Home', icon: '<i class="fas fa-home" style="color: #3b82f6;"></i>' },
-                { keys: ['F'], action: 'Go to Flashcards', icon: '<i class="fas fa-layer-group" style="color: #8b5cf6;"></i>' },
-                { keys: ['T'], action: 'Go to Todos', icon: '<i class="fas fa-list-check" style="color: #10b981;"></i>' },
-                { keys: [shiftKey, 'N'], action: 'Go to Notes', icon: '<i class="fas fa-book-open" style="color: #f59e0b;"></i>' },
-                { keys: ['P'], action: 'Go to Pomodoro', icon: '<i class="fas fa-clock" style="color: #ef4444;"></i>' },
-                { keys: ['S'], action: 'Go to Schedule', icon: '<i class="fas fa-calendar-days" style="color: #06b6d4;"></i>' },
-                { keys: [shiftKey, 'P'], action: 'Go to Progress', icon: '<i class="fas fa-chart-line" style="color: #ec4899;"></i>' },
-                { keys: [','], action: 'Go to Settings', icon: '<i class="fas fa-cog" style="color: #64748b;"></i>' },
-                { keys: ['/'], action: 'Show this help', icon: '<i class="fas fa-question-circle" style="color: #a855f7;"></i>' },
-                { keys: ['Esc'], action: 'Close modals', icon: '<i class="fas fa-times" style="color: #6b7280;"></i>', noMod: true }
-            ];
-
-            const isDark = document.body.classList.contains('dark-mode');
-            
-            const shortcutList = shortcuts.map(s => {
-                const keyElements = s.noMod 
-                    ? s.keys.map(k => `<kbd style="background: ${isDark ? '#334155' : '#e2e8f0'}; color: ${isDark ? '#e2e8f0' : '#1e293b'}; padding: 6px 10px; border-radius: 6px; font-size: 13px; font-weight: 600; border: 1px solid ${isDark ? '#475569' : '#cbd5e1'}; min-width: 32px; text-align: center; display: inline-block;">${k}</kbd>`).join('')
-                    : `<kbd style="background: ${isDark ? '#334155' : '#e2e8f0'}; color: ${isDark ? '#e2e8f0' : '#1e293b'}; padding: 6px 10px; border-radius: 6px; font-size: 13px; font-weight: 600; border: 1px solid ${isDark ? '#475569' : '#cbd5e1'}; min-width: 32px; text-align: center; display: inline-block;">${modKey}</kbd>` + s.keys.map(k => ` <span style="color: ${isDark ? '#64748b' : '#94a3b8'}; margin: 0 4px;">+</span> <kbd style="background: ${isDark ? '#334155' : '#e2e8f0'}; color: ${isDark ? '#e2e8f0' : '#1e293b'}; padding: 6px 10px; border-radius: 6px; font-size: 13px; font-weight: 600; border: 1px solid ${isDark ? '#475569' : '#cbd5e1'}; min-width: 32px; text-align: center; display: inline-block;">${k}</kbd>`).join('');
-                
-                return `<div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: ${isDark ? 'rgba(59, 130, 246, 0.08)' : 'rgba(59, 130, 246, 0.05)'}; border-radius: 10px; margin-bottom: 10px; border: 1px solid ${isDark ? 'rgba(59, 130, 246, 0.15)' : 'rgba(59, 130, 246, 0.1)'}; transition: all 0.2s;" onmouseover="this.style.background='${isDark ? 'rgba(59, 130, 246, 0.12)' : 'rgba(59, 130, 246, 0.08)'}'; this.style.transform='translateX(2px)';" onmouseout="this.style.background='${isDark ? 'rgba(59, 130, 246, 0.08)' : 'rgba(59, 130, 246, 0.05)'}'; this.style.transform='translateX(0)';">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 16px; width: 24px; text-align: center; color: ${isDark ? '#e2e8f0' : '#1e293b'};">${s.icon}</span>
-                        <span style="font-weight: 600; color: ${isDark ? '#e2e8f0' : '#1e293b'};">${s.action}</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 4px;">
-                        ${keyElements}
-                    </div>
-                </div>`;
-            }).join('');
-
-            const modal = document.createElement('div');
-            modal.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 30000; backdrop-filter: blur(8px); animation: fadeIn 0.2s ease;';
-            
-            modal.innerHTML = `
-                <style>
-                    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-                    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-                </style>
-                <div style="background: ${isDark ? '#1e293b' : 'white'}; border-radius: 20px; padding: 0; max-width: 550px; width: 92%; max-height: 85vh; overflow: hidden; box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4); border: 1px solid ${isDark ? '#334155' : '#e2e8f0'}; animation: slideUp 0.3s ease;">
-                    <div style="background: #1e293b; padding: 24px 30px; border-bottom: 1px solid ${isDark ? '#334155' : '#e2e8f0'};">
-                        <div style="display: flex; align-items: center; justify-content: space-between;">
-                            <div>
-                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
-                                    <i class="fas fa-keyboard" style="font-size: 24px; color: white;"></i>
-                                    <h2 style="margin: 0; color: white; font-size: 24px; font-weight: 700;">Keyboard Shortcuts</h2>
-                                </div>
-                                <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
-                                    <span style="background: rgba(255, 255, 255, 0.2); padding: 4px 10px; border-radius: 6px; font-size: 12px; color: white; font-weight: 600; display: flex; align-items: center; gap: 6px;">${osIcon} <span>${osBadge}</span></span>
-                                </div>
-                            </div>
-                            <button onclick="this.closest('.keyboard-shortcuts-modal').remove()" style="background: rgba(255, 255, 255, 0.2); border: none; width: 36px; height: 36px; border-radius: 8px; font-size: 20px; cursor: pointer; color: white; transition: all 0.2s; display: flex; align-items: center; justify-content: center;" onmouseover="this.style.background='rgba(255, 255, 255, 0.3)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.2)'">×</button>
-                        </div>
-                    </div>
-                    <div style="padding: 24px 30px; max-height: calc(85vh - 120px); overflow-y: auto;">
-                        ${shortcutList}
-                        <div style="margin-top: 20px; padding: 16px; background: ${isDark ? 'rgba(139, 92, 246, 0.1)' : 'rgba(139, 92, 246, 0.05)'}; border-radius: 10px; border: 1px solid ${isDark ? 'rgba(139, 92, 246, 0.2)' : 'rgba(139, 92, 246, 0.15)'};">
-                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                                <span style="font-size: 16px;">💡</span>
-                                <span style="font-weight: 600; color: ${isDark ? '#e2e8f0' : '#1e293b'}; font-size: 14px;">Pro Tip</span>
-                            </div>
-                            <p style="margin: 0; color: ${isDark ? '#94a3b8' : '#64748b'}; font-size: 13px; line-height: 1.6;">Use ${modKey} + / to show this dialog anytime!</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-            modal.className = 'keyboard-shortcuts-modal';
-            modal.addEventListener('click', function(e) { if (e.target === modal) modal.remove(); });
-            document.body.appendChild(modal);
-        }
-
         // ============ BUG REPORT FUNCTIONALITY ============
         const BUG_REPORT_URL = 'https://script.google.com/macros/s/AKfycbxW5D6i7Td2Em-OqHmCpgy-DVQuzn1oCzn_pBRB2IOb_8MGfwgPqjF8KghYQDZpMNdKUw/exec';
         function openBugReportModal() { document.getElementById('bugReportModal').classList.add('active'); document.getElementById('bugPage').value = window.location.href; document.getElementById('bugPageName').textContent = 'Pomodoro Timer'; const user = vieraAPI.getUser(); if (user) { document.getElementById('bugUserEmail').value = user.email || ''; document.getElementById('bugUserName').value = `${user.firstName || ''} ${user.lastName || ''}`.trim(); } }
@@ -2080,7 +1288,5 @@
         async function submitBugReport(event) { event.preventDefault(); const btn = event.target.querySelector('button[type="submit"]'); const originalContent = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...'; const bugData = { page: document.getElementById('bugPage').value, pageName: 'Pomodoro Timer', category: document.getElementById('bugCategory').value, description: document.getElementById('bugDescription').value, userEmail: document.getElementById('bugUserEmail').value || 'Anonymous', userName: document.getElementById('bugUserName').value || 'Anonymous', browser: getBrowserInfo(), screenSize: `${window.innerWidth}x${window.innerHeight}`, userAgent: navigator.userAgent }; try { await fetch(BUG_REPORT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(bugData) }); showNotification('Bug report submitted successfully!', 'success', 'Report Sent'); closeBugReportModal(); document.getElementById('bugDescription').value = ''; } catch (error) { showNotification('Failed to submit bug report.', 'error', 'Error'); } finally { btn.disabled = false; btn.innerHTML = originalContent; } }
         document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeBugReportModal(); });
     </script>
-
-    <div id="bugReportModal" class="bug-modal"><div class="bug-modal-content"><div class="bug-modal-header"><div class="bug-modal-title"><i class="fas fa-bug"></i> Report a Bug</div><button class="bug-close-btn" onclick="closeBugReportModal()"><i class="fas fa-times"></i></button></div><div class="bug-page-info"><i class="fas fa-link"></i><span>Reporting from: <strong id="bugPageName">Pomodoro Timer</strong></span><input type="hidden" id="bugPage" value=""></div><form onsubmit="submitBugReport(event)"><div class="bug-form-group"><label class="bug-form-label">Category</label><select class="bug-form-select" id="bugCategory" required><option value="General">General Issue</option><option value="UI/Design">UI/Design Problem</option><option value="Functionality">Feature Not Working</option><option value="Performance">Performance Issue</option><option value="Login/Account">Login/Account Problem</option><option value="Data Loss">Data Loss</option><option value="Mobile">Mobile-Specific Issue</option><option value="Other">Other</option></select></div><div class="bug-form-group"><label class="bug-form-label">Describe the bug *</label><textarea class="bug-form-textarea" id="bugDescription" placeholder="Please describe what happened..." required></textarea></div><div class="bug-form-group"><label class="bug-form-label">Your Email (optional)</label><input type="email" class="bug-form-input" id="bugUserEmail" placeholder="your@email.com"></div><div class="bug-form-group"><label class="bug-form-label">Your Name (optional)</label><input type="text" class="bug-form-input" id="bugUserName" placeholder="Your name"></div><button type="submit" class="bug-submit-btn"><i class="fas fa-paper-plane"></i> Submit Bug Report</button></form></div></div>
 </body>
 </html>

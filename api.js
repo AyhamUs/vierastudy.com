@@ -1,10 +1,9 @@
-// VieraStudy API Client v12 - Clean API-only version
+// VieraStudy API Client v13
 // ALL data comes from Cloudflare Workers - NO localStorage for data
 // Token stored in sessionStorage for persistence across page refreshes
 
 const API_URL = 'https://vierastudy-api.ayhamissa416.workers.dev';
 
-// In-memory cache for current session data (loaded from cloud)
 let _cache = {
     flashcards: [],
     todos: [],
@@ -16,81 +15,69 @@ let _cache = {
     pomodoroSessions: [],
     pomodoroSettings: {},
     activityLog: [],
-    settings: { darkMode: false }
+    settings: {
+        darkMode: false,
+        accentColor: '#3b82f6',
+        fontSize: 16
+    }
 };
 
 let _cacheLoaded = false;
 let _isDirty = false;
 let _saveTimeout = null;
 let _maxSaveTimeout = null;
+let _lastSyncTime = null;
 let _readyResolve;
 let _readyPromise = new Promise(resolve => { _readyResolve = resolve; });
 
-// Sync timing
 const SYNC_DEBOUNCE = 2000;
 const SYNC_MAX_DELAY = 8000;
 
+function _emit(name) {
+    window.dispatchEvent(new Event(name));
+}
+
 class VieraStudyAPI {
     constructor() {
-        // Token and user stored in sessionStorage (survives page refresh, clears on browser close)
         this.token = sessionStorage.getItem('vierastudy_token');
         this.user = JSON.parse(sessionStorage.getItem('vierastudy_user') || 'null');
-        console.log('[VieraStudy] Init - logged in:', !!this.token, 'user:', this.user?.firstName);
     }
 
-    get ready() {
-        return _readyPromise;
-    }
+    get ready() { return _readyPromise; }
 
-    // ============ AUTHENTICATION ============
+    // ── AUTH ──────────────────────────────────────────────────────────────────
 
     async register(email, password, firstName, lastName) {
         try {
-            const response = await fetch(`${API_URL}/register`, {
+            const res = await fetch(`${API_URL}/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password, firstName, lastName })
             });
-            const data = await response.json();
-            
+            const data = await res.json();
             if (data.success && data.token) {
-                this.token = data.token;
-                this.user = data.user;
-                sessionStorage.setItem('vierastudy_token', data.token);
-                sessionStorage.setItem('vierastudy_user', JSON.stringify(data.user));
-                _cacheLoaded = false;
-                console.log('[VieraStudy] Registered:', data.user.firstName);
+                this._setSession(data.token, data.user);
             }
             return data;
-        } catch (error) {
-            console.error('Register error:', error);
+        } catch (e) {
             return { error: 'Network error. Please try again.' };
         }
     }
 
     async login(email, password) {
         try {
-            const response = await fetch(`${API_URL}/login`, {
+            const res = await fetch(`${API_URL}/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
             });
-            const data = await response.json();
-            
+            const data = await res.json();
             if (data.success && data.token) {
-                this.token = data.token;
-                this.user = data.user;
-                sessionStorage.setItem('vierastudy_token', data.token);
-                sessionStorage.setItem('vierastudy_user', JSON.stringify(data.user));
-                _cacheLoaded = false;
-                console.log('[VieraStudy] Logged in:', data.user.firstName);
-                
-                // Load data from cloud
+                this._setSession(data.token, data.user);
                 await this.loadData();
             }
             return data;
-        } catch (error) {
-            console.error('Login error:', error);
+        } catch (e) {
             return { error: 'Network error. Please try again.' };
         }
     }
@@ -101,17 +88,19 @@ class VieraStudyAPI {
                 await this._saveDataNow();
                 await fetch(`${API_URL}/logout`, {
                     method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${this.token}`
-                    }
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.token}` }
                 });
             }
-        } catch (error) {
-            console.error('Logout error:', error);
-        }
-        
+        } catch (e) {}
         this._clearSession();
+    }
+
+    _setSession(token, user) {
+        this.token = token;
+        this.user = user;
+        sessionStorage.setItem('vierastudy_token', token);
+        sessionStorage.setItem('vierastudy_user', JSON.stringify(user));
+        _cacheLoaded = false;
     }
 
     _clearSession() {
@@ -120,105 +109,58 @@ class VieraStudyAPI {
         sessionStorage.removeItem('vierastudy_token');
         sessionStorage.removeItem('vierastudy_user');
         _cache = {
-            flashcards: [],
-            todos: [],
-            notes: [],
-            classes: [],
-            events: [],
-            tasks: [],
-            pomodoroStats: {},
-            pomodoroSessions: [],
-            pomodoroSettings: {},
-            activityLog: [],
-            settings: { darkMode: false }
+            flashcards: [], todos: [], notes: [], classes: [], events: [],
+            tasks: [], pomodoroStats: {}, pomodoroSessions: [], pomodoroSettings: {},
+            activityLog: [], settings: { darkMode: false, accentColor: '#3b82f6', fontSize: 16 }
         };
         _cacheLoaded = false;
         _isDirty = false;
     }
 
+    // Skip verifySession on cold start — loadData directly for 1 round-trip instead of 2
     async verifySession() {
         if (!this.token) return null;
-        
         try {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 10000);
-            
-            const response = await fetch(`${API_URL}/verify`, {
-                method: 'GET',
+            const ctrl = new AbortController();
+            const t = setTimeout(() => ctrl.abort(), 5000);
+            const res = await fetch(`${API_URL}/verify`, {
                 headers: { 'Authorization': `Bearer ${this.token}` },
-                signal: controller.signal
+                signal: ctrl.signal
             });
-            
-            clearTimeout(timeoutId);
-            
-            if (!response.ok) {
-                if (response.status === 401 || response.status === 403) {
-                    console.log('[VieraStudy] Token rejected');
-                    this._clearSession();
-                    return null;
-                }
-                // Server error - use cached user if available
-                if (this.user) {
-                    console.log('[VieraStudy] Server error, using cached user');
-                    return this.user;
-                }
-                return null;
+            clearTimeout(t);
+            if (!res.ok) {
+                if (res.status === 401 || res.status === 403) { this._clearSession(); return null; }
+                return this.user || null;
             }
-            
-            const data = await response.json();
+            const data = await res.json();
             if (data.success && data.user) {
                 this.user = data.user;
                 sessionStorage.setItem('vierastudy_user', JSON.stringify(data.user));
-                
-                if (!_cacheLoaded) {
-                    await this.loadData();
-                }
                 return data.user;
             }
             return null;
-        } catch (error) {
-            console.error('Verify error:', error);
-            // Network error - use cached user if available
-            if (this.user) {
-                console.log('[VieraStudy] Network error, using cached user');
-                return this.user;
-            }
-            return null;
+        } catch (e) {
+            return this.user || null;
         }
     }
 
-    isLoggedIn() {
-        return !!this.token;
-    }
+    isLoggedIn() { return !!this.token; }
+    getUser() { return this.user; }
 
-    getUser() {
-        return this.user;
-    }
-
-    // ============ DATA OPERATIONS ============
+    // ── DATA ──────────────────────────────────────────────────────────────────
 
     async loadData() {
         if (!this.token) return null;
-        
         try {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 15000);
-            
-            const response = await fetch(`${API_URL}/data`, {
-                method: 'GET',
+            const ctrl = new AbortController();
+            const t = setTimeout(() => ctrl.abort(), 8000);
+            const res = await fetch(`${API_URL}/data`, {
                 headers: { 'Authorization': `Bearer ${this.token}` },
-                signal: controller.signal
+                signal: ctrl.signal
             });
-            
-            clearTimeout(timeoutId);
-            
-            if (!response.ok) {
-                console.error('[VieraStudy] Failed to load data:', response.status);
-                return null;
-            }
-            
-            const data = await response.json();
-            
+            clearTimeout(t);
+            if (!res.ok) return null;
+            const data = await res.json();
             _cache = {
                 flashcards: data.flashcards || [],
                 todos: data.todos || [],
@@ -230,101 +172,95 @@ class VieraStudyAPI {
                 pomodoroSessions: data.pomodoroSessions || [],
                 pomodoroSettings: data.pomodoroSettings || {},
                 activityLog: data.activityLog || [],
-                settings: data.settings || { darkMode: false }
+                settings: Object.assign(
+                    { darkMode: false, accentColor: '#3b82f6', fontSize: 16 },
+                    data.settings || {}
+                )
             };
             _cacheLoaded = true;
             _isDirty = false;
-            
-            // Apply dark mode and sync to localStorage for instant loading on next visit
-            if (_cache.settings.darkMode) {
+            _lastSyncTime = new Date().toISOString();
+
+            // Apply persisted settings
+            const s = _cache.settings;
+            if (s.darkMode) {
                 document.body.classList.add('dark-mode');
                 localStorage.setItem('studyDeckDarkMode', 'true');
             } else {
                 document.body.classList.remove('dark-mode');
                 localStorage.setItem('studyDeckDarkMode', 'false');
             }
-            
-            console.log('[VieraStudy] Data loaded from cloud');
-            return _cache;
-        } catch (error) {
-            console.error('Load data error:', error);
-            if (error.name === 'AbortError') {
-                console.log('[VieraStudy] Data load timed out');
+            if (s.accentColor) {
+                document.documentElement.style.setProperty('--accent', s.accentColor);
+                localStorage.setItem('vieraAccent', s.accentColor);
             }
+            if (s.fontSize) {
+                document.documentElement.style.setProperty('--font-size-base', s.fontSize + 'px');
+                localStorage.setItem('vieraFontSize', s.fontSize);
+            }
+            return _cache;
+        } catch (e) {
             return null;
         }
     }
 
     async _saveDataNow() {
         if (!this.token || !_isDirty) return { success: true };
-        
-        if (_saveTimeout) {
-            clearTimeout(_saveTimeout);
-            _saveTimeout = null;
-        }
-        if (_maxSaveTimeout) {
-            clearTimeout(_maxSaveTimeout);
-            _maxSaveTimeout = null;
-        }
-        
+        clearTimeout(_saveTimeout); _saveTimeout = null;
+        clearTimeout(_maxSaveTimeout); _maxSaveTimeout = null;
+        _emit('viera:saving');
         try {
-            const response = await fetch(`${API_URL}/data`, {
+            const res = await fetch(`${API_URL}/data`, {
                 method: 'PUT',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.token}`
-                },
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.token}` },
                 body: JSON.stringify(_cache)
             });
-            const result = await response.json();
+            const result = await res.json();
             _isDirty = false;
-            console.log('[VieraStudy] Data saved to cloud');
+            _lastSyncTime = new Date().toISOString();
+            _emit('viera:saved');
             return result;
-        } catch (error) {
-            console.error('Save data error:', error);
+        } catch (e) {
+            _emit('viera:error');
             return { error: 'Network error' };
         }
     }
 
-    async saveData() {
-        this.scheduleSave();
-        return { success: true };
-    }
-
     scheduleSave() {
         if (!this.token) return;
-        
         _isDirty = true;
-        
-        if (_saveTimeout) {
-            clearTimeout(_saveTimeout);
-        }
-        
+        clearTimeout(_saveTimeout);
         _saveTimeout = setTimeout(() => {
             this._saveDataNow();
-            if (_maxSaveTimeout) {
-                clearTimeout(_maxSaveTimeout);
-                _maxSaveTimeout = null;
-            }
+            clearTimeout(_maxSaveTimeout); _maxSaveTimeout = null;
         }, SYNC_DEBOUNCE);
-        
         if (!_maxSaveTimeout) {
             _maxSaveTimeout = setTimeout(() => {
-                if (_saveTimeout) {
-                    clearTimeout(_saveTimeout);
-                    _saveTimeout = null;
-                }
+                clearTimeout(_saveTimeout); _saveTimeout = null;
                 this._saveDataNow();
                 _maxSaveTimeout = null;
             }, SYNC_MAX_DELAY);
         }
     }
 
-    // Backward compatibility
-    async syncToCloud() { return await this._saveDataNow(); }
-    async syncFromCloud() { return await this.loadData(); }
+    getSyncTime() { return _lastSyncTime; }
+    async syncToCloud() { return this._saveDataNow(); }
+    async syncFromCloud() { return this.loadData(); }
+    async saveData() { this.scheduleSave(); return { success: true }; }
 
-    // ============ DATA GETTERS ============
+    // ── EXPORT ────────────────────────────────────────────────────────────────
+
+    exportData() {
+        const blob = new Blob([JSON.stringify(_cache, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'vierastudy-export.json';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    // ── GETTERS ───────────────────────────────────────────────────────────────
 
     getFlashcards() { return _cache.flashcards; }
     getTodos() { return _cache.todos; }
@@ -338,171 +274,105 @@ class VieraStudyAPI {
     getActivityLog() { return _cache.activityLog; }
     getSettings() { return _cache.settings; }
 
-    // ============ DATA SETTERS ============
+    // ── SETTERS ───────────────────────────────────────────────────────────────
 
-    setFlashcards(data) { _cache.flashcards = data; this.scheduleSave(); }
-    setTodos(data) { _cache.todos = data; this.scheduleSave(); }
-    setNotes(data) { _cache.notes = data; this.scheduleSave(); }
-    setClasses(data) { _cache.classes = data; this.scheduleSave(); }
-    setEvents(data) { _cache.events = data; this.scheduleSave(); }
-    setTasks(data) { _cache.tasks = data; this.scheduleSave(); }
-    setPomodoroStats(data) { _cache.pomodoroStats = data; this.scheduleSave(); }
-    setPomodoroSessions(data) { _cache.pomodoroSessions = data; this.scheduleSave(); }
-    setPomodoroSettings(data) { _cache.pomodoroSettings = data; this.scheduleSave(); }
-    setActivityLog(data) { _cache.activityLog = data; this.scheduleSave(); }
-    setSettings(data) { _cache.settings = data; this.scheduleSave(); }
+    setFlashcards(d) { _cache.flashcards = d; this.scheduleSave(); }
+    setTodos(d) { _cache.todos = d; this.scheduleSave(); }
+    setNotes(d) { _cache.notes = d; this.scheduleSave(); }
+    setClasses(d) { _cache.classes = d; this.scheduleSave(); }
+    setEvents(d) { _cache.events = d; this.scheduleSave(); }
+    setTasks(d) { _cache.tasks = d; this.scheduleSave(); }
+    setPomodoroStats(d) { _cache.pomodoroStats = d; this.scheduleSave(); }
+    setPomodoroSessions(d) { _cache.pomodoroSessions = d; this.scheduleSave(); }
+    setPomodoroSettings(d) { _cache.pomodoroSettings = d; this.scheduleSave(); }
+    setActivityLog(d) { _cache.activityLog = d; this.scheduleSave(); }
+    setSettings(d) { _cache.settings = d; this.scheduleSave(); }
 
-    // ============ CONVENIENCE METHODS ============
+    // ── CONVENIENCE ───────────────────────────────────────────────────────────
 
-    addFlashcardDeck(deck) {
-        _cache.flashcards.push(deck);
-        this.scheduleSave();
-    }
-
+    addFlashcardDeck(deck) { _cache.flashcards.push(deck); this.scheduleSave(); }
     updateFlashcardDeck(id, deck) {
-        const index = _cache.flashcards.findIndex(d => d.id === id);
-        if (index !== -1) {
-            _cache.flashcards[index] = { ..._cache.flashcards[index], ...deck };
-            this.scheduleSave();
-        }
+        const i = _cache.flashcards.findIndex(d => d.id === id);
+        if (i !== -1) { _cache.flashcards[i] = { ..._cache.flashcards[i], ...deck }; this.scheduleSave(); }
     }
+    deleteFlashcardDeck(id) { _cache.flashcards = _cache.flashcards.filter(d => d.id !== id); this.scheduleSave(); }
 
-    deleteFlashcardDeck(id) {
-        _cache.flashcards = _cache.flashcards.filter(d => d.id !== id);
-        this.scheduleSave();
+    addTodo(t) { _cache.todos.push(t); this.scheduleSave(); }
+    updateTodo(id, t) {
+        const i = _cache.todos.findIndex(x => x.id === id);
+        if (i !== -1) { _cache.todos[i] = { ..._cache.todos[i], ...t }; this.scheduleSave(); }
     }
+    deleteTodo(id) { _cache.todos = _cache.todos.filter(t => t.id !== id); this.scheduleSave(); }
 
-    addTodo(todo) {
-        _cache.todos.push(todo);
-        this.scheduleSave();
+    addNote(n) { _cache.notes.push(n); this.scheduleSave(); }
+    updateNote(id, n) {
+        const i = _cache.notes.findIndex(x => x.id === id);
+        if (i !== -1) { _cache.notes[i] = { ..._cache.notes[i], ...n }; this.scheduleSave(); }
     }
+    deleteNote(id) { _cache.notes = _cache.notes.filter(n => n.id !== id); this.scheduleSave(); }
 
-    updateTodo(id, todo) {
-        const index = _cache.todos.findIndex(t => t.id === id);
-        if (index !== -1) {
-            _cache.todos[index] = { ..._cache.todos[index], ...todo };
-            this.scheduleSave();
-        }
+    addClass(c) { _cache.classes.push(c); this.scheduleSave(); }
+    updateClass(id, c) {
+        const i = _cache.classes.findIndex(x => x.id === id);
+        if (i !== -1) { _cache.classes[i] = { ..._cache.classes[i], ...c }; this.scheduleSave(); }
     }
+    deleteClass(id) { _cache.classes = _cache.classes.filter(c => c.id !== id); this.scheduleSave(); }
 
-    deleteTodo(id) {
-        _cache.todos = _cache.todos.filter(t => t.id !== id);
-        this.scheduleSave();
+    addEvent(e) { _cache.events.push(e); this.scheduleSave(); }
+    updateEvent(id, e) {
+        const i = _cache.events.findIndex(x => x.id === id);
+        if (i !== -1) { _cache.events[i] = { ..._cache.events[i], ...e }; this.scheduleSave(); }
     }
+    deleteEvent(id) { _cache.events = _cache.events.filter(e => e.id !== id); this.scheduleSave(); }
 
-    addNote(note) {
-        _cache.notes.push(note);
-        this.scheduleSave();
+    addTask(t) { _cache.tasks.push(t); this.scheduleSave(); }
+    updateTask(id, t) {
+        const i = _cache.tasks.findIndex(x => x.id === id);
+        if (i !== -1) { _cache.tasks[i] = { ..._cache.tasks[i], ...t }; this.scheduleSave(); }
     }
-
-    updateNote(id, note) {
-        const index = _cache.notes.findIndex(n => n.id === id);
-        if (index !== -1) {
-            _cache.notes[index] = { ..._cache.notes[index], ...note };
-            this.scheduleSave();
-        }
-    }
-
-    deleteNote(id) {
-        _cache.notes = _cache.notes.filter(n => n.id !== id);
-        this.scheduleSave();
-    }
-
-    addClass(classItem) {
-        _cache.classes.push(classItem);
-        this.scheduleSave();
-    }
-
-    updateClass(id, classItem) {
-        const index = _cache.classes.findIndex(c => c.id === id);
-        if (index !== -1) {
-            _cache.classes[index] = { ..._cache.classes[index], ...classItem };
-            this.scheduleSave();
-        }
-    }
-
-    deleteClass(id) {
-        _cache.classes = _cache.classes.filter(c => c.id !== id);
-        this.scheduleSave();
-    }
-
-    addEvent(event) {
-        _cache.events.push(event);
-        this.scheduleSave();
-    }
-
-    deleteEvent(id) {
-        _cache.events = _cache.events.filter(e => e.id !== id);
-        this.scheduleSave();
-    }
-
-    addTask(task) {
-        _cache.tasks.push(task);
-        this.scheduleSave();
-    }
-
-    updateTask(id, task) {
-        const index = _cache.tasks.findIndex(t => t.id === id);
-        if (index !== -1) {
-            _cache.tasks[index] = { ..._cache.tasks[index], ...task };
-            this.scheduleSave();
-        }
-    }
-
-    deleteTask(id) {
-        _cache.tasks = _cache.tasks.filter(t => t.id !== id);
-        this.scheduleSave();
-    }
+    deleteTask(id) { _cache.tasks = _cache.tasks.filter(t => t.id !== id); this.scheduleSave(); }
 
     logActivity(icon, color, message) {
-        _cache.activityLog.unshift({
-            id: Date.now(),
-            icon,
-            color,
-            message,
-            timestamp: new Date().toISOString()
-        });
-        if (_cache.activityLog.length > 50) {
-            _cache.activityLog = _cache.activityLog.slice(0, 50);
-        }
+        _cache.activityLog.unshift({ id: Date.now(), icon, color, message, timestamp: new Date().toISOString() });
+        if (_cache.activityLog.length > 50) _cache.activityLog = _cache.activityLog.slice(0, 50);
         this.scheduleSave();
     }
 
     setDarkMode(enabled) {
         _cache.settings.darkMode = enabled;
-        // Sync to localStorage for instant loading on next visit
         localStorage.setItem('studyDeckDarkMode', enabled ? 'true' : 'false');
-        if (enabled) {
-            document.body.classList.add('dark-mode');
-        } else {
-            document.body.classList.remove('dark-mode');
-        }
+        document.body.classList.toggle('dark-mode', enabled);
         this.scheduleSave();
     }
 
-    isDarkMode() {
-        return _cache.settings.darkMode;
+    setAccentColor(color) {
+        _cache.settings.accentColor = color;
+        document.documentElement.style.setProperty('--accent', color);
+        localStorage.setItem('vieraAccent', color);
+        this.scheduleSave();
     }
+
+    setFontSize(px) {
+        _cache.settings.fontSize = px;
+        document.documentElement.style.setProperty('--font-size-base', px + 'px');
+        localStorage.setItem('vieraFontSize', px);
+        this.scheduleSave();
+    }
+
+    isDarkMode() { return _cache.settings.darkMode; }
 }
 
-// Create global instance
 window.vieraAPI = new VieraStudyAPI();
 
-// Global sync function for backward compatibility
 window.syncData = function() {
-    if (window.vieraAPI && window.vieraAPI.isLoggedIn()) {
-        _isDirty = true;
-        window.vieraAPI._saveDataNow();
-    }
+    if (window.vieraAPI?.isLoggedIn()) { _isDirty = true; window.vieraAPI._saveDataNow(); }
 };
 
-// Save via sendBeacon for page unload
 function saveViaBeacon() {
     if (window.vieraAPI?.isLoggedIn() && _isDirty) {
         const token = sessionStorage.getItem('vierastudy_token');
         if (token && navigator.sendBeacon) {
-            const blob = new Blob([JSON.stringify(_cache)], { type: 'application/json' });
-            navigator.sendBeacon(`${API_URL}/data?token=${token}`, blob);
+            navigator.sendBeacon(`${API_URL}/data?token=${token}`, new Blob([JSON.stringify(_cache)], { type: 'application/json' }));
             _isDirty = false;
             return true;
         }
@@ -510,42 +380,32 @@ function saveViaBeacon() {
     return false;
 }
 
-// Save before page unload
 window.addEventListener('beforeunload', saveViaBeacon);
 window.addEventListener('pagehide', saveViaBeacon);
-
-// Save when visibility changes (tab switch, minimize)
-document.addEventListener('visibilitychange', function() {
-    if (document.visibilityState === 'hidden') {
-        saveViaBeacon();
-    }
-});
-
-// Save when clicking internal links
-document.addEventListener('click', function(e) {
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveViaBeacon(); });
+document.addEventListener('click', e => {
     const link = e.target.closest('a[href]');
     if (link && _isDirty) {
         const href = link.getAttribute('href');
-        if (href && !href.startsWith('http') && !href.startsWith('//') && !href.startsWith('mailto:')) {
-            saveViaBeacon();
-        }
+        if (href && !href.startsWith('http') && !href.startsWith('//') && !href.startsWith('mailto:')) saveViaBeacon();
     }
 });
 
-// Auto-initialize on load
+// Cold-start optimization: loadData directly (includes implicit session check via 401 response)
 (async function initializeSession() {
-    if (window.vieraAPI && window.vieraAPI.token) {
+    if (window.vieraAPI.token) {
         try {
-            const user = await window.vieraAPI.verifySession();
-            if (user) {
-                console.log('[VieraStudy] Session verified');
+            const data = await window.vieraAPI.loadData();
+            if (data) {
+                // Refresh user info in background without blocking ready
+                window.vieraAPI.verifySession();
                 _readyResolve(true);
             } else {
-                console.log('[VieraStudy] Session invalid');
-                _readyResolve(false);
+                // Token may be invalid — verify to confirm
+                const user = await window.vieraAPI.verifySession();
+                _readyResolve(!!user);
             }
-        } catch (error) {
-            console.error('[VieraStudy] Session check failed:', error);
+        } catch (e) {
             _readyResolve(false);
         }
     } else {
@@ -553,4 +413,4 @@ document.addEventListener('click', function(e) {
     }
 })();
 
-console.log('VieraStudy API v12 loaded (API-only, no localStorage)');
+console.log('VieraStudy API v13 loaded');

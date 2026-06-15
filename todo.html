@@ -21,6 +21,7 @@
     <meta name="twitter:description" content="Manage your tasks with VieraStudy's To-Do List. Stay organized with priorities, due dates, and class assignments.">
     <meta name="twitter:image" content="https://vierastudy.com/vierastudy.png">
     <link rel="icon" href="vierastudy.png" type="image/png">
+    <link rel="stylesheet" href="/shared.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -230,37 +231,6 @@
             height: 100vh;
         }
 
-        .sidebar {
-            width: 280px;
-            background: #1e293b;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        .logo {
-            padding: 30px 25px;
-            font-size: 24px;
-            font-weight: bold;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo img {
-            width: 35px;
-            height: 35px;
-            object-fit: contain;
-        }
-
-        .logo-text {
-            color: white;
-        }
-
         .pro-badge {
             display: inline-flex;
             align-items: center;
@@ -275,129 +245,6 @@
             text-transform: uppercase;
             box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .nav-menu {
-            flex: 1;
-            padding: 20px 0;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        .nav-item {
-            padding: 15px 25px;
-            display: flex;
-            align-items: center;
-            color: #cbd5e1;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-
-        .nav-item:hover {
-            background: rgba(59, 130, 246, 0.1);
-            color: #3b82f6;
-        }
-
-        .nav-item.active {
-            background: rgba(59, 130, 246, 0.15);
-            border-left: 3px solid #3b82f6;
-        }
-
-        a[href="dashboard.html"].nav-item.active,
-        a[href="dashboard.html"].nav-item:hover {
-            color: #3b82f6;
-        }
-
-        a[href="flashcards"].nav-item.active,
-        a[href="flashcards"].nav-item:hover {
-            color: #8b5cf6;
-        }
-
-        a[href="todo"].nav-item.active,
-        a[href="todo"].nav-item:hover {
-            color: #10b981;
-        }
-
-        a[href="schedule"].nav-item.active,
-        a[href="schedule"].nav-item:hover {
-            color: #f59e0b;
-        }
-
-        a[href="pomodoro"].nav-item.active,
-        a[href="pomodoro"].nav-item:hover {
-            color: #ef4444;
-        }
-
-        a[href="notes"].nav-item.active,
-        a[href="notes"].nav-item:hover {
-            color: #06b6d4;
-        }
-
-        a[href="progress-tracker"].nav-item.active,
-        a[href="progress-tracker"].nav-item:hover {
-            color: #ec4899;
-        }
-
-        a[href="classes"].nav-item.active,
-        a[href="classes"].nav-item:hover {
-            color: #f97316;
-        }
-
-        a[href="settings"].nav-item.active,
-        a[href="settings"].nav-item:hover {
-            color: #64748b;
-        }
-
-        .nav-item i {
-            width: 25px;
-            margin-right: 15px;
-            font-size: 18px;
-        }
-
-        .nav-item .fa-home {
-            color: #3b82f6;
-        }
-
-        .nav-item .fa-layer-group {
-            color: #8b5cf6;
-        }
-
-        .nav-item .fa-list-check {
-            color: #10b981;
-        }
-
-        .nav-item .fa-calendar-days {
-            color: #f59e0b;
-        }
-
-        .nav-item .fa-clock {
-            color: #ef4444;
-        }
-
-        .nav-item .fa-book-open {
-            color: #06b6d4;
-        }
-
-        .nav-item .fa-chart-line {
-            color: #ec4899;
-        }
-
-        .nav-item .fa-brain {
-            color: #6366f1;
-        }
-
-        .nav-item .fa-calculator {
-            color: #84cc16;
-        }
-
-        .nav-item .fa-book {
-            color: #f97316;
-        }
-
-        .nav-item .fa-gear,
-        .nav-item .fa-cog {
-            color: #64748b;
         }
 
         .ai-dropdown {
@@ -473,19 +320,6 @@
             text-align: center;
         }
 
-        .user-profile {
-            padding: 20px 25px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            visibility: hidden;
-        }
-
-        .user-profile.loaded {
-            visibility: visible;
-        }
-
         .user-avatar {
             width: 45px;
             height: 45px;
@@ -527,25 +361,6 @@
             border-radius: 10px;
             font-size: 11px;
             font-weight: 600;
-        }
-
-        .signout-btn {
-            background: rgba(239, 68, 68, 0.1);
-            border: none;
-            color: #ef4444;
-            width: 35px;
-            height: 35px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .signout-btn:hover {
-            background: #ef4444;
-            color: white;
         }
 
         .main-content {
@@ -639,7 +454,7 @@
 
         .todo-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 15px;
             padding: 20px;
             background: #f8fafc;
@@ -674,6 +489,7 @@
             justify-content: center;
             transition: all 0.3s;
             flex-shrink: 0;
+            margin-top: 2px;
         }
 
         .todo-checkbox:hover {
@@ -737,6 +553,7 @@
         .todo-actions {
             display: flex;
             gap: 5px;
+            flex-shrink: 0;
         }
 
         .icon-btn {
@@ -868,67 +685,7 @@
             background: #2563eb;
         }
 
-        .mobile-menu-toggle {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            background: #3b82f6;
-            color: white;
-            border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        .mobile-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 998;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-
-        .mobile-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
         @media (max-width: 768px) {
-            .sidebar {
-                position: fixed;
-                left: -280px;
-                top: 0;
-                bottom: 0;
-                z-index: 999;
-                transition: left 0.3s ease;
-                width: 280px;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .sidebar.active {
-                left: 0;
-            }
-
-            .mobile-menu-toggle {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .mobile-overlay {
-                display: block;
-            }
-
             .header {
                 padding: 20px 20px 20px 75px;
                 flex-direction: column;
@@ -964,16 +721,6 @@
                 padding-left: 35px;
             }
 
-            .nav-item {
-                padding: 16px 25px;
-                min-height: 48px;
-                touch-action: manipulation;
-            }
-
-            .nav-menu a {
-                -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
-            }
-
             .btn,
             button {
                 min-height: 44px;
@@ -984,11 +731,6 @@
         @media (max-width: 480px) {
             .header {
                 padding: 15px 15px 15px 65px;
-            }
-
-            .mobile-menu-toggle {
-                width: 44px;
-                height: 44px;
             }
 
             .content {
@@ -1006,7 +748,6 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
             z-index: 10000;
-            animation: fadeIn 0.2s ease;
         }
 
         .notification-modal.show {
@@ -1025,7 +766,6 @@
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            animation: slideIn 0.3s ease;
             text-align: center;
         }
 
@@ -1090,47 +830,6 @@
             background: #2563eb;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Bug Report Button */
-        .bug-report-btn {
-            background: rgba(251, 191, 36, 0.1);
-            border: none;
-            color: #f59e0b;
-            width: 35px;
-            height: 35px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-right: 8px;
-        }
-
-        .bug-report-btn:hover {
-            background: #f59e0b;
-            color: white;
-        }
-
-        .bug-report-btn i {
-            font-size: 14px;
         }
 
         /* Bug Report Modal */
@@ -1317,82 +1016,20 @@
             cursor: not-allowed;
             transform: none;
         }
+
+        /* Subtask styles */
+        .subtask-section { margin-top: 8px; padding-left: 20px; border-left: 2px solid var(--accent, #3b82f6); }
+        .subtask-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; font-size: 13px; }
+        .subtask-done { text-decoration: line-through; opacity: 0.6; }
+        .subtask-progress { font-size: 11px; color: var(--accent, #3b82f6); font-weight: 600; margin-bottom: 4px; }
+        .subtask-input { border: none; border-bottom: 1px solid #e2e8f0; font-size: 13px; padding: 4px; width: 100%; background: transparent; outline: none; color: inherit; }
     </style>
 </head>
 <body>
-    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-        <i class="fas fa-bars"></i>
-    </button>
-    <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button><div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
 
     <div class="container">
-        <div class="sidebar">
-            <div class="logo">
-                <img src="vierastudy.png" alt="VieraStudy">
-                <span class="logo-text">VieraStudy</span>
-            </div>
-            
-            <nav class="nav-menu">
-                <a href="dashboard.html" class="nav-item">
-                    <i class="fas fa-home" style="color: #3b82f6;"></i>
-                    <span>Home</span>
-                </a>
-                
-                <a href="flashcards" class="nav-item">
-                    <i class="fas fa-layer-group" style="color: #8b5cf6;"></i>
-                    <span>Flashcards</span>
-                </a>
-                
-                <a href="todo" class="nav-item active">
-                    <i class="fas fa-list-check"></i>
-                    <span>To-Do List</span>
-                </a>
-                
-                <a href="schedule" class="nav-item">
-                    <i class="fas fa-calendar-days"></i>
-                    <span>Study Schedule</span>
-                </a>
-                
-                <a href="pomodoro" class="nav-item">
-                    <i class="fas fa-clock" style="color: #ef4444;"></i>
-                    <span>Pomodoro Timer</span>
-                </a>
-                
-                <a href="notes" class="nav-item">
-                    <i class="fas fa-book-open"></i>
-                    <span>Take Notes</span>
-                </a>
-                
-                <a href="progress-tracker" class="nav-item">
-                    <i class="fas fa-chart-line" style="color: #ec4899;"></i>
-                    <span>Progress Tracker</span>
-                </a>
-                
-                <a href="classes" class="nav-item">
-                    <i class="fas fa-book" style="color: #f59e0b;"></i>
-                    <span>My Classes</span>
-                </a>
-                
-                <a href="settings" class="nav-item">
-                    <i class="fas fa-cog" style="color: #64748b;"></i>
-                    <span>Settings</span>
-                </a>
-            </nav>
-            
-            <div class="user-profile">
-                <div class="user-avatar" id="userAvatar"></div>
-                <div class="user-info">
-                    <div class="user-name" id="userName"></div>
-                    <div class="user-plan" id="userPlan"></div>
-                </div>
-                <button class="bug-report-btn" onclick="openBugReportModal()" title="Report a Bug">
-                    <i class="fas fa-bug"></i>
-                </button>
-                <button class="signout-btn" onclick="handleSignout()" title="Sign Out">
-                    <i class="fas fa-right-from-bracket"></i>
-                </button>
-            </div>
-        </div>
+        <div class="sidebar"></div>
 
         <div class="main-content">
             <div class="header">
@@ -1402,7 +1039,7 @@
                     Add Task
                 </button>
             </div>
-            
+
             <div class="content">
                 <div class="filters">
                     <button class="filter-btn active" onclick="filterTodos('all')">All</button>
@@ -1432,12 +1069,12 @@
                     <label class="form-label">Task Title <span style="color: #ef4444;">*</span></label>
                     <input type="text" class="form-input" id="todoTitle" required placeholder="What needs to be done?">
                 </div>
-                
+
                 <div class="form-group">
                     <label class="form-label">Description</label>
                     <textarea class="form-textarea" id="todoDescription" placeholder="Add details..."></textarea>
                 </div>
-                
+
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Class</label>
@@ -1445,7 +1082,7 @@
                             <option value="">Select class</option>
                         </select>
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="form-label">Priority <span style="color: #ef4444;">*</span></label>
                         <select class="form-select" id="todoPriority" required>
@@ -1455,14 +1092,14 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label class="form-label">Due Date</label>
                     <input type="date" class="form-input" id="todoDue">
                 </div>
-                
+
                 <input type="hidden" id="editingTodoId" value="">
-                
+
                 <button type="submit" class="submit-btn">
                     Save Task
                 </button>
@@ -1496,604 +1133,6 @@
             </div>
         </div>
     </div>
-
-    <script src="api.js?v=12"></script>
-    <script>
-        // Session check - redirect to login if not authenticated
-        (async function() {
-            await vieraAPI.ready;
-            if (!vieraAPI.isLoggedIn() || !vieraAPI.getUser()) {
-                window.location.href = 'login.html';
-                return;
-            }
-        })();
-        
-        // Notification Modal Functions
-        function showNotification(message, type = 'success', title = null) {
-            const modal = document.getElementById('notificationModal');
-            const icon = document.getElementById('notificationIcon');
-            const titleEl = document.getElementById('notificationTitle');
-            const messageEl = document.getElementById('notificationMessage');
-            
-            const defaultTitles = {
-                success: 'Success!',
-                info: 'Information',
-                warning: 'Warning',
-                error: 'Error'
-            };
-            
-            const icons = {
-                success: 'fa-check',
-                info: 'fa-info',
-                warning: 'fa-exclamation',
-                error: 'fa-times'
-            };
-            
-            icon.className = `notification-icon ${type}`;
-            icon.innerHTML = `<i class="fas ${icons[type]}"></i>`;
-            titleEl.textContent = title || defaultTitles[type] || 'Notification';
-            messageEl.textContent = message;
-            modal.classList.add('show');
-        }
-
-        function closeNotification() {
-            document.getElementById('notificationModal').classList.remove('show');
-        }
-
-        document.addEventListener('click', function(e) {
-            const modal = document.getElementById('notificationModal');
-            if (e.target === modal) closeNotification();
-        });
-
-        // Confirmation Modal Functions
-        let confirmCallback = null;
-
-        function showConfirmation(message, title = 'Confirm Action', type = 'warning') {
-            return new Promise((resolve) => {
-                const modal = document.getElementById('confirmationModal');
-                const icon = document.getElementById('confirmationIcon');
-                const titleEl = document.getElementById('confirmationTitle');
-                const messageEl = document.getElementById('confirmationMessage');
-                const confirmBtn = document.getElementById('confirmButton');
-                
-                const icons = {
-                    warning: 'fa-exclamation-triangle',
-                    danger: 'fa-exclamation-circle',
-                    info: 'fa-question-circle'
-                };
-                
-                const iconColors = {
-                    warning: 'warning',
-                    danger: 'error',
-                    info: 'info'
-                };
-                
-                icon.className = `notification-icon ${iconColors[type] || 'warning'}`;
-                icon.innerHTML = `<i class="fas ${icons[type] || 'fa-exclamation-triangle'}"></i>`;
-                titleEl.textContent = title;
-                messageEl.textContent = message;
-                
-                if (type === 'danger') {
-                    confirmBtn.style.background = '#ef4444';
-                } else {
-                    confirmBtn.style.background = '#3b82f6';
-                }
-                
-                confirmCallback = resolve;
-                modal.classList.add('show');
-            });
-        }
-
-        function confirmAction() {
-            const modal = document.getElementById('confirmationModal');
-            modal.classList.remove('show');
-            if (confirmCallback) {
-                confirmCallback(true);
-                confirmCallback = null;
-            }
-        }
-
-        function cancelConfirmation() {
-            const modal = document.getElementById('confirmationModal');
-            modal.classList.remove('show');
-            if (confirmCallback) {
-                confirmCallback(false);
-                confirmCallback = null;
-            }
-        }
-
-        // Load User Profile
-        function loadUserProfile() {
-            const user = vieraAPI.getUser();
-            if (user) {
-                const { firstName, lastName, isPremium } = user;
-                const initials = `${firstName.charAt(0)}${lastName ? lastName.charAt(0) : ''}`.toUpperCase();
-                document.getElementById('userAvatar').textContent = initials;
-                document.getElementById('userName').textContent = firstName;
-                
-                const planElement = document.getElementById('userPlan');
-                if (isPremium) {
-                    planElement.textContent = 'Premium';
-                    planElement.className = 'user-plan premium';
-                } else {
-                    planElement.textContent = 'Free';
-                    planElement.className = 'user-plan';
-                }
-            } else {
-                window.location.href = '/';
-            }
-        }
-
-        let todos = [];
-        let classes = [];
-        let currentFilter = 'all';
-
-        // Initialize data from API cache
-        function initializeData() {
-            todos = vieraAPI.getTodos() || [];
-            classes = vieraAPI.getClasses() || [];
-        }
-
-        // Log activity via API
-        function logActivity(icon, color, title) {
-            vieraAPI.logActivity(icon, color, title);
-        }
-
-        // Helper function to parse date strings without timezone issues
-        function parseLocalDate(dateString) {
-            if (!dateString) return null;
-            const [year, month, day] = dateString.split('-').map(Number);
-            return new Date(year, month - 1, day);
-        }
-
-        // Load dark mode immediately to prevent flash
-        (function() {
-            const darkMode = localStorage.getItem('studyDeckDarkMode') === 'true';
-            if (darkMode) {
-                document.body.classList.add('dark-mode');
-            }
-        })();
-
-        document.addEventListener('DOMContentLoaded', async function() {
-            // Wait for API to be ready (data loaded from cloud)
-            await vieraAPI.ready;
-            
-            // Only redirect if there's truly no token
-            if (!vieraAPI.isLoggedIn()) {
-                window.location.href = '/';
-                return;
-            }
-            
-            initializeData();
-            loadUserProfile();
-            document.querySelector('.user-profile')?.classList.add('loaded');
-            populateClassSelect();
-            renderTodos();
-        });
-
-        function toggleDropdown() {
-            document.querySelector('.ai-dropdown').classList.toggle('open');
-        }
-
-        function toggleMobileMenu() {
-            document.querySelector('.sidebar').classList.toggle('active');
-            document.querySelector('.mobile-overlay').classList.toggle('active');
-        }
-
-        // Close mobile menu when clicking nav links (except dropdowns)
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-menu a[href]:not(.dropdown-header)');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    if (window.innerWidth <= 768) {
-                        const sidebar = document.querySelector('.sidebar');
-                        const overlay = document.querySelector('.mobile-overlay');
-                        sidebar.classList.remove('active');
-                        overlay.classList.remove('active');
-                    }
-                });
-            });
-        });
-
-        async function handleSignout() {
-            const confirmed = await showConfirmation(
-                'Are you sure you want to sign out?',
-                'Sign Out',
-                'warning'
-            );
-            
-            if (confirmed) {
-                await vieraAPI.syncToCloud();
-                await vieraAPI.logout();
-                window.location.href = '/';
-            }
-        }
-
-        function populateClassSelect() {
-            const select = document.getElementById('todoClass');
-            select.innerHTML = '<option value="">Select class</option>';
-            classes.forEach(cls => {
-                select.innerHTML += `<option value="${cls.id}">${cls.name}</option>`;
-            });
-        }
-
-        function filterTodos(filter) {
-            currentFilter = filter;
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            renderTodos();
-        }
-
-        function renderTodos() {
-            const container = document.getElementById('todosList');
-            let filteredTodos = todos;
-
-            if (currentFilter === 'active') {
-                filteredTodos = todos.filter(t => !t.completed);
-            } else if (currentFilter === 'completed') {
-                filteredTodos = todos.filter(t => t.completed);
-            } else if (currentFilter === 'high') {
-                filteredTodos = todos.filter(t => t.priority === 'high' && !t.completed);
-            }
-
-            if (filteredTodos.length === 0) {
-                container.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 40px;">No tasks found. Add some tasks to get started!</p>';
-                return;
-            }
-
-            container.innerHTML = filteredTodos.map(todo => {
-                const todoClass = classes.find(c => c.id === todo.classId);
-                return `
-                    <div class="todo-item ${todo.completed ? 'completed' : ''}" draggable="true">
-                        <div class="todo-checkbox ${todo.completed ? 'checked' : ''}" onclick="toggleTodo(${todo.id})">
-                            ${todo.completed ? '<i class="fas fa-check" style="color: #10b981;"></i>' : ''}
-                        </div>
-                        <div class="todo-content">
-                            <div class="todo-title">${todo.title}</div>
-                            <div class="todo-meta">
-                                ${todoClass ? `<span class="todo-class" style="background: ${todoClass.color}20; color: ${todoClass.color}"><i class="fas ${todoClass.icon || 'fa-book'}" style="font-size: 12px;"></i> ${todoClass.name}</span>` : ''}
-                                <span class="todo-priority ${todo.priority}">
-                                    <i class="fas fa-flag"></i>
-                                    ${todo.priority.charAt(0).toUpperCase() + todo.priority.slice(1)}
-                                </span>
-                                ${todo.due ? `<span class="todo-due"><i class="fas fa-calendar" style="color: #06b6d4;"></i> ${parseLocalDate(todo.due).toLocaleDateString()}</span>` : ''}
-                            </div>
-                        </div>
-                        <div class="todo-actions">
-                            <button class="icon-btn" onclick="editTodo(${todo.id})">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="icon-btn delete" onclick="deleteTodo(${todo.id})">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function openTodoModal() {
-            populateClassSelect();
-            document.getElementById('todoModal').classList.add('active');
-            document.getElementById('todoForm').reset();
-            document.getElementById('editingTodoId').value = '';
-            document.querySelector('.modal-title').textContent = 'Add New Task';
-        }
-
-        function closeTodoModal() {
-            document.getElementById('todoModal').classList.remove('active');
-        }
-
-        function saveTodo(event) {
-            event.preventDefault();
-            
-            const id = document.getElementById('editingTodoId').value;
-            const classId = document.getElementById('todoClass').value;
-            const isNew = !id;
-            
-            const todoData = {
-                id: id ? parseInt(id) : Date.now(),
-                title: document.getElementById('todoTitle').value,
-                description: document.getElementById('todoDescription').value,
-                classId: classId ? parseInt(classId) : null,
-                priority: document.getElementById('todoPriority').value,
-                due: document.getElementById('todoDue').value,
-                completed: false,
-                created: new Date().toISOString()
-            };
-
-            if (id) {
-                const index = todos.findIndex(t => t.id === parseInt(id));
-                todos[index] = { ...todos[index], ...todoData };
-            } else {
-                todos.push(todoData);
-            }
-
-            vieraAPI.setTodos(todos);
-            
-            // Log activity for new tasks
-            if (isNew) {
-                logActivity('fas fa-plus-circle', 'green', `Added task: ${todoData.title}`);
-            }
-            
-            // Sync with study schedule if due date is set
-            if (todoData.due) {
-                syncToSchedule(todoData);
-            }
-            
-            renderTodos();
-            closeTodoModal();
-        }
-
-        function syncToSchedule(todo) {
-            // Get existing events from API
-            let events = vieraAPI.getEvents() || [];
-            
-            // Check if event already exists for this todo
-            const existingEventIndex = events.findIndex(e => e.todoId === todo.id);
-            
-            // Get class info for color
-            const todoClass = classes.find(c => c.id === todo.classId);
-            
-            const eventData = {
-                id: existingEventIndex >= 0 ? events[existingEventIndex].id : Date.now(),
-                todoId: todo.id,
-                title: `📝 ${todo.title}`,
-                description: todo.description || '',
-                date: todo.due,
-                startTime: '09:00',
-                endTime: '10:00',
-                color: todoClass?.color || '#3b82f6',
-                type: 'todo'
-            };
-            
-            if (existingEventIndex >= 0) {
-                events[existingEventIndex] = eventData;
-            } else {
-                events.push(eventData);
-            }
-            
-            vieraAPI.setEvents(events);
-        }
-
-        function editTodo(id) {
-            const todo = todos.find(t => t.id === id);
-            if (!todo) return;
-
-            document.querySelector('.modal-title').textContent = 'Edit Task';
-            document.getElementById('todoTitle').value = todo.title;
-            document.getElementById('todoDescription').value = todo.description || '';
-            document.getElementById('todoClass').value = todo.classId || '';
-            document.getElementById('todoPriority').value = todo.priority;
-            document.getElementById('todoDue').value = todo.due || '';
-            document.getElementById('editingTodoId').value = todo.id;
-            document.getElementById('todoModal').classList.add('active');
-        }
-
-        function toggleTodo(id) {
-            const todo = todos.find(t => t.id === id);
-            if (todo) {
-                todo.completed = !todo.completed;
-                todo.updated = new Date().toISOString();
-                
-                // Log activity
-                if (todo.completed) {
-                    logActivity('fas fa-check-circle', 'green', `Completed task: ${todo.title}`);
-                }
-                vieraAPI.setTodos(todos);
-                renderTodos();
-            }
-        }
-
-        async function deleteTodo(id) {
-            const confirmed = await showConfirmation(
-                'This task will be permanently deleted. This action cannot be undone.',
-                'Delete Task?',
-                'danger'
-            );
-            
-            if (confirmed) {
-                todos = todos.filter(t => t.id !== id);
-                vieraAPI.setTodos(todos);
-                
-                // Remove from schedule
-                let events = vieraAPI.getEvents() || [];
-                events = events.filter(e => e.todoId !== id);
-                vieraAPI.setEvents(events);
-                
-                renderTodos();
-                showNotification('Task deleted successfully', 'success', 'Task Deleted');
-            }
-        }
-
-        // ============================================
-        // KEYBOARD SHORTCUTS & AUTO-SAVE
-        // ============================================
-        document.addEventListener('keydown', function(e) {
-            const isTyping = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable;
-            
-            // Escape - Close modals
-            if (e.key === 'Escape') {
-                const todoModal = document.getElementById('todoModal');
-                if (todoModal && todoModal.classList.contains('active')) {
-                    closeTodoModal();
-                }
-            }
-            
-            if (isTyping && e.key !== 'Escape') return;
-            
-            if ((e.metaKey || e.ctrlKey) && e.key === 'h') { e.preventDefault(); window.location.href = '/'; }
-            if ((e.metaKey || e.ctrlKey) && e.key === 'f') { e.preventDefault(); window.location.href = 'flashcards'; }
-            if ((e.metaKey || e.ctrlKey) && e.key === 'p') { e.preventDefault(); window.location.href = 'pomodoro'; }
-            if ((e.metaKey || e.ctrlKey) && e.key === 's') { e.preventDefault(); window.location.href = 'schedule'; }
-            if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === 'N') { e.preventDefault(); window.location.href = 'notes'; }
-            if ((e.metaKey || e.ctrlKey) && e.key === ',') { e.preventDefault(); window.location.href = 'settings'; }
-            if ((e.metaKey || e.ctrlKey) && e.key === '/') { e.preventDefault(); showKeyboardShortcuts(); }
-        });
-
-        function showKeyboardShortcuts() {
-            // Detect OS
-            const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-            const isWindows = navigator.platform.toUpperCase().indexOf('WIN') >= 0;
-            const isLinux = navigator.platform.toUpperCase().indexOf('LINUX') >= 0;
-            const isChromeOS = navigator.userAgent.indexOf('CrOS') >= 0;
-            
-            // Symbol for modifier key
-            const modKey = isMac ? '⌘' : 'Ctrl';
-            const shiftKey = isMac ? '⇧' : 'Shift';
-            const optKey = isMac ? '⌥' : 'Alt';
-            
-            // OS Badge
-            let osBadge = 'Windows';
-            let osIcon = '<i class="fab fa-windows"></i>';
-            if (isMac) { osBadge = 'macOS'; osIcon = '<i class="fab fa-apple"></i>'; }
-            else if (isLinux) { osBadge = 'Linux'; osIcon = '<i class="fab fa-linux"></i>'; }
-            else if (isChromeOS) { osBadge = 'Chrome OS'; osIcon = '<i class="fab fa-chrome"></i>'; }
-            
-            const shortcuts = [
-                { keys: ['H'], action: 'Go to Home', icon: '<i class="fas fa-home" style="color: #3b82f6;"></i>' },
-                { keys: ['F'], action: 'Go to Flashcards', icon: '<i class="fas fa-layer-group" style="color: #8b5cf6;"></i>' },
-                { keys: ['T'], action: 'Go to Todos', icon: '<i class="fas fa-list-check" style="color: #10b981;"></i>' },
-                { keys: [shiftKey, 'N'], action: 'Go to Notes', icon: '<i class="fas fa-book-open" style="color: #f59e0b;"></i>' },
-                { keys: ['P'], action: 'Go to Pomodoro', icon: '<i class="fas fa-clock" style="color: #ef4444;"></i>' },
-                { keys: ['S'], action: 'Go to Schedule', icon: '<i class="fas fa-calendar-days" style="color: #06b6d4;"></i>' },
-                { keys: [shiftKey, 'P'], action: 'Go to Progress', icon: '<i class="fas fa-chart-line" style="color: #ec4899;"></i>' },
-                { keys: [','], action: 'Go to Settings', icon: '<i class="fas fa-cog" style="color: #64748b;"></i>' },
-                { keys: ['/'], action: 'Show this help', icon: '<i class="fas fa-question-circle" style="color: #a855f7;"></i>' },
-                { keys: ['Esc'], action: 'Close modals', icon: '<i class="fas fa-times" style="color: #6b7280;"></i>', noMod: true }
-            ];
-
-            const isDark = document.body.classList.contains('dark-mode');
-            
-            const shortcutList = shortcuts.map(s => {
-                const keyElements = s.noMod 
-                    ? s.keys.map(k => `<kbd style="background: ${isDark ? '#334155' : '#e2e8f0'}; color: ${isDark ? '#e2e8f0' : '#1e293b'}; padding: 6px 10px; border-radius: 6px; font-size: 13px; font-weight: 600; border: 1px solid ${isDark ? '#475569' : '#cbd5e1'}; min-width: 32px; text-align: center; display: inline-block;">${k}</kbd>`).join('')
-                    : `<kbd style="background: ${isDark ? '#334155' : '#e2e8f0'}; color: ${isDark ? '#e2e8f0' : '#1e293b'}; padding: 6px 10px; border-radius: 6px; font-size: 13px; font-weight: 600; border: 1px solid ${isDark ? '#475569' : '#cbd5e1'}; min-width: 32px; text-align: center; display: inline-block;">${modKey}</kbd>` + s.keys.map(k => ` <span style="color: ${isDark ? '#64748b' : '#94a3b8'}; margin: 0 4px;">+</span> <kbd style="background: ${isDark ? '#334155' : '#e2e8f0'}; color: ${isDark ? '#e2e8f0' : '#1e293b'}; padding: 6px 10px; border-radius: 6px; font-size: 13px; font-weight: 600; border: 1px solid ${isDark ? '#475569' : '#cbd5e1'}; min-width: 32px; text-align: center; display: inline-block;">${k}</kbd>`).join('');
-                
-                return `<div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: ${isDark ? 'rgba(59, 130, 246, 0.08)' : 'rgba(59, 130, 246, 0.05)'}; border-radius: 10px; margin-bottom: 10px; border: 1px solid ${isDark ? 'rgba(59, 130, 246, 0.15)' : 'rgba(59, 130, 246, 0.1)'}; transition: all 0.2s;" onmouseover="this.style.background='${isDark ? 'rgba(59, 130, 246, 0.12)' : 'rgba(59, 130, 246, 0.08)'}'; this.style.transform='translateX(2px)';" onmouseout="this.style.background='${isDark ? 'rgba(59, 130, 246, 0.08)' : 'rgba(59, 130, 246, 0.05)'}'; this.style.transform='translateX(0)';">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 16px; width: 24px; text-align: center; color: ${isDark ? '#e2e8f0' : '#1e293b'};">${s.icon}</span>
-                        <span style="font-weight: 600; color: ${isDark ? '#e2e8f0' : '#1e293b'};">${s.action}</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 4px;">
-                        ${keyElements}
-                    </div>
-                </div>`;
-            }).join('');
-
-            const modal = document.createElement('div');
-            modal.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 30000; backdrop-filter: blur(8px); animation: fadeIn 0.2s ease;';
-            
-            modal.innerHTML = `
-                <style>
-                    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-                    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-                </style>
-                <div style="background: ${isDark ? '#1e293b' : 'white'}; border-radius: 20px; padding: 0; max-width: 550px; width: 92%; max-height: 85vh; overflow: hidden; box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4); border: 1px solid ${isDark ? '#334155' : '#e2e8f0'}; animation: slideUp 0.3s ease;">
-                    <div style="background: #1e293b; padding: 24px 30px; border-bottom: 1px solid ${isDark ? '#334155' : '#e2e8f0'};">
-                        <div style="display: flex; align-items: center; justify-content: space-between;">
-                            <div>
-                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
-                                    <i class="fas fa-keyboard" style="font-size: 24px; color: white;"></i>
-                                    <h2 style="margin: 0; color: white; font-size: 24px; font-weight: 700;">Keyboard Shortcuts</h2>
-                                </div>
-                                <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
-                                    <span style="background: rgba(255, 255, 255, 0.2); padding: 4px 10px; border-radius: 6px; font-size: 12px; color: white; font-weight: 600; display: flex; align-items: center; gap: 6px;">${osIcon} <span>${osBadge}</span></span>
-                                </div>
-                            </div>
-                            <button onclick="this.closest('.keyboard-shortcuts-modal').remove()" style="background: rgba(255, 255, 255, 0.2); border: none; width: 36px; height: 36px; border-radius: 8px; font-size: 20px; cursor: pointer; color: white; transition: all 0.2s; display: flex; align-items: center; justify-content: center;" onmouseover="this.style.background='rgba(255, 255, 255, 0.3)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.2)'">×</button>
-                        </div>
-                    </div>
-                    <div style="padding: 24px 30px; max-height: calc(85vh - 120px); overflow-y: auto;">
-                        ${shortcutList}
-                        <div style="margin-top: 20px; padding: 16px; background: ${isDark ? 'rgba(139, 92, 246, 0.1)' : 'rgba(139, 92, 246, 0.05)'}; border-radius: 10px; border: 1px solid ${isDark ? 'rgba(139, 92, 246, 0.2)' : 'rgba(139, 92, 246, 0.15)'};">
-                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                                <span style="font-size: 16px;">💡</span>
-                                <span style="font-weight: 600; color: ${isDark ? '#e2e8f0' : '#1e293b'}; font-size: 14px;">Pro Tip</span>
-                            </div>
-                            <p style="margin: 0; color: ${isDark ? '#94a3b8' : '#64748b'}; font-size: 13px; line-height: 1.6;">Use ${modKey} + / to show this dialog anytime!</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-            modal.className = 'keyboard-shortcuts-modal';
-            modal.addEventListener('click', function(e) { if (e.target === modal) modal.remove(); });
-            document.body.appendChild(modal);
-        }
-
-        // ============ BUG REPORT FUNCTIONALITY ============
-        const BUG_REPORT_URL = 'https://script.google.com/macros/s/AKfycbxW5D6i7Td2Em-OqHmCpgy-DVQuzn1oCzn_pBRB2IOb_8MGfwgPqjF8KghYQDZpMNdKUw/exec';
-
-        function openBugReportModal() {
-            document.getElementById('bugReportModal').classList.add('active');
-            document.getElementById('bugPage').value = window.location.href;
-            document.getElementById('bugPageName').textContent = 'To-Do List';
-            
-            const user = vieraAPI.getUser();
-            if (user) {
-                document.getElementById('bugUserEmail').value = user.email || '';
-                document.getElementById('bugUserName').value = `${user.firstName || ''} ${user.lastName || ''}`.trim();
-            }
-        }
-
-        function closeBugReportModal() {
-            document.getElementById('bugReportModal').classList.remove('active');
-        }
-
-        function getBrowserInfo() {
-            const ua = navigator.userAgent;
-            let browser = 'Unknown';
-            if (ua.includes('Firefox')) browser = 'Firefox';
-            else if (ua.includes('Chrome') && !ua.includes('Edg')) browser = 'Chrome';
-            else if (ua.includes('Safari') && !ua.includes('Chrome')) browser = 'Safari';
-            else if (ua.includes('Edg')) browser = 'Edge';
-            else if (ua.includes('Opera') || ua.includes('OPR')) browser = 'Opera';
-            if (/iPhone|iPad|iPod|Android/i.test(ua)) browser += ' (Mobile)';
-            return browser;
-        }
-
-        async function submitBugReport(event) {
-            event.preventDefault();
-            const btn = event.target.querySelector('button[type="submit"]');
-            const originalContent = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
-            
-            const bugData = {
-                page: document.getElementById('bugPage').value,
-                pageName: 'To-Do List',
-                category: document.getElementById('bugCategory').value,
-                description: document.getElementById('bugDescription').value,
-                userEmail: document.getElementById('bugUserEmail').value || 'Anonymous',
-                userName: document.getElementById('bugUserName').value || 'Anonymous',
-                browser: getBrowserInfo(),
-                screenSize: `${window.innerWidth}x${window.innerHeight}`,
-                userAgent: navigator.userAgent
-            };
-            
-            try {
-                await fetch(BUG_REPORT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(bugData)
-                });
-                showNotification('Bug report submitted successfully! Thank you for your feedback.', 'success', 'Report Sent');
-                closeBugReportModal();
-                document.getElementById('bugDescription').value = '';
-                document.getElementById('bugCategory').value = 'General';
-            } catch (error) {
-                console.error('Bug report error:', error);
-                showNotification('Failed to submit bug report. Please try again later.', 'error', 'Error');
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = originalContent;
-            }
-        }
-
-        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeBugReportModal(); });
-        document.getElementById('bugReportModal')?.addEventListener('click', function(e) { if (e.target === this) closeBugReportModal(); });
-    </script>
 
     <!-- Bug Report Modal -->
     <div id="bugReportModal" class="bug-modal">
@@ -2137,5 +1176,483 @@
             </form>
         </div>
     </div>
+
+    <script src="/api.js"></script>
+    <script src="/shared.js"></script>
+    <script>
+        // Session check - redirect to login if not authenticated
+        (async function() {
+            await vieraAPI.ready;
+            if (!vieraAPI.isLoggedIn() || !vieraAPI.getUser()) {
+                window.location.href = 'login.html';
+                return;
+            }
+        })();
+
+        // Notification Modal Functions
+        function showNotification(message, type = 'success', title = null) {
+            const modal = document.getElementById('notificationModal');
+            const icon = document.getElementById('notificationIcon');
+            const titleEl = document.getElementById('notificationTitle');
+            const messageEl = document.getElementById('notificationMessage');
+
+            const defaultTitles = {
+                success: 'Success!',
+                info: 'Information',
+                warning: 'Warning',
+                error: 'Error'
+            };
+
+            const icons = {
+                success: 'fa-check',
+                info: 'fa-info',
+                warning: 'fa-exclamation',
+                error: 'fa-times'
+            };
+
+            icon.className = `notification-icon ${type}`;
+            icon.innerHTML = `<i class="fas ${icons[type]}"></i>`;
+            titleEl.textContent = title || defaultTitles[type] || 'Notification';
+            messageEl.textContent = message;
+            modal.classList.add('show');
+        }
+
+        function closeNotification() {
+            document.getElementById('notificationModal').classList.remove('show');
+        }
+
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('notificationModal');
+            if (e.target === modal) closeNotification();
+        });
+
+        // Confirmation Modal Functions
+        let confirmCallback = null;
+
+        function showConfirmation(message, title = 'Confirm Action', type = 'warning') {
+            return new Promise((resolve) => {
+                const modal = document.getElementById('confirmationModal');
+                const icon = document.getElementById('confirmationIcon');
+                const titleEl = document.getElementById('confirmationTitle');
+                const messageEl = document.getElementById('confirmationMessage');
+                const confirmBtn = document.getElementById('confirmButton');
+
+                const icons = {
+                    warning: 'fa-exclamation-triangle',
+                    danger: 'fa-exclamation-circle',
+                    info: 'fa-question-circle'
+                };
+
+                const iconColors = {
+                    warning: 'warning',
+                    danger: 'error',
+                    info: 'info'
+                };
+
+                icon.className = `notification-icon ${iconColors[type] || 'warning'}`;
+                icon.innerHTML = `<i class="fas ${icons[type] || 'fa-exclamation-triangle'}"></i>`;
+                titleEl.textContent = title;
+                messageEl.textContent = message;
+
+                if (type === 'danger') {
+                    confirmBtn.style.background = '#ef4444';
+                } else {
+                    confirmBtn.style.background = '#3b82f6';
+                }
+
+                confirmCallback = resolve;
+                modal.classList.add('show');
+            });
+        }
+
+        function confirmAction() {
+            const modal = document.getElementById('confirmationModal');
+            modal.classList.remove('show');
+            if (confirmCallback) {
+                confirmCallback(true);
+                confirmCallback = null;
+            }
+        }
+
+        function cancelConfirmation() {
+            const modal = document.getElementById('confirmationModal');
+            modal.classList.remove('show');
+            if (confirmCallback) {
+                confirmCallback(false);
+                confirmCallback = null;
+            }
+        }
+
+        let todos = [];
+        let classes = [];
+        let currentFilter = 'all';
+
+        // Initialize data from API cache
+        function initializeData() {
+            todos = vieraAPI.getTodos() || [];
+            classes = vieraAPI.getClasses() || [];
+        }
+
+        // Log activity via API
+        function logActivity(icon, color, title) {
+            vieraAPI.logActivity(icon, color, title);
+        }
+
+        // Helper function to parse date strings without timezone issues
+        function parseLocalDate(dateString) {
+            if (!dateString) return null;
+            const [year, month, day] = dateString.split('-').map(Number);
+            return new Date(year, month - 1, day);
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Wait for API to be ready (data loaded from cloud)
+            await vieraAPI.ready;
+
+            // Only redirect if there's truly no token
+            if (!vieraAPI.isLoggedIn()) {
+                window.location.href = '/';
+                return;
+            }
+
+            initializeData();
+            populateClassSelect();
+            renderTodos();
+        });
+
+        function filterTodos(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderTodos();
+        }
+
+        function renderSubtasks(todo) {
+            if (!todo.subtasks || todo.subtasks.length === 0) {
+                return `<div class="subtask-section" style="margin-top:6px; padding-left:0; border-left:none;">
+                    <div class="subtask-add">
+                        <input type="text" placeholder="Add subtask..." class="subtask-input"
+                            onkeydown="if(event.key==='Enter') addSubtask('${todo.id}', this)">
+                    </div>
+                </div>`;
+            }
+            const done = todo.subtasks.filter(s => s.completed).length;
+            return `<div class="subtask-section">
+                <div class="subtask-progress">${done}/${todo.subtasks.length} subtasks</div>
+                ${todo.subtasks.map(s => `
+                    <div class="subtask-item">
+                        <input type="checkbox" ${s.completed ? 'checked' : ''}
+                            onchange="toggleSubtask('${todo.id}', '${s.id}', this.checked)">
+                        <span class="${s.completed ? 'subtask-done' : ''}">${s.text}</span>
+                    </div>
+                `).join('')}
+                <div class="subtask-add">
+                    <input type="text" placeholder="Add subtask..." class="subtask-input"
+                        onkeydown="if(event.key==='Enter') addSubtask('${todo.id}', this)">
+                </div>
+            </div>`;
+        }
+
+        function toggleSubtask(todoId, subtaskId, checked) {
+            const todo = todos.find(t => String(t.id) === String(todoId));
+            if (!todo || !todo.subtasks) return;
+            const sub = todo.subtasks.find(s => String(s.id) === String(subtaskId));
+            if (sub) sub.completed = checked;
+            // Auto-complete parent if all subtasks done
+            if (todo.subtasks.length > 0 && todo.subtasks.every(s => s.completed)) {
+                todo.completed = true;
+                todo.updated = new Date().toISOString();
+            }
+            vieraAPI.setTodos(todos);
+            renderTodos();
+        }
+
+        function addSubtask(todoId, inputEl) {
+            const text = inputEl.value.trim();
+            if (!text) return;
+            const todo = todos.find(t => String(t.id) === String(todoId));
+            if (!todo) return;
+            if (!todo.subtasks) todo.subtasks = [];
+            todo.subtasks.push({ id: Date.now().toString(), text, completed: false });
+            vieraAPI.setTodos(todos);
+            inputEl.value = '';
+            renderTodos();
+        }
+
+        function renderTodos() {
+            const container = document.getElementById('todosList');
+            let filteredTodos = todos;
+
+            if (currentFilter === 'active') {
+                filteredTodos = todos.filter(t => !t.completed);
+            } else if (currentFilter === 'completed') {
+                filteredTodos = todos.filter(t => t.completed);
+            } else if (currentFilter === 'high') {
+                filteredTodos = todos.filter(t => t.priority === 'high' && !t.completed);
+            }
+
+            if (filteredTodos.length === 0) {
+                container.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 40px;">No tasks found. Add some tasks to get started!</p>';
+                return;
+            }
+
+            container.innerHTML = filteredTodos.map(todo => {
+                const todoClass = classes.find(c => c.id === todo.classId);
+                const subtaskCount = todo.subtasks && todo.subtasks.length > 0
+                    ? `<span class="subtask-progress" style="margin-left:4px;">${todo.subtasks.filter(s=>s.completed).length}/${todo.subtasks.length} subtasks</span>`
+                    : '';
+                return `
+                    <div class="todo-item ${todo.completed ? 'completed' : ''}" draggable="true">
+                        <div class="todo-checkbox ${todo.completed ? 'checked' : ''}" onclick="toggleTodo(${todo.id})">
+                            ${todo.completed ? '<i class="fas fa-check" style="color: #10b981;"></i>' : ''}
+                        </div>
+                        <div class="todo-content">
+                            <div class="todo-title">${todo.title}</div>
+                            <div class="todo-meta">
+                                ${todoClass ? `<span class="todo-class" style="background: ${todoClass.color}20; color: ${todoClass.color}"><i class="fas ${todoClass.icon || 'fa-book'}" style="font-size: 12px;"></i> ${todoClass.name}</span>` : ''}
+                                <span class="todo-priority ${todo.priority}">
+                                    <i class="fas fa-flag"></i>
+                                    ${todo.priority.charAt(0).toUpperCase() + todo.priority.slice(1)}
+                                </span>
+                                ${todo.due ? `<span class="todo-due"><i class="fas fa-calendar" style="color: #06b6d4;"></i> ${parseLocalDate(todo.due).toLocaleDateString()}</span>` : ''}
+                                ${subtaskCount}
+                            </div>
+                            ${renderSubtasks(todo)}
+                        </div>
+                        <div class="todo-actions">
+                            <button class="icon-btn" onclick="editTodo(${todo.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="icon-btn delete" onclick="deleteTodo(${todo.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openTodoModal() {
+            populateClassSelect();
+            document.getElementById('todoModal').classList.add('active');
+            document.getElementById('todoForm').reset();
+            document.getElementById('editingTodoId').value = '';
+            document.querySelector('.modal-title').textContent = 'Add New Task';
+        }
+
+        function closeTodoModal() {
+            document.getElementById('todoModal').classList.remove('active');
+        }
+
+        function saveTodo(event) {
+            event.preventDefault();
+
+            const id = document.getElementById('editingTodoId').value;
+            const classId = document.getElementById('todoClass').value;
+            const isNew = !id;
+
+            const todoData = {
+                id: id ? parseInt(id) : Date.now(),
+                title: document.getElementById('todoTitle').value,
+                description: document.getElementById('todoDescription').value,
+                classId: classId ? parseInt(classId) : null,
+                priority: document.getElementById('todoPriority').value,
+                due: document.getElementById('todoDue').value,
+                completed: false,
+                created: new Date().toISOString()
+            };
+
+            if (id) {
+                const index = todos.findIndex(t => t.id === parseInt(id));
+                todos[index] = { ...todos[index], ...todoData };
+            } else {
+                todos.push(todoData);
+            }
+
+            vieraAPI.setTodos(todos);
+
+            // Log activity for new tasks
+            if (isNew) {
+                logActivity('fas fa-plus-circle', 'green', `Added task: ${todoData.title}`);
+            }
+
+            // Sync with study schedule if due date is set
+            if (todoData.due) {
+                syncToSchedule(todoData);
+            }
+
+            renderTodos();
+            closeTodoModal();
+        }
+
+        function populateClassSelect() {
+            const select = document.getElementById('todoClass');
+            select.innerHTML = '<option value="">Select class</option>';
+            classes.forEach(cls => {
+                select.innerHTML += `<option value="${cls.id}">${cls.name}</option>`;
+            });
+        }
+
+        function syncToSchedule(todo) {
+            // Get existing events from API
+            let events = vieraAPI.getEvents() || [];
+
+            // Check if event already exists for this todo
+            const existingEventIndex = events.findIndex(e => e.todoId === todo.id);
+
+            // Get class info for color
+            const todoClass = classes.find(c => c.id === todo.classId);
+
+            const eventData = {
+                id: existingEventIndex >= 0 ? events[existingEventIndex].id : Date.now(),
+                todoId: todo.id,
+                title: `📝 ${todo.title}`,
+                description: todo.description || '',
+                date: todo.due,
+                startTime: '09:00',
+                endTime: '10:00',
+                color: todoClass?.color || '#3b82f6',
+                type: 'todo'
+            };
+
+            if (existingEventIndex >= 0) {
+                events[existingEventIndex] = eventData;
+            } else {
+                events.push(eventData);
+            }
+
+            vieraAPI.setEvents(events);
+        }
+
+        function editTodo(id) {
+            const todo = todos.find(t => t.id === id);
+            if (!todo) return;
+
+            document.querySelector('.modal-title').textContent = 'Edit Task';
+            document.getElementById('todoTitle').value = todo.title;
+            document.getElementById('todoDescription').value = todo.description || '';
+            document.getElementById('todoClass').value = todo.classId || '';
+            document.getElementById('todoPriority').value = todo.priority;
+            document.getElementById('todoDue').value = todo.due || '';
+            document.getElementById('editingTodoId').value = todo.id;
+            document.getElementById('todoModal').classList.add('active');
+        }
+
+        function toggleTodo(id) {
+            const todo = todos.find(t => t.id === id);
+            if (todo) {
+                todo.completed = !todo.completed;
+                todo.updated = new Date().toISOString();
+
+                // Log activity
+                if (todo.completed) {
+                    logActivity('fas fa-check-circle', 'green', `Completed task: ${todo.title}`);
+                }
+                vieraAPI.setTodos(todos);
+                renderTodos();
+            }
+        }
+
+        async function deleteTodo(id) {
+            const confirmed = await showConfirmation(
+                'This task will be permanently deleted. This action cannot be undone.',
+                'Delete Task?',
+                'danger'
+            );
+
+            if (confirmed) {
+                todos = todos.filter(t => t.id !== id);
+                vieraAPI.setTodos(todos);
+
+                // Remove from schedule
+                let events = vieraAPI.getEvents() || [];
+                events = events.filter(e => e.todoId !== id);
+                vieraAPI.setEvents(events);
+
+                renderTodos();
+                showNotification('Task deleted successfully', 'success', 'Task Deleted');
+            }
+        }
+
+        // Escape closes modals
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeTodoModal();
+                closeBugReportModal();
+            }
+        });
+
+        // ============ BUG REPORT FUNCTIONALITY ============
+        const BUG_REPORT_URL = 'https://script.google.com/macros/s/AKfycbxW5D6i7Td2Em-OqHmCpgy-DVQuzn1oCzn_pBRB2IOb_8MGfwgPqjF8KghYQDZpMNdKUw/exec';
+
+        function openBugReportModal() {
+            document.getElementById('bugReportModal').classList.add('active');
+            document.getElementById('bugPage').value = window.location.href;
+            document.getElementById('bugPageName').textContent = 'To-Do List';
+
+            const user = vieraAPI.getUser();
+            if (user) {
+                document.getElementById('bugUserEmail').value = user.email || '';
+                document.getElementById('bugUserName').value = `${user.firstName || ''} ${user.lastName || ''}`.trim();
+            }
+        }
+
+        function closeBugReportModal() {
+            document.getElementById('bugReportModal').classList.remove('active');
+        }
+
+        function getBrowserInfo() {
+            const ua = navigator.userAgent;
+            let browser = 'Unknown';
+            if (ua.includes('Firefox')) browser = 'Firefox';
+            else if (ua.includes('Chrome') && !ua.includes('Edg')) browser = 'Chrome';
+            else if (ua.includes('Safari') && !ua.includes('Chrome')) browser = 'Safari';
+            else if (ua.includes('Edg')) browser = 'Edge';
+            else if (ua.includes('Opera') || ua.includes('OPR')) browser = 'Opera';
+            if (/iPhone|iPad|iPod|Android/i.test(ua)) browser += ' (Mobile)';
+            return browser;
+        }
+
+        async function submitBugReport(event) {
+            event.preventDefault();
+            const btn = event.target.querySelector('button[type="submit"]');
+            const originalContent = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
+            const bugData = {
+                page: document.getElementById('bugPage').value,
+                pageName: 'To-Do List',
+                category: document.getElementById('bugCategory').value,
+                description: document.getElementById('bugDescription').value,
+                userEmail: document.getElementById('bugUserEmail').value || 'Anonymous',
+                userName: document.getElementById('bugUserName').value || 'Anonymous',
+                browser: getBrowserInfo(),
+                screenSize: `${window.innerWidth}x${window.innerHeight}`,
+                userAgent: navigator.userAgent
+            };
+
+            try {
+                await fetch(BUG_REPORT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(bugData)
+                });
+                showNotification('Bug report submitted successfully! Thank you for your feedback.', 'success', 'Report Sent');
+                closeBugReportModal();
+                document.getElementById('bugDescription').value = '';
+                document.getElementById('bugCategory').value = 'General';
+            } catch (error) {
+                console.error('Bug report error:', error);
+                showNotification('Failed to submit bug report. Please try again later.', 'error', 'Error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalContent;
+            }
+        }
+
+        document.getElementById('bugReportModal')?.addEventListener('click', function(e) { if (e.target === this) closeBugReportModal(); });
+    </script>
 </body>
 </html>
