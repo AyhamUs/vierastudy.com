@@ -175,39 +175,15 @@
 
         /* Welcome Banner */
         .welcome-banner {
-            background:
-                linear-gradient(135deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 55%, #a855f7) 60%, color-mix(in srgb, var(--accent) 35%, #ec4899) 100%);
-            border-radius: var(--radius-lg);
-            padding: 32px 36px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 30px;
             margin-bottom: 28px;
-            color: white;
+            color: var(--text);
             position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow-accent);
-        }
-
-        .welcome-banner::before {
-            content: '';
-            position: absolute;
-            top: -80%;
-            right: -15%;
-            width: 450px;
-            height: 450px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .welcome-banner::after {
-            content: '';
-            position: absolute;
-            bottom: -60%;
-            left: -10%;
-            width: 300px;
-            height: 300px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            pointer-events: none;
+            box-shadow: none;
         }
 
         .welcome-banner-content {
@@ -227,19 +203,21 @@
         }
 
         .welcome-greeting h1 {
-            font-size: 28px;
-            font-weight: 700;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
             margin-bottom: 6px;
             display: flex;
             align-items: center;
             gap: 10px;
             flex-wrap: wrap;
             word-break: break-word;
+            color: var(--text);
         }
 
         .welcome-greeting p {
-            font-size: 16px;
-            opacity: 0.9;
+            font-size: 15px;
+            color: var(--text-muted);
             margin-bottom: 0;
             word-break: break-word;
         }
@@ -251,22 +229,23 @@
         }
 
         .welcome-date-day {
-            font-size: 20px;
+            font-size: 17px;
             font-weight: 600;
             margin-bottom: 2px;
+            color: var(--text);
         }
 
         .welcome-date-full {
             font-size: 13px;
-            opacity: 0.8;
+            color: var(--text-faint);
         }
 
         .welcome-quote {
             margin-top: 18px;
             padding-top: 18px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-top: 1px solid var(--border);
             font-style: italic;
-            opacity: 0.9;
+            color: var(--text-muted);
             font-size: 14px;
             position: relative;
             z-index: 1;
@@ -294,42 +273,26 @@
             overflow: hidden;
         }
 
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            border-radius: 16px 0 0 16px;
-        }
-
-        .stat-card:nth-child(1)::before { background: linear-gradient(180deg, #3b82f6, #2563eb); }
-        .stat-card:nth-child(2)::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
-        .stat-card:nth-child(3)::before { background: linear-gradient(180deg, #10b981, #059669); }
-        .stat-card:nth-child(4)::before { background: linear-gradient(180deg, #f59e0b, #d97706); }
-
         .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
             border-color: var(--border-strong);
+            background: var(--surface-2);
         }
 
         .stat-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-xs);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 19px;
             flex-shrink: 0;
+            background: var(--surface-2);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
         }
 
-        .stat-card:nth-child(1) .stat-icon { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
-        .stat-card:nth-child(2) .stat-icon { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
-        .stat-card:nth-child(3) .stat-icon { background: rgba(16, 185, 129, 0.1); color: #10b981; }
-        .stat-card:nth-child(4) .stat-icon { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+        body.dark-mode .stat-icon { background: var(--surface-hover); }
 
         .stat-info {
             flex: 1;
