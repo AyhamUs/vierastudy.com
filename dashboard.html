@@ -60,64 +60,13 @@
             color: #e2e8f0;
         }
 
-        body.dark-mode .main-content {
-            background: #0f172a;
-        }
-
         body.dark-mode .header {
-            background: #1e293b;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .header h1 {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .card {
-            background: #1e293b;
-            border: 1px solid #334155;
-        }
-
-        body.dark-mode .card h3 {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .card p {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .card-number {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .section {
-            background: #1e293b;
-            border: 1px solid #334155;
-        }
-
-        body.dark-mode .section h2 {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .activity-item {
-            border-color: #334155;
-        }
-
-        body.dark-mode .activity-title {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .activity-time {
-            color: #94a3b8;
+            color: var(--text);
         }
 
         body.dark-mode .footer {
-            background: #1e293b;
-            border-color: #334155;
-        }
-
-        body.dark-mode .activity-item {
-            border-color: #334155;
+            background: var(--surface);
+            border-color: var(--border);
         }
 
         body.dark-mode hr,
@@ -226,14 +175,15 @@
 
         /* Welcome Banner */
         .welcome-banner {
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
-            border-radius: 20px;
+            background:
+                linear-gradient(135deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 55%, #a855f7) 60%, color-mix(in srgb, var(--accent) 35%, #ec4899) 100%);
+            border-radius: var(--radius-lg);
             padding: 32px 36px;
             margin-bottom: 28px;
             color: white;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(59, 130, 246, 0.3);
+            box-shadow: var(--shadow-accent);
         }
 
         .welcome-banner::before {
@@ -331,15 +281,15 @@
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            border-radius: 16px;
+            background: var(--surface);
+            border-radius: var(--radius);
             padding: 24px;
             display: flex;
             align-items: center;
             gap: 18px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            transition: transform var(--transition), box-shadow var(--transition);
             position: relative;
             overflow: hidden;
         }
@@ -361,7 +311,8 @@
 
         .stat-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--shadow-md);
+            border-color: var(--border-strong);
         }
 
         .stat-icon {
@@ -386,7 +337,7 @@
 
         .stat-label {
             font-size: 13px;
-            color: #64748b;
+            color: var(--text-muted);
             margin-bottom: 4px;
             font-weight: 500;
         }
@@ -394,27 +345,15 @@
         .stat-value {
             font-size: 28px;
             font-weight: 700;
-            color: #1e293b;
+            color: var(--text);
             line-height: 1.2;
+            letter-spacing: -0.02em;
         }
 
         .stat-subtitle {
             font-size: 12px;
-            color: #94a3b8;
+            color: var(--text-faint);
             margin-top: 2px;
-        }
-
-        body.dark-mode .stat-card {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border: 1px solid #334155;
-        }
-
-        body.dark-mode .stat-value {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .stat-label {
-            color: #94a3b8;
         }
 
         /* Quick Actions - New Design */
@@ -426,23 +365,23 @@
         }
 
         .quick-action-card {
-            background: white;
-            border-radius: 14px;
+            background: var(--surface);
+            border-radius: var(--radius);
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
+            border: 1.5px solid var(--border);
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition);
             cursor: pointer;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            box-shadow: var(--shadow-sm);
         }
 
         .quick-action-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-md);
         }
 
         .quick-action-icon {
@@ -474,17 +413,8 @@
         .quick-action-text {
             font-size: 13px;
             font-weight: 600;
-            color: #475569;
+            color: var(--text);
             text-align: center;
-        }
-
-        body.dark-mode .quick-action-card {
-            background: #1e293b;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        body.dark-mode .quick-action-text {
-            color: #cbd5e1;
         }
 
         /* Dashboard Grid Layout */
@@ -503,16 +433,17 @@
         }
 
         .card {
-            background: white;
+            background: var(--surface);
             padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: all 0.3s;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--transition), box-shadow var(--transition);
         }
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-md);
         }
 
         .card-icon {
@@ -549,11 +480,11 @@
         .card h3 {
             font-size: 18px;
             margin-bottom: 8px;
-            color: #1e293b;
+            color: var(--text);
         }
 
         .card p {
-            color: #64748b;
+            color: var(--text-muted);
             font-size: 14px;
             line-height: 1.6;
         }
@@ -561,35 +492,35 @@
         .card-number {
             font-size: 32px;
             font-weight: bold;
-            color: #1e293b;
+            color: var(--text);
             margin-top: 15px;
         }
 
         .section {
-            background: white;
+            background: var(--surface);
             padding: 24px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-            border: 1px solid #e2e8f0;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
         }
 
         .section h2 {
             font-size: 17px;
             margin-bottom: 18px;
-            color: #1e293b;
+            color: var(--text);
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
         .section h2 i {
-            color: #64748b;
+            color: var(--accent);
             font-size: 16px;
         }
 
         .activity-item {
             padding: 14px 0;
-            border-bottom: 1px solid #f1f5f9;
+            border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             gap: 14px;
@@ -622,7 +553,7 @@
 
         .activity-title {
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text);
             margin-bottom: 2px;
             font-size: 14px;
             white-space: nowrap;
@@ -2493,6 +2424,194 @@
             background: #334155;
             color: #cbd5e1;
         }
+
+        /* ── Dashboard toolbar ─────────────────────────────── */
+        .dash-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .dash-toolbar-title {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+        .dash-toolbar-actions { display: flex; gap: 10px; }
+        .dash-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 9px 16px;
+            border-radius: var(--radius-xs);
+            font-size: 13.5px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+        .dash-btn:hover { color: var(--text); border-color: var(--border-strong); }
+        .dash-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--accent-contrast);
+            box-shadow: var(--shadow-accent);
+        }
+
+        /* ── Widget framing ────────────────────────────────── */
+        .dash-widget { margin-bottom: 28px; position: relative; }
+        .dash-widget:last-child { margin-bottom: 0; }
+        .widget-bar {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--surface);
+            border: 1px dashed var(--border-strong);
+            border-radius: var(--radius-xs);
+            padding: 8px 12px;
+            margin-bottom: 10px;
+        }
+        .widget-drag {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: grab;
+        }
+        .widget-drag i { color: var(--text-faint); }
+        .widget-hide {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            width: 30px; height: 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+        .widget-hide:hover { background: #ef4444; border-color: #ef4444; color: #fff; }
+
+        /* Edit mode */
+        body.dash-editing .widget-bar { display: flex; }
+        body.dash-editing .dash-widget {
+            outline: 2px dashed var(--border-strong);
+            outline-offset: 6px;
+            border-radius: var(--radius);
+        }
+        body.dash-editing .dash-widget .welcome-banner,
+        body.dash-editing .dash-widget .quick-action-card,
+        body.dash-editing .dash-widget .stat-card { pointer-events: none; }
+        .dash-widget.dragging { opacity: 0.45; }
+        .dash-widget.drop-target { outline-color: var(--accent) !important; }
+
+        .banner-edit {
+            position: absolute;
+            top: 16px; right: 16px;
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #fff;
+            width: 34px; height: 34px;
+            border-radius: 10px;
+            cursor: pointer;
+            z-index: 2;
+            transition: background var(--transition);
+        }
+        .banner-edit:hover { background: rgba(255,255,255,0.32); }
+
+        /* ── Daily goals ───────────────────────────────────── */
+        .goals-section h2 { justify-content: flex-start; }
+        .goals-progress {
+            margin-left: auto;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 3px 10px;
+            border-radius: var(--radius-pill);
+        }
+        .goals-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+        .goal-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 14px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xs);
+            transition: all var(--transition);
+        }
+        .goal-item:hover { border-color: var(--border-strong); }
+        .goal-check {
+            width: 22px; height: 22px;
+            border-radius: 7px;
+            border: 2px solid var(--border-strong);
+            cursor: pointer;
+            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff;
+            font-size: 12px;
+            transition: all var(--transition);
+        }
+        .goal-item.done .goal-check { background: var(--accent); border-color: var(--accent); }
+        .goal-text { flex: 1; font-size: 14px; color: var(--text); }
+        .goal-item.done .goal-text { text-decoration: line-through; color: var(--text-faint); }
+        .goal-del {
+            background: transparent; border: none; color: var(--text-faint);
+            cursor: pointer; font-size: 14px; opacity: 0; transition: opacity var(--transition);
+        }
+        .goal-item:hover .goal-del { opacity: 1; }
+        .goal-del:hover { color: #ef4444; }
+        .goal-empty { text-align: center; color: var(--text-faint); font-size: 13px; padding: 14px 0; }
+        .goal-add { display: flex; gap: 10px; }
+        .goal-add input {
+            flex: 1;
+            padding: 11px 14px;
+            border: 1.5px solid var(--border-strong);
+            border-radius: var(--radius-xs);
+            background: var(--surface-2);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 14px;
+            transition: border-color var(--transition);
+        }
+        .goal-add input:focus { outline: none; border-color: var(--accent); }
+        .goal-add button {
+            background: var(--accent); color: var(--accent-contrast);
+            border: none; width: 44px; border-radius: var(--radius-xs);
+            cursor: pointer; font-size: 15px; transition: background var(--transition);
+        }
+        .goal-add button:hover { background: var(--accent-hover); }
+
+        /* ── Hidden tray ───────────────────────────────────── */
+        .hidden-tray {
+            background: var(--surface-2);
+            border: 1px dashed var(--border-strong);
+            border-radius: var(--radius);
+            padding: 16px 18px;
+            margin-bottom: 28px;
+        }
+        .hidden-tray-label {
+            font-size: 12px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.05em; color: var(--text-faint);
+            display: block; margin-bottom: 12px;
+        }
+        .hidden-tray-items { display: flex; flex-wrap: wrap; gap: 10px; }
+        .hidden-chip {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--surface); border: 1px solid var(--border);
+            color: var(--text-muted); padding: 8px 14px;
+            border-radius: var(--radius-pill); font-size: 13px; font-weight: 600;
+            cursor: pointer; transition: all var(--transition);
+        }
+        .hidden-chip:hover { color: var(--accent); border-color: var(--accent); }
     </style>
 </head>
 <body>
@@ -2516,121 +2635,163 @@
             </div>
             
             <div class="content">
-                <!-- Welcome Banner -->
-                <div class="welcome-banner">
-                    <div class="welcome-banner-content">
-                        <div class="welcome-greeting">
-                            <h1 id="greeting-text">Good Morning ☀️</h1>
-                            <p>Welcome back, <span id="bannerUserName"></span>! Ready to learn?</p>
-                        </div>
-                        <div class="welcome-date">
-                            <div class="welcome-date-day" id="current-day">Friday</div>
-                            <div class="welcome-date-full" id="current-date">November 28, 2025</div>
-                        </div>
-                    </div>
-                    <div class="welcome-quote" id="daily-quote">
-                        "The secret of getting ahead is getting started." — Mark Twain
+                <!-- Dashboard toolbar -->
+                <div class="dash-toolbar">
+                    <div class="dash-toolbar-title">Your Dashboard</div>
+                    <div class="dash-toolbar-actions">
+                        <button class="dash-btn" id="dashAddBtn" onclick="openWidgetMenu()" style="display:none">
+                            <i class="fas fa-plus"></i> Add widget
+                        </button>
+                        <button class="dash-btn" id="dashEditBtn" onclick="toggleDashEdit()">
+                            <i class="fas fa-table-cells-large"></i> <span>Customize</span>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Stats Cards -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-layer-group"></i>
+                <!-- Sortable widget area -->
+                <div id="dashWidgets">
+                    <!-- Welcome Banner -->
+                    <section class="dash-widget" data-widget="banner">
+                        <div class="widget-bar">
+                            <span class="widget-drag"><i class="fas fa-grip-vertical"></i> Welcome banner</span>
+                            <button class="widget-hide" onclick="hideWidget('banner')"><i class="fas fa-eye-slash"></i></button>
                         </div>
-                        <div class="stat-info">
-                            <div class="stat-label">Flashcard Decks</div>
-                            <div class="stat-value" id="deckCount">0</div>
-                            <div class="stat-subtitle">Total created</div>
-                        </div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-list-check"></i>
-                        </div>
-                        <div class="stat-info">
-                            <div class="stat-label">Active Tasks</div>
-                            <div class="stat-value" id="taskCount">0</div>
-                            <div class="stat-subtitle">To-do items</div>
-                        </div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-book-open"></i>
-                        </div>
-                        <div class="stat-info">
-                            <div class="stat-label">Notes</div>
-                            <div class="stat-value" id="noteCount">0</div>
-                            <div class="stat-subtitle">Total saved</div>
-                        </div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div class="stat-info">
-                            <div class="stat-label">Classes</div>
-                            <div class="stat-value" id="classCount">0</div>
-                            <div class="stat-subtitle">Enrolled</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quick Actions -->
-                <div class="quick-actions-grid">
-                    <a href="flashcards" class="quick-action-card">
-                        <div class="quick-action-icon">
-                            <i class="fas fa-plus"></i>
-                        </div>
-                        <span class="quick-action-text">Create Flashcards</span>
-                    </a>
-                    <a href="todo" class="quick-action-card">
-                        <div class="quick-action-icon">
-                            <i class="fas fa-check-square"></i>
-                        </div>
-                        <span class="quick-action-text">Add Task</span>
-                    </a>
-                    <a href="pomodoro" class="quick-action-card">
-                        <div class="quick-action-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <span class="quick-action-text">Start Focus</span>
-                    </a>
-                    <a href="notes" class="quick-action-card">
-                        <div class="quick-action-icon">
-                            <i class="fas fa-edit"></i>
-                        </div>
-                        <span class="quick-action-text">Take Notes</span>
-                    </a>
-                </div>
-
-                <!-- Dashboard Grid: Classes + Activity -->
-                <div class="dashboard-grid">
-                    <!-- Your Classes -->
-                    <div class="section" id="classesSection">
-                        <h2><i class="fas fa-graduation-cap"></i> Your Classes</h2>
-                        <div id="classesList" class="classes-preview">
-                        </div>
-                        <div id="emptyClasses" style="display: none; text-align: center; color: #94a3b8; padding: 20px;">
-                            <i class="fas fa-graduation-cap" style="font-size: 36px; margin-bottom: 12px; opacity: 0.3;"></i>
-                            <p style="font-size: 14px;">No classes yet. <a href="classes" style="color: #3b82f6;">Add one</a></p>
-                        </div>
-                    </div>
-
-                    <!-- Recent Activity -->
-                    <div class="section">
-                        <h2><i class="fas fa-clock"></i> Recent Activity</h2>
-                        <div id="activityList">
-                            <div style="text-align: center; color: #94a3b8; padding: 20px;">
-                                <i class="fas fa-clock" style="font-size: 36px; margin-bottom: 12px; opacity: 0.3;"></i>
-                                <p style="font-size: 14px;">Your activity will appear here</p>
+                        <div class="welcome-banner">
+                            <button class="banner-edit" onclick="editGreeting()" title="Edit greeting"><i class="fas fa-pen"></i></button>
+                            <div class="welcome-banner-content">
+                                <div class="welcome-greeting">
+                                    <h1 id="greeting-text">Good Morning ☀️</h1>
+                                    <p id="bannerSubtitle">Welcome back, <span id="bannerUserName"></span>! Ready to learn?</p>
+                                </div>
+                                <div class="welcome-date">
+                                    <div class="welcome-date-day" id="current-day">Friday</div>
+                                    <div class="welcome-date-full" id="current-date">November 28, 2025</div>
+                                </div>
+                            </div>
+                            <div class="welcome-quote" id="daily-quote">
+                                "The secret of getting ahead is getting started." — Mark Twain
                             </div>
                         </div>
-                    </div>
+                    </section>
+
+                    <!-- Stats Cards -->
+                    <section class="dash-widget" data-widget="stats">
+                        <div class="widget-bar">
+                            <span class="widget-drag"><i class="fas fa-grip-vertical"></i> Quick stats</span>
+                            <button class="widget-hide" onclick="hideWidget('stats')"><i class="fas fa-eye-slash"></i></button>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-layer-group"></i></div>
+                                <div class="stat-info">
+                                    <div class="stat-label">Flashcard Decks</div>
+                                    <div class="stat-value" id="deckCount">0</div>
+                                    <div class="stat-subtitle">Total created</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-list-check"></i></div>
+                                <div class="stat-info">
+                                    <div class="stat-label">Active Tasks</div>
+                                    <div class="stat-value" id="taskCount">0</div>
+                                    <div class="stat-subtitle">To-do items</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-book-open"></i></div>
+                                <div class="stat-info">
+                                    <div class="stat-label">Notes</div>
+                                    <div class="stat-value" id="noteCount">0</div>
+                                    <div class="stat-subtitle">Total saved</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <div class="stat-info">
+                                    <div class="stat-label">Classes</div>
+                                    <div class="stat-value" id="classCount">0</div>
+                                    <div class="stat-subtitle">Enrolled</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Quick Actions -->
+                    <section class="dash-widget" data-widget="quick">
+                        <div class="widget-bar">
+                            <span class="widget-drag"><i class="fas fa-grip-vertical"></i> Quick actions</span>
+                            <button class="widget-hide" onclick="hideWidget('quick')"><i class="fas fa-eye-slash"></i></button>
+                        </div>
+                        <div class="quick-actions-grid">
+                            <a href="flashcards" class="quick-action-card">
+                                <div class="quick-action-icon"><i class="fas fa-plus"></i></div>
+                                <span class="quick-action-text">Create Flashcards</span>
+                            </a>
+                            <a href="todo" class="quick-action-card">
+                                <div class="quick-action-icon"><i class="fas fa-check-square"></i></div>
+                                <span class="quick-action-text">Add Task</span>
+                            </a>
+                            <a href="pomodoro" class="quick-action-card">
+                                <div class="quick-action-icon"><i class="fas fa-clock"></i></div>
+                                <span class="quick-action-text">Start Focus</span>
+                            </a>
+                            <a href="notes" class="quick-action-card">
+                                <div class="quick-action-icon"><i class="fas fa-edit"></i></div>
+                                <span class="quick-action-text">Take Notes</span>
+                            </a>
+                        </div>
+                    </section>
+
+                    <!-- Daily Goals -->
+                    <section class="dash-widget" data-widget="goals">
+                        <div class="widget-bar">
+                            <span class="widget-drag"><i class="fas fa-grip-vertical"></i> Daily goals</span>
+                            <button class="widget-hide" onclick="hideWidget('goals')"><i class="fas fa-eye-slash"></i></button>
+                        </div>
+                        <div class="section goals-section">
+                            <h2><i class="fas fa-bullseye"></i> Today's Goals
+                                <span class="goals-progress" id="goalsProgress">0/0</span>
+                            </h2>
+                            <div id="goalsList" class="goals-list"></div>
+                            <form class="goal-add" onsubmit="addGoal(event)">
+                                <input type="text" id="goalInput" placeholder="Add a goal for today..." maxlength="120">
+                                <button type="submit"><i class="fas fa-plus"></i></button>
+                            </form>
+                        </div>
+                    </section>
+
+                    <!-- Classes + Activity -->
+                    <section class="dash-widget" data-widget="grid">
+                        <div class="widget-bar">
+                            <span class="widget-drag"><i class="fas fa-grip-vertical"></i> Classes &amp; activity</span>
+                            <button class="widget-hide" onclick="hideWidget('grid')"><i class="fas fa-eye-slash"></i></button>
+                        </div>
+                        <div class="dashboard-grid">
+                            <div class="section" id="classesSection">
+                                <h2><i class="fas fa-graduation-cap"></i> Your Classes</h2>
+                                <div id="classesList" class="classes-preview"></div>
+                                <div id="emptyClasses" style="display: none; text-align: center; color: var(--text-faint); padding: 20px;">
+                                    <i class="fas fa-graduation-cap" style="font-size: 36px; margin-bottom: 12px; opacity: 0.3;"></i>
+                                    <p style="font-size: 14px;">No classes yet. <a href="classes" style="color: var(--accent);">Add one</a></p>
+                                </div>
+                            </div>
+                            <div class="section">
+                                <h2><i class="fas fa-clock"></i> Recent Activity</h2>
+                                <div id="activityList">
+                                    <div style="text-align: center; color: var(--text-faint); padding: 20px;">
+                                        <i class="fas fa-clock" style="font-size: 36px; margin-bottom: 12px; opacity: 0.3;"></i>
+                                        <p style="font-size: 14px;">Your activity will appear here</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Hidden widgets tray -->
+                <div id="hiddenTray" class="hidden-tray" style="display:none">
+                    <span class="hidden-tray-label">Hidden widgets — click to restore</span>
+                    <div id="hiddenTrayItems" class="hidden-tray-items"></div>
                 </div>
 
                 <!-- Footer -->
@@ -3210,8 +3371,14 @@
             const dateEl = document.getElementById('current-date');
             const quoteEl = document.getElementById('daily-quote');
             
-            // Set greeting based on time
-            if (hour >= 5 && hour < 12) {
+            // Custom greeting overrides (set via the banner edit pencil)
+            const customGreeting = localStorage.getItem('vieraGreeting');
+            const customSubtitle = localStorage.getItem('vieraSubtitle');
+
+            // Set greeting based on time (unless custom)
+            if (customGreeting) {
+                greetingEl.textContent = customGreeting;
+            } else if (hour >= 5 && hour < 12) {
                 greetingEl.textContent = 'Good Morning ☀️';
             } else if (hour >= 12 && hour < 17) {
                 greetingEl.textContent = 'Good Afternoon 🌤️';
@@ -3220,9 +3387,13 @@
             } else {
                 greetingEl.textContent = 'Good Night 🌙';
             }
-            
-            // Set user name
-            bannerNameEl.textContent = firstName;
+
+            // Set subtitle / user name
+            if (customSubtitle) {
+                document.getElementById('bannerSubtitle').textContent = customSubtitle;
+            } else {
+                bannerNameEl.textContent = firstName;
+            }
             
             // Set date
             const now = new Date();
@@ -3520,11 +3691,192 @@
         document.addEventListener('DOMContentLoaded', async function() {
             // Wait for API to be ready (data loaded from cloud)
             await vieraAPI.ready;
-            
+
             checkUserProfile();
             loadStatistics();
             loadRecentActivity();
+            initDashLayout();
+            renderGoals();
         });
+
+        // ============================================
+        // DASHBOARD LAYOUT CUSTOMIZATION
+        // ============================================
+        const DASH_WIDGETS = {
+            banner: 'Welcome banner',
+            stats:  'Quick stats',
+            quick:  'Quick actions',
+            goals:  'Daily goals',
+            grid:   'Classes & activity'
+        };
+        const DEFAULT_ORDER = ['banner', 'stats', 'quick', 'goals', 'grid'];
+
+        function getLayout() {
+            try {
+                const l = JSON.parse(localStorage.getItem('vieraDashLayout'));
+                if (l && Array.isArray(l.order)) {
+                    // ensure every known widget is present
+                    const order = l.order.filter(w => DASH_WIDGETS[w]);
+                    DEFAULT_ORDER.forEach(w => { if (!order.includes(w)) order.push(w); });
+                    return { order, hidden: Array.isArray(l.hidden) ? l.hidden : [] };
+                }
+            } catch (e) {}
+            return { order: [...DEFAULT_ORDER], hidden: [] };
+        }
+        function saveLayout(l) { localStorage.setItem('vieraDashLayout', JSON.stringify(l)); }
+
+        function applyLayout() {
+            const layout = getLayout();
+            const container = document.getElementById('dashWidgets');
+            layout.order.forEach(w => {
+                const el = container.querySelector(`[data-widget="${w}"]`);
+                if (el) container.appendChild(el);
+            });
+            container.querySelectorAll('.dash-widget').forEach(el => {
+                el.style.display = layout.hidden.includes(el.dataset.widget) ? 'none' : '';
+            });
+            renderHiddenTray(layout);
+        }
+
+        function renderHiddenTray(layout) {
+            const tray = document.getElementById('hiddenTray');
+            const items = document.getElementById('hiddenTrayItems');
+            const editing = document.body.classList.contains('dash-editing');
+            if (!layout.hidden.length || !editing) { tray.style.display = 'none'; return; }
+            tray.style.display = 'block';
+            items.innerHTML = layout.hidden.map(w =>
+                `<button class="hidden-chip" onclick="restoreWidget('${w}')"><i class="fas fa-plus"></i> ${DASH_WIDGETS[w]}</button>`
+            ).join('');
+        }
+
+        function hideWidget(w) {
+            const layout = getLayout();
+            if (!layout.hidden.includes(w)) layout.hidden.push(w);
+            saveLayout(layout);
+            applyLayout();
+        }
+        function restoreWidget(w) {
+            const layout = getLayout();
+            layout.hidden = layout.hidden.filter(x => x !== w);
+            saveLayout(layout);
+            applyLayout();
+        }
+
+        function toggleDashEdit() {
+            const editing = document.body.classList.toggle('dash-editing');
+            const btn = document.getElementById('dashEditBtn');
+            btn.classList.toggle('active', editing);
+            btn.querySelector('span').textContent = editing ? 'Done' : 'Customize';
+            applyLayout();
+            if (editing) showNotification('Drag widgets to reorder, or hide what you don\'t need. Click Done when finished.', 'info', 'Customize Mode');
+        }
+
+        // Drag & drop reordering
+        let _dragEl = null;
+        function initDashLayout() {
+            applyLayout();
+            const container = document.getElementById('dashWidgets');
+            container.querySelectorAll('.dash-widget').forEach(el => {
+                const handle = el.querySelector('.widget-drag');
+                handle.addEventListener('mousedown', () => { el.setAttribute('draggable', 'true'); });
+                handle.addEventListener('mouseup', () => { el.removeAttribute('draggable'); });
+
+                el.addEventListener('dragstart', e => {
+                    _dragEl = el; el.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                });
+                el.addEventListener('dragend', () => {
+                    el.classList.remove('dragging');
+                    el.removeAttribute('draggable');
+                    container.querySelectorAll('.dash-widget').forEach(w => w.classList.remove('drop-target'));
+                    _dragEl = null;
+                    persistOrder();
+                });
+                el.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    if (!_dragEl || _dragEl === el) return;
+                    const rect = el.getBoundingClientRect();
+                    const after = e.clientY > rect.top + rect.height / 2;
+                    container.insertBefore(_dragEl, after ? el.nextSibling : el);
+                });
+            });
+        }
+        function persistOrder() {
+            const container = document.getElementById('dashWidgets');
+            const order = [...container.querySelectorAll('.dash-widget')].map(el => el.dataset.widget);
+            const layout = getLayout();
+            layout.order = order;
+            saveLayout(layout);
+        }
+
+        // Editable greeting
+        function editGreeting() {
+            const cur = document.getElementById('greeting-text').textContent;
+            const curSub = document.getElementById('bannerSubtitle').textContent;
+            const g = prompt('Your greeting headline:', cur);
+            if (g === null) return;
+            const s = prompt('Your greeting subtitle:', curSub);
+            if (s === null) return;
+            if (g.trim()) localStorage.setItem('vieraGreeting', g.trim()); else localStorage.removeItem('vieraGreeting');
+            if (s.trim()) localStorage.setItem('vieraSubtitle', s.trim()); else localStorage.removeItem('vieraSubtitle');
+            const user = vieraAPI.getUser();
+            updateWelcomeBanner(user ? user.firstName : '');
+            showNotification('Greeting updated', 'success', 'Saved');
+        }
+
+        // ============================================
+        // DAILY GOALS
+        // ============================================
+        function getGoals() {
+            try {
+                const data = JSON.parse(localStorage.getItem('vieraDailyGoals'));
+                const today = new Date().toDateString();
+                if (data && data.date === today) return data.items || [];
+            } catch (e) {}
+            return [];
+        }
+        function saveGoals(items) {
+            localStorage.setItem('vieraDailyGoals', JSON.stringify({ date: new Date().toDateString(), items }));
+        }
+        function renderGoals() {
+            const items = getGoals();
+            const list = document.getElementById('goalsList');
+            const prog = document.getElementById('goalsProgress');
+            const done = items.filter(g => g.done).length;
+            prog.textContent = `${done}/${items.length}`;
+            if (!items.length) {
+                list.innerHTML = '<div class="goal-empty">No goals yet — add one below to start your day 🎯</div>';
+                return;
+            }
+            list.innerHTML = items.map((g, i) => `
+                <div class="goal-item ${g.done ? 'done' : ''}">
+                    <div class="goal-check" onclick="toggleGoal(${i})">${g.done ? '<i class="fas fa-check"></i>' : ''}</div>
+                    <span class="goal-text">${escapeHtml(g.text)}</span>
+                    <button class="goal-del" onclick="deleteGoal(${i})"><i class="fas fa-times"></i></button>
+                </div>`).join('');
+        }
+        function addGoal(e) {
+            e.preventDefault();
+            const input = document.getElementById('goalInput');
+            const text = input.value.trim();
+            if (!text) return;
+            const items = getGoals();
+            items.push({ text, done: false });
+            saveGoals(items);
+            input.value = '';
+            renderGoals();
+        }
+        function toggleGoal(i) {
+            const items = getGoals();
+            if (items[i]) { items[i].done = !items[i].done; saveGoals(items); renderGoals(); }
+        }
+        function deleteGoal(i) {
+            const items = getGoals();
+            items.splice(i, 1); saveGoals(items); renderGoals();
+        }
+        function escapeHtml(s) {
+            return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        }
 
         // Add click handlers for navigation items
         document.querySelectorAll('.nav-item').forEach(item => {
