@@ -343,35 +343,31 @@
         }
 
         .quick-action-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
+            box-shadow: none;
         }
 
         .quick-action-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 14px;
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-xs);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
-            transition: all 0.3s ease;
+            font-size: 18px;
+            transition: all var(--transition);
+            background: var(--surface-2);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
         }
 
-        .quick-action-card:nth-child(1) .quick-action-icon { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
-        .quick-action-card:nth-child(2) .quick-action-icon { background: rgba(16, 185, 129, 0.1); color: #10b981; }
-        .quick-action-card:nth-child(3) .quick-action-icon { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
-        .quick-action-card:nth-child(4) .quick-action-icon { background: rgba(6, 182, 212, 0.1); color: #06b6d4; }
+        body.dark-mode .quick-action-icon { background: var(--surface-hover); }
 
-        .quick-action-card:nth-child(1):hover { border-color: #8b5cf6; background: rgba(139, 92, 246, 0.05); }
-        .quick-action-card:nth-child(2):hover { border-color: #10b981; background: rgba(16, 185, 129, 0.05); }
-        .quick-action-card:nth-child(3):hover { border-color: #ef4444; background: rgba(239, 68, 68, 0.05); }
-        .quick-action-card:nth-child(4):hover { border-color: #06b6d4; background: rgba(6, 182, 212, 0.05); }
-
-        .quick-action-card:nth-child(1):hover .quick-action-icon { background: #8b5cf6; color: white; }
-        .quick-action-card:nth-child(2):hover .quick-action-icon { background: #10b981; color: white; }
-        .quick-action-card:nth-child(3):hover .quick-action-icon { background: #ef4444; color: white; }
-        .quick-action-card:nth-child(4):hover .quick-action-icon { background: #06b6d4; color: white; }
+        .quick-action-card:hover { border-color: var(--border-strong); background: var(--surface-2); }
+        .quick-action-card:hover .quick-action-icon {
+            background: var(--accent);
+            color: var(--accent-contrast);
+            border-color: var(--accent);
+        }
 
         .quick-action-text {
             font-size: 13px;
