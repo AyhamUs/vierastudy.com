@@ -23,7 +23,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #ffffff;
+            background: #f7f7f5;
             min-height: 100vh;
             display: flex;
             -webkit-font-smoothing: antialiased;
@@ -37,37 +37,16 @@
 
         .login-left {
             flex: 1;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f6f6f4;
+            border-right: 1px solid #ecebe8;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 60px;
-            color: white;
+            color: #2e2e2c;
             position: relative;
             overflow: hidden;
-        }
-
-        .login-left::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            top: -250px;
-            right: -250px;
-        }
-
-        .login-left::after {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            bottom: -150px;
-            left: -150px;
         }
 
         .login-brand {
@@ -77,24 +56,24 @@
         }
 
         .login-brand img {
-            width: 80px;
-            height: 80px;
+            width: 64px;
+            height: 64px;
             margin-bottom: 24px;
-            filter: brightness(0) invert(1);
         }
 
         .login-brand h1 {
-            font-size: 36px;
-            font-weight: 700;
+            font-size: 32px;
+            font-weight: 600;
             margin-bottom: 16px;
-            letter-spacing: -1px;
+            letter-spacing: -0.02em;
+            color: #2e2e2c;
         }
 
         .login-brand p {
-            font-size: 18px;
-            opacity: 0.9;
+            font-size: 16px;
+            color: #73726e;
             line-height: 1.6;
-            max-width: 400px;
+            max-width: 380px;
         }
 
         .login-right {
@@ -103,29 +82,33 @@
             align-items: center;
             justify-content: center;
             padding: 40px;
-            background: #ffffff;
+            background: #f7f7f5;
         }
 
         .login-container {
             width: 100%;
-            max-width: 440px;
+            max-width: 420px;
+            background: #ffffff;
+            border: 1px solid #ecebe8;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+            padding: 40px;
         }
 
         .back-to-home {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            color: #64748b;
+            color: #73726e;
             text-decoration: none;
             font-size: 14px;
             margin-bottom: 32px;
-            transition: all 0.2s;
-            font-weight: 500;
+            transition: color 0.2s;
+            font-weight: 400;
         }
 
         .back-to-home:hover {
-            color: #667eea;
-            gap: 12px;
+            color: #2f80ed;
         }
 
         .back-to-home i {
@@ -137,16 +120,16 @@
         }
 
         .login-title {
-            font-size: 32px;
-            font-weight: 700;
-            color: #0f172a;
+            font-size: 26px;
+            font-weight: 600;
+            color: #2e2e2c;
             margin-bottom: 8px;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.02em;
         }
 
         .login-subtitle {
             font-size: 15px;
-            color: #64748b;
+            color: #73726e;
             line-height: 1.5;
             font-weight: 400;
         }
@@ -167,37 +150,37 @@
         .input-label {
             display: block;
             font-size: 13px;
-            font-weight: 600;
-            color: #334155;
+            font-weight: 500;
+            color: #2e2e2c;
             margin-bottom: 8px;
         }
 
         .login-input {
             width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
+            padding: 12px 14px;
+            border: 1px solid #e0dfdb;
+            border-radius: 6px;
             font-size: 15px;
             font-family: 'Inter', sans-serif;
-            transition: all 0.3s ease;
+            transition: border-color 0.2s, box-shadow 0.2s;
             background: #ffffff;
-            color: #0f172a;
+            color: #2e2e2c;
             box-sizing: border-box;
         }
 
         .login-input::placeholder {
-            color: #94a3b8;
+            color: #9b9a96;
         }
 
         .login-input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #2f80ed;
             background: #ffffff;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 3px rgba(47, 128, 237, 0.12);
         }
 
         .login-input:hover:not(:focus) {
-            border-color: #cbd5e1;
+            border-color: #d0cfca;
         }
 
         .login-btn {
@@ -205,52 +188,44 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: #2f80ed;
+            color: #ffffff;
             border: none;
-            padding: 16px 32px;
-            border-radius: 10px;
-            font-size: 16px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background 0.2s;
             margin-top: 8px;
-            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
             width: 100%;
         }
 
         .login-btn:hover {
-            background: linear-gradient(135deg, #5568d3 0%, #6a4294 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.5);
-        }
-
-        .login-btn:active {
-            transform: translateY(0);
+            background: #1f6fe0;
         }
 
         .login-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
-            transform: none;
         }
 
         .auth-switch {
             text-align: center;
             margin-top: 24px;
-            color: #64748b;
-            font-size: 15px;
+            color: #73726e;
+            font-size: 14px;
         }
 
         .auth-switch a {
-            color: #667eea;
+            color: #2f80ed;
             text-decoration: none;
-            font-weight: 600;
-            transition: all 0.2s;
+            font-weight: 500;
+            transition: color 0.2s;
         }
 
         .auth-switch a:hover {
-            color: #764ba2;
+            color: #1f6fe0;
         }
 
         .checkbox-group {
@@ -263,20 +238,20 @@
             gap: 10px;
             cursor: pointer;
             font-size: 13px;
-            color: #475569;
+            color: #73726e;
             line-height: 1.6;
         }
 
         .checkbox-label input[type="checkbox"] {
             margin-top: 4px;
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             cursor: pointer;
-            accent-color: #667eea;
+            accent-color: #2f80ed;
         }
 
         .checkbox-label a {
-            color: #667eea;
+            color: #2f80ed;
             text-decoration: none;
             font-weight: 500;
         }
@@ -289,18 +264,18 @@
             margin-top: 32px;
             text-align: center;
             font-size: 13px;
-            color: #94a3b8;
+            color: #9b9a96;
         }
 
         .login-footer a {
-            color: #64748b;
+            color: #73726e;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 400;
             transition: color 0.2s;
         }
 
         .login-footer a:hover {
-            color: #667eea;
+            color: #2f80ed;
         }
 
         @media (max-width: 968px) {
@@ -320,10 +295,11 @@
 
             .login-container {
                 max-width: 100%;
+                padding: 28px 22px;
             }
 
             .login-title {
-                font-size: 26px;
+                font-size: 22px;
             }
 
             .login-subtitle {
@@ -336,7 +312,7 @@
             }
 
             .login-btn {
-                padding: 16px;
+                padding: 14px;
                 font-size: 16px;
             }
 
@@ -365,10 +341,11 @@
         }
 
         .notification-content {
-            background: white;
+            background: #ffffff;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid #ecebe8;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
             max-width: 400px;
             width: 90%;
             text-align: center;
@@ -407,34 +384,34 @@
         }
 
         .notification-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
-            color: #1e293b;
+            color: #2e2e2c;
+            letter-spacing: -0.02em;
             margin-bottom: 10px;
         }
 
         .notification-message {
             font-size: 14px;
-            color: #64748b;
+            color: #73726e;
             margin-bottom: 20px;
             line-height: 1.6;
         }
 
         .notification-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: #2f80ed;
+            color: #ffffff;
             border: none;
             padding: 10px 30px;
             border-radius: 8px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: background 0.2s;
         }
 
         .notification-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            background: #1f6fe0;
         }
 
         @keyframes fadeIn {
@@ -580,7 +557,7 @@
                         >
                     </div>
                     <div style="text-align: right; margin-bottom: 16px;">
-                        <a href="forgot-password.html" style="color: #667eea; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s;">
+                        <a href="forgot-password.html" style="color: #2f80ed; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s;">
                             Forgot Password?
                         </a>
                     </div>

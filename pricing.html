@@ -32,18 +32,18 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #ffffff;
-            color: #1e293b;
-            line-height: 1.7;
+            color: #2e2e2c;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Header Navigation */
         .header {
             background: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #ecebe8;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .nav-container {
@@ -60,7 +60,7 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            color: #1e293b;
+            color: #2e2e2c;
         }
 
         .logo-img {
@@ -69,9 +69,10 @@
         }
 
         .logo-text {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
-            color: #1e293b;
+            color: #2e2e2c;
+            letter-spacing: -0.02em;
         }
 
         .nav-links {
@@ -82,7 +83,7 @@
 
         .nav-link {
             text-decoration: none;
-            color: #64748b;
+            color: #73726e;
             font-weight: 500;
             font-size: 15px;
             transition: color 0.2s;
@@ -90,7 +91,7 @@
 
         .nav-link:hover,
         .nav-link.active {
-            color: #3b82f6;
+            color: #2f80ed;
         }
 
         .cta-buttons {
@@ -99,64 +100,62 @@
         }
 
         .btn {
-            padding: 10px 24px;
+            padding: 10px 22px;
             border-radius: 8px;
             font-weight: 600;
             font-size: 15px;
             text-decoration: none;
-            transition: all 0.2s;
+            transition: all 0.15s;
             display: inline-block;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            color: white;
-            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+            background: #2f80ed;
+            color: #ffffff;
         }
 
         .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+            background: #1f6fe0;
         }
 
         .btn-secondary {
-            background: white;
-            color: #3b82f6;
-            border: 2px solid #3b82f6;
+            background: #ffffff;
+            color: #2e2e2c;
+            border: 1px solid #e0dfdb;
         }
 
         .btn-secondary:hover {
-            background: #f0f9ff;
+            background: #f6f6f4;
         }
 
         /* Hero */
         .hero {
-            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
-            padding: 80px 2rem 60px;
+            background: #f7f7f5;
+            border-bottom: 1px solid #ecebe8;
+            padding: 88px 2rem 72px;
             text-align: center;
         }
 
         .hero h1 {
-            font-size: 48px;
-            font-weight: 800;
-            color: #0f172a;
+            font-size: 46px;
+            font-weight: 700;
+            color: #2e2e2c;
+            letter-spacing: -0.02em;
             margin-bottom: 16px;
         }
 
         .hero .price-tag {
             font-size: 72px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #10b981, #059669);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 700;
+            color: #2e2e2c;
+            letter-spacing: -0.02em;
             margin: 24px 0;
         }
 
         .hero p {
-            font-size: 20px;
-            color: #64748b;
-            max-width: 700px;
+            font-size: 19px;
+            color: #73726e;
+            max-width: 640px;
             margin: 0 auto;
         }
 
@@ -175,70 +174,61 @@
         }
 
         .pricing-card {
-            background: white;
-            border: 2px solid #e2e8f0;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            background: #ffffff;
+            border: 1px solid #ecebe8;
+            border-radius: 8px;
+            padding: 36px 32px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
             position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
+            transition: border-color 0.15s;
         }
 
         .pricing-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            border-color: #e0dfdb;
         }
 
         .pricing-card.featured {
-            border: 3px solid #3b82f6;
-        }
-
-        .pricing-card.featured::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border: 1.5px solid #2f80ed;
         }
 
         .popular-badge {
             position: absolute;
             top: 20px;
             right: 20px;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
+            background: #2f80ed;
+            color: #ffffff;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
             text-transform: uppercase;
         }
 
         .pricing-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
         }
 
         .plan-name {
-            font-size: 32px;
-            font-weight: 700;
-            color: #0f172a;
+            font-size: 22px;
+            font-weight: 600;
+            color: #2e2e2c;
+            letter-spacing: -0.02em;
             margin-bottom: 12px;
         }
 
         .plan-price {
-            font-size: 64px;
-            font-weight: 800;
-            color: #10b981;
+            font-size: 52px;
+            font-weight: 700;
+            color: #2e2e2c;
+            letter-spacing: -0.02em;
             margin-bottom: 8px;
         }
 
         .plan-description {
-            font-size: 18px;
-            color: #64748b;
+            font-size: 16px;
+            color: #73726e;
         }
 
         .features-list {
@@ -248,10 +238,10 @@
         }
 
         .features-list li {
-            padding: 16px 0;
-            border-bottom: 1px solid #e2e8f0;
-            font-size: 17px;
-            color: #475569;
+            padding: 13px 0;
+            border-bottom: 1px solid #ecebe8;
+            font-size: 15px;
+            color: #2e2e2c;
             display: flex;
             align-items: center;
             gap: 12px;
@@ -262,8 +252,10 @@
         }
 
         .features-list i {
-            color: #10b981;
-            font-size: 20px;
+            color: #73726e;
+            font-size: 16px;
+            width: 18px;
+            text-align: center;
         }
 
         .cta-section {
@@ -272,30 +264,37 @@
         }
 
         .highlight-box {
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-            border-left: 4px solid #10b981;
-            padding: 24px;
+            background: #f6f6f4;
+            border: 1px solid #ecebe8;
+            padding: 32px;
             border-radius: 8px;
-            margin: 40px 0;
+            margin: 48px 0 0;
         }
 
         .highlight-box h3 {
-            color: #0f172a;
-            font-size: 20px;
-            margin-bottom: 12px;
+            color: #2e2e2c;
+            font-size: 19px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
         }
 
         .highlight-box p {
-            color: #475569;
-            font-size: 16px;
-            line-height: 1.7;
+            color: #73726e;
+            font-size: 15px;
+            line-height: 1.6;
             margin: 0;
+        }
+
+        .highlight-box p strong {
+            color: #2e2e2c;
         }
 
         /* Footer */
         .footer {
-            background: #0f172a;
-            color: #94a3b8;
+            background: #f7f7f5;
+            border-top: 1px solid #ecebe8;
+            color: #73726e;
             padding: 60px 2rem 30px;
         }
 
@@ -309,8 +308,8 @@
         }
 
         .footer-section h3 {
-            color: #e2e8f0;
-            font-size: 18px;
+            color: #2e2e2c;
+            font-size: 15px;
             font-weight: 600;
             margin-bottom: 16px;
         }
@@ -322,23 +321,23 @@
         }
 
         .footer-link {
-            color: #94a3b8;
+            color: #73726e;
             text-decoration: none;
             font-size: 15px;
             transition: color 0.2s;
         }
 
         .footer-link:hover {
-            color: #3b82f6;
+            color: #2f80ed;
         }
 
         .footer-bottom {
             max-width: 1200px;
             margin: 0 auto;
             padding-top: 30px;
-            border-top: 1px solid #334155;
+            border-top: 1px solid #ecebe8;
             text-align: center;
-            color: #64748b;
+            color: #9b9a96;
         }
 
         .footer-logo {
@@ -356,7 +355,8 @@
         .footer-logo span {
             font-size: 20px;
             font-weight: 700;
-            color: #e2e8f0;
+            color: #2e2e2c;
+            letter-spacing: -0.02em;
         }
 
         @media (max-width: 768px) {
@@ -365,7 +365,7 @@
             }
 
             .hero h1 {
-                font-size: 36px;
+                font-size: 34px;
             }
 
             .pricing-grid {
@@ -377,11 +377,11 @@
             }
 
             .plan-name {
-                font-size: 24px;
+                font-size: 22px;
             }
 
             .plan-price {
-                font-size: 42px;
+                font-size: 44px;
             }
         }
     </style>
@@ -421,7 +421,7 @@
             <div class="pricing-card">
                 <div class="pricing-header">
                     <h2 class="plan-name">Free</h2>
-                    <div class="plan-price">$0<span style="font-size: 20px; color: #64748b; font-weight: 500;">/forever</span></div>
+                    <div class="plan-price">$0<span style="font-size: 18px; color: #73726e; font-weight: 500;">/forever</span></div>
                     <p class="plan-description">Perfect for students on a budget</p>
                 </div>
 
@@ -432,7 +432,7 @@
                     <li><i class="fas fa-check-circle"></i> Progress tracking</li>
                     <li><i class="fas fa-check-circle"></i> Cloud sync</li>
                     <li><i class="fas fa-check-circle"></i> Mobile responsive</li>
-                    <li style="color: #94a3b8;"><i class="fas fa-ad" style="color: #94a3b8;"></i> Ad supported</li>
+                    <li style="color: #9b9a96;"><i class="fas fa-ad" style="color: #9b9a96;"></i> Ad supported</li>
                 </ul>
 
                 <div class="cta-section">
@@ -445,19 +445,19 @@
                 <div class="popular-badge">Most Popular</div>
                 <div class="pricing-header">
                     <h2 class="plan-name">Premium Monthly</h2>
-                    <div class="plan-price" style="color: #3b82f6;">$3<span style="font-size: 20px; color: #64748b; font-weight: 500;">/month</span></div>
+                    <div class="plan-price" style="color: #2f80ed;">$3<span style="font-size: 18px; color: #73726e; font-weight: 500;">/month</span></div>
                     <p class="plan-description">Ad-free studying experience</p>
                 </div>
 
                 <ul class="features-list">
-                    <li><i class="fas fa-check-circle" style="color: #3b82f6;"></i> All features included</li>
-                    <li><i class="fas fa-check-circle" style="color: #3b82f6;"></i> Unlimited flashcards & notes</li>
-                    <li><i class="fas fa-check-circle" style="color: #3b82f6;"></i> Task management</li>
-                    <li><i class="fas fa-check-circle" style="color: #3b82f6;"></i> Progress tracking</li>
-                    <li><i class="fas fa-check-circle" style="color: #3b82f6;"></i> Cloud sync</li>
-                    <li><i class="fas fa-check-circle" style="color: #3b82f6;"></i> Mobile responsive</li>
-                    <li><i class="fas fa-star" style="color: #3b82f6;"></i> <strong>No ads</strong></li>
-                    <li><i class="fas fa-star" style="color: #3b82f6;"></i> <strong>Support development</strong></li>
+                    <li><i class="fas fa-check-circle" style="color: #2f80ed;"></i> All features included</li>
+                    <li><i class="fas fa-check-circle" style="color: #2f80ed;"></i> Unlimited flashcards & notes</li>
+                    <li><i class="fas fa-check-circle" style="color: #2f80ed;"></i> Task management</li>
+                    <li><i class="fas fa-check-circle" style="color: #2f80ed;"></i> Progress tracking</li>
+                    <li><i class="fas fa-check-circle" style="color: #2f80ed;"></i> Cloud sync</li>
+                    <li><i class="fas fa-check-circle" style="color: #2f80ed;"></i> Mobile responsive</li>
+                    <li><i class="fas fa-star" style="color: #2f80ed;"></i> <strong>No ads</strong></li>
+                    <li><i class="fas fa-star" style="color: #2f80ed;"></i> <strong>Support development</strong></li>
                 </ul>
 
                 <div class="cta-section">
@@ -469,29 +469,29 @@
             <div class="pricing-card">
                 <div class="pricing-header">
                     <h2 class="plan-name">Premium Annual</h2>
-                    <div class="plan-price" style="color: #8b5cf6;">$30<span style="font-size: 20px; color: #64748b; font-weight: 500;">/year</span></div>
+                    <div class="plan-price" style="color: #2e2e2c;">$30<span style="font-size: 18px; color: #73726e; font-weight: 500;">/year</span></div>
                     <p class="plan-description">Save 17% with annual billing</p>
                 </div>
 
                 <ul class="features-list">
-                    <li><i class="fas fa-check-circle" style="color: #8b5cf6;"></i> All features included</li>
-                    <li><i class="fas fa-check-circle" style="color: #8b5cf6;"></i> Unlimited flashcards & notes</li>
-                    <li><i class="fas fa-check-circle" style="color: #8b5cf6;"></i> Task management</li>
-                    <li><i class="fas fa-check-circle" style="color: #8b5cf6;"></i> Progress tracking</li>
-                    <li><i class="fas fa-check-circle" style="color: #8b5cf6;"></i> Cloud sync</li>
-                    <li><i class="fas fa-check-circle" style="color: #8b5cf6;"></i> Mobile responsive</li>
-                    <li><i class="fas fa-star" style="color: #8b5cf6;"></i> <strong>No ads</strong></li>
-                    <li><i class="fas fa-star" style="color: #8b5cf6;"></i> <strong>Best value</strong></li>
+                    <li><i class="fas fa-check-circle" style="color: #73726e;"></i> All features included</li>
+                    <li><i class="fas fa-check-circle" style="color: #73726e;"></i> Unlimited flashcards & notes</li>
+                    <li><i class="fas fa-check-circle" style="color: #73726e;"></i> Task management</li>
+                    <li><i class="fas fa-check-circle" style="color: #73726e;"></i> Progress tracking</li>
+                    <li><i class="fas fa-check-circle" style="color: #73726e;"></i> Cloud sync</li>
+                    <li><i class="fas fa-check-circle" style="color: #73726e;"></i> Mobile responsive</li>
+                    <li><i class="fas fa-star" style="color: #73726e;"></i> <strong>No ads</strong></li>
+                    <li><i class="fas fa-star" style="color: #73726e;"></i> <strong>Best value</strong></li>
                 </ul>
 
                 <div class="cta-section">
-                    <a href="login.html" class="btn btn-primary" style="width: 100%; text-align: center; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">Start Premium</a>
+                    <a href="login.html" class="btn btn-secondary" style="width: 100%; text-align: center;">Start Premium</a>
                 </div>
             </div>
         </div>
 
         <div class="highlight-box">
-            <h3><i class="fas fa-question-circle" style="color: #3b82f6; margin-right: 8px;"></i> Frequently Asked Questions</h3>
+            <h3><i class="fas fa-question-circle" style="color: #2f80ed; margin-right: 8px;"></i> Frequently Asked Questions</h3>
             <p style="margin-bottom: 16px;"><strong>Do I need to provide payment info for the free plan?</strong><br>No! The free plan is truly free with no credit card required. Just create an account and start studying.</p>
             <p style="margin-bottom: 16px;"><strong>Can I upgrade or downgrade anytime?</strong><br>Yes! You can upgrade to premium or cancel your subscription at any time. No long-term commitments.</p>
             <p style="margin-bottom: 16px;"><strong>What kind of ads will I see on the free plan?</strong><br>We show non-intrusive display ads that don't interfere with your studying. Premium users enjoy a completely ad-free experience.</p>

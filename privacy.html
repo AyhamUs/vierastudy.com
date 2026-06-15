@@ -17,107 +17,150 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
+            background: #ffffff;
+            color: #2e2e2c;
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 760px;
             margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background: #ffffff;
+            padding: 64px 32px 96px;
         }
 
         .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #667eea;
+            margin-bottom: 56px;
+            padding: 40px 36px;
+            background: #f7f7f5;
+            border: 1px solid #ecebe8;
+            border-radius: 8px;
         }
 
         .logo {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 20px;
+            width: 48px;
+            height: 48px;
+            margin-bottom: 24px;
+            display: block;
         }
 
         h1 {
-            color: #1e293b;
-            font-size: 32px;
-            margin-bottom: 10px;
+            color: #2e2e2c;
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 16px;
         }
 
         .effective-date {
-            color: #64748b;
+            color: #73726e;
             font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 0;
         }
 
         h2 {
-            color: #1e293b;
-            font-size: 22px;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            padding-top: 10px;
+            color: #2e2e2c;
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+            margin-bottom: 16px;
+        }
+
+        h3 {
+            color: #2e2e2c;
+            font-size: 17px;
+            font-weight: 600;
+            margin-top: 28px;
+            margin-bottom: 10px;
         }
 
         p, li {
-            color: #475569;
-            margin-bottom: 12px;
+            color: #2e2e2c;
+            font-size: 16px;
+            margin-bottom: 14px;
         }
 
         ul {
-            margin-left: 25px;
-            margin-bottom: 15px;
+            margin-left: 22px;
+            margin-bottom: 18px;
         }
 
         li {
             margin-bottom: 8px;
+            padding-left: 4px;
+        }
+
+        li::marker {
+            color: #9b9a96;
         }
 
         strong {
-            color: #1e293b;
+            color: #2e2e2c;
+            font-weight: 600;
+        }
+
+        a {
+            color: #2f80ed;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #1f6fe0;
+            text-decoration: underline;
         }
 
         .back-link {
             display: inline-block;
-            margin-top: 30px;
-            color: #667eea;
-            text-decoration: none;
+            margin-top: 48px;
+            color: #2f80ed;
             font-weight: 500;
-            transition: color 0.3s;
+            font-size: 15px;
         }
 
         .back-link:hover {
-            color: #5568d3;
+            color: #1f6fe0;
+            text-decoration: none;
         }
 
         .section {
-            margin-bottom: 25px;
+            margin-bottom: 48px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid #ecebe8;
+        }
+
+        .section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
         }
 
         .highlight-box {
-            background: #f1f5f9;
-            border-left: 4px solid #667eea;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 4px;
+            background: #f6f6f4;
+            border: 1px solid #e0dfdb;
+            padding: 16px 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+            color: #2e2e2c;
         }
 
         @media (max-width: 768px) {
             .container {
-                padding: 25px;
+                padding: 40px 20px 64px;
+            }
+
+            .header {
+                padding: 28px 22px;
             }
 
             h1 {
-                font-size: 26px;
+                font-size: 28px;
             }
 
             h2 {
-                font-size: 20px;
+                font-size: 21px;
             }
         }
     </style>
@@ -142,7 +185,7 @@
         <div class="section">
             <h2>2. Information We Collect</h2>
             
-            <h3 style="font-size: 18px; color: #334155; margin-top: 20px; margin-bottom: 10px;">2.1 Account Information</h3>
+            <h3>2.1 Account Information</h3>
             <p>When you create an account, we collect:</p>
             <ul>
                 <li><strong>Email address:</strong> Used for account authentication and important communications</li>
@@ -151,7 +194,7 @@
                 <li><strong>Account preferences:</strong> Settings like dark mode, notification preferences</li>
             </ul>
 
-            <h3 style="font-size: 18px; color: #334155; margin-top: 20px; margin-bottom: 10px;">2.2 Study Content & Data</h3>
+            <h3>2.2 Study Content & Data</h3>
             <p>To provide our services, we store the content you create:</p>
             <ul>
                 <li><strong>Classes:</strong> Course names, descriptions, schedules, and progress</li>
@@ -163,7 +206,7 @@
                 <li><strong>Pomodoro Sessions:</strong> Timer history, focus time, and productivity statistics</li>
             </ul>
 
-            <h3 style="font-size: 18px; color: #334155; margin-top: 20px; margin-bottom: 10px;">2.3 Technical & Usage Data</h3>
+            <h3>2.3 Technical & Usage Data</h3>
             <p>We collect limited technical information to maintain platform security and performance:</p>
             <ul>
                 <li><strong>Authentication tokens:</strong> Session management (stored in sessionStorage)</li>
@@ -203,14 +246,14 @@
             <h2>4. Data Storage & Security</h2>
             <p>We implement industry-standard security measures to protect your information:</p>
 
-            <h3 style="font-size: 18px; color: #334155; margin-top: 20px; margin-bottom: 10px;">4.1 Encryption</h3>
+            <h3>4.1 Encryption</h3>
             <ul>
                 <li><strong>Data at Rest:</strong> All stored data is encrypted using AES-256 encryption on Cloudflare Workers infrastructure</li>
                 <li><strong>Data in Transit:</strong> All communications use HTTPS/TLS 1.3 encryption</li>
                 <li><strong>Password Security:</strong> Passwords are hashed with SHA-256 and never stored in plain text</li>
             </ul>
 
-            <h3 style="font-size: 18px; color: #334155; margin-top: 20px; margin-bottom: 10px;">4.2 Access Controls</h3>
+            <h3>4.2 Access Controls</h3>
             <ul>
                 <li>Strict authentication requirements for all user accounts</li>
                 <li>Session tokens stored securely in browser sessionStorage</li>
@@ -218,7 +261,7 @@
                 <li>Regular security monitoring and vulnerability scanning</li>
             </ul>
 
-            <h3 style="font-size: 18px; color: #334155; margin-top: 20px; margin-bottom: 10px;">4.3 Infrastructure</h3>
+            <h3>4.3 Infrastructure</h3>
             <ul>
                 <li><strong>Cloud Provider:</strong> Cloudflare Workers and Durable Objects</li>
                 <li><strong>Data Centers:</strong> Distributed globally with redundancy</li>
@@ -273,7 +316,7 @@
         <div class="section">
             <h2>7. Data Retention & Deletion</h2>
             
-            <h3 style="font-size: 18px; color: #334155; margin-top: 20px; margin-bottom: 10px;">7.1 While Your Account is Active</h3>
+            <h3>7.1 While Your Account is Active</h3>
             <p>Your study data is stored securely as long as your account remains active. This includes:</p>
             <ul>
                 <li>All flashcards, notes, tasks, and schedules you create</li>
@@ -281,7 +324,7 @@
                 <li>Account settings and preferences</li>
             </ul>
 
-            <h3 style="font-size: 18px; color: #334155; margin-top: 20px; margin-bottom: 10px;">7.2 Account Deletion</h3>
+            <h3>7.2 Account Deletion</h3>
             <p>When you delete your account:</p>
             <ul>
                 <li><strong>Immediate:</strong> Access is revoked and account is marked for deletion</li>
@@ -290,7 +333,7 @@
                 <li><strong>No Recovery:</strong> Deleted data cannot be recovered</li>
             </ul>
 
-            <h3 style="font-size: 18px; color: #334155; margin-top: 20px; margin-bottom: 10px;">7.3 Data Retention Exceptions</h3>
+            <h3>7.3 Data Retention Exceptions</h3>
             <p>We may retain certain information for legal compliance:</p>
             <ul>
                 <li>Transaction records for tax and accounting purposes (7 years)</li>
@@ -313,54 +356,54 @@
 
             <p><strong>If We Discover Underage Users:</strong> If we learn that a child under 13 has created an account without parental consent, we will immediately delete the account and all associated data.</p>
 
-            <p><strong>Parents:</strong> If you believe your child under 13 has created an account, please contact us immediately at <a href="mailto:issaayh26@pewaukeeschools.org" style="color: #667eea;">issaayh26@pewaukeeschools.org</a>.</p>
+            <p><strong>Parents:</strong> If you believe your child under 13 has created an account, please contact us immediately at <a href="mailto:issaayh26@pewaukeeschools.org">issaayh26@pewaukeeschools.org</a>.</p>
         </div>
 
         <div class="section">
             <h2>9. Your Privacy Rights</h2>
             <p>You have the following rights regarding your personal data:</p>
 
-            <h3 style="font-size: 18px; color: #334155; margin-top: 20px; margin-bottom: 10px;">9.1 Access & Export</h3>
+            <h3>9.1 Access & Export</h3>
             <ul>
                 <li>View all your stored data through your account dashboard</li>
                 <li>Export your data in standard formats (JSON, CSV)</li>
                 <li>Request a complete copy of your information</li>
             </ul>
 
-            <h3 style="font-size: 18px; color: #334155; margin-top: 20px; margin-bottom: 10px;">9.2 Correction & Update</h3>
+            <h3>9.2 Correction & Update</h3>
             <ul>
                 <li>Edit your account information at any time</li>
                 <li>Update or delete study content you've created</li>
                 <li>Modify preferences and settings</li>
             </ul>
 
-            <h3 style="font-size: 18px; color: #334155; margin-top: 20px; margin-bottom: 10px;">9.3 Deletion</h3>
+            <h3>9.3 Deletion</h3>
             <ul>
                 <li>Delete your entire account and all data through account settings</li>
                 <li>Request specific data deletion by contacting us</li>
             </ul>
 
-            <h3 style="font-size: 18px; color: #334155; margin-top: 20px; margin-bottom: 10px;">9.4 Object & Restrict</h3>
+            <h3>9.4 Object & Restrict</h3>
             <ul>
                 <li>Object to certain data processing activities</li>
                 <li>Request restricted processing in specific situations</li>
             </ul>
 
-            <p><strong>To exercise your rights:</strong> Contact us at <a href="mailto:issaayh26@pewaukeeschools.org" style="color: #667eea;">issaayh26@pewaukeeschools.org</a> or manage settings in your account dashboard.</p>
+            <p><strong>To exercise your rights:</strong> Contact us at <a href="mailto:issaayh26@pewaukeeschools.org">issaayh26@pewaukeeschools.org</a> or manage settings in your account dashboard.</p>
         </div>
 
         <div class="section">
             <h2>10. Cookies & Tracking</h2>
             <p>VieraStudy uses minimal tracking technologies:</p>
 
-            <h3 style="font-size: 18px; color: #334155; margin-top: 20px; margin-bottom: 10px;">10.1 Essential Storage</h3>
+            <h3>10.1 Essential Storage</h3>
             <ul>
                 <li><strong>sessionStorage:</strong> Stores authentication token (clears when browser closes)</li>
                 <li><strong>No Cookies:</strong> We do not use traditional cookies</li>
                 <li><strong>localStorage:</strong> Stores user preferences like dark mode setting only</li>
             </ul>
 
-            <h3 style="font-size: 18px; color: #334155; margin-top: 20px; margin-bottom: 10px;">10.2 Third-Party Tracking</h3>
+            <h3>10.2 Third-Party Tracking</h3>
             <ul>
                 <li><strong>No Analytics:</strong> We do not use Google Analytics or similar tracking</li>
                 <li><strong>No Advertising:</strong> No advertising cookies or pixels</li>
@@ -410,16 +453,16 @@
             <h2>14. Contact Information</h2>
             <p>For privacy questions, concerns, or requests regarding your personal data:</p>
             
-            <p><strong>Email:</strong> <a href="mailto:issaayh26@pewaukeeschools.org" style="color: #667eea;">issaayh26@pewaukeeschools.org</a></p>
-            <p><strong>Website:</strong> <a href="https://vierastudy.com" style="color: #667eea;">https://vierastudy.com</a></p>
+            <p><strong>Email:</strong> <a href="mailto:issaayh26@pewaukeeschools.org">issaayh26@pewaukeeschools.org</a></p>
+            <p><strong>Website:</strong> <a href="https://vierastudy.com">https://vierastudy.com</a></p>
             
-            <p style="margin-top: 20px;"><strong>Response Time:</strong> We aim to respond to all privacy inquiries within 5 business days.</p>
+            <p style="margin-top:8px;"><strong>Response Time:</strong> We aim to respond to all privacy inquiries within 5 business days.</p>
         </div>
 
         <div class="section">
             <h2>15. Additional Legal Information</h2>
             
-            <h3 style="font-size: 18px; color: #334155; margin-top: 20px; margin-bottom: 10px;">California Residents (CCPA)</h3>
+            <h3>California Residents (CCPA)</h3>
             <p>California residents have additional rights under the California Consumer Privacy Act:</p>
             <ul>
                 <li>Right to know what personal information is collected</li>
@@ -428,7 +471,7 @@
                 <li>Right to non-discrimination for exercising rights</li>
             </ul>
 
-            <h3 style="font-size: 18px; color: #334155; margin-top: 20px; margin-bottom: 10px;">European Users (GDPR)</h3>
+            <h3>European Users (GDPR)</h3>
             <p>While VieraStudy is US-based, we respect GDPR principles:</p>
             <ul>
                 <li>Legal basis for processing: Contract performance and legitimate interests</li>

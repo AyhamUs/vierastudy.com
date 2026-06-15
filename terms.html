@@ -17,95 +17,123 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
+            background: #ffffff;
+            color: #2e2e2c;
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 760px;
             margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background: #ffffff;
+            padding: 72px 28px 96px;
         }
 
         .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #667eea;
+            text-align: left;
+            margin-bottom: 56px;
+            padding: 40px 36px;
+            background: #f7f7f5;
+            border: 1px solid #ecebe8;
+            border-radius: 8px;
         }
 
         .logo {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 20px;
+            width: 48px;
+            height: 48px;
+            margin: 0 0 20px;
         }
 
         h1 {
-            color: #1e293b;
-            font-size: 32px;
-            margin-bottom: 10px;
+            color: #2e2e2c;
+            font-size: 38px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 14px;
         }
 
         .effective-date {
-            color: #64748b;
+            color: #73726e;
             font-size: 14px;
+            margin-bottom: 2px;
         }
 
         h2 {
-            color: #1e293b;
+            color: #2e2e2c;
             font-size: 22px;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            padding-top: 10px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 14px;
         }
 
         p, li {
-            color: #475569;
-            margin-bottom: 12px;
+            color: #2e2e2c;
+            font-size: 16px;
+            margin-bottom: 14px;
         }
 
         ul {
-            margin-left: 25px;
-            margin-bottom: 15px;
+            margin-left: 22px;
+            margin-bottom: 16px;
         }
 
         li {
             margin-bottom: 8px;
+            color: #4a4a47;
         }
 
         strong {
-            color: #1e293b;
+            color: #2e2e2c;
+            font-weight: 600;
+        }
+
+        a {
+            color: #2f80ed;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: #1f6fe0;
         }
 
         .back-link {
             display: inline-block;
-            margin-top: 30px;
-            color: #667eea;
-            text-decoration: none;
+            margin-top: 48px;
+            padding-top: 28px;
+            border-top: 1px solid #ecebe8;
+            color: #2f80ed;
             font-weight: 500;
-            transition: color 0.3s;
+            width: 100%;
         }
 
         .back-link:hover {
-            color: #5568d3;
+            color: #1f6fe0;
         }
 
         .section {
-            margin-bottom: 25px;
+            margin-bottom: 44px;
+            padding-bottom: 44px;
+            border-bottom: 1px solid #ecebe8;
+        }
+
+        .section:last-of-type {
+            border-bottom: none;
         }
 
         @media (max-width: 768px) {
             .container {
-                padding: 25px;
+                padding: 44px 20px 64px;
+            }
+
+            .header {
+                padding: 28px 24px;
+                margin-bottom: 40px;
             }
 
             h1 {
-                font-size: 26px;
+                font-size: 30px;
             }
 
             h2 {
@@ -209,7 +237,7 @@
                 <li>We implement strict access controls and security monitoring</li>
                 <li>Upon account deletion, all personal data is permanently deleted from our systems</li>
             </ul>
-            <p>For complete details, please review our <a href="privacy.html" style="color: #667eea;">Privacy Policy</a>.</p>
+            <p>For complete details, please review our <a href="privacy.html" >Privacy Policy</a>.</p>
         </div>
 
         <div class="section">
@@ -267,7 +295,7 @@
             <h2>13. Arbitration & Dispute Resolution</h2>
             <p><strong>Agreement to Arbitrate:</strong> You agree that any dispute, claim, or controversy arising out of or relating to these Terms or the Platform shall be resolved through binding arbitration rather than in court, except that you may assert claims in small claims court if they qualify.</p>
             <p><strong>Arbitration Rules:</strong> Arbitration will be conducted by the American Arbitration Association (AAA) under its Commercial Arbitration Rules. The arbitrator's decision will be final and binding.</p>
-            <p><strong>Opt-Out Right:</strong> If you are a new user, you may reject and opt-out of this Arbitration Agreement within 30 days of accepting these Terms by emailing us at <a href="mailto:issaayh26@pewaukeeschools.org" style="color: #667eea;">issaayh26@pewaukeeschools.org</a> with your first and last name and stating your intent to opt-out. Opting out does not affect any other part of these Terms.</p>
+            <p><strong>Opt-Out Right:</strong> If you are a new user, you may reject and opt-out of this Arbitration Agreement within 30 days of accepting these Terms by emailing us at <a href="mailto:issaayh26@pewaukeeschools.org" >issaayh26@pewaukeeschools.org</a> with your first and last name and stating your intent to opt-out. Opting out does not affect any other part of these Terms.</p>
             <p><strong>Class Action Waiver:</strong> You agree to bring claims only in your individual capacity and not as part of any class or representative action.</p>
         </div>
 
@@ -308,8 +336,8 @@
         <div class="section">
             <h2>17. Contact Information</h2>
             <p>For questions, concerns, or legal notices regarding these Terms of Service, please contact us:</p>
-            <p><strong>Email:</strong> <a href="mailto:issaayh26@pewaukeeschools.org" style="color: #667eea;">issaayh26@pewaukeeschools.org</a></p>
-            <p><strong>Website:</strong> <a href="https://vierastudy.com" style="color: #667eea;">https://vierastudy.com</a></p>
+            <p><strong>Email:</strong> <a href="mailto:issaayh26@pewaukeeschools.org" >issaayh26@pewaukeeschools.org</a></p>
+            <p><strong>Website:</strong> <a href="https://vierastudy.com" >https://vierastudy.com</a></p>
         </div>
 
         <div class="section">
