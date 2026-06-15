@@ -22,7 +22,7 @@
     <meta name="twitter:title" content="VieraStudy - Progress Tracker">
     <meta name="twitter:description" content="Track your study progress with VieraStudy. Monitor learning goals, visualize achievements, and stay motivated.">
     <meta name="twitter:image" content="https://vierastudy.com/vierastudy.png">
-    <link rel="stylesheet" href="/shared.css">
+    <link rel="stylesheet" href="shared.css">
     <link rel="icon" href="vierastudy.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -916,8 +916,8 @@
 
     <div id="bugReportModal" class="bug-modal"><div class="bug-modal-content"><div class="bug-modal-header"><div class="bug-modal-title"><i class="fas fa-bug"></i> Report a Bug</div><button class="bug-close-btn" onclick="closeBugReportModal()"><i class="fas fa-times"></i></button></div><div class="bug-page-info"><i class="fas fa-link"></i><span>Reporting from: <strong id="bugPageName">Progress Tracker</strong></span><input type="hidden" id="bugPage" value=""></div><form onsubmit="submitBugReport(event)"><div class="bug-form-group"><label class="bug-form-label">Category</label><select class="bug-form-select" id="bugCategory" required><option value="General">General Issue</option><option value="UI/Design">UI/Design Problem</option><option value="Functionality">Feature Not Working</option><option value="Performance">Performance Issue</option><option value="Login/Account">Login/Account Problem</option><option value="Data Loss">Data Loss</option><option value="Mobile">Mobile-Specific Issue</option><option value="Other">Other</option></select></div><div class="bug-form-group"><label class="bug-form-label">Describe the bug *</label><textarea class="bug-form-textarea" id="bugDescription" placeholder="Please describe what happened..." required></textarea></div><div class="bug-form-group"><label class="bug-form-label">Your Email (optional)</label><input type="email" class="bug-form-input" id="bugUserEmail" placeholder="your@email.com"></div><div class="bug-form-group"><label class="bug-form-label">Your Name (optional)</label><input type="text" class="bug-form-input" id="bugUserName" placeholder="Your name"></div><button type="submit" class="bug-submit-btn"><i class="fas fa-paper-plane"></i> Submit Bug Report</button></form></div></div>
 
-    <script src="/api.js"></script>
-    <script src="/shared.js"></script>
+    <script src="api.js"></script>
+    <script src="shared.js"></script>
     <script>
         // Session check - redirect to login if not authenticated
         (async function() {
