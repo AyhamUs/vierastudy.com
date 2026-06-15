@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VieraStudy has shut down</title>
+    <meta name="description" content="VieraStudy has officially shut down. Thank you to everyone who studied with us.">
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="vierastudy.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f7f7f5;
+            --surface: #ffffff;
+            --subtle: #f6f6f4;
+            --text: #2e2e2c;
+            --muted: #73726e;
+            --faint: #9b9a96;
+            --border: #ecebe8;
+            --border-strong: #e0dfdb;
+            --accent: #2f80ed;
+            --accent-hover: #1f6fe0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background:
+                radial-gradient(900px 500px at 50% -10%, rgba(47, 128, 237, 0.05), transparent 70%),
+                var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 14px 50px rgba(15, 15, 15, 0.06);
+            max-width: 580px;
+            width: 100%;
+            padding: 52px 52px 44px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), #8b9dff);
+            opacity: 0.85;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .brand img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+        }
+
+        .brand span {
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--text);
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--muted);
+            background: var(--subtle);
+            border: 1px solid var(--border-strong);
+            border-radius: 999px;
+            padding: 5px 13px;
+            margin-bottom: 24px;
+        }
+
+        .tag .dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: #c97a4a;
+        }
+
+        h1 {
+            font-size: 34px;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+            line-height: 1.15;
+            margin-bottom: 22px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.72;
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+
+        p strong { color: var(--text); font-weight: 600; }
+
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 34px 0 28px;
+        }
+
+        /* ── Contact ── */
+        .contact {
+            background: var(--subtle);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .contact-icon {
+            width: 42px; height: 42px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            background: var(--surface);
+            border: 1px solid var(--border-strong);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 17px;
+        }
+
+        .contact-text { min-width: 0; }
+
+        .contact-label {
+            font-size: 13px;
+            color: var(--faint);
+            margin-bottom: 2px;
+        }
+
+        .contact a {
+            font-size: 15.5px;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            word-break: break-all;
+            transition: color 0.15s ease;
+        }
+
+        .contact a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+        /* ── Sign-off ── */
+        .signoff-intro {
+            font-size: 15px;
+            color: var(--muted);
+            margin-bottom: 2px;
+        }
+
+        .signature {
+            font-family: 'Caveat', cursive;
+            font-size: 46px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text);
+            margin: 4px 0 10px;
+        }
+
+        .signed-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .signed-role {
+            font-size: 13px;
+            color: var(--faint);
+            margin-top: 2px;
+        }
+
+        .date {
+            font-size: 13px;
+            color: var(--faint);
+            margin-top: 28px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 580px) {
+            .card { padding: 36px 26px 30px; }
+            h1 { font-size: 27px; }
+            .signature { font-size: 40px; }
+            .contact { flex-direction: row; }
+        }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <div class="brand">
+            <img src="vierastudy.png" alt="VieraStudy">
+            <span>VieraStudy</span>
+        </div>
+
+        <span class="tag"><span class="dot"></span>Service ended</span>
+
+        <h1>VieraStudy has shut down.</h1>
+
+        <p>
+            After much thought, we've made the difficult decision to permanently close
+            VieraStudy. The app and all of its study tools are no longer available.
+        </p>
+        <p>
+            Thank you to every student who created flashcards, tracked their progress,
+            and trusted us to be a small part of your learning. It genuinely meant the
+            world to us.
+        </p>
+        <p>
+            <strong>Wishing you all the best in your studies and beyond.</strong>
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="contact">
+            <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m3 6 9 6 9-6"/></svg></div>
+            <div class="contact-text">
+                <div class="contact-label">Questions or requests? Reach out anytime —</div>
+                <a href="mailto:ayhamissa416@gmail.com">ayhamissa416@gmail.com</a>
+            </div>
+        </div>
+
+        <div class="signoff-intro">With gratitude,</div>
+        <div class="signature">The VieraStudy Team</div>
+        <div class="signed-name">Viera Educational Solutions</div>
+        <div class="signed-role">Founders &amp; Team</div>
+
+        <div class="date">Signed June 15, 2026</div>
+    </main>
+</body>
+</html>
