@@ -82,45 +82,13 @@
             color: #94a3b8;
         }
 
-        body.dark-mode .modal-content {
-            background: #1e293b;
-        }
-
-        body.dark-mode .modal h2 {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .form-group label {
-            color: #e2e8f0;
-        }
-
+        body.dark-mode .modal-content { background: var(--surface); }
+        body.dark-mode .modal h2 { color: var(--text); }
+        body.dark-mode .form-group label { color: var(--text); }
         body.dark-mode .form-group input {
-            background: #334155;
-            border-color: #475569;
-            color: #e2e8f0;
-        }
-
-        /* Login screen stays light regardless of dark mode */
-
-        body.dark-mode .notification-content {
-            background: #1e293b;
-        }
-
-        body.dark-mode .notification-title {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .notification-message {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .quick-action-card {
-            background: #1e293b;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        body.dark-mode .quick-action-text {
-            color: #cbd5e1;
+            background: var(--surface-2);
+            border-color: var(--border-strong);
+            color: var(--text);
         }
 
         .container {
@@ -3143,11 +3111,6 @@
     </div>
 
     <script>
-        if (localStorage.getItem('vieraDevPreview') === '1') {
-            const mockData = { flashcards:[{name:'Bio'},{name:'Chem'}], todos:[{text:'Essay',completed:false}], notes:[{title:'Lecture 1'}], classes:[{name:'Biology',color:'#e7e6e3',icon:'fa-dna'},{name:'History',color:'#e7e6e3',icon:'fa-landmark'}] };
-            const mock = { ready: Promise.resolve(), user:{}, isLoggedIn:()=>true, getUser:()=>({firstName:'Alex',lastName:'Rivera',email:'alex@example.com',isPremium:true}), getFlashcards:()=>mockData.flashcards, getTodos:()=>mockData.todos, getNotes:()=>mockData.notes, getClasses:()=>mockData.classes, getActivity:()=>[], setDarkMode:()=>{}, setAccentColor:()=>{}, syncToCloud:async()=>{}, logout:async()=>{}, loadData:async()=>{}, _saveDataNow:()=>{}, scheduleSync:()=>{} };
-            Object.defineProperty(window, 'vieraAPI', { value: mock, writable:false, configurable:false });
-        }
         // Session check - redirect to login if not authenticated
         (async function() {
             await vieraAPI.ready;
