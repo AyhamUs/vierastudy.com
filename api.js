@@ -51,6 +51,8 @@ class VieraStudyAPI {
     // ── AUTH ──────────────────────────────────────────────────────────────────
 
     async register(email, password, firstName, lastName) {
+        await _readyPromise;
+        if (!_supabase) return { error: 'Service unavailable. Please refresh the page.' };
         try {
             const { data, error } = await _supabase.auth.signUp({
                 email, password,
@@ -68,6 +70,8 @@ class VieraStudyAPI {
     }
 
     async login(email, password) {
+        await _readyPromise;
+        if (!_supabase) return { error: 'Service unavailable. Please refresh the page.' };
         try {
             const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
             if (error) return { error: error.message };
@@ -75,6 +79,7 @@ class VieraStudyAPI {
             await this.loadData();
             return { success: true, user: this.user };
         } catch (e) {
+            console.error('[VieraStudy] Login error:', e);
             return { error: 'Network error. Please try again.' };
         }
     }

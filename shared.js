@@ -1,15 +1,96 @@
 // VieraStudy Shared Components v1
 // Provides: sidebar injection, modals, keyboard shortcuts, command palette, sync status, bug report
 
-// ── 1. INSTANT SETTINGS (before DOM ready, prevents flash) ────────────────────
-(function () {
-  const dm = localStorage.getItem('studyDeckDarkMode') === 'true';
-  if (dm) document.body.classList.add('dark-mode');
-  const accent = localStorage.getItem('vieraAccent');
-  if (accent) document.documentElement.style.setProperty('--accent', accent);
-  const fs = localStorage.getItem('vieraFontSize');
-  if (fs) document.documentElement.style.setProperty('--font-size-base', fs + 'px');
+// ── 1. THEME ENGINE + INSTANT SETTINGS (before paint, prevents flash) ─────────
+window.VieraTheme = (function () {
+  const root = document.documentElement;
+
+  // Accent presets (label + hex) available to the customizer
+  const ACCENTS = [
+    { name: 'Blue',   hex: '#3b82f6' },
+    { name: 'Violet', hex: '#8b5cf6' },
+    { name: 'Emerald',hex: '#10b981' },
+    { name: 'Rose',   hex: '#f43f5e' },
+    { name: 'Amber',  hex: '#f59e0b' },
+    { name: 'Pink',   hex: '#ec4899' },
+    { name: 'Cyan',   hex: '#06b6d4' },
+    { name: 'Indigo', hex: '#6366f1' },
+  ];
+
+  function hexToRgb(hex) {
+    const h = hex.replace('#', '');
+    const n = parseInt(h.length === 3 ? h.split('').map(c => c + c).join('') : h, 16);
+    return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+  }
+  function shade(hex, amt) {
+    const { r, g, b } = hexToRgb(hex);
+    const f = c => Math.max(0, Math.min(255, Math.round(c + amt))).toString(16).padStart(2, '0');
+    return '#' + f(r) + f(g) + f(b);
+  }
+  function readableText(hex) {
+    const { r, g, b } = hexToRgb(hex);
+    return (0.299 * r + 0.587 * g + 0.114 * b) > 150 ? '#0f172a' : '#ffffff';
+  }
+
+  function applyAccent(hex) {
+    const { r, g, b } = hexToRgb(hex);
+    root.style.setProperty('--accent', hex);
+    root.style.setProperty('--accent-hover', shade(hex, -22));
+    root.style.setProperty('--accent-soft', `rgba(${r}, ${g}, ${b}, 0.13)`);
+    root.style.setProperty('--accent-contrast', readableText(hex));
+  }
+
+  function applyThemeMode(mode) {
+    // mode: 'light' | 'dark' | 'auto'
+    let dark = mode === 'dark';
+    if (mode === 'auto') {
+      dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    document.body && document.body.classList.toggle('dark-mode', dark);
+    // keep legacy flag in sync so existing pages stay consistent
+    localStorage.setItem('studyDeckDarkMode', dark ? 'true' : 'false');
+  }
+
+  const prefs = {
+    mode:    () => localStorage.getItem('vieraThemeMode') || (localStorage.getItem('studyDeckDarkMode') === 'true' ? 'dark' : 'light'),
+    accent:  () => localStorage.getItem('vieraAccent') || '#3b82f6',
+    density: () => localStorage.getItem('vieraDensity') || 'comfortable',
+    radius:  () => localStorage.getItem('vieraRadius') || '14',
+    font:    () => localStorage.getItem('vieraFontSize') || '16',
+  };
+
+  function apply() {
+    applyAccent(prefs.accent());
+    applyThemeMode(prefs.mode());
+    if (document.body) document.body.setAttribute('data-density', prefs.density());
+    root.style.setProperty('--radius', prefs.radius() + 'px');
+    root.style.setProperty('--font-size-base', prefs.font() + 'px');
+  }
+
+  function set(key, val) {
+    const map = { mode: 'vieraThemeMode', accent: 'vieraAccent', density: 'vieraDensity', radius: 'vieraRadius', font: 'vieraFontSize' };
+    if (map[key]) localStorage.setItem(map[key], val);
+    apply();
+    // best-effort cloud persistence via existing API
+    try {
+      if (key === 'mode' && window.vieraAPI?.setDarkMode) vieraAPI.setDarkMode(document.body.classList.contains('dark-mode'));
+      if (key === 'accent' && window.vieraAPI?.setAccentColor) vieraAPI.setAccentColor(val);
+    } catch (e) {}
+    window.dispatchEvent(new CustomEvent('viera:theme-changed', { detail: { key, val } }));
+  }
+
+  // React to OS theme changes while in auto mode
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (prefs.mode() === 'auto') applyThemeMode('auto');
+    });
+  }
+
+  return { ACCENTS, prefs, apply, set, applyAccent, applyThemeMode };
 })();
+
+// Apply instantly (body may not exist yet — accent/radius/font are on <html>, theme re-applied on DOM ready)
+window.VieraTheme.apply();
 
 // ── 2. SIDEBAR INJECTION ──────────────────────────────────────────────────────
 function injectSidebar() {
@@ -71,6 +152,9 @@ function injectSidebar() {
         <div class="user-name" id="userName">Loading...</div>
         <div class="user-plan" id="userPlan"></div>
       </div>
+      <button class="bug-report-btn" onclick="openCustomizer()" title="Customize appearance" style="margin-right:6px;color:var(--accent)">
+        <i class="fas fa-sliders"></i>
+      </button>
       <button class="bug-report-btn" onclick="openBugReportModal()" title="Report a Bug">
         <i class="fas fa-bug"></i>
       </button>
@@ -167,6 +251,14 @@ function injectModals() {
       </div>
     `;
     document.body.appendChild(b);
+  }
+
+  if (!document.getElementById('vieraCustomizer')) {
+    const cz = document.createElement('div');
+    cz.id = 'vieraCustomizer';
+    cz.className = 'customizer';
+    cz.addEventListener('click', e => { if (e.target === cz) closeCustomizer(); });
+    document.body.appendChild(cz);
   }
 
   if (!document.getElementById('commandPalette')) {
@@ -355,6 +447,95 @@ window.submitBugReport = async function(event) {
   }
 };
 
+// ── 9b. APPEARANCE CUSTOMIZER ─────────────────────────────────────────────────
+function renderCustomizer() {
+  const cz = document.getElementById('vieraCustomizer');
+  if (!cz) return;
+  const T = window.VieraTheme;
+  const p = T.prefs;
+  const mode = p.mode(), accent = p.accent(), density = p.density(), radius = p.radius(), font = p.font();
+
+  const modeBtn = (val, icon, label) =>
+    `<button class="${mode === val ? 'active' : ''}" data-cz-mode="${val}"><i class="fas ${icon}"></i>${label}</button>`;
+  const densBtn = (val, label) =>
+    `<button class="${density === val ? 'active' : ''}" data-cz-density="${val}">${label}</button>`;
+  const swatches = T.ACCENTS.map(a =>
+    `<button class="cz-swatch${accent.toLowerCase() === a.hex.toLowerCase() ? ' active' : ''}" data-cz-accent="${a.hex}" style="background:${a.hex}" title="${a.name}"></button>`
+  ).join('');
+
+  cz.innerHTML = `
+    <div class="customizer-panel">
+      <div class="customizer-head">
+        <h2><i class="fas fa-sliders"></i> Appearance</h2>
+        <button class="customizer-close" onclick="closeCustomizer()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="customizer-body">
+        <div>
+          <span class="cz-group-label">Theme</span>
+          <div class="cz-seg">
+            ${modeBtn('light', 'fa-sun', 'Light')}
+            ${modeBtn('dark', 'fa-moon', 'Dark')}
+            ${modeBtn('auto', 'fa-circle-half-stroke', 'Auto')}
+          </div>
+        </div>
+        <div>
+          <span class="cz-group-label">Accent color</span>
+          <div class="cz-swatches">${swatches}</div>
+        </div>
+        <div>
+          <span class="cz-group-label">Density</span>
+          <div class="cz-seg">
+            ${densBtn('compact', 'Compact')}
+            ${densBtn('comfortable', 'Cozy')}
+            ${densBtn('spacious', 'Spacious')}
+          </div>
+        </div>
+        <div>
+          <span class="cz-group-label">Corner roundness</span>
+          <div class="cz-slider-row">
+            <input type="range" class="cz-slider" id="czRadius" min="0" max="24" step="2" value="${radius}">
+            <span class="cz-slider-val" id="czRadiusVal">${radius}px</span>
+          </div>
+        </div>
+        <div>
+          <span class="cz-group-label">Text size</span>
+          <div class="cz-slider-row">
+            <input type="range" class="cz-slider" id="czFont" min="14" max="20" step="1" value="${font}">
+            <span class="cz-slider-val" id="czFontVal">${font}px</span>
+          </div>
+        </div>
+        <button class="notification-btn" style="width:100%" onclick="resetCustomizer()">
+          <i class="fas fa-rotate-left"></i> Reset to defaults
+        </button>
+      </div>
+    </div>`;
+
+  cz.querySelectorAll('[data-cz-mode]').forEach(b => b.onclick = () => { T.set('mode', b.dataset.czMode); renderCustomizer(); });
+  cz.querySelectorAll('[data-cz-density]').forEach(b => b.onclick = () => { T.set('density', b.dataset.czDensity); renderCustomizer(); });
+  cz.querySelectorAll('[data-cz-accent]').forEach(b => b.onclick = () => { T.set('accent', b.dataset.czAccent); renderCustomizer(); });
+
+  const rad = cz.querySelector('#czRadius'), radVal = cz.querySelector('#czRadiusVal');
+  rad.oninput = () => { radVal.textContent = rad.value + 'px'; T.set('radius', rad.value); };
+  const fnt = cz.querySelector('#czFont'), fntVal = cz.querySelector('#czFontVal');
+  fnt.oninput = () => { fntVal.textContent = fnt.value + 'px'; T.set('font', fnt.value); };
+}
+
+window.openCustomizer = function () {
+  renderCustomizer();
+  document.getElementById('vieraCustomizer')?.classList.add('active');
+};
+window.closeCustomizer = function () {
+  document.getElementById('vieraCustomizer')?.classList.remove('active');
+};
+window.resetCustomizer = function () {
+  ['vieraThemeMode', 'vieraAccent', 'vieraDensity', 'vieraRadius', 'vieraFontSize'].forEach(k => localStorage.removeItem(k));
+  document.documentElement.style.removeProperty('--radius');
+  document.documentElement.style.removeProperty('--font-size-base');
+  window.VieraTheme.apply();
+  renderCustomizer();
+  window.showNotification && window.showNotification('Appearance reset to defaults', 'success', 'Reset');
+};
+
 // ── 10. COMMAND PALETTE ───────────────────────────────────────────────────────
 var CMD_PAGES = [
   { icon: 'fa-home', color: '#3b82f6', label: 'Home / Dashboard', sub: 'Overview and quick actions', href: '/dashboard.html' },
@@ -480,6 +661,7 @@ function setupKeyboardShortcuts() {
       window.closeBugReportModal();
       window.closeCommandPalette();
       window.closeNotification();
+      window.closeCustomizer && window.closeCustomizer();
     }
     if (isTyping) return;
     var mod = e.metaKey || e.ctrlKey;
@@ -543,6 +725,7 @@ window.showKeyboardShortcuts = function() {
 
 // ── 13. INITIALIZATION ────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async function() {
+  window.VieraTheme.apply();
   injectSidebar();
   injectModals();
   setupKeyboardShortcuts();
