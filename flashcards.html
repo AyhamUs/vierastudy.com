@@ -39,237 +39,10 @@
 
         body {
             font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f7fa;
-            color: #333;
+            background: var(--bg);
+            color: var(--text);
             transition: background 0.3s, color 0.3s;
             overflow-x: hidden;
-        }
-
-        body.dark-mode {
-            background: #0f172a;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .main-content {
-            background: #0f172a;
-        }
-
-        body.dark-mode .header {
-            background: #1e293b;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .header h1 {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .decks-section {
-            background: #1e293b;
-            border-color: #334155;
-        }
-
-        body.dark-mode .section-title {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .deck-card {
-            background: #334155;
-            border-color: #475569;
-        }
-
-        body.dark-mode .deck-name {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .deck-count {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .flashcard {
-            background: #1e293b;
-            border-color: #334155;
-        }
-
-        body.dark-mode .card-content {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .modal {
-            background: rgba(0, 0, 0, 0.7);
-        }
-
-        body.dark-mode .modal-content {
-            background: #1e293b;
-        }
-
-        body.dark-mode .modal-title {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .flashcard-input-group {
-            background: #1e293b;
-        }
-
-        body.dark-mode .add-card-btn {
-            background: #334155;
-            border-color: #475569;
-            color: #3b82f6;
-        }
-
-        body.dark-mode .add-card-btn:hover {
-            background: #475569;
-            border-color: #3b82f6;
-        }
-
-        body.dark-mode .remove-card-btn {
-            background: #475569;
-            color: #ef4444;
-        }
-
-        body.dark-mode .remove-card-btn:hover {
-            background: #ef4444;
-            color: white;
-        }
-
-        body.dark-mode .form-label {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .form-input,
-        body.dark-mode .form-select,
-        body.dark-mode .form-textarea {
-            background: #334155;
-            border-color: #475569;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .form-input::placeholder,
-        body.dark-mode .form-textarea::placeholder {
-            color: #64748b;
-        }
-
-        body.dark-mode .form-input:focus,
-        body.dark-mode .form-select:focus,
-        body.dark-mode .form-textarea:focus {
-            background: #334155;
-            border-color: #3b82f6;
-        }
-
-        body.dark-mode .add-deck-btn,
-        body.dark-mode .submit-btn {
-            background: #3b82f6;
-        }
-
-        body.dark-mode .add-deck-btn:hover,
-        body.dark-mode .submit-btn:hover {
-            background: #2563eb;
-        }
-
-        body.dark-mode .icon-btn {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .icon-btn:hover {
-            background: #475569;
-            color: #3b82f6;
-        }
-
-        body.dark-mode .icon-btn.delete:hover {
-            background: #475569;
-            color: #ef4444;
-        }
-
-        body.dark-mode .close-modal {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .close-modal:hover {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .card-actions button {
-            background: #334155;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .card-actions button:hover {
-            background: #475569;
-        }
-
-        body.dark-mode .section-header {
-            border-color: #334155;
-        }
-
-        body.dark-mode .deck-card {
-            background: #1e293b;
-            border-color: #334155;
-        }
-
-        body.dark-mode .deck-title {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .deck-stat {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .deck-menu {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .deck-menu:hover {
-            color: #3b82f6;
-        }
-
-        body.dark-mode .deck-stats {
-            border-color: #334155;
-        }
-
-        body.dark-mode .add-deck-card {
-            background: #334155;
-            border-color: #475569;
-            color: #94a3b8;
-        }
-
-        body.dark-mode .add-deck-card:hover {
-            background: #475569;
-            border-color: #3b82f6;
-            color: #3b82f6;
-        }
-
-        body.dark-mode .study-header h2 {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .close-study {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .flashcard {
-            background: #1e293b;
-            color: #e2e8f0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        body.dark-mode .card-face {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .card-front,
-        body.dark-mode .card-back {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .card-content {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .card-hint {
-            color: #64748b;
-        }
-
-        body.dark-mode .study-progress {
-            color: #94a3b8;
         }
 
         .container {
@@ -284,9 +57,9 @@
         }
 
         .header {
-            background: white;
+            background: var(--surface);
             padding: 25px 40px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-sm);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -294,7 +67,7 @@
 
         .header h1 {
             font-size: 28px;
-            color: #1e293b;
+            color: var(--text);
         }
 
         .header h1 i {
@@ -302,11 +75,11 @@
         }
 
         .add-deck-btn {
-            background: #3b82f6;
-            color: white;
+            background: var(--accent);
+            color: var(--accent-contrast);
             border: none;
             padding: 12px 24px;
-            border-radius: 10px;
+            border-radius: var(--radius-xs);
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
@@ -317,7 +90,7 @@
         }
 
         .add-deck-btn:hover {
-            background: #2563eb;
+            background: var(--accent-hover);
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
         }
@@ -333,18 +106,18 @@
         }
 
         .deck-card {
-            background: white;
-            border-radius: 12px;
+            background: var(--surface);
+            border-radius: var(--radius);
             padding: 25px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-sm);
             cursor: pointer;
             transition: all 0.3s;
-            border-left: 4px solid #3b82f6;
+            border-left: 4px solid var(--accent);
         }
 
         .deck-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-md);
         }
 
         .deck-header {
@@ -357,17 +130,17 @@
         .deck-title {
             font-size: 18px;
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text);
         }
 
         .deck-menu {
-            color: #94a3b8;
+            color: var(--text-faint);
             cursor: pointer;
             padding: 4px;
         }
 
         .deck-menu:hover {
-            color: #3b82f6;
+            color: var(--accent);
         }
 
         .deck-stats {
@@ -375,19 +148,19 @@
             gap: 15px;
             margin-top: 15px;
             padding-top: 15px;
-            border-top: 1px solid #f1f5f9;
+            border-top: 1px solid var(--border);
         }
 
         .deck-stat {
             display: flex;
             align-items: center;
             gap: 5px;
-            color: #64748b;
+            color: var(--text-muted);
             font-size: 14px;
         }
 
         .deck-stat i {
-            color: #3b82f6;
+            color: var(--accent);
         }
 
         .deck-class-badge {
@@ -442,7 +215,7 @@
 
         .study-due-counter {
             font-size: 13px;
-            color: #94a3b8;
+            color: var(--text-faint);
         }
 
         .study-due-counter span {
@@ -471,8 +244,8 @@
         }
 
         .flashcard {
-            background: white;
-            border-radius: 20px;
+            background: var(--surface);
+            border-radius: var(--radius-lg);
             padding: 60px 40px;
             min-height: 400px;
             display: flex;
@@ -480,7 +253,7 @@
             justify-content: center;
             text-align: center;
             font-size: 24px;
-            color: #1e293b;
+            color: var(--text);
             cursor: pointer;
             transition: transform 0.6s;
             transform-style: preserve-3d;
@@ -514,10 +287,10 @@
         }
 
         .study-btn {
-            background: white;
+            background: var(--surface);
             border: none;
             padding: 16px 35px;
-            border-radius: 12px;
+            border-radius: var(--radius);
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
@@ -580,8 +353,8 @@
         }
 
         .modal-content {
-            background: white;
-            border-radius: 12px;
+            background: var(--surface);
+            border-radius: var(--radius);
             padding: 30px;
             max-width: 600px;
             width: 90%;
@@ -607,14 +380,14 @@
         .modal-title {
             font-size: 22px;
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text);
         }
 
         .close-modal {
             background: none;
             border: none;
             font-size: 24px;
-            color: #94a3b8;
+            color: var(--text-faint);
             cursor: pointer;
             padding: 0;
             width: 28px;
@@ -627,7 +400,7 @@
         }
 
         .close-modal:hover {
-            color: #64748b;
+            color: var(--text-muted);
             transform: rotate(90deg);
         }
 
@@ -638,7 +411,7 @@
         .form-label {
             display: block;
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text);
             margin-bottom: 8px;
             font-size: 14px;
         }
@@ -646,15 +419,17 @@
         .form-input, .form-select {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
+            border: 2px solid var(--border-strong);
+            border-radius: var(--radius-xs);
             font-size: 14px;
             font-family: inherit;
+            background: var(--surface);
+            color: var(--text);
         }
 
         .form-input:focus, .form-select:focus {
             outline: none;
-            border-color: #3b82f6;
+            border-color: var(--accent);
         }
 
         .flashcard-inputs {
@@ -668,18 +443,18 @@
             grid-template-columns: 1fr 1fr;
             gap: 10px;
             padding: 15px;
-            background: #f8fafc;
-            border-radius: 8px;
+            background: var(--surface-2);
+            border-radius: var(--radius-xs);
         }
 
         .submit-btn {
             width: 100%;
-            background: #3b82f6;
-            color: white;
+            background: var(--accent);
+            color: var(--accent-contrast);
             flex: 1;
             border: none;
             padding: 14px;
-            border-radius: 8px;
+            border-radius: var(--radius-xs);
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
@@ -687,7 +462,7 @@
         }
 
         .submit-btn:hover {
-            background: #2563eb;
+            background: var(--accent-hover);
         }
 
         .flashcard-input-group {
@@ -695,8 +470,8 @@
             gap: 10px;
             margin-bottom: 10px;
             padding: 15px;
-            background: #f8fafc;
-            border-radius: 8px;
+            background: var(--surface-2);
+            border-radius: var(--radius-xs);
             align-items: start;
         }
 
@@ -708,11 +483,11 @@
         }
 
         .remove-card-btn {
-            background: #f1f5f9;
+            background: var(--surface-2);
             border: none;
             padding: 8px 12px;
             border-radius: 6px;
-            color: #94a3b8;
+            color: var(--text-faint);
             cursor: pointer;
             transition: all 0.3s;
             font-size: 14px;
@@ -726,11 +501,11 @@
         }
 
         .add-card-btn {
-            background: #f1f5f9;
-            color: #3b82f6;
-            border: 2px dashed #cbd5e1;
+            background: var(--surface-2);
+            color: var(--accent);
+            border: 2px dashed var(--border);
             padding: 12px;
-            border-radius: 8px;
+            border-radius: var(--radius-xs);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
@@ -738,8 +513,8 @@
         }
 
         .add-card-btn:hover {
-            border-color: #3b82f6;
-            background: #eff6ff;
+            border-color: var(--accent);
+            background: var(--accent-soft);
         }
 
         @media (max-width: 768px) {
@@ -796,7 +571,7 @@
             color: #f59e0b;
             width: 35px;
             height: 35px;
-            border-radius: 8px;
+            border-radius: var(--radius-xs);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -808,29 +583,22 @@
         .bug-report-btn i { font-size: 14px; }
         .bug-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); z-index: 10000; align-items: center; justify-content: center; padding: 20px; }
         .bug-modal.active { display: flex; }
-        .bug-modal-content { background: white; border-radius: 16px; padding: 30px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); }
-        body.dark-mode .bug-modal-content { background: #1e293b; }
+        .bug-modal-content { background: var(--surface); border-radius: var(--radius); padding: 30px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-lg); }
         .bug-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .bug-modal-title { font-size: 22px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 10px; }
+        .bug-modal-title { font-size: 22px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 10px; }
         .bug-modal-title i { color: #f59e0b; }
-        body.dark-mode .bug-modal-title { color: #e2e8f0; }
-        .bug-close-btn { background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer; transition: color 0.3s; }
+        .bug-close-btn { background: none; border: none; font-size: 24px; color: var(--text-faint); cursor: pointer; transition: color 0.3s; }
         .bug-close-btn:hover { color: #ef4444; }
         .bug-form-group { margin-bottom: 20px; }
-        .bug-form-label { display: block; font-weight: 600; color: #1e293b; margin-bottom: 8px; font-size: 14px; }
-        body.dark-mode .bug-form-label { color: #e2e8f0; }
-        .bug-form-input, .bug-form-select, .bug-form-textarea { width: 100%; padding: 12px 14px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 14px; font-family: inherit; transition: border-color 0.3s, box-shadow 0.3s; background: white; color: #1e293b; }
-        body.dark-mode .bug-form-input, body.dark-mode .bug-form-select, body.dark-mode .bug-form-textarea { background: #334155; border-color: #475569; color: #e2e8f0; }
+        .bug-form-label { display: block; font-weight: 600; color: var(--text); margin-bottom: 8px; font-size: 14px; }
+        .bug-form-input, .bug-form-select, .bug-form-textarea { width: 100%; padding: 12px 14px; border: 2px solid var(--border-strong); border-radius: var(--radius-xs); font-size: 14px; font-family: inherit; transition: border-color 0.3s, box-shadow 0.3s; background: var(--surface); color: var(--text); }
         .bug-form-input:focus, .bug-form-select:focus, .bug-form-textarea:focus { outline: none; border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1); }
         .bug-form-textarea { resize: vertical; min-height: 120px; }
-        .bug-page-info { background: #f8fafc; border-radius: 10px; padding: 12px 14px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-        body.dark-mode .bug-page-info { background: #334155; }
-        .bug-page-info i { color: #3b82f6; }
-        .bug-page-info span { font-size: 13px; color: #64748b; }
-        body.dark-mode .bug-page-info span { color: #94a3b8; }
-        .bug-page-info strong { color: #1e293b; }
-        body.dark-mode .bug-page-info strong { color: #e2e8f0; }
-        .bug-submit-btn { width: 100%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; border: none; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .bug-page-info { background: var(--surface-2); border-radius: var(--radius-xs); padding: 12px 14px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .bug-page-info i { color: var(--accent); }
+        .bug-page-info span { font-size: 13px; color: var(--text-muted); }
+        .bug-page-info strong { color: var(--text); }
+        .bug-submit-btn { width: 100%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; border: none; padding: 14px; border-radius: var(--radius-xs); font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .bug-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); }
         .bug-submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
     </style>

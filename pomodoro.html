@@ -41,280 +41,14 @@
 
         body {
             font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f7fa;
-            color: #333;
+            background: var(--bg);
+            color: var(--text);
             transition: background 0.3s, color 0.3s;
             overflow-x: hidden;
         }
 
-        body.dark-mode {
-            background: #0f172a;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .main-content {
-            background: #0f172a;
-        }
-
-        body.dark-mode .header {
-            background: #1e293b;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .header h1 {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .timer-container {
-            background: #1e293b;
-        }
-
-        body.dark-mode .timer-display {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .timer-label {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .controls button {
-            background: #334155;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .controls button:hover {
-            background: #475569;
-        }
-
-        body.dark-mode .controls .start-btn {
-            background: #22c55e;
-        }
-
-        body.dark-mode .controls .start-btn:hover {
-            background: #16a34a;
-        }
-
-        body.dark-mode .content {
-            background: #0f172a;
-        }
-
-        body.dark-mode .history-section,
-        body.dark-mode .settings-section {
-            background: #1e293b;
-            border: 1px solid #334155;
-        }
-
-        body.dark-mode .setting-group {
-            border-color: #334155;
-        }
-
-        body.dark-mode .setting-group h3 {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .settings-panel {
-            background: #1e293b;
-            border: 1px solid #334155;
-        }
-
-        body.dark-mode .settings-title {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .setting-label {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .setting-input {
-            background: #334155;
-            border-color: #475569;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .setting-input:focus {
-            background: #334155;
-            border-color: #3b82f6;
-        }
-
-        body.dark-mode .save-settings-btn {
-            background: #3b82f6;
-        }
-
-        body.dark-mode .save-settings-btn:hover {
-            background: #2563eb;
-        }
-
-        body.dark-mode .section-title {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .section-header {
-            border-color: #334155;
-        }
-
-        body.dark-mode .stat-card {
-            background: #1e293b;
-            border: 1px solid #334155;
-        }
-
-        body.dark-mode .stat-title {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .stat-label {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .stat-value {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .history-item {
-            background: #334155;
-            border-color: #475569;
-        }
-
-        body.dark-mode .history-task {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .history-date {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .setting-item label {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .setting-item input,
-        body.dark-mode .setting-item select {
-            background: #334155;
-            border-color: #475569;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .modal-content {
-            background: #1e293b;
-        }
-
-        body.dark-mode .modal-title {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .form-label {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .form-input,
-        body.dark-mode .form-select,
-        body.dark-mode .form-textarea {
-            background: #334155;
-            border-color: #475569;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .form-input::placeholder,
-        body.dark-mode .form-textarea::placeholder {
-            color: #64748b;
-        }
-
-        body.dark-mode .form-input:focus,
-        body.dark-mode .form-select:focus,
-        body.dark-mode .form-textarea:focus {
-            background: #334155;
-            border-color: #3b82f6;
-        }
-
-        body.dark-mode .notification-content {
-            background: #1e293b;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .notification-title {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .notification-message {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .mode-selector button {
-            background: #334155;
-            color: #94a3b8;
-        }
-
-        body.dark-mode .mode-selector button.active {
-            background: #3b82f6;
-            color: white;
-        }
-
-        body.dark-mode .mode-selector button:hover:not(.active) {
-            background: #475569;
-        }
-
-        body.dark-mode .close-modal {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .close-modal:hover {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .icon-btn {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .icon-btn:hover {
-            background: #475569;
-            color: #3b82f6;
-        }
-
-        body.dark-mode .icon-btn.delete:hover {
-            background: #475569;
-            color: #ef4444;
-        }
-
-        body.dark-mode .timer-container {
-            background: #1e293b;
-            border: 1px solid #334155;
-        }
-
-        body.dark-mode .mode-btn {
-            background: #334155;
-            border-color: #475569;
-            color: #94a3b8;
-        }
-
-        body.dark-mode .mode-btn:hover {
-            border-color: #3b82f6;
-            color: #3b82f6;
-            background: #475569;
-        }
-
-        body.dark-mode .mode-btn.active {
-            background: #3b82f6;
-            border-color: #3b82f6;
-            color: white;
-        }
-
         body.dark-mode .timer-ring {
             opacity: 0.3;
-        }
-
-        body.dark-mode .task-input {
-            background: #334155;
-            border-color: #475569;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .task-input::placeholder {
-            color: #64748b;
-        }
-
-        body.dark-mode .preset-btn {
-            background: #334155;
-            border-color: #475569;
-            color: #94a3b8;
         }
 
         .container {
@@ -328,14 +62,14 @@
         }
 
         .header {
-            background: white;
+            background: var(--surface);
             padding: 25px 40px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-sm);
         }
 
         .header h1 {
             font-size: 28px;
-            color: #1e293b;
+            color: var(--text);
         }
 
         .header h1 i {
@@ -356,10 +90,10 @@
         }
 
         .timer-container {
-            background: white;
-            border-radius: 12px;
+            background: var(--surface);
+            border-radius: var(--radius);
             padding: 40px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-sm);
             text-align: center;
         }
 
@@ -372,24 +106,24 @@
 
         .mode-btn {
             padding: 10px 20px;
-            border: 2px solid #e2e8f0;
-            background: white;
-            border-radius: 8px;
+            border: 2px solid var(--border-strong);
+            background: var(--surface);
+            border-radius: var(--radius-xs);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            color: #64748b;
+            color: var(--text-muted);
         }
 
         .mode-btn:hover {
-            border-color: #3b82f6;
-            color: #3b82f6;
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
         .mode-btn.active {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
+            background: var(--accent);
+            color: var(--accent-contrast);
+            border-color: var(--accent);
         }
 
         .timer-circle {
@@ -408,7 +142,7 @@
 
         .circle-bg {
             fill: none;
-            stroke: #e2e8f0;
+            stroke: var(--border);
             stroke-width: 8;
         }
 
@@ -427,7 +161,7 @@
             transform: translate(-50%, -50%);
             font-size: 64px;
             font-weight: bold;
-            color: #1e293b;
+            color: var(--text);
         }
 
         .timer-controls {
@@ -439,7 +173,7 @@
         .control-btn {
             padding: 15px 35px;
             border: none;
-            border-radius: 10px;
+            border-radius: var(--radius-xs);
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
@@ -480,16 +214,16 @@
         }
 
         .settings-panel {
-            background: white;
-            border-radius: 12px;
+            background: var(--surface);
+            border-radius: var(--radius);
             padding: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-sm);
         }
 
         .settings-title {
             font-size: 20px;
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text);
             margin-bottom: 20px;
         }
 
@@ -500,7 +234,7 @@
         .setting-label {
             display: block;
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text);
             margin-bottom: 8px;
             font-size: 14px;
         }
@@ -508,30 +242,32 @@
         .setting-input {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
+            border: 2px solid var(--border-strong);
+            border-radius: var(--radius-xs);
             font-size: 14px;
+            background: var(--surface);
+            color: var(--text);
         }
 
         .setting-input:focus {
             outline: none;
-            border-color: #3b82f6;
+            border-color: var(--accent);
         }
 
         .save-settings-btn {
             width: 100%;
             padding: 12px;
-            background: #3b82f6;
-            color: white;
+            background: var(--accent);
+            color: var(--accent-contrast);
             border: none;
-            border-radius: 8px;
+            border-radius: var(--radius-xs);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .save-settings-btn:hover {
-            background: #2563eb;
+            background: var(--accent-hover);
         }
 
         .stats-section {
@@ -542,10 +278,10 @@
         }
 
         .stat-card {
-            background: white;
-            border-radius: 12px;
+            background: var(--surface);
+            border-radius: var(--radius);
             padding: 25px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-sm);
         }
 
         .stat-header {
@@ -557,14 +293,14 @@
 
         .stat-title {
             font-size: 14px;
-            color: #64748b;
+            color: var(--text-muted);
             font-weight: 600;
         }
 
         .stat-icon {
             width: 40px;
             height: 40px;
-            border-radius: 10px;
+            border-radius: var(--radius-xs);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -574,20 +310,20 @@
         .stat-value {
             font-size: 32px;
             font-weight: bold;
-            color: #1e293b;
+            color: var(--text);
         }
 
         .history-section {
-            background: white;
-            border-radius: 12px;
+            background: var(--surface);
+            border-radius: var(--radius);
             padding: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-sm);
         }
 
         .history-title {
             font-size: 20px;
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text);
             margin-bottom: 20px;
         }
 
@@ -596,17 +332,17 @@
             align-items: center;
             gap: 15px;
             padding: 15px;
-            background: #f8fafc;
-            border-radius: 8px;
+            background: var(--surface-2);
+            border-radius: var(--radius-xs);
             margin-bottom: 10px;
         }
 
         .history-icon {
             width: 40px;
             height: 40px;
-            border-radius: 8px;
-            background: #3b82f620;
-            color: #3b82f6;
+            border-radius: var(--radius-xs);
+            background: var(--accent-soft);
+            color: var(--accent);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -618,12 +354,12 @@
 
         .history-class {
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text);
         }
 
         .history-time {
             font-size: 12px;
-            color: #64748b;
+            color: var(--text-muted);
         }
 
         .history-duration {
@@ -633,40 +369,33 @@
 
         /* Preset Bar */
         .preset-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        .preset-label { font-weight: 600; color: #64748b; font-size: 14px; }
-        .preset-btn { padding: 8px 16px; border: 2px solid #e2e8f0; border-radius: 100px; background: white; cursor: pointer; font-size: 13px; font-weight: 600; color: #64748b; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
-        .preset-btn:hover { border-color: var(--accent, #3b82f6); color: var(--accent, #3b82f6); }
-        .preset-btn.active { background: var(--accent, #3b82f6); color: white; border-color: var(--accent, #3b82f6); }
+        .preset-label { font-weight: 600; color: var(--text-muted); font-size: 14px; }
+        .preset-btn { padding: 8px 16px; border: 2px solid var(--border-strong); border-radius: 100px; background: var(--surface); cursor: pointer; font-size: 13px; font-weight: 600; color: var(--text-muted); transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+        .preset-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .preset-btn.active { background: var(--accent); color: var(--accent-contrast); border-color: var(--accent); }
 
         /* Bug Report Button */
-        .bug-report-btn { background: rgba(251, 191, 36, 0.1); border: none; color: #f59e0b; width: 35px; height: 35px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; margin-right: 8px; }
+        .bug-report-btn { background: rgba(251, 191, 36, 0.1); border: none; color: #f59e0b; width: 35px; height: 35px; border-radius: var(--radius-xs); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; margin-right: 8px; }
         .bug-report-btn:hover { background: #f59e0b; color: white; }
         .bug-report-btn i { font-size: 14px; }
         .bug-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); z-index: 10000; align-items: center; justify-content: center; padding: 20px; }
         .bug-modal.active { display: flex; }
-        .bug-modal-content { background: white; border-radius: 16px; padding: 30px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); }
-        body.dark-mode .bug-modal-content { background: #1e293b; }
+        .bug-modal-content { background: var(--surface); border-radius: var(--radius); padding: 30px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-lg); }
         .bug-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .bug-modal-title { font-size: 22px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 10px; }
+        .bug-modal-title { font-size: 22px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 10px; }
         .bug-modal-title i { color: #f59e0b; }
-        body.dark-mode .bug-modal-title { color: #e2e8f0; }
-        .bug-close-btn { background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer; transition: color 0.3s; }
+        .bug-close-btn { background: none; border: none; font-size: 24px; color: var(--text-faint); cursor: pointer; transition: color 0.3s; }
         .bug-close-btn:hover { color: #ef4444; }
         .bug-form-group { margin-bottom: 20px; }
-        .bug-form-label { display: block; font-weight: 600; color: #1e293b; margin-bottom: 8px; font-size: 14px; }
-        body.dark-mode .bug-form-label { color: #e2e8f0; }
-        .bug-form-input, .bug-form-select, .bug-form-textarea { width: 100%; padding: 12px 14px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 14px; font-family: inherit; transition: border-color 0.3s; background: white; color: #1e293b; }
-        body.dark-mode .bug-form-input, body.dark-mode .bug-form-select, body.dark-mode .bug-form-textarea { background: #334155; border-color: #475569; color: #e2e8f0; }
+        .bug-form-label { display: block; font-weight: 600; color: var(--text); margin-bottom: 8px; font-size: 14px; }
+        .bug-form-input, .bug-form-select, .bug-form-textarea { width: 100%; padding: 12px 14px; border: 2px solid var(--border-strong); border-radius: var(--radius-xs); font-size: 14px; font-family: inherit; transition: border-color 0.3s; background: var(--surface); color: var(--text); }
         .bug-form-input:focus, .bug-form-select:focus, .bug-form-textarea:focus { outline: none; border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1); }
         .bug-form-textarea { resize: vertical; min-height: 120px; }
-        .bug-page-info { background: #f8fafc; border-radius: 10px; padding: 12px 14px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-        body.dark-mode .bug-page-info { background: #334155; }
-        .bug-page-info i { color: #3b82f6; }
-        .bug-page-info span { font-size: 13px; color: #64748b; }
-        body.dark-mode .bug-page-info span { color: #94a3b8; }
-        .bug-page-info strong { color: #1e293b; }
-        body.dark-mode .bug-page-info strong { color: #e2e8f0; }
-        .bug-submit-btn { width: 100%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; border: none; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .bug-page-info { background: var(--surface-2); border-radius: var(--radius-xs); padding: 12px 14px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .bug-page-info i { color: var(--accent); }
+        .bug-page-info span { font-size: 13px; color: var(--text-muted); }
+        .bug-page-info strong { color: var(--text); }
+        .bug-submit-btn { width: 100%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; border: none; padding: 14px; border-radius: var(--radius-xs); font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .bug-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); }
         .bug-submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
 

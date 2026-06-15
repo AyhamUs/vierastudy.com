@@ -39,187 +39,10 @@
 
         body {
             font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f7fa;
-            color: #333;
+            background: var(--bg);
+            color: var(--text);
             transition: background 0.3s, color 0.3s;
             overflow-x: hidden;
-        }
-
-        body.dark-mode {
-            background: #0f172a;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .main-content {
-            background: #0f172a;
-        }
-
-        body.dark-mode .header {
-            background: #1e293b;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .header h1 {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .todo-header {
-            background: #1e293b;
-            border-color: #334155;
-        }
-
-        body.dark-mode .add-todo-btn {
-            background: #3b82f6;
-        }
-
-        body.dark-mode .todo-filters button {
-            background: #334155;
-            color: #94a3b8;
-        }
-
-        body.dark-mode .todo-filters button.active {
-            background: #3b82f6;
-            color: white;
-        }
-
-        body.dark-mode .todo-item {
-            background: #1e293b;
-            border-color: #334155;
-        }
-
-        body.dark-mode .todo-text {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .todo-title {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .todo-class,
-        body.dark-mode .todo-priority {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .todo-due {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .todo-checkbox {
-            border-color: #475569;
-            background: #334155;
-        }
-
-        body.dark-mode .modal-content {
-            background: #1e293b;
-        }
-
-        body.dark-mode .modal-title {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .form-label {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .form-input,
-        body.dark-mode .form-select,
-        body.dark-mode .form-textarea {
-            background: #334155;
-            border-color: #475569;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .form-input::placeholder,
-        body.dark-mode .form-textarea::placeholder {
-            color: #64748b;
-        }
-
-        body.dark-mode .form-input:focus,
-        body.dark-mode .form-select:focus,
-        body.dark-mode .form-textarea:focus {
-            background: #334155;
-            border-color: #3b82f6;
-        }
-
-        body.dark-mode .notification-content {
-            background: #1e293b;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .notification-title {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .notification-message {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .icon-btn {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .icon-btn:hover {
-            background: #475569;
-            color: #3b82f6;
-        }
-
-        body.dark-mode .icon-btn.delete:hover {
-            background: #475569;
-            color: #ef4444;
-        }
-
-        body.dark-mode .close-modal {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .close-modal:hover {
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .empty-state {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .add-todo-section {
-            border-color: #334155;
-        }
-
-        body.dark-mode .filter-btn {
-            background: #334155;
-            border-color: #475569;
-            color: #94a3b8;
-        }
-
-        body.dark-mode .filter-btn:hover {
-            border-color: #3b82f6;
-            color: #3b82f6;
-            background: #475569;
-        }
-
-        body.dark-mode .filter-btn.active {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
-        }
-
-        body.dark-mode .todos-section {
-            background: #1e293b;
-            border: 1px solid #334155;
-        }
-
-        body.dark-mode .add-todo-section {
-            background: #334155;
-            border-color: #475569;
-        }
-
-        body.dark-mode .todo-input {
-            background: #1e293b;
-            border-color: #475569;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .todo-input::placeholder {
-            color: #64748b;
         }
 
         body.dark-mode .priority-badge {
@@ -297,7 +120,7 @@
 
         .dropdown-item {
             padding: 12px 25px 12px 55px;
-            color: #94a3b8;
+            color: var(--text-faint);
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
@@ -308,10 +131,10 @@
         }
 
         .dropdown-item:hover {
-            background: rgba(59, 130, 246, 0.08);
-            color: #3b82f6;
+            background: var(--accent-soft);
+            color: var(--accent);
             padding-left: 60px;
-            border-left-color: #3b82f6;
+            border-left-color: var(--accent);
         }
 
         .dropdown-item i {
@@ -344,7 +167,7 @@
 
         .user-plan {
             font-size: 11px;
-            color: #94a3b8;
+            color: var(--text-faint);
             font-weight: 500;
         }
 
@@ -369,9 +192,9 @@
         }
 
         .header {
-            background: white;
+            background: var(--surface);
             padding: 25px 40px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-sm);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -379,7 +202,7 @@
 
         .header h1 {
             font-size: 28px;
-            color: #1e293b;
+            color: var(--text);
         }
 
         .header h1 i {
@@ -392,11 +215,11 @@
         }
 
         .add-todo-btn {
-            background: #3b82f6;
-            color: white;
+            background: var(--accent);
+            color: var(--accent-contrast);
             border: none;
             padding: 12px 24px;
-            border-radius: 10px;
+            border-radius: var(--radius-xs);
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
@@ -407,7 +230,7 @@
         }
 
         .add-todo-btn:hover {
-            background: #2563eb;
+            background: var(--accent-hover);
             transform: translateY(-2px);
         }
 
@@ -423,33 +246,33 @@
         }
 
         .filter-btn {
-            background: white;
-            border: 2px solid #e2e8f0;
+            background: var(--surface);
+            border: 2px solid var(--border);
             padding: 10px 20px;
-            border-radius: 8px;
+            border-radius: var(--radius-xs);
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            color: #64748b;
+            color: var(--text-muted);
         }
 
         .filter-btn:hover {
-            border-color: #3b82f6;
-            color: #3b82f6;
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
         .filter-btn.active {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
+            background: var(--accent);
+            color: var(--accent-contrast);
+            border-color: var(--accent);
         }
 
         .todos-section {
-            background: white;
-            border-radius: 12px;
+            background: var(--surface);
+            border-radius: var(--radius);
             padding: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-sm);
         }
 
         .todo-item {
@@ -457,16 +280,16 @@
             align-items: flex-start;
             gap: 15px;
             padding: 20px;
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
+            background: var(--surface-2);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-xs);
             margin-bottom: 15px;
             transition: all 0.3s;
             cursor: grab;
         }
 
         .todo-item:hover {
-            border-color: #3b82f6;
+            border-color: var(--accent);
             box-shadow: 0 2px 10px rgba(59, 130, 246, 0.1);
         }
 
@@ -481,7 +304,7 @@
         .todo-checkbox {
             width: 24px;
             height: 24px;
-            border: 2px solid #cbd5e1;
+            border: 2px solid var(--border-strong);
             border-radius: 6px;
             cursor: pointer;
             display: flex;
@@ -493,7 +316,7 @@
         }
 
         .todo-checkbox:hover {
-            border-color: #3b82f6;
+            border-color: var(--accent);
         }
 
         .todo-checkbox.checked {
@@ -508,7 +331,7 @@
 
         .todo-title {
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text);
             font-size: 16px;
             margin-bottom: 5px;
         }
@@ -541,13 +364,13 @@
         }
 
         .todo-priority.low {
-            background: rgba(59, 130, 246, 0.1);
-            color: #3b82f6;
+            background: var(--accent-soft);
+            color: var(--accent);
         }
 
         .todo-due {
             background: rgba(100, 116, 139, 0.1);
-            color: #64748b;
+            color: var(--text-muted);
         }
 
         .todo-actions {
@@ -559,7 +382,7 @@
         .icon-btn {
             background: none;
             border: none;
-            color: #94a3b8;
+            color: var(--text-faint);
             cursor: pointer;
             padding: 8px;
             border-radius: 6px;
@@ -567,8 +390,8 @@
         }
 
         .icon-btn:hover {
-            background: #f1f5f9;
-            color: #3b82f6;
+            background: var(--surface-hover);
+            color: var(--accent);
         }
 
         .icon-btn.delete:hover {
@@ -593,8 +416,8 @@
         }
 
         .modal-content {
-            background: white;
-            border-radius: 12px;
+            background: var(--surface);
+            border-radius: var(--radius);
             padding: 30px;
             max-width: 500px;
             width: 90%;
@@ -620,14 +443,14 @@
         .modal-title {
             font-size: 22px;
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text);
         }
 
         .close-modal {
             background: none;
             border: none;
             font-size: 24px;
-            color: #94a3b8;
+            color: var(--text-faint);
             cursor: pointer;
         }
 
@@ -638,7 +461,7 @@
         .form-label {
             display: block;
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text);
             margin-bottom: 8px;
             font-size: 14px;
         }
@@ -646,15 +469,17 @@
         .form-input, .form-select, .form-textarea {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
+            border: 2px solid var(--border-strong);
+            border-radius: var(--radius-xs);
             font-size: 14px;
             font-family: inherit;
+            background: var(--surface);
+            color: var(--text);
         }
 
         .form-input:focus, .form-select:focus, .form-textarea:focus {
             outline: none;
-            border-color: #3b82f6;
+            border-color: var(--accent);
         }
 
         .form-textarea {
@@ -670,11 +495,11 @@
 
         .submit-btn {
             width: 100%;
-            background: #3b82f6;
-            color: white;
+            background: var(--accent);
+            color: var(--accent-contrast);
             border: none;
             padding: 14px;
-            border-radius: 8px;
+            border-radius: var(--radius-xs);
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
@@ -682,7 +507,7 @@
         }
 
         .submit-btn:hover {
-            background: #2563eb;
+            background: var(--accent-hover);
         }
 
         @media (max-width: 768px) {
@@ -757,8 +582,8 @@
         }
 
         .notification-content {
-            background: white;
-            border-radius: 12px;
+            background: var(--surface);
+            border-radius: var(--radius);
             padding: 30px;
             max-width: 400px;
             width: 90%;
@@ -786,8 +611,8 @@
         }
 
         .notification-icon.info {
-            background: #3b82f6;
-            color: white;
+            background: var(--accent);
+            color: var(--accent-contrast);
         }
 
         .notification-icon.warning {
@@ -804,22 +629,22 @@
             font-size: 20px;
             font-weight: 600;
             margin-bottom: 10px;
-            color: #1e293b;
+            color: var(--text);
         }
 
         .notification-message {
             font-size: 15px;
-            color: #64748b;
+            color: var(--text-muted);
             margin-bottom: 25px;
             line-height: 1.5;
         }
 
         .notification-btn {
-            background: #3b82f6;
-            color: white;
+            background: var(--accent);
+            color: var(--accent-contrast);
             border: none;
             padding: 12px 30px;
-            border-radius: 8px;
+            border-radius: var(--radius-xs);
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
@@ -827,7 +652,7 @@
         }
 
         .notification-btn:hover {
-            background: #2563eb;
+            background: var(--accent-hover);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
@@ -852,18 +677,14 @@
         }
 
         .bug-modal-content {
-            background: white;
-            border-radius: 16px;
+            background: var(--surface);
+            border-radius: var(--radius);
             padding: 30px;
             max-width: 500px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        body.dark-mode .bug-modal-content {
-            background: #1e293b;
         }
 
         .bug-modal-header {
@@ -876,7 +697,7 @@
         .bug-modal-title {
             font-size: 22px;
             font-weight: 700;
-            color: #1e293b;
+            color: var(--text);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -886,15 +707,11 @@
             color: #f59e0b;
         }
 
-        body.dark-mode .bug-modal-title {
-            color: #e2e8f0;
-        }
-
         .bug-close-btn {
             background: none;
             border: none;
             font-size: 24px;
-            color: #94a3b8;
+            color: var(--text-faint);
             cursor: pointer;
             transition: color 0.3s;
         }
@@ -910,13 +727,9 @@
         .bug-form-label {
             display: block;
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text);
             margin-bottom: 8px;
             font-size: 14px;
-        }
-
-        body.dark-mode .bug-form-label {
-            color: #e2e8f0;
         }
 
         .bug-form-input,
@@ -924,21 +737,13 @@
         .bug-form-textarea {
             width: 100%;
             padding: 12px 14px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
+            border: 2px solid var(--border-strong);
+            border-radius: var(--radius-xs);
             font-size: 14px;
             font-family: inherit;
             transition: border-color 0.3s, box-shadow 0.3s;
-            background: white;
-            color: #1e293b;
-        }
-
-        body.dark-mode .bug-form-input,
-        body.dark-mode .bug-form-select,
-        body.dark-mode .bug-form-textarea {
-            background: #334155;
-            border-color: #475569;
-            color: #e2e8f0;
+            background: var(--surface);
+            color: var(--text);
         }
 
         .bug-form-input:focus,
@@ -955,8 +760,8 @@
         }
 
         .bug-page-info {
-            background: #f8fafc;
-            border-radius: 10px;
+            background: var(--surface-2);
+            border-radius: var(--radius-xs);
             padding: 12px 14px;
             margin-bottom: 20px;
             display: flex;
@@ -964,29 +769,17 @@
             gap: 10px;
         }
 
-        body.dark-mode .bug-page-info {
-            background: #334155;
-        }
-
         .bug-page-info i {
-            color: #3b82f6;
+            color: var(--accent);
         }
 
         .bug-page-info span {
             font-size: 13px;
-            color: #64748b;
-        }
-
-        body.dark-mode .bug-page-info span {
-            color: #94a3b8;
+            color: var(--text-muted);
         }
 
         .bug-page-info strong {
-            color: #1e293b;
-        }
-
-        body.dark-mode .bug-page-info strong {
-            color: #e2e8f0;
+            color: var(--text);
         }
 
         .bug-submit-btn {
@@ -1022,7 +815,7 @@
         .subtask-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; font-size: 13px; }
         .subtask-done { text-decoration: line-through; opacity: 0.6; }
         .subtask-progress { font-size: 11px; color: var(--accent, #3b82f6); font-weight: 600; margin-bottom: 4px; }
-        .subtask-input { border: none; border-bottom: 1px solid #e2e8f0; font-size: 13px; padding: 4px; width: 100%; background: transparent; outline: none; color: inherit; }
+        .subtask-input { border: none; border-bottom: 1px solid var(--border); font-size: 13px; padding: 4px; width: 100%; background: transparent; outline: none; color: inherit; }
     </style>
 </head>
 <body>
