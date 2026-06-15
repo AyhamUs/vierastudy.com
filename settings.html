@@ -851,31 +851,16 @@
             }
 
             try {
-                const token = vieraAPI.token;
-                const response = await fetch('https://vierastudy-api.ayhamissa416.workers.dev/profile', {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ firstName, lastName })
-                });
-
-                const data = await response.json();
-
-                if (response.ok && data.success) {
-                    vieraAPI.user = data.user;
-                    sessionStorage.setItem('vierastudy_user', JSON.stringify(data.user));
-
-                    const initials = `${firstName.charAt(0)}${lastName ? lastName.charAt(0) : ''}`.toUpperCase();
+                const result = await vieraAPI.updateProfile(firstName, lastName);
+                if (result.success) {
+                    const initials = (firstName.charAt(0) + (lastName ? lastName.charAt(0) : '')).toUpperCase();
                     const avatarEl = document.getElementById('userAvatar');
                     if (avatarEl) avatarEl.textContent = initials;
                     const nameEl = document.getElementById('userName');
                     if (nameEl) nameEl.textContent = firstName;
-
                     showNotification('Profile updated successfully!', 'success', 'Profile Updated');
                 } else {
-                    showNotification(data.error || 'Failed to update profile', 'error', 'Error');
+                    showNotification(result.error || 'Failed to update profile', 'error', 'Error');
                 }
             } catch (error) {
                 console.error('Profile update error:', error);
@@ -908,25 +893,14 @@
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Changing...';
 
             try {
-                const token = vieraAPI.token;
-                const response = await fetch('https://vierastudy-api.ayhamissa416.workers.dev/password', {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ currentPassword, newPassword })
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
+                const result = await vieraAPI.changePassword(newPassword);
+                if (result.success) {
                     showNotification('Password changed successfully!', 'success', 'Password Updated');
                     document.getElementById('currentPassword').value = '';
                     document.getElementById('newPassword').value = '';
                     document.getElementById('confirmPassword').value = '';
                 } else {
-                    showNotification(data.error || 'Failed to change password', 'error', 'Error');
+                    showNotification(result.error || 'Failed to change password', 'error', 'Error');
                 }
             } catch (error) {
                 console.error('Password change error:', error);
