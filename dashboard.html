@@ -473,8 +473,8 @@
         }
 
         .section h2 i {
-            color: var(--accent);
-            font-size: 16px;
+            color: var(--text-faint);
+            font-size: 15px;
         }
 
         .activity-item {
@@ -2474,16 +2474,18 @@
         .banner-edit {
             position: absolute;
             top: 16px; right: 16px;
-            background: rgba(255,255,255,0.18);
-            border: 1px solid rgba(255,255,255,0.25);
-            color: #fff;
-            width: 34px; height: 34px;
-            border-radius: 10px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            color: var(--text-faint);
+            width: 32px; height: 32px;
+            border-radius: var(--radius-xs);
             cursor: pointer;
             z-index: 2;
-            transition: background var(--transition);
+            opacity: 0;
+            transition: opacity var(--transition), color var(--transition), background var(--transition);
         }
-        .banner-edit:hover { background: rgba(255,255,255,0.32); }
+        .welcome-banner:hover .banner-edit { opacity: 1; }
+        .banner-edit:hover { background: var(--surface-hover); color: var(--text); }
 
         /* ── Daily goals ───────────────────────────────────── */
         .goals-section h2 { justify-content: flex-start; }
@@ -3141,6 +3143,11 @@
     </div>
 
     <script>
+        if (localStorage.getItem('vieraDevPreview') === '1') {
+            const mockData = { flashcards:[{name:'Bio'},{name:'Chem'}], todos:[{text:'Essay',completed:false}], notes:[{title:'Lecture 1'}], classes:[{name:'Biology',color:'#e7e6e3',icon:'fa-dna'},{name:'History',color:'#e7e6e3',icon:'fa-landmark'}] };
+            const mock = { ready: Promise.resolve(), user:{}, isLoggedIn:()=>true, getUser:()=>({firstName:'Alex',lastName:'Rivera',email:'alex@example.com',isPremium:true}), getFlashcards:()=>mockData.flashcards, getTodos:()=>mockData.todos, getNotes:()=>mockData.notes, getClasses:()=>mockData.classes, getActivity:()=>[], setDarkMode:()=>{}, setAccentColor:()=>{}, syncToCloud:async()=>{}, logout:async()=>{}, loadData:async()=>{}, _saveDataNow:()=>{}, scheduleSync:()=>{} };
+            Object.defineProperty(window, 'vieraAPI', { value: mock, writable:false, configurable:false });
+        }
         // Session check - redirect to login if not authenticated
         (async function() {
             await vieraAPI.ready;
